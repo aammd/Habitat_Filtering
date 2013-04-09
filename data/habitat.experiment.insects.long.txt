@@ -218,4 +218,3 @@ initial	A14	scirtid	1
 initial	A15	oligo	4
 initial	A15	forcipomyia	1
 initial	A15	tipulidae	1
-final			
