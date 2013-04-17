@@ -24,13 +24,13 @@ A9	Aechmea.nudicaulis	400	2013/03/26	Eccleson	4.55	255	28
 N7	Neoregelia	650	2013/03/28	Eccleson	5.17	522	24	
 N8	Neoregelia	1200	2013/03/28	Eccleson	6.5	386	23	
 A11	Aechmea.nudicaulis	600	2013/03/28	Eccleson	5.98	184	25	
-A3	Aechmea.nudicaulis	300	2013/03/24	NA	NA	NA	NA	
-A2	Aechmea.nudicaulis	800	2013/03/24	NA	NA	NA	NA	
-A1	Aechmea.nudicaulis	450	2013/03/24	NA	NA	NA	NA	
-N3	Neoregelia	1250	2013/03/24	NA	NA	NA	NA	
-A4	Aechmea.nudicaulis	200	2013/03/25	NA	NA	NA	NA	
-N4	Neoregelia	570	2013/03/25	NA	NA	NA	NA	
-A10	Aechmea.nudicaulis	1450	2013/03/28	NA	NA	NA	NA	
+A3	Aechmea.nudicaulis	300	2013/03/24	unused	NA	NA	NA	
+A2	Aechmea.nudicaulis	800	2013/03/24	unused	NA	NA	NA	
+A1	Aechmea.nudicaulis	450	2013/03/24	unused	NA	NA	NA	
+N3	Neoregelia	1250	2013/03/24	unused	NA	NA	NA	
+A4	Aechmea.nudicaulis	200	2013/03/25	unused	NA	NA	NA	
+N4	Neoregelia	570	2013/03/25	unused	NA	NA	NA	
+A10	Aechmea.nudicaulis	1450	2013/03/28	unused	NA	NA	NA	
 V7	Vrisea	1980	2013/03/23	Smith	6.06	1000	23	
 V1	Vrisea	3300	2013/03/23	Smith	5.44	1540	22	
 N12	Neoregelia	720	2013/03/30	Smith	5.86	274	23	
@@ -46,4 +46,4 @@ N11	Neoregelia	630	2013/03/30	Tennant	5.6	328	27
 V12	Vrisea	1730	2013/03/23	unused	NA	NA	NA	
 V5	Vrisea	2740	2013/03/23	unused	NA	NA	NA	
 N10	Neoregelia	750	2013/03/29	unused	NA	NA	NA	
-A15	Aechmea.nudicaulis	450	2013/03/31	unused	NA	NA	NA	
+A15	Aechmea.nudicaulis	450	2013/03/31	unused	NA	NA	NA
