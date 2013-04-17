@@ -1,16 +1,17 @@
-## file for setting up and then analyzing the habitat experiment
+## file for analyzing the habitat experiment
 ## Andrew MacDonald, 2014
 
-source("calculating.function.R")
-
-## 26 March -- calculating the schedule for tomorrow!  We had some
-## false-starts with the water amounts, and so I had to constrain the
-## "available" column to find replacement plants.  Must remember to
-## change it back!
-calculate.block(filename="27March.csv")
+blocks <-
+  read.table("../data/blocks.txt",header=TRUE,comment.char="#")
 
 
-## acutally we're going to do equal parts!
+insects <-
+  read.table("../data/insect.communities.txt",header=TRUE,comment.char="#")
 
-read.csv
+bromeliad <-
+  read.table("../data/bromeliad.volumes.txt",comment.char="#",header=TRUE)
+
+head(bromeliad)
+
+## not quite sure where to begin.
 
