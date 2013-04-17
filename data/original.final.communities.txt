@@ -2,9 +2,10 @@
 ## experimentally homogenized communities are in				
 ##      homogenized.communities.txt				
 ## variables:				
-## sampling = wether 'initial' (meaning observed from wild plants in the				
-## field).  Or 'final', meaning after 12 days in experiment.				
-## bromeliad = unique code for each plant				
+## sampling =  'initial' --  observed from wild plants in the				
+## field.  Or 'final', meaning after 12 days in experiment.				
+## or 'homogenized', meaning the starting  community for the block				
+## bromeliad = unique code for each plant OR the experimental block in which six plants were placed				
 ## spp = species name for each macroinvertebrate				
 ## abundance = number of macroinverts found				
 sampling	bromeliad	spp	abundance	
@@ -453,3 +454,54 @@ final	V7	oligo	8
 final	V7	scirtid	4	
 final	V7	forcipomyia	3	
 final	V7	leptagrion	1	
+homogenized	pilot10	oligo	10	
+homogenized	pilot10	scirtid	4	
+homogenized	pilot10	tipulidae	2	
+homogenized	pilot10	Chiro	2	
+homogenized	pilot10	culex	2	
+homogenized	pilot10	ostra	1	
+homogenized	pilot20	oligo	20	
+homogenized	pilot20	scirtid	8	
+homogenized	pilot20	tipulidae	4	
+homogenized	pilot20	Chiro	4	
+homogenized	pilot20	culicid	4	
+homogenized	pilot20	ostra	2	
+homogenized	Baker	Chiro	2	
+homogenized	Baker	ostra	16	
+homogenized	Baker	oligo	38	
+homogenized	Baker	leptagrion	1	
+homogenized	Baker	forcipomyia	6	
+homogenized	Baker	culicid	2	
+homogenized	Baker	corethrella	1	
+homogenized	Baker	scirtid	2	
+homogenized	Davidson	Chiro	6	
+homogenized	Davidson	ostra	31	
+homogenized	Davidson	oligo	19	
+homogenized	Davidson	leptagrion	1	#down from 2 because that was impossible
+homogenized	Davidson	forcipomyia	5	
+homogenized	Davidson	culicid	7	
+homogenized	Davidson	corethrella	1	
+homogenized	Davidson	scirtid	6	
+homogenized	Eccleson	Chiro	4	
+homogenized	Eccleson	ostra	15	
+homogenized	Eccleson	oligo	21	
+homogenized	Eccleson	leptagrion	1	
+homogenized	Eccleson	forcipomyia	6	
+homogenized	Eccleson	culicid	6	
+homogenized	Eccleson	corethrella	1	
+homogenized	Eccleson	scirtid	10	
+homogenized	Tennant	Chiro	1	
+homogenized	Tennant	ostra	7	
+homogenized	Tennant	oligo	16	
+homogenized	Tennant	forcipomyia	4	
+homogenized	Tennant	culicid	6	
+homogenized	Tennant	scirtid	3	
+homogenized	Tennant	tipulidae	1	
+homogenized	Smith	Chiro	2	
+homogenized	Smith	ostra	0	
+homogenized	Smith	oligo	12	
+homogenized	Smith	forcipomyia	5	
+homogenized	Smith	culicid	3	
+homogenized	Smith	scirtid	4	
+homogenized	Smith	tipulidae	1	
+homogenized	Smith	leptagrion	1	
