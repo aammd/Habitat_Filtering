@@ -47,27 +47,27 @@ V12	Vrisea	1730	2013/03/23	NA	unused	NA	NA	NA
 V5	Vrisea	2740	2013/03/23	NA	unused	NA	NA	NA	
 N10	Neoregelia	750	2013/03/29	closed	unused	NA	NA	NA	
 A15	Aechmea.nudicaulis	450	2013/03/31	NA	unused	NA	NA	NA	
-N24	Neoregelia	1240	2013/04/19	open					
-N23	Neoregelia	900	2013/04/19	open					
-N25	Neoregelia	1020	2013/04/19	open					
-N21	Neoregelia	1210	2013/04/19	closed					
-N22	Neoregelia	600	2013/04/19	closed					
-N20	Neoregelia	1540	2013/04/19	closed					
-N26	Neoregelia	NA	2013/04/20	closed					
-N27	Neoregelia	1590	2013/04/20	closed					
-N28	Neoregelia	1210	2013/04/20	closed					
-N29	Neoregelia	940	2013/04/20	closed					
-N30	Neoregelia	1220	2013/04/20	closed					
-N31	Neoregelia		2013/04/20	closed					
-N32	Neoregelia		2013/04/21	open					
-N33	Neoregelia	860	2013/04/21	open					
-N34	Neoregelia	1620	2013/04/21	open					
-N35	Neoregelia	1690	2013/04/21	open					
-N36	Neoregelia	1390	2013/04/21	open					
-N37	Neoregelia	1630	2013/04/21	open					
-N38	Neoregelia	1260	2013/04/21	closed					
-N39	Neoregelia	1530	2013/04/21	closed					
-N40	Neoregelia	1400	2013/04/22	closed					
-N41	Neoregelia	1100	2013/04/22	open					
-N42	Neoregelia	1370	2013/04/22	closed					
-N43	Neoregelia	1390	2013/04/22	open					
+N24	Neoregelia	1240	2013/04/19	open	SarahJane	NA	NA	NA	
+N23	Neoregelia	900	2013/04/19	open	SarahJane	NA	NA	NA	
+N25	Neoregelia	1020	2013/04/19	open	SarahJane	NA	NA	NA	
+N21	Neoregelia	1210	2013/04/19	closed	NA	NA	NA	NA	
+N22	Neoregelia	600	2013/04/19	closed	NA	NA	NA	NA	
+N20	Neoregelia	1540	2013/04/19	closed	NA	NA	NA	NA	
+N26	Neoregelia	NA	2013/04/20	closed	NA	NA	NA	NA	
+N27	Neoregelia	1590	2013/04/20	closed	NA	NA	NA	NA	
+N28	Neoregelia	1210	2013/04/20	closed	SarahJane	NA	NA	NA	
+N29	Neoregelia	940	2013/04/20	closed	NA	NA	NA	NA	
+N30	Neoregelia	1220	2013/04/20	closed	SarahJane	NA	NA	NA	
+N31	Neoregelia	NA	2013/04/20	closed	NA	NA	NA	NA	
+N32	Neoregelia	NA	2013/04/21	open	NA	NA	NA	NA	
+N33	Neoregelia	860	2013/04/21	open	NA	NA	NA	NA	
+N34	Neoregelia	1620	2013/04/21	open	NA	NA	NA	NA	
+N35	Neoregelia	1690	2013/04/21	open	NA	NA	NA	NA	
+N36	Neoregelia	1390	2013/04/21	open	NA	NA	NA	NA	
+N37	Neoregelia	1630	2013/04/21	open	NA	NA	NA	NA	
+N38	Neoregelia	1260	2013/04/21	closed	NA	NA	NA	NA	
+N39	Neoregelia	1530	2013/04/21	closed	NA	NA	NA	NA	
+N40	Neoregelia	1400	2013/04/22	closed	NA	NA	NA	NA	
+N41	Neoregelia	1100	2013/04/22	open	NA	NA	NA	NA	
+N42	Neoregelia	1370	2013/04/22	closed	SarahJane	NA	NA	NA	
+N43	Neoregelia	1390	2013/04/22	open	NA	NA	NA	NA	

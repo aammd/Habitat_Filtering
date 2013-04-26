@@ -19,14 +19,11 @@ bromeliad <-
 
 ## correct variable spellings
 
-insects$spp[which(insects$spp=="leptagrion"|insects$spp=="Leptagrion")]
-<- "Leptagrion"
+insects$spp[which(insects$spp=="leptagrion"|insects$spp=="Leptagrion")] <- "Leptagrion"
 
-insects$spp[which(insects$spp%in%c("ostra","elpidium","elp"))] <-
-  "Elpidium"
+insects$spp[which(insects$spp%in%c("ostra","elpidium","elp"))] <-   "Elpidium"
 
-insects$spp[which(insects$spp%in%c("diptera","Diptera"))] <-
-  "Diptera"
+insects$spp[which(insects$spp%in%c("diptera","Diptera"))] <-   "Diptera"
 
 ## not quite sure where to begin.
 
@@ -100,38 +97,38 @@ dev.off()
 
 change.by.block <- function(blockname){
 ## first get the final communities:
-final.comm <- insects[
-                      (insects$bromeliad%in%
-                      bromeliad[bromeliad$Block==blockname,"Brom"]|
-                      insects$bromeliad==blockname)&
-                      insects$sampling!="initial",]
+  final.comm <- insects[
+                        (insects$bromeliad%in%
+                         bromeliad[bromeliad$Block==blockname,"Brom"]|
+                         insects$bromeliad==blockname)&
+                        insects$sampling!="initial",]
+  
+  ## as above, cast
+  all.spp.abds <-
+    cast(data=final.comm,formula=bromeliad~spp,value="abundance",fill=0)
 
-## as above, cast
-all.spp.abds <-
-  cast(data=final.comm,formula=bromeliad~spp,value="abundance",fill=0)
-
-## get the starting one:
-starting <- which(all.spp.abds$bromeliad==blockname)
-
-## remove this row from the data:
-starting.comm <- all.spp.abds[starting,-1]
-only.final.bromeliads <- all.spp.abds[-c(starting),]
-
-starting.matrix <- as.matrix(starting.comm)
-final.matrix <- as.matrix(only.final.bromeliads[,-1])
-
-starting.matrix.repeat <- t(replicate(6,starting.matrix,simplify='matrix'))
-changematrix <- (final.matrix-starting.matrix.repeat)
-## there is a strange thing with the cast command used to create
-## all.spp.abds.
-changematrix <- as.matrix(changematrix)
-## stick on names and bromeliads again
-dimnames(changematrix)[[2]] <- names(starting.comm)
-dataframe.change <- cbind(brom=only.final.bromeliads[,1],data.frame(changematrix))
-## melt
-
-melt(dataframe.change,measure.vars=names(dataframe.change)[-1])
-## repeat for all blocks
+  ## get the starting one:
+  starting <- which(all.spp.abds$bromeliad==blockname)
+  
+  ## remove this row from the data:
+  starting.comm <- all.spp.abds[starting,-1]
+  only.final.bromeliads <- all.spp.abds[-c(starting),]
+  
+  starting.matrix <- as.matrix(starting.comm)
+  final.matrix <- as.matrix(only.final.bromeliads[,-1])
+  
+  starting.matrix.repeat <- t(replicate(6,starting.matrix,simplify='matrix'))
+  changematrix <- (final.matrix-starting.matrix.repeat)
+  ## there is a strange thing with the cast command used to create
+  ## all.spp.abds.
+  changematrix <- as.matrix(changematrix)
+  ## stick on names and bromeliads again
+  dimnames(changematrix)[[2]] <- names(starting.comm)
+  dataframe.change <- cbind(brom=only.final.bromeliads[,1],data.frame(changematrix))
+  ## melt
+  
+  melt(dataframe.change,measure.vars=names(dataframe.change)[-1])
+  ## repeat for all blocks
 }
 
 
@@ -164,3 +161,35 @@ for(spp in 1:3){
        )
 }
 dev.off()
+
+## 2nd experiment
+
+bromeliad[42:nrow(bromeliad),c("max.vol","Habitat")]
+
+## unused ones.
+bromeliad <- bromeliad[is.na(bromeliad$Block),]
+
+twohab.list <-
+  split(bromeliad[,c("max.vol")],bromeliad[,c("Habitat")])
+
+twohab.list <- lapply(twohab.list,function(x) x[!is.na(x)])
+
+
+threesample <- replicate(50,do.call(c,lapply(twohab.list,function(x) sample(x,3))))
+
+threesample[,which.min(apply(threesample,2,sd))]
+
+
+Rose <-
+  insects[insects$bromeliad%in%c("N40","N38","N39","N37","N34","N36"),]
+
+with(Rose,table(spp,bromeliad)) ## should all be 1
+
+floor(tapply(Rose$abundance,Rose$spp,mean))
+
+
+cast.rose <- cast(data=Rose,formula=bromeliad~spp,value='abundance')
+
+colMeans(as.data.frame(recase.rose[,-1]))
+
+head(Rose)
