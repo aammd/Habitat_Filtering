@@ -1,0 +1,95 @@
+% The effect of habitat variation on organisms of different body size
+% A. Andrew M. MacDonald, Diane S. Srivastava, Vinicius F. Farjalla (et al?)
+
+
+# The strength of habitat filtering and organism size
+
+
+Previous observational studies [@Farjalla2012] have shown that larger
+bodied organisms show a greater degree of habitat filtering: there is greater
+environmental structure as body size increases from bacteria (weak),
+zooplankton (intermediate) and insects (strong). This is especially
+interesting as these different environments are caused by variation in habitat
+preference among several bromeliad species -- some species are found under
+shrub cover, while others are meters away in full sun.
+
+Sun and shade habitats have different species compositions. This may be caused
+by organism' s local environmental tolerances; sensitivity to heat may vary
+among the three groups of organisms studied.  However, species compositions may
+also be affected by the effects of temperature fluctuations on metabolism.
+Warmer animals may show increased feeding rate, which may increase top-down
+regulation and alter both density and richness of lower trophic levels.
+
+In this experiment we will test these observations by homogenizing these
+communities, removing variation among communities as much as possible.  We
+hypothesize that as habitat filtering acts, via mortality and -- for non-
+metamorphosing organisms -- reduced fecundity, we will observe a 'relaxation'
+of the community towards the orginal species composition.  We hypothesize that
+this relaxation will be greatest for insects, less for zooplankton and nearly
+zero for bacteria.
+
+## Methods
+
+We performed two complementary experiments to test how different groups within
+these communities respond to environmental variation.  In each experiment, we
+removed the communities from bromeliads, sampled them, and then returned a
+homogenized community to all plants.  Plants were replaced in a similar local
+habitat to their original, and enclosed in a mesh cage to prevent
+colonization. After a 12 day period, we sampled communities again and tested
+for a 'relaxation' in composition towards their original composition.  In our
+first experiment (among-species) we tested how sensitivy to different
+bromeliad species.  Our second experiment (within-species) examined the
+effects of habitat independently of species, by comparing communities within
+the same bromeliad species in open- and closed-canopy habitats.
+
+We performed these experiments at the Parque Nacional de Jurubatiba, in Rio de
+Janeiro state, Brazil ($22^{\circ}$ S $41^{\circ}$).  For our between--species experiment
+we used _Aechmea nudicaulis_, _Neoregelia cruenta_, and _Vriesea neoglutinosa_;
+our between --habitat experiment used _Neoregelia cruenta_ only, sampled from
+exposed and shaded habitats.  _N. cruenta_ is both common and highly plastic,
+occuring in a broader range of habitats than any other bromeliad in this study
+site.
+
+Macroinvertebrate communities were sampled by washing the plants throughly and
+seiving the water through a (dimenions) sieve.  They were identified to the
+lowest taxonomic level possible in the field (genus or family).  Homogenized
+communities were the arithemetic mean of the densities of each group in
+original communities (though often quite a bit lower because of natural
+mortality).
+
+To homogenize zooplankton, protist and bacteria communities, we collected and
+equal volume of inoculum from each plant, mixed and returned equal volumes to
+all bromeliads.  In our first experiment we used 100ml of inoculum from each
+plant, because _A. nudicaulis_ is very small and this was the maximum volume
+we could obtain while simultaneously selecting average-sized plants.
+
+
+
+## Results
+
+
+```{r data_clean,echo=FALSE,message=FALSE}
+source("~/Dropbox/PhD/brazil2013/experiments/R.scripts/habitatExp.R")
+opts_chunk$set(dev="pdf",results='hide',message=FALSE,warning=FALSE)
+```
+
+Here is a preliminary figure showing the change in the first experiment.  Each
+graph has six dots, corresponding to the initial compositions of the
+communities.  The dots are coloured according to species.  Each figure also
+shows the homogenized community which all bromeliads received (green dot) and
+coloured arrows showing how that community was changed to resemble the intial.
+A test of our hypothesis requires these arrows (representing community
+'relaxation' back to the original composition) be both in a nonrandom
+direction (ie tending to point to intial compositions) *and* longer for
+insects than for zooplankton, which in turn show larger change than bacteria.
+
+```{r simplefig,fig.cap="Percent change in different animals",echo=FALSE}
+#lapply(c("Baker","Davidson","Eccleson","Tennant","Smith"),plot.all.six.broms)
+for(i in c("Baker","Davidson","Eccleson","Tennant","Smith")){
+print(block_change_plot(i))
+#print(foo)
+}
+```
+
+## Discussion
+

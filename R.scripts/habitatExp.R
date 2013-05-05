@@ -2,23 +2,25 @@
 ## Andrew MacDonald, 2014
 
 library(reshape)
+library(grid)
+library(ggplot2)
+
 
 
 blocks <-
-  read.table("../data/blocks.txt",header=TRUE,comment.char="#",
+  read.table("~/Dropbox/PhD/brazil2013/experiments/data/blocks.txt",header=TRUE,comment.char="#",
              stringsAsFactors=FALSE)
 
 
-insects <-
-  read.table("../data/insect.communities.txt",header=TRUE,comment.char="#",
-             stringsAsFactors=FALSE)
+insects <-   read.table("~/Dropbox/PhD/brazil2013/experiments/data/insect.communities.table.txt",
+  header=TRUE,comment.char="#",stringsAsFactors=FALSE)
 
 bromeliad <-
-  read.table("../data/bromeliad.volumes.txt",comment.char="#",header=TRUE,
-             stringsAsFactors=FALSE)
+  read.table("~/Dropbox/PhD/brazil2013/experiments/data/bromeliad.volumes.txt",comment.char="#",
+    header=TRUE,stringsAsFactors=FALSE)
+
 
 ## correct variable spellings
-
 insects$spp[which(insects$spp=="leptagrion"|insects$spp=="Leptagrion")] <- "Leptagrion"
 
 insects$spp[which(insects$spp%in%c("ostra","elpidium","elp"))] <-   "Elpidium"
@@ -76,13 +78,12 @@ plot.all.six.broms <- function(plotname){
              type='l',lty=1:n.insects,col=1:n.insects)
 
   }
-  title(main=plotname,outer=TRUE)
   
 }
 
-pdf("../figures/block.pdf")
-lapply(c("Baker","Davidson","Eccleson","Tennant","Smith"),plot.all.six.broms)
-dev.off()
+# pdf("../figures/block.pdf")
+# lapply(c("Baker","Davidson","Eccleson","Tennant","Smith"),plot.all.six.broms)
+# dev.off()
 ## repeat this over all 5 blocks
 
 ## next we need a stripplot (made through beanplot!?) which wiill have
@@ -132,64 +133,129 @@ change.by.block <- function(blockname){
 }
 
 
-species.list.changes <- do.call(rbind,lapply(c("Baker","Davidson","Eccleson","Tennant","Smith"),change.by.block))
+# species.list.changes <- do.call(rbind,lapply(c("Baker","Davidson","Eccleson","Tennant","Smith"),change.by.block))
 
-## rbind
+# ## rbind
 
-## split by species
+# ## split by species
 
-differences.same.species <- lapply(unique(bromeliad$species),function(b){
-  same.spp.bromeliad <- bromeliad[bromeliad$species==b,"Brom"]
-  species.list.changes[species.list.changes$brom%in%same.spp.bromeliad,]
-}
-  )
+# differences.same.species <- lapply(unique(bromeliad$species),function(b){
+#   same.spp.bromeliad <- bromeliad[bromeliad$species==b,"Brom"]
+#   species.list.changes[species.list.changes$brom%in%same.spp.bromeliad,]
+# }
+#   )
 
-names(differences.same.species) <- unique(bromeliad$species)
+# names(differences.same.species) <- unique(bromeliad$species)
   
 
-## for each species, beanplot
+# ## for each species, beanplot
 
-library(beanplot)
+# library(beanplot)
 
-pdf("../figures/species.changes.pdf")
-for(spp in 1:3){
-  par(oma=c(0,5,0,0))
-  with(differences.same.species[[spp]],
-       stripchart(value~variable,las=1,pch="|",
-                  main=names(differences.same.species)[spp],
-                  xlab="size relative to homogenized community")
-       )
+# pdf("../figures/species.changes.pdf")
+# for(spp in 1:3){
+#   par(oma=c(0,5,0,0))
+#   with(differences.same.species[[spp]],
+#        stripchart(value~variable,las=1,pch="|",
+#                   main=names(differences.same.species)[spp],
+#                   xlab="size relative to homogenized community")
+#        )
+# }
+# dev.off()
+
+# ## 2nd experiment
+
+# bromeliad[42:nrow(bromeliad),c("max.vol","Habitat")]
+
+# ## unused ones.
+# bromeliad <- bromeliad[is.na(bromeliad$Block),]
+
+# twohab.list <-
+#   split(bromeliad[,c("max.vol")],bromeliad[,c("Habitat")])
+
+# twohab.list <- lapply(twohab.list,function(x) x[!is.na(x)])
+
+
+# threesample <- replicate(50,do.call(c,lapply(twohab.list,function(x) sample(x,3))))
+
+# selected <- threesample[,which.min(apply(threesample,2,sd))]
+
+# bromeliad[bromeliad$max.vol%in%selected,]
+
+# expBlock <-
+#   insects[insects$bromeliad%in%c("N48","N35","N52","N20","N22","N51"),]
+
+# with(expBlock,table(spp,bromeliad)) ## should all be 1
+
+# floor(tapply(expBlock$abundance,expBlock$spp,mean,na.rm=TRUE)
+#       )
+
+
+# tapply(expBlock$abundance,expBlock$spp,mean,na.rm=TRUE)
+# tapply(expBlock$abundance,expBlock$spp,length)
+
+
+# cast.expBlock <- cast(data=expBlock,formula=bromeliad~spp,value='abundance',fill=0)
+
+# colMeans(as.data.frame(cast.expBlock[,-1]))
+# round(tapply(expBlock$abundance,expBlock$spp,sum)/6)
+
+# head(expBlock)
+
+ls()
+library(vegan)
+library(reshape)
+
+head(insects)
+
+cast(insects,sampling+spp~bromeliad,fill=0)
+
+## need to get the right bromeliads together for the question
+## keep it simple: one species.
+
+## get info on species from "bromeliad"
+block_change_plot<-function(blockname){
+  useful.broms<-bromeliad$Brom[bromeliad$Block%in%c(blockname)]
+  ## choose only one time:
+  sampled_community<-insects[insects$sampling%in%c("initial","final","homogenized")
+                             &insects$bromeliad%in%c(useful.broms,blockname),]
+  
+  ## two ways of doing this: by block or by experiment
+  
+  ## then cast into a nice shape -- bromeliads as columns?
+  ## NOTE that some bromeliads are NOT in both before and after, only before.
+  
+  sampled_community_cast<-cast(sampled_community,sampling+bromeliad~spp,fill=0)
+  
+  
+  ## then do the distance matrix
+  
+  #sampled_community_dist<-vegdist(sampled_community_cast[,-c(1,2)])
+  
+  #betadisper(sampled_community_dist,sampled_community_cast$sampling)
+  ## then beta-diversity
+  
+  #community.plot<-ordiplot(sampled_community_dist,type="n")
+  #browser()
+  community.plot<-scores(cca(sampled_community_cast))
+  #ordihull(community.plot,groups=sampled_community_cast$sampling)
+  
+  
+  site_coord<-data.frame(community.plot$sites)
+  names(site_coord)<-c("xval","yval")
+  ordination_data<-data.frame(sampled_community_cast,site_coord)
+  
+  spp_names<-bromeliad$species[match(ordination_data$bromeliad,bromeliad$Brom)]
+  spp_names[is.na(spp_names)]<-"homogenized"
+  
+  ordination_data<-data.frame(ordination_data,spp_names=spp_names)
+  
+  ordin_simple<-ordination_data[,c("sampling","bromeliad","xval","yval","spp_names")]
+  ordin_reshape<-reshape(ordin_simple,v.names=c("xval","yval"),timevar="sampling",direction='wide',idvar="bromeliad")
+  browser()
+  ordin_reshape$xval.homogenized[is.na(ordin_reshape$xval.homogenized)]<-ordin_reshape$xval.homogenized[!is.na(ordin_reshape$xval.homogenized)]
+  ordin_reshape$yval.homogenized[is.na(ordin_reshape$yval.homogenized)]<-ordin_reshape$yval.homogenized[!is.na(ordin_reshape$yval.homogenized)]
+  
+  ggplot(data=ordin_reshape,aes(x=xval.homogenized,xend=xval.final,y=yval.homogenized,yend=yval.final,colour=spp_names),xlab="test")+geom_segment(arrow=arrow(length=unit(0.5,"cm")))+
+    geom_point()+xlab("PCo1")+ylab("PCo2")+geom_point(aes(x=xval.initial,y=yval.initial))
 }
-dev.off()
-
-## 2nd experiment
-
-bromeliad[42:nrow(bromeliad),c("max.vol","Habitat")]
-
-## unused ones.
-bromeliad <- bromeliad[is.na(bromeliad$Block),]
-
-twohab.list <-
-  split(bromeliad[,c("max.vol")],bromeliad[,c("Habitat")])
-
-twohab.list <- lapply(twohab.list,function(x) x[!is.na(x)])
-
-
-threesample <- replicate(50,do.call(c,lapply(twohab.list,function(x) sample(x,3))))
-
-threesample[,which.min(apply(threesample,2,sd))]
-
-
-Rose <-
-  insects[insects$bromeliad%in%c("N40","N38","N39","N37","N34","N36"),]
-
-with(Rose,table(spp,bromeliad)) ## should all be 1
-
-floor(tapply(Rose$abundance,Rose$spp,mean))
-
-
-cast.rose <- cast(data=Rose,formula=bromeliad~spp,value='abundance')
-
-colMeans(as.data.frame(recase.rose[,-1]))
-
-head(Rose)
