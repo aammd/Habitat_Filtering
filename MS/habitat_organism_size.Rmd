@@ -83,12 +83,8 @@ A test of our hypothesis requires these arrows (representing community
 direction (ie tending to point to intial compositions) *and* longer for
 insects than for zooplankton, which in turn show larger change than bacteria.
 
-```{r simplefig,fig.cap="Percent change in different animals",echo=FALSE}
-#lapply(c("Baker","Davidson","Eccleson","Tennant","Smith"),plot.all.six.broms)
-for(i in c("Baker","Davidson","Eccleson","Tennant","Smith")){
-print(block_change_plot(i))
-#print(foo)
-}
+```{r simplefig,fig.cap="change in different animals",echo=FALSE}
+plot_select_blocks()
 ```
 
 ## Discussion

@@ -4,7 +4,7 @@
 library(reshape)
 library(grid)
 library(ggplot2)
-
+library(vegan)
 
 
 blocks <-
@@ -202,60 +202,74 @@ change.by.block <- function(blockname){
 
 # head(expBlock)
 
-ls()
-library(vegan)
-library(reshape)
-
-head(insects)
-
-cast(insects,sampling+spp~bromeliad,fill=0)
 
 ## need to get the right bromeliads together for the question
 ## keep it simple: one species.
-
-## get info on species from "bromeliad"
-block_change_plot<-function(blockname){
+select_bromeliads<-function(blockname){
+  ## get the bromeliads in this block
   useful.broms<-bromeliad$Brom[bromeliad$Block%in%c(blockname)]
-  ## choose only one time:
+
+  ## collect *all* relevant insects
   sampled_community<-insects[insects$sampling%in%c("initial","final","homogenized")
                              &insects$bromeliad%in%c(useful.broms,blockname),]
-  
-  ## two ways of doing this: by block or by experiment
-  
-  ## then cast into a nice shape -- bromeliads as columns?
-  ## NOTE that some bromeliads are NOT in both before and after, only before.
-  
-  sampled_community_cast<-cast(sampled_community,sampling+bromeliad~spp,fill=0)
-  
-  
-  ## then do the distance matrix
-  
-  #sampled_community_dist<-vegdist(sampled_community_cast[,-c(1,2)])
-  
-  #betadisper(sampled_community_dist,sampled_community_cast$sampling)
-  ## then beta-diversity
-  
-  #community.plot<-ordiplot(sampled_community_dist,type="n")
+  #sampled_community_cast<-cast(sampled_community,sampling+bromeliad~spp,fill=0)
+  ## get their species
+  # useful_brom_sp<-bromeliad$species[match(sampled_community_cast$bromeliad,bromeliad$Brom)]
+  useful_brom_sp<-bromeliad$species[match(sampled_community$bromeliad,bromeliad$Brom)]
+  ## the one missing value is actually the homogenized community
+  useful_brom_sp[is.na(useful_brom_sp)]<-"homogenized"
   #browser()
-  community.plot<-scores(cca(sampled_community_cast))
-  #ordihull(community.plot,groups=sampled_community_cast$sampling)
-  
-  
-  site_coord<-data.frame(community.plot$sites)
-  names(site_coord)<-c("xval","yval")
-  ordination_data<-data.frame(sampled_community_cast,site_coord)
-  
-  spp_names<-bromeliad$species[match(ordination_data$bromeliad,bromeliad$Brom)]
-  spp_names[is.na(spp_names)]<-"homogenized"
-  
-  ordination_data<-data.frame(ordination_data,spp_names=spp_names)
-  
-  ordin_simple<-ordination_data[,c("sampling","bromeliad","xval","yval","spp_names")]
-  ordin_reshape<-reshape(ordin_simple,v.names=c("xval","yval"),timevar="sampling",direction='wide',idvar="bromeliad")
-  browser()
-  ordin_reshape$xval.homogenized[is.na(ordin_reshape$xval.homogenized)]<-ordin_reshape$xval.homogenized[!is.na(ordin_reshape$xval.homogenized)]
-  ordin_reshape$yval.homogenized[is.na(ordin_reshape$yval.homogenized)]<-ordin_reshape$yval.homogenized[!is.na(ordin_reshape$yval.homogenized)]
-  
-  ggplot(data=ordin_reshape,aes(x=xval.homogenized,xend=xval.final,y=yval.homogenized,yend=yval.final,colour=spp_names),xlab="test")+geom_segment(arrow=arrow(length=unit(0.5,"cm")))+
-    geom_point()+xlab("PCo1")+ylab("PCo2")+geom_point(aes(x=xval.initial,y=yval.initial))
+  data.frame(block=blockname,brom_sp=useful_brom_sp,sampled_community)
+}
+
+one_block_ordination<-function(cast_df){
+  sampled_community_cast<-cast_df[,!names(cast_df)%in%c("brom_sp","block","sampling","bromeliad")]
+  CAs<-scores(cca(sampled_community_cast))[["sites"]]
+  data.frame(cast_df[,names(cast_df)%in%c("block","sampling","brom_sp","bromeliad")],CAs)
+}
+
+
+plot_select_blocks<-function(block_vector=c("Baker","Davidson","Eccleson","Tennant","Smith")){
+selected_broms<-lapply(block_vector,select_bromeliads)
+ordinated_bromeliads<-do.call(rbind,lapply(selected_broms,one_block_ordination))
+
+wide_broms<-reshape(ordinated_bromeliads,v.names=c("CA1","CA2"),
+  timevar="sampling",direction='wide',idvar="bromeliad")
+
+## need to fill in the homogenized values:
+
+starting_points<-wide_broms[wide_broms$brom_sp=="homogenized",c("block","CA1.homogenized","CA2.homogenized")]
+
+## remove homogenized from original and organize
+reshaped_broms<-merge(starting_points,wide_broms[,!names(wide_broms)%in%c("CA1.homogenized","CA2.homogenized")],by="block")
+
+ggplot(data=reshaped_broms,aes(x=CA1.homogenized,xend=CA1.final,y=CA2.homogenized,yend=CA2.final,colour=brom_sp))+geom_segment(arrow=arrow(length=unit(0.2,"cm")))+
+    geom_point()+xlab("CA1")+ylab("CA2")+geom_point(aes(x=CA1.initial,y=CA2.initial))+theme_bw()+
+    scale_colour_brewer(type="div",palette=5)+opts(legend.position="top")+labs(colour="")
+
+
+}
+
+## I want to redo the thing to check all bromeliads simultaneously
+newer_plot_select_blocks<-function(block_vector=c("Baker","Davidson","Eccleson","Tennant","Smith")){
+selected_broms<-lapply(block_vector,select_bromeliads)
+newtest<-do.call(rbind,selected_broms)
+ordinated_bromeliads<-one_block_ordination(newtest)
+browser()
+
+wide_broms<-reshape(ordinated_bromeliads,v.names=c("CA1","CA2"),
+  timevar="sampling",direction='wide',idvar="bromeliad")
+
+## need to fill in the homogenized values:
+
+starting_points<-wide_broms[wide_broms$brom_sp=="homogenized",c("block","CA1.homogenized","CA2.homogenized")]
+
+## remove homogenized from original and organize
+reshaped_broms<-merge(starting_points,wide_broms[,!names(wide_broms)%in%c("CA1.homogenized","CA2.homogenized")],by="block")
+
+ggplot(data=reshaped_broms,aes(x=CA1.homogenized,xend=CA1.final,y=CA2.homogenized,yend=CA2.final,colour=brom_sp))+geom_segment(arrow=arrow(length=unit(0.2,"cm")))+
+geom_point()+xlab("CA1")+ylab("CA2")+geom_point(aes(x=CA1.initial,y=CA2.initial))+theme_bw()+
+scale_colour_brewer(type="div",palette=5)+opts(legend.position="top")+labsmmmmmm(colour="")
+
+
 }
