@@ -1,0 +1,33 @@
+## List of figures
+
+```{r data_clean,echo=FALSE,message=FALSE}
+source("~/Dropbox/PhD/brazil2013/experiments/R.scripts/habitatExp.R")
+opts_chunk$set(dev="pdf",results='hide',message=FALSE,warning=FALSE,echo=FALSE)
+```
+
+```{r fig.cap=""} 
+newer_plot_select_blocks() 
+``` 
+
+### Figure 1  Insect community
+change over time in the inter-species experiment.  The graph is based on a non-
+metric multidimensional scaling of a euclidian distance matrix among
+communities.  Each dot represents the initial (observed) community composition
+of each bromeliad; dots are coloured according to species.  We formed
+'homogenized' communities by allocating six bromeliads (two of each species) to
+blocks and dividing the combined invertebrate community evenly among them.
+Arrows show the change from this identical starting community to the composition at the end of the experiment (position of the arrow head).A test of our
+hypothesis requires these arrows (representing community 'relaxation' back to
+the original composition) be both in a nonrandom direction (ie tending to point
+to intial compositions) *and* longer for insects than for zooplankton, which in
+turn show larger change than bacteria.
+
+
+
+
+
+```{r fig.cap=""}
+ggplot(sarahjane,aes(x=Date.Time,y=Value,colour=habitat),group=ibutton)+geom_line()
+```
+### Figure 2
+The temporal variation in temperature between two habitats -- open and closed.  

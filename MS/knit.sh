@@ -4,11 +4,18 @@
 # pandoc -H margins.sty list_of_figures.md -o list_of_figures.pdf
 # Make the manuscript
 Rscript -e "library(knitr); knit('habitat_organism_size.Rmd')"
-pandoc --bibliography references.bib habitat_organism_size.md -o habitat_organism_size.pdf
-# Combine the two using PDFtools (pdftools@skynet.be)
-# pdfcat git_manuscript.pdf list_of_figures.pdf > git_ms.pdf
+pandoc -s -S --bibliography references.bib habitat_organism_size.md -o habitat_organism_size.pdf
+
+## make the figures
+Rscript -e "library(knitr); knit('habitat_organism_size_figs.Rmd')"
+pandoc -s -S habitat_organism_size_figs.md -o habitat_organism_size_figs.pdf
+
+
+# Combine the two 
+pdfunite habitat_organism_size.pdf habitat_organism_size_figs.pdf habitat_organism_size_MS.pdf
 # Remove duplicate files and rename concated one to original name
-# rm list_of_figures.pdf
+rm habitat_organism_size.pdf
+rm habitat_organism_size_figs.pdf
 # rm git_manuscript.pdf
 # mv git_ms.pdf git_manuscript.pdf
 
@@ -17,4 +24,4 @@ pandoc --bibliography references.bib habitat_organism_size.md -o habitat_organis
 
 ## look at it:
 
-evince habitat_organism_size.pdf
+evince habitat_organism_size_MS.pdf
