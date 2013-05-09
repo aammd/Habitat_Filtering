@@ -75,27 +75,6 @@ one_block_ordination<-function(cast_df){
 }
 
 
-plot_select_blocks<-function(block_vector=c("Baker","Davidson","Eccleson","Tennant","Smith")){
-selected_broms<-lapply(block_vector,select_bromeliads)
-ordinated_bromeliads<-do.call(rbind,lapply(selected_broms,one_block_ordination))
-
-wide_broms<-reshape(ordinated_bromeliads,v.names=c("CA1","CA2"),
-  timevar="sampling",direction='wide',idvar="bromeliad")
-
-## need to fill in the homogenized values:
-
-starting_points<-wide_broms[wide_broms$brom_sp=="homogenized",c("block","CA1.homogenized","CA2.homogenized")]
-
-## remove homogenized from original and organize
-reshaped_broms<-merge(starting_points,wide_broms[,!names(wide_broms)%in%c("CA1.homogenized","CA2.homogenized")],by="block")
-browser()
-ggplot(data=reshaped_broms,aes(x=CA1.homogenized,xend=CA1.final,y=CA2.homogenized,yend=CA2.final,colour=brom_sp))+geom_segment(arrow=arrow(length=unit(0.2,"cm")))+
-    geom_point()+xlab("CA1")+ylab("CA2")+geom_point(aes(x=CA1.initial,y=CA2.initial))+theme_bw()+
-    scale_colour_brewer(type="div",palette=5)+opts(legend.position="top")+labs(colour="")
-
-
-}
-
 ## I want to redo the thing to check all bromeliads simultaneously
 newer_plot_select_blocks<-function(block_vector=c("Baker","Davidson","Eccleson","Tennant","Smith")){
 selected_broms<-lapply(block_vector,select_bromeliads)
@@ -127,7 +106,9 @@ ggplot(data=reshaped_broms2,aes(x=CA1.homogenized,xend=CA1.final,y=CA2.homogeniz
 ibutton_data<-read.ibutton.folder("/home/andrew/Dropbox/PhD/brazil2013/experiments/data/ibuttons/SarahJane/")
 sarahjane<-ibuttons.to.data.frame(ibutton_data)
 
-## later I'm going to make this combine nicely with the main dataset.
+## later I'm going to make this combine nicely with the main dataset.\
+
+
 ## just for quick right now:
 habitats<-data.frame(ibutton=c(24,23,25,42,28,30),
   habitat=rep(c("open","closed"),c(3,3)))
