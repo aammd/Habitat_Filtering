@@ -6,7 +6,7 @@ library(grid)
 library(ggplot2)
 library(vegan)
 library(igraph)
-source("/home/andrew/Dropbox/PhD/ibutton.functions/ibutton.functions.R")
+source("~/Dropbox/PhD/ibutton.functions/ibutton.functions.R")
 
 blocks <-
   read.table("~/Dropbox/PhD/brazil2013/experiments/data/blocks.txt",header=TRUE,comment.char="#",
@@ -19,7 +19,6 @@ insects <-   read.table("~/Dropbox/PhD/brazil2013/experiments/data/insect.commun
 bromeliad <-
   read.table("~/Dropbox/PhD/brazil2013/experiments/data/bromeliad.volumes.txt",comment.char="#",
     header=TRUE,stringsAsFactors=FALSE)
-
 
 ## correct variable spellings
 insects$spp[which(insects$spp=="leptagrion"|insects$spp=="Leptagrion")] <- "Leptagrion"
@@ -103,6 +102,7 @@ ggplot(data=reshaped_broms2,aes(x=CA1.homogenized,xend=CA1.final,y=CA2.homogeniz
 
 
 
+## read and work with ibutton data
 ibutton_data<-read.ibutton.folder("/home/andrew/Dropbox/PhD/brazil2013/experiments/data/ibuttons/SarahJane/")
 sarahjane<-ibuttons.to.data.frame(ibutton_data)
 

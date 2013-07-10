@@ -1,8 +1,8 @@
 ## List of figures
 
 ```{r data_clean,echo=FALSE,message=FALSE}
-source("~/Dropbox/PhD/brazil2013/experiments/R.scripts/habitatExp.R")
-opts_chunk$set(dev="pdf",results='hide',message=FALSE,warning=FALSE,echo=FALSE)
+source("../R.scripts/habitatExp.R")
+opts_chunk$set(dev="png",results='hide',message=FALSE,warning=FALSE,echo=FALSE)
 ```
 
 ```{r fig.cap=""} 
@@ -30,4 +30,10 @@ turn show larger change than bacteria.
 ggplot(sarahjane,aes(x=Date.Time,y=Value,colour=habitat),group=ibutton)+geom_line()
 ```
 ### Figure 2
-The temporal variation in temperature between two habitats -- open and closed.  
+The temporal variation in temperature between two habitats -- open and closed.  The effect of a very cold day can be seen on the right.
+
+```{r}
+## doesn't work right :(  needs a complete check.
+newer_plot_select_blocks(block_vector=c("SarahJane","Martha","Rose","Donna","Pond"))
+```
+

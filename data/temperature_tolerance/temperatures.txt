@@ -1,0 +1,26 @@
+## Data on the temperature change with time for each temperature trial			
+## Trial = code that matches to the identifier in the 'trials' list			
+## time = minutes from start of trial			
+## temp = the temperature at that time			
+## trial.time = unique indentifier of each minute in the experiment. Matches to column in 'individuals'			
+Trial	time	temp	trial.time
+tab.3.may	0	27.5	
+tab.3.may	1	28	
+tab.3.may	2	30.5	
+tab.3.may	3	31	
+tab.3.may	4	32	
+tab.3.may	5	32	
+tab.3.may	6	33	
+tab.3.may	7	35	
+tab.3.may	8	35.5	
+tab.3.may	9	36.5	
+tab.3.may	10	37	
+tab.3.may	11	39	
+tab.3.may	12	41.5	
+tab.3.may	13	42	
+tab.3.may	14	43	
+tab.3.may	15	43	
+tab.3.may	16	45	
+tab.3.may	17	48.5	
+tab.3.may	18	50	
+tab.3.may	19	50	
