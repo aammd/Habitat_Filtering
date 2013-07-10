@@ -983,7 +983,6 @@ final	N47	scirtid	9
 final	N47	diptera_pupa	2	
 final	N47	atrichopogon	2	
 final	N47	forcipomyia	2	
-final	N47	forcipomyia	2	
 final	N47	oligo	176	
 final	N47	Leptagrion	2	
 final	N47	tipulidae	1	

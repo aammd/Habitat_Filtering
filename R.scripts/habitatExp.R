@@ -76,28 +76,28 @@ one_block_ordination<-function(cast_df){
 
 ## I want to redo the thing to check all bromeliads simultaneously
 newer_plot_select_blocks<-function(block_vector=c("Baker","Davidson","Eccleson","Tennant","Smith")){
-selected_broms<-lapply(block_vector,select_bromeliads)
-newtest<-do.call(rbind,selected_broms)
-
-sampled_community_cast<-cast(newtest,sampling+bromeliad+brom_sp+block~spp,value="abundance",fill=0)
-ordinated_bromeliads<-one_block_ordination(sampled_community_cast)
-wide_broms<-reshape(ordinated_bromeliads,v.names=c("CA1","CA2"),
-  timevar="sampling",direction='wide',idvar="bromeliad")
-
-## need to fill in the homogenized values:
-
-starting_points<-wide_broms[wide_broms$brom_sp=="homogenized",c("block","CA1.homogenized","CA2.homogenized")]
-
-## remove homogenized from original and organize
-reshaped_broms<-merge(starting_points,wide_broms[,!names(wide_broms)%in%c("CA1.homogenized","CA2.homogenized")],by="block")
-reshaped_broms2<-reshaped_broms[reshaped_broms$brom_sp!="homogenized",]
-reshaped_broms_hull<-with(reshaped_broms2,convex.hull(cbind(CA1.initial,CA2.initial)))
-#browser()
-ggplot(data=reshaped_broms2,aes(x=CA1.homogenized,xend=CA1.final,y=CA2.homogenized,yend=CA2.final,
-                                colour=brom_sp))+
-  geom_segment(arrow=arrow(length=unit(0.2,"cm")))+
-  geom_point(aes(colour="homogenized"))+xlab("axis1")+ylab("axis2")+geom_point(aes(x=CA1.initial,y=CA2.initial))+
-  scale_colour_brewer(type="div",palette=5)+labs(colour="")
+  selected_broms<-lapply(block_vector,select_bromeliads)
+  newtest<-do.call(rbind,selected_broms)
+  
+  sampled_community_cast<-cast(newtest,sampling+bromeliad+brom_sp+block~spp,value="abundance",fill=0)
+  ordinated_bromeliads<-one_block_ordination(sampled_community_cast)
+  wide_broms<-reshape(ordinated_bromeliads,v.names=c("CA1","CA2"),
+                      timevar="sampling",direction='wide',idvar="bromeliad")
+  
+  ## need to fill in the homogenized values:
+  
+  starting_points<-wide_broms[wide_broms$brom_sp=="homogenized",c("block","CA1.homogenized","CA2.homogenized")]
+  
+  ## remove homogenized from original and organize
+  reshaped_broms<-merge(starting_points,wide_broms[,!names(wide_broms)%in%c("CA1.homogenized","CA2.homogenized")],by="block")
+  reshaped_broms2<-reshaped_broms[reshaped_broms$brom_sp!="homogenized",]
+  reshaped_broms_hull<-with(reshaped_broms2,convex.hull(cbind(CA1.initial,CA2.initial)))
+  #browser()
+  ggplot(data=reshaped_broms2,aes(x=CA1.homogenized,xend=CA1.final,y=CA2.homogenized,yend=CA2.final,
+                                  colour=brom_sp))+
+    geom_segment(arrow=arrow(length=unit(0.2,"cm")))+
+    geom_point(aes(colour="homogenized"))+xlab("axis1")+ylab("axis2")+geom_point(aes(x=CA1.initial,y=CA2.initial))+
+    scale_colour_brewer(type="div",palette=5)+labs(colour="")
 }
 
 

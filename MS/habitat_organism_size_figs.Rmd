@@ -1,7 +1,7 @@
 ## List of figures
 
 ```{r data_clean,echo=FALSE,message=FALSE}
-source("../R.scripts/habitatExp.R")
+source("R.scripts/habitatExp.R")
 opts_chunk$set(dev="png",results='hide',message=FALSE,warning=FALSE,echo=FALSE)
 ```
 
