@@ -23,27 +23,6 @@ bact <- llply(list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",p
 # llply(list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",pattern="*.csv",full.names=TRUE),count.fields,comment.char="#")
 
 
-# rearrange bacteria ------------------------------------------------------
-
-bacteria_list <- llply(bact,function(DF) {
-  
-  plotdates <- do.call(rbind,strsplit(DF$sample,split=" "))
-  
-  samp.dates <- paste(apply(plotdates[,-1],1,paste,collapse="-"),"2013",sep="-")
-  samp.dates <- dmy(samp.dates)
-  
-  duration <- (max(samp.dates)-samp.dates)<as.duration(259200)
-  
-  sampling <- c("initial","final")[duration+1]
-  
-  DF <- DF[,!names(DF)%in%c("sample")]
-  
-  DF <- rename(DF,c("Block"="block"))
-  
-  data.frame(bromeliad=plotdates[,1],sampling,DF)
-}
-)      
-
 # renaming insects taxa ---------------------------------------------------
 
 ## correct variable spellings
@@ -187,6 +166,106 @@ zoop_sig <- zoop_interact_anova$uni.p %>% t %>% data.frame %>%
 left_join(zoop_sig,zoop_statistic) %>%
   ggplot(aes(x="zoop",y=species_wald,fill=species_p<0.05)) +
   geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
+
+
+
+# rearrange bacteria ------------------------------------------------------
+
+bacteria_list <- llply(bact,function(DF) {
+  
+  plotdates <- do.call(rbind,strsplit(DF$sample,split=" "))
+  
+  samp.dates <- paste(apply(plotdates[,-1],1,paste,collapse="-"),"2013",sep="-")
+  samp.dates <- dmy(samp.dates)
+  
+  duration <- (max(samp.dates)-samp.dates)<as.duration(259200)
+  
+  sampling <- c("initial","final")[duration+1]
+  
+  DF <- DF[,!names(DF)%in%c("sample")]
+  
+  DF <- rename(DF,c("Block"="block"))
+  
+  data.frame(bromeliad=plotdates[,1],sampling,DF,stringsAsFactors=FALSE)%>%
+    filter(sampling=="final") %>%
+    select(-block,-sampling)
+}
+) 
+
+# Bacteria from threespp --------------------------------------------------
+
+bacteria_list
+
+bact_results <- lapply(bacteria_list[1],function(BACTERIA){
+## select blocks
+bact_data <- blocks %>%
+  filter(experiment=="threespp") %>%
+  select(Block=block) %>%
+  ## merge to bromeliad
+  left_join(bromeliad) %>%
+  mutate(bromeliad=Brom) %>%
+  select(-Brom) %>%
+  # and add the animals
+  ## note that for bacteria, they are joined in the opposite direction!
+  left_join(BACTERIA,
+            .                        # this dot essentially makes this a "right join".
+            ) %>% 
+  # set up a list object a la mvabund
+  (
+    function(data) {
+      list(factors=data %>% select(Block,species) %>% as.matrix,
+           bacts=data %>% select(starts_with("X")) %>% as.matrix
+      )
+    }
+  )
+
+## call mvabund on responses
+bactresponses <- bact_data %>% extract2("bacts") %>% mvabund
+
+## run glm
+bact_glm_species <- bact_data %>% extract2("factors") %>% data.frame %>% 
+  manyglm(bactresponses~species,data=.,family="binomial") 
+
+bact_total_aov <- anova(bact_glm_species, nBoot=400, test="wald")
+
+## not sure how to interpret
+#drop1(bact_glm_species)
+
+# summary gives overall fit
+bact_species_summary <- bact_glm_species %>% summary(resamp="pit.trap")
+# anova gives us values for each animal
+bact_species_anova  <- bact_glm_species %>% anova(resamp="pit.trap",p.uni="adjusted", show.time="all")
+
+bact_statistic <- bact_species_anova$uni.test %>% t %>% data.frame %>% 
+  select(-X.Intercept.,
+         #Block_wald=Block,
+         species_wald=species) %>%
+  (function(df) data.frame(spp=rownames(df),df)) %>%
+  set_rownames(NULL)
+
+bact_sig <- bact_species_anova$uni.p %>% t %>% data.frame %>% 
+  select(-X.Intercept.,
+         #Block_p=Block,
+         species_p=species) %>%
+  (function(df) data.frame(spp=rownames(df),df)) %>%
+  set_rownames(NULL)
+
+bact_species_wald <- left_join(bact_sig,bact_statistic)
+
+list("bact_glm_species"=bact_glm_species,
+     "bact_total_aov"=bact_total_aov,
+     "bact_species_summary"=bact_species_summary,
+     "bact_species_anova"=bact_species_anova,
+     "bact_species_wald"=bact_species_wald)
+})
+
+%>%
+  ggplot(aes(x="bact",y=species_wald,fill=species_p<0.05)) +
+  geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
+
+
+
+
 ## basic first question: for each bromeliad, how did the densities of
 ## each species change?
 
