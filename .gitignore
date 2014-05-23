@@ -9,9 +9,9 @@ data/.gsf*
 MS/figure/
 MS/figure/
 MS/flatworm.md
-MS/habitat_organism_size.md
 MS/habitat_organism_size.pdf
 
 MS/habitat_organism_size_MS.pdf
-MS/habitat_organism_size_figs.md
 .Rproj.user
+
+.Rhistory
