@@ -189,14 +189,23 @@ bacteria_list <- llply(bact,function(DF) {
   data.frame(bromeliad=plotdates[,1],sampling,DF,stringsAsFactors=FALSE)%>%
     filter(sampling=="final") %>%
     select(-block,-sampling)
+}) 
+
+## go through this list, identify the block, and put the block names in a vector
+## then set that vector as names for the list.
+bacteria_list <- laply(bacteria_list,function(DF,.bromeliad=bromeliad){
+  DF %>%
+    select(Brom=bromeliad) %>%
+    left_join(.bromeliad) %>%
+    extract2("Block") %>% unique
 }
-) 
+) %>%
+  set_names(bacteria_list,.)
 
 # Bacteria from threespp --------------------------------------------------
 
-bacteria_list
 
-bact_results <- lapply(bacteria_list[1],function(BACTERIA){
+bact_results <- llply(bacteria_list,function(BACTERIA){
 ## select blocks
 bact_data <- blocks %>%
   filter(experiment=="threespp") %>%
@@ -258,6 +267,31 @@ list("bact_glm_species"=bact_glm_species,
      "bact_species_anova"=bact_species_anova,
      "bact_species_wald"=bact_species_wald)
 })
+
+## check with plots
+par(mfrow=c(2,3))
+lapply(bact_results,function(x) plot(x$bact_glm_species))
+
+ldply(bact_results,extract2,"bact_species_wald") %>%
+  select(block=.id,
+         species_p,
+         species_wald) %>%
+  ggplot(aes(x=block,y=species_wald))+geom_point()
+
+ldply(bact_results,extract2,"bact_species_wald") %>%
+  select(block=.id,
+         species_p,
+         species_wald) %>%
+  group_by(block) %>%
+  summarize(meanwald=mean(species_wald),
+            nsig=sum(species_p<0.05),
+            sd_wald=sd(species_wald)
+  )
+
+
+
+
+
 
 %>%
   ggplot(aes(x="bact",y=species_wald,fill=species_p<0.05)) +
