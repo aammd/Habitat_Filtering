@@ -124,8 +124,12 @@ left_join(insect_sig,insect_statistic) %>%
 
 # Zoops in threespp -------------------------------------------------------
 
+zoops_final_cast <- zoop %>%
+  filter(sampling=="final") %>%
+  dcast(bromeliad~spp,value.var = "abundance",fill = 0)
+
 ## select blocks
-insect_data <- blocks %>%
+zoop_data <- blocks %>%
   filter(experiment=="threespp") %>%
   select(Block=block) %>%
   ## merge to bromeliad
@@ -133,54 +137,55 @@ insect_data <- blocks %>%
   mutate(bromeliad=Brom) %>%
   select(-Brom) %>%
   # and add the animals
-  left_join(insects_final_cast) %>%
+  left_join(zoops_final_cast) %>%
   # set up a list object a la mvabund
   (
     function(data) {
       list(factors=data %>% select(Block,species) %>% as.matrix,
-           insects=data %>% select(atrichopogon:tipulidae) %>% as.matrix
+           zoops=data %>% select(Bdelloidea:Tardigrada) %>% as.matrix
       )
     }
   )
 
 ## call mvabund on responses
-insectresponses <- insect_data %>% extract2("insects") %>% mvabund
+zoopresponses <- zoop_data %>% extract2("zoops") %>% mvabund
 
 ## run glm
-insect_glm_interact <- insect_data %>% extract2("factors") %>% data.frame %>% 
-  manyglm(insectresponses~Block*species,data=.,family="poisson") 
+zoop_glm_interact <- zoop_data %>% extract2("factors") %>% data.frame %>% 
+  manyglm(zoopresponses~Block*species,data=.,family="negative binomial") 
 ## no interaction
-insect_glm_additive <- insect_data %>% extract2("factors") %>% data.frame %>% 
-  manyglm(insectresponses~Block+species,data=.,family="poisson") 
+zoop_glm_additive <- zoop_data %>% extract2("factors") %>% data.frame %>% 
+  manyglm(zoopresponses~Block+species,data=.,family="poisson") 
 
 ## check
-#plot(insect_glm)
-anova(insect_glm_interact, nBoot=400, test="wald")
+plot(zoop_glm_interact)
+
+anova(zoop_glm_interact, nBoot=400, test="wald")
 
 ## not sure how to interpret
-drop1(insect_glm_interact)
+drop1(zoop_glm_interact)
 
 # summary gives overall fit
-insect_interact_summary <- insect_glm_interact %>% summary(resamp="residual")
+zoop_interact_summary <- zoop_glm_interact %>% summary(resamp="residual")
 # anova gives us values for each animal
-insect_interact_anova  <- insect_glm_interact %>% anova(resamp="perm.resid",p.uni="adjusted", show.time="all")
+zoop_interact_anova  <- zoop_glm_interact %>% anova(resamp="perm.resid",p.uni="adjusted", show.time="all")
 
-insect_statistic <- insect_interact_anova$uni.test %>% t %>% data.frame %>% 
+zoop_statistic <- zoop_interact_anova$uni.test %>% t %>% data.frame %>% 
   select(-X.Intercept.,
          Block_wald=Block,
          species_wald=species) %>%
   (function(df) data.frame(spp=rownames(df),df)) %>%
   set_rownames(NULL)
 
-insect_sig <- insect_interact_anova$uni.p %>% t %>% data.frame %>% 
+zoop_sig <- zoop_interact_anova$uni.p %>% t %>% data.frame %>% 
   select(-X.Intercept.,
          Block_p=Block,
          species_p=species) %>%
   (function(df) data.frame(spp=rownames(df),df)) %>%
   set_rownames(NULL)
 
-left_join(insect_sig,insect_statistic) %>%
-  ggplot(aes(x="insect",y=species_wald,fill=species_p<0.05)) +
+left_join(zoop_sig,zoop_statistic) %>%
+  ggplot(aes(x="zoop",y=species_wald,fill=species_p<0.05)) +
   geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
 ## basic first question: for each bromeliad, how did the densities of
 ## each species change?
