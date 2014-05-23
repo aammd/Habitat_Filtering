@@ -1,25 +1,21 @@
 ## file for analyzing the habitat experiment
 ## Andrew MacDonald, 2014
 
-
-
-
 # read in data ------------------------------------------------------------
 
 blocks <-
   read.table("~/Dropbox/PhD/brazil2013/experiments/data/blocks.txt",header=TRUE,comment.char="#",
-             stringsAsFactors=FALSE)
-
+             stringsAsFactors=FALSE) %>% tbl_df()
 
 insects <-   read.table("~/Dropbox/PhD/brazil2013/experiments/data/insect.communities.table.txt",
-  header=TRUE,comment.char="#",stringsAsFactors=FALSE)
+  header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df()
 
 zoop <-  read.table("~/Dropbox/PhD/brazil2013/experiments/data/zoop.txt",
-                    header=TRUE,comment.char="#",stringsAsFactors=FALSE)
+                    header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df
 
 bromeliad <-
   read.table("~/Dropbox/PhD/brazil2013/experiments/data/bromeliad.volumes.txt",comment.char="#",
-    header=TRUE,stringsAsFactors=FALSE)
+    header=TRUE,stringsAsFactors=FALSE) %>% tbl_df
 
 bact <- llply(list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",pattern="*.csv",full.names=TRUE),read.table,comment.char="#",
               header=TRUE,stringsAsFactors=FALSE,sep=",")
@@ -51,14 +47,141 @@ bacteria_list <- llply(bact,function(DF) {
 # renaming insects taxa ---------------------------------------------------
 
 ## correct variable spellings
-insects$spp[which(insects$spp=="leptagrion"|insects$spp=="Leptagrion")] <- "Leptagrion"
+insects <- insects %>% 
+  mutate(spp2=ifelse(spp%in%c("leptagrion","Leptagrion"),"Leptagrion",spp),
+         spp3=ifelse(spp2%in%c("ostra","elpidium","elp"),"Elpidium",spp2),
+         spp4=ifelse(spp3%in%c("diptera","Diptera"),"Diptera",spp3)) %>%
+  select(sampling,bromeliad,Spp=spp4,abundance)
 
-insects$spp[which(insects$spp%in%c("ostra","elpidium","elp"))] <-   "Elpidium"
+## site x spp matrix
+insects_final_cast <- insects %>%
+  filter(sampling=="final") %>%
+  dcast(bromeliad~Spp,value.var = "abundance",fill = 0)
 
-insects$spp[which(insects$spp%in%c("diptera","Diptera"))] <-   "Diptera"
 
-## not quite sure where to begin.
+# insects in threespp experiment ------------------------------------------
 
+## select blocks
+insect_data <- blocks %>%
+  filter(experiment=="threespp") %>%
+  select(Block=block) %>%
+  ## merge to bromeliad
+  left_join(bromeliad) %>%
+  mutate(bromeliad=Brom) %>%
+  select(-Brom) %>%
+  # and add the animals
+  left_join(insects_final_cast) %>%
+  # set up a list object a la mvabund
+  (
+    function(data) {
+      list(factors=data %>% select(Block,species) %>% as.matrix,
+           insects=data %>% select(atrichopogon:tipulidae) %>% as.matrix
+      )
+    }
+  )
+
+## call mvabund on responses
+insectresponses <- insect_data %>% extract2("insects") %>% mvabund
+
+## run glm
+insect_glm_interact <- insect_data %>% extract2("factors") %>% data.frame %>% 
+  manyglm(insectresponses~Block*species,data=.,family="poisson") 
+## no interaction
+insect_glm_additive <- insect_data %>% extract2("factors") %>% data.frame %>% 
+  manyglm(insectresponses~Block+species,data=.,family="poisson") 
+
+## check
+#plot(insect_glm)
+anova(insect_glm_interact, nBoot=400, test="wald")
+
+## not sure how to interpret
+drop1(insect_glm_interact)
+
+# summary gives overall fit
+insect_interact_summary <- insect_glm_interact %>% summary(resamp="residual")
+# anova gives us values for each animal
+insect_interact_anova  <- insect_glm_interact %>% anova(resamp="perm.resid",p.uni="adjusted", show.time="all")
+
+insect_statistic <- insect_interact_anova$uni.test %>% t %>% data.frame %>% 
+  select(-X.Intercept.,
+         Block_wald=Block,
+         species_wald=species) %>%
+  (function(df) data.frame(spp=rownames(df),df)) %>%
+  set_rownames(NULL)
+
+insect_sig <- insect_interact_anova$uni.p %>% t %>% data.frame %>% 
+  select(-X.Intercept.,
+         Block_p=Block,
+         species_p=species) %>%
+  (function(df) data.frame(spp=rownames(df),df)) %>%
+  set_rownames(NULL)
+
+left_join(insect_sig,insect_statistic) %>%
+  ggplot(aes(x="insect",y=species_wald,fill=species_p<0.05)) +
+  geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
+
+
+
+# Zoops in threespp -------------------------------------------------------
+
+## select blocks
+insect_data <- blocks %>%
+  filter(experiment=="threespp") %>%
+  select(Block=block) %>%
+  ## merge to bromeliad
+  left_join(bromeliad) %>%
+  mutate(bromeliad=Brom) %>%
+  select(-Brom) %>%
+  # and add the animals
+  left_join(insects_final_cast) %>%
+  # set up a list object a la mvabund
+  (
+    function(data) {
+      list(factors=data %>% select(Block,species) %>% as.matrix,
+           insects=data %>% select(atrichopogon:tipulidae) %>% as.matrix
+      )
+    }
+  )
+
+## call mvabund on responses
+insectresponses <- insect_data %>% extract2("insects") %>% mvabund
+
+## run glm
+insect_glm_interact <- insect_data %>% extract2("factors") %>% data.frame %>% 
+  manyglm(insectresponses~Block*species,data=.,family="poisson") 
+## no interaction
+insect_glm_additive <- insect_data %>% extract2("factors") %>% data.frame %>% 
+  manyglm(insectresponses~Block+species,data=.,family="poisson") 
+
+## check
+#plot(insect_glm)
+anova(insect_glm_interact, nBoot=400, test="wald")
+
+## not sure how to interpret
+drop1(insect_glm_interact)
+
+# summary gives overall fit
+insect_interact_summary <- insect_glm_interact %>% summary(resamp="residual")
+# anova gives us values for each animal
+insect_interact_anova  <- insect_glm_interact %>% anova(resamp="perm.resid",p.uni="adjusted", show.time="all")
+
+insect_statistic <- insect_interact_anova$uni.test %>% t %>% data.frame %>% 
+  select(-X.Intercept.,
+         Block_wald=Block,
+         species_wald=species) %>%
+  (function(df) data.frame(spp=rownames(df),df)) %>%
+  set_rownames(NULL)
+
+insect_sig <- insect_interact_anova$uni.p %>% t %>% data.frame %>% 
+  select(-X.Intercept.,
+         Block_p=Block,
+         species_p=species) %>%
+  (function(df) data.frame(spp=rownames(df),df)) %>%
+  set_rownames(NULL)
+
+left_join(insect_sig,insect_statistic) %>%
+  ggplot(aes(x="insect",y=species_wald,fill=species_p<0.05)) +
+  geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
 ## basic first question: for each bromeliad, how did the densities of
 ## each species change?
 
