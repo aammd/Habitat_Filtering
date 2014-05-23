@@ -235,10 +235,11 @@ bromeliad2 <- bromeliad[,1:2]
 bromeliad2 <- rename(bromeliad2,c("Brom"="bromeliad"))
 bact_ord_spp <- join(bacteria_ordination,bromeliad2,by="bromeliad")
 
+if(FALSE){
 svg("bacteria.svg",width=11.2,height=8.4)
 ggplot(bact_ord_spp,aes(x=CA1,y=CA2,colour=species,shape=sampling))+geom_point(size=5)+theme(axis.text=element_text(size=12),axis.title=element_text(size=14,face="bold"))+facet_wrap(~block,scales="free",ncol=2)
 dev.off()
-
+}
 
 meltbacteria <- melt(bacteria_ordination)
 
@@ -255,10 +256,10 @@ out <- dcast(melt_with_combined_columns,formula=block+bromeliad~newvar)
 
 
 
-llply(bacteria_list,function(x) sum(is.na(x)))
-
-CAs<-metaMDS(vegdist(sampled_community_cast,distance="euclid"))[["points"]]
-CAs<-as.matrix(CAs)
-colnames(CAs)<-c("CA1","CA2")
-data.frame(cast_df[,names(cast_df)%in%c("block","sampling","brom_sp","bromeliad","habitat")],CAs)
+# llply(bacteria_list,function(x) sum(is.na(x)))
+# 
+# CAs<-metaMDS(vegdist(sampled_community_cast,distance="euclid"))[["points"]]
+# CAs<-as.matrix(CAs)
+# colnames(CAs)<-c("CA1","CA2")
+# data.frame(cast_df[,names(cast_df)%in%c("block","sampling","brom_sp","bromeliad","habitat")],CAs)
 
