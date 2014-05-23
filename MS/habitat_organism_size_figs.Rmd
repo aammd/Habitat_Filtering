@@ -1,13 +1,88 @@
 ## List of figures
 
 ```{r data_clean,echo=FALSE,message=FALSE}
+# load packages -----------------------------------------------------------
+
+library(reshape)
+library(reshape2)
+library(grid)
+library(ggplot2)
+library(vegan)
+library(igraph)
+library(plyr)
+library(lubridate)
+
+source("~/Dropbox/PhD/ibutton.functions/ibutton.functions.R")
 source("R.scripts/habitatExp.R")
 opts_chunk$set(dev="png",results='hide',message=FALSE,warning=FALSE,echo=FALSE)
 ```
 
 ```{r fig.cap=""} 
-newer_plot_select_blocks() 
+#newer_plot_select_blocks() 
+threespp <- plot_select_blocks_arrow()
+## starting points
+p1 <- ggplot(data=threespp,aes(x=CA1.initial,y=CA2.initial,colour=brom_sp))+geom_point(,size=5)
+## homogenized points (different colour)
+p1 <- p1 + geom_point(aes(x=CA1.homogenized,y=CA2.homogenized),size=5)
+p1 <- p1+geom_segment(aes(x=CA1.homogenized,xend=CA1.final,y=CA2.homogenized,yend=CA2.final,colour=brom_sp),arrow=arrow(length=unit(0.2,"cm")))
+
+svg("insects.svg",width=11.2,height=8.4)
+p1+theme(axis.text=element_text(size=12),axis.title=element_text(size=14,face="bold"))+facet_wrap(~block,scales="free")
+dev.off()
+
+
 ``` 
+
+
+```{r }
+
+threesppzoo <- plot_select_blocks_arrow(Dataframe=zoop,homogen_insects=FALSE)
+p2 <- ggplot(data=threesppzoo,aes(x=CA1.initial,y=CA2.initial,colour=brom_sp))+geom_point()
+## homogenized points (different colour)
+p2 <- p2 + geom_point(aes(x=CA1.final,y=CA2.final))
+p2 + facet_grid(~brom_sp)
+
+## final and initial
+## melt data
+threesppzoo_melt <- melt(threesppzoo,id.vars=c("block","brom_sp","bromeliad","habitat"))
+newcols <- sapply(as.character(threesppzoo_melt$variable),strsplit,split=".",fixed=TRUE)
+threespp_newcol <- data.frame(threesppzoo_melt,do.call(rbind,newcols))
+
+threesppzoo_new <- threespp_newcol[!names(threespp_newcol)%in%c("variable")]
+threesppzoo_new <- rename(threesppzoo_new,c("X1"="axis","X2"="sampling"))
+new_zoo <- dcast(threesppzoo_new,formula=block+brom_sp+bromeliad+habitat+sampling~axis,value.var="value")
+
+svg("zoop.svg",width=11.2,height=8.4)
+ggplot(new_zoo,aes(x=CA1,y=CA2,shape=sampling,colour=brom_sp))+geom_point(size=5)+facet_wrap(~block,scales="free")+theme(axis.text=element_text(size=12),axis.title=element_text(size=14,face="bold"))
+dev.off()
+
+
+head(zoop)
+
+dlply(zoop,.(bromeliad),dcast,sampling~spp)
+
+zoo.nspp <- count(zoop,.(bromeliad,sampling))
+
+## that can be graphed right away:
+bromeliad2 <- bromeliad[,c(1:2,6)]
+bromeliad2 <- rename(bromeliad2,c("Brom"="bromeliad"))
+zoo_n_spp <- join(zoo.nspp,bromeliad2,by="bromeliad")
+test <- dcast(data=zoo_n_spp,species+Block+bromeliad~sampling,value.var="freq")
+
+ggplot(test,aes(x=final,y=initial,colour=species))+geom_line()#+facet_grid(~Block)
+
+```
+
+
+
+```{r}
+
+
+
+```
+
+
+
 
 ### Figure 1  Insect community
 change over time in the inter-species experiment.  The graph is based on a non-
@@ -34,6 +109,7 @@ The temporal variation in temperature between two habitats -- open and closed.  
 
 ```{r}
 ## doesn't work right :(  needs a complete check.
-newer_plot_select_blocks(block_vector=c("SarahJane","Martha","Rose","Donna","Pond"))
+twohab <- plot_select_blocks_arrow(block_vector=c("SarahJane","Martha","Rose","Donna","Pond"))
+ggplot(data=twohab$first,aes(x=CA1,y=CA2,colour=habitat))+geom_point()+geom_point(data=twohab$homo)+geom_segment(data=twohab$arrows,aes(x=CA1.homo,xend=CA1.final,y=CA2.homo,yend=CA2.final,colour=habitat.final),arrow=arrow(length=unit(0.2,"cm")))
 ```
 

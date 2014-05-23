@@ -2,15 +2,6 @@
 ## Andrew MacDonald, 2014
 
 
-# load packages -----------------------------------------------------------
-
-library(reshape2)
-library(grid)
-library(ggplot2)
-library(vegan)
-library(igraph)
-
-source("~/Dropbox/PhD/ibutton.functions/ibutton.functions.R")
 
 
 # read in data ------------------------------------------------------------
@@ -29,6 +20,35 @@ zoop <-  read.table("~/Dropbox/PhD/brazil2013/experiments/data/zoop.txt",
 bromeliad <-
   read.table("~/Dropbox/PhD/brazil2013/experiments/data/bromeliad.volumes.txt",comment.char="#",
     header=TRUE,stringsAsFactors=FALSE)
+
+bact <- llply(list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",pattern="*.csv",full.names=TRUE),read.table,comment.char="#",
+              header=TRUE,stringsAsFactors=FALSE,sep=",")
+
+# llply(list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",pattern="*.csv",full.names=TRUE),count.fields,comment.char="#")
+
+
+# rearrange bacteria ------------------------------------------------------
+
+bacteria_list <- llply(bact,function(DF) {
+  
+  plotdates <- do.call(rbind,strsplit(DF$sample,split=" "))
+  
+  samp.dates <- paste(apply(plotdates[,-1],1,paste,collapse="-"),"2013",sep="-")
+  samp.dates <- dmy(samp.dates)
+  
+  duration <- (max(samp.dates)-samp.dates)<as.duration(259200)
+  
+  sampling <- c("initial","final")[duration+1]
+  
+  DF <- DF[,!names(DF)%in%c("sample")]
+  
+  DF <- rename(DF,c("Block"="block"))
+  
+  data.frame(bromeliad=plotdates[,1],sampling,DF)
+}
+)      
+
+# renaming insects taxa ---------------------------------------------------
 
 ## correct variable spellings
 insects$spp[which(insects$spp=="leptagrion"|insects$spp=="Leptagrion")] <- "Leptagrion"
@@ -52,7 +72,6 @@ insects$spp[which(insects$spp%in%c("diptera","Diptera"))] <-   "Diptera"
 ## data for one bromeliad and the homogenized community.
 
 ## first get a list of all the broms in the homogenized community
-
 
 
 ## need to get the right bromeliads together for the question
@@ -117,7 +136,7 @@ newer_plot_select_blocks<-function(block_vector=c("Baker","Davidson","Eccleson",
 
 
 ## I want to redo the thing to check all bromeliads simultaneously
-plot_select_blocks_arrow<-function(block_vector=c("Baker","Davidson","Eccleson","Tennant","Smith"),Dataframe=insects){
+plot_select_blocks_arrow<-function(block_vector=c("Baker","Davidson","Eccleson","Tennant","Smith"),Dataframe=insects,homogen_insects=TRUE){
   
   selected_broms<-lapply(block_vector,select_bromeliads,dataframe=Dataframe)
   newtest<-do.call(rbind,selected_broms)
@@ -130,50 +149,54 @@ plot_select_blocks_arrow<-function(block_vector=c("Baker","Davidson","Eccleson",
   ## melt these ordinated data
   meltbrom <- melt(ordinated_bromeliads)
   
-#   ## split the melted ordinations by sampling date, and then cast the two CA axes into columns:
-#   test <- ddply(meltbrom,.(sampling),dcast,formula=block+brom_sp+bromeliad+habitat~variable)
-#   
+  #   ## split the melted ordinations by sampling date, and then cast the two CA axes into columns:
+  #   test <- ddply(meltbrom,.(sampling),dcast,formula=block+brom_sp+bromeliad+habitat~variable)
+  #   
   
   ##because we need to separate the CA1 and 2 for each time period (in order to draw arrows) we first must combine these vectors:
   melt_with_combined_columns <- transform(meltbrom,newvar=apply(cbind(as.character(variable),sampling),1,paste,collapse="."))
   
- # now cast this back into columns:
+  # now cast this back into columns:
   
   out <- dcast(melt_with_combined_columns,formula=block+brom_sp+bromeliad+habitat~newvar)
-
-  ## remove habitat
-  out2 <- out[,!names(out)%in%c("habitat")]
   
-  ## select out homos
-  homogen <- out2[,names(out2)%in%c("bromeliad","CA1.homogenized","CA2.homogenized")]
-  ## remove NA rows
-  homogen <- homogen[complete.cases(homogen),]
-  ## rename bromeliad to block:
-  homogen <- rename(homogen,replace=c("bromeliad"="block"))
+  ## the below merging is only relevant for insect communities.
+  if (!homogen_insects) out 
   
-  ## select just the other rows:
-  not_homogen <- out2[,!names(out2)%in%c("CA1.homogenized","CA2.homogenized")]
-  ## remove NA rows
-  not_homogen <- not_homogen[complete.cases(not_homogen),]
-  not_homogen$block <- as.character(not_homogen$block)
-  
-  ## now merge `block` in not_homogen to `bromeliad` in homogen (renamed above):
-  join(homogen,not_homogen,by="block",type="full")
-  
-#   ## dataframe with only the original samples
-#   first <- dcast(subset(meltbrom,sampling=="initial"),formula=block+brom_sp+bromeliad+habitat~variable)
-#   ## with the homogenized samples
-#   homo <- dcast(subset(meltbrom,sampling=="homogenized"),formula=block+brom_sp+bromeliad+habitat~variable)
-#   ## the arrows are trickier: they require a merge:
-#   final <- dcast(subset(meltbrom,sampling=="final"),formula=block+brom_sp+bromeliad+habitat~variable)
-  
-#   arrows <- merge(homo,final,by="block",suffixes=c(".homo",".final"))
-#   
-#   out <- list(first,homo,arrows)
-#   names(out) <- c("first","homo","arrows")
-#   out
-#   ggplot(data=first,aes(x=CA1,y=CA2,colour=brom_sp))+geom_point()+geom_point(data=homo)+geom_segment(data=arrows,aes(x=CA1.homo,xend=CA1.final,y=CA2.homo,yend=CA2.final,colour=brom_sp.final),arrow=arrow(length=unit(0.2,"cm")))
-
+  else {
+    ## remove habitat
+    out2 <- out[,!names(out)%in%c("habitat")]
+    
+    ## select out homos
+    homogen <- out2[,names(out2)%in%c("bromeliad","CA1.homogenized","CA2.homogenized")]
+    ## remove NA rows
+    homogen <- homogen[complete.cases(homogen),]
+    ## rename bromeliad to block:
+    homogen <- rename(homogen,replace=c("bromeliad"="block"))
+    
+    ## select just the other rows:
+    not_homogen <- out2[,!names(out2)%in%c("CA1.homogenized","CA2.homogenized")]
+    ## remove NA rows
+    not_homogen <- not_homogen[complete.cases(not_homogen),]
+    not_homogen$block <- as.character(not_homogen$block)
+    
+    ## now merge `block` in not_homogen to `bromeliad` in homogen (renamed above):
+    join(homogen,not_homogen,by="block",type="full")
+    
+    #   ## dataframe with only the original samples
+    #   first <- dcast(subset(meltbrom,sampling=="initial"),formula=block+brom_sp+bromeliad+habitat~variable)
+    #   ## with the homogenized samples
+    #   homo <- dcast(subset(meltbrom,sampling=="homogenized"),formula=block+brom_sp+bromeliad+habitat~variable)
+    #   ## the arrows are trickier: they require a merge:
+    #   final <- dcast(subset(meltbrom,sampling=="final"),formula=block+brom_sp+bromeliad+habitat~variable)
+    
+    #   arrows <- merge(homo,final,by="block",suffixes=c(".homo",".final"))
+    #   
+    #   out <- list(first,homo,arrows)
+    #   names(out) <- c("first","homo","arrows")
+    #   out
+    #   ggplot(data=first,aes(x=CA1,y=CA2,colour=brom_sp))+geom_point()+geom_point(data=homo)+geom_segment(data=arrows,aes(x=CA1.homo,xend=CA1.final,y=CA2.homo,yend=CA2.final,colour=brom_sp.final),arrow=arrow(length=unit(0.2,"cm")))
+  }
 }
 
 
@@ -194,4 +217,48 @@ habitats<-data.frame(ibutton=c(24,23,25,42,28,30),
 sarahjane<-merge(habitats,sarahjane,by="ibutton")
 
 
+
+# bacteria ordination: ----------------------------------------------------
+
+## this only works for Bacteria.
+bacteria_ordination <- ldply(bacteria_list[3:5],function(X){
+  X2 <- X[,!names(X)%in%c("bromeliad","sampling","block")]
+  CAs<-metaMDS(vegdist(X2,distance="euclid"))[["points"]]
+  CAs <- as.matrix(CAs)
+  colnames(CAs)<-c("CA1","CA2")
+  data.frame(X[,names(X)%in%c("bromeliad","sampling","block")],CAs)
+})
+
+
+## that can be graphed right away:
+bromeliad2 <- bromeliad[,1:2]
+bromeliad2 <- rename(bromeliad2,c("Brom"="bromeliad"))
+bact_ord_spp <- join(bacteria_ordination,bromeliad2,by="bromeliad")
+
+svg("bacteria.svg",width=11.2,height=8.4)
+ggplot(bact_ord_spp,aes(x=CA1,y=CA2,colour=species,shape=sampling))+geom_point(size=5)+theme(axis.text=element_text(size=12),axis.title=element_text(size=14,face="bold"))+facet_wrap(~block,scales="free",ncol=2)
+dev.off()
+
+
+meltbacteria <- melt(bacteria_ordination)
+
+#   ## split the melted ordinations by sampling date, and then cast the two CA axes into columns:
+#   test <- ddply(meltbrom,.(sampling),dcast,formula=block+brom_sp+bromeliad+habitat~variable)
+#   
+
+##because we need to separate the CA1 and 2 for each time period (in order to draw arrows) we first must combine these vectors:
+melt_with_combined_columns <- transform(meltbacteria,newvar=apply(cbind(as.character(variable),sampling),1,paste,collapse="."))
+
+# now cast this back into columns:
+
+out <- dcast(melt_with_combined_columns,formula=block+bromeliad~newvar)
+
+
+
+llply(bacteria_list,function(x) sum(is.na(x)))
+
+CAs<-metaMDS(vegdist(sampled_community_cast,distance="euclid"))[["points"]]
+CAs<-as.matrix(CAs)
+colnames(CAs)<-c("CA1","CA2")
+data.frame(cast_df[,names(cast_df)%in%c("block","sampling","brom_sp","bromeliad","habitat")],CAs)
 
