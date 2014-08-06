@@ -7,6 +7,7 @@
 library(dplyr)
 library(tidyr)
 library(mvabund)
+library(magrittr)
 
 # read in data ------------------------------------------------------------
 
@@ -40,12 +41,10 @@ insects <- insects %>%
   mutate(spp2=ifelse(spp%in%c("leptagrion","Leptagrion"),"Leptagrion",spp),
          spp3=ifelse(spp2%in%c("ostra","elpidium","elp"),"Elpidium",spp2),
          spp4=ifelse(spp3%in%c("diptera","Diptera"),"Diptera",spp3)) %>%
-  select(sampling,bromeliad,Spp=spp4,abundance)
+  select(sampling,bromeliad,Spp = spp4,abundance)
 
-## site x spp matrix
-insects_final_cast <- insects %>%
-  filter(sampling=="final") %>%
-  spread(Spp, abundance, fill = 0)
+## what insect taxa are there?
+
 
 # insects in threespp experiment ------------------------------------------
 
@@ -55,12 +54,14 @@ insect_data <- blocks %>%
   select(Block = block) %>%
   ## merge to bromeliad
   left_join(bromeliad) %>%
-  mutate(bromeliad=Brom) %>%
-  select(-Brom) %>%
+  mutate(bromeliad = Brom) %>%
+  select(- Brom) %>%
   # and add the animals
-  left_join(insects_final_cast) %>%
+  left_join(insects %>%
+              filter(sampling == "final") %>%
+              spread(Spp, abundance, fill = 0)) %>%
   # set up a list object a la mvabund
-  lambda(data -> {
+  l(data -> {
       list(factors=data %>% select(Block,species) %>% as.matrix,
            insects=data %>% select(atrichopogon:tipulidae) %>% as.matrix
       )
