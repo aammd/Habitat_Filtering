@@ -1,6 +1,13 @@
 ## file for analyzing the habitat experiment
 ## Andrew MacDonald, 2014
 
+
+# packages ----------------------------------------------------------------
+
+library(dplyr)
+library(tidyr)
+library(mvabund)
+
 # read in data ------------------------------------------------------------
 
 blocks <-
@@ -17,8 +24,11 @@ bromeliad <-
   read.table("~/Dropbox/PhD/brazil2013/experiments/data/bromeliad.volumes.txt",comment.char="#",
     header=TRUE,stringsAsFactors=FALSE) %>% tbl_df
 
-bact <- llply(list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",pattern="*.csv",full.names=TRUE),read.table,comment.char="#",
-              header=TRUE,stringsAsFactors=FALSE,sep=",")
+bact <- list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",
+                   pattern="*.csv",
+                   full.names=TRUE) %>% 
+  lapply(read.table,comment.char="#",
+         header=TRUE,stringsAsFactors=FALSE,sep=",")
 
 # llply(list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",pattern="*.csv",full.names=TRUE),count.fields,comment.char="#")
 
@@ -35,15 +45,14 @@ insects <- insects %>%
 ## site x spp matrix
 insects_final_cast <- insects %>%
   filter(sampling=="final") %>%
-  dcast(bromeliad~Spp,value.var = "abundance",fill = 0)
-
+  spread(Spp, abundance, fill = 0)
 
 # insects in threespp experiment ------------------------------------------
 
 ## select blocks
 insect_data <- blocks %>%
-  filter(experiment=="threespp") %>%
-  select(Block=block) %>%
+  filter(experiment == "threespp") %>%
+  select(Block = block) %>%
   ## merge to bromeliad
   left_join(bromeliad) %>%
   mutate(bromeliad=Brom) %>%
@@ -51,8 +60,7 @@ insect_data <- blocks %>%
   # and add the animals
   left_join(insects_final_cast) %>%
   # set up a list object a la mvabund
-  (
-    function(data) {
+  lambda(data -> {
       list(factors=data %>% select(Block,species) %>% as.matrix,
            insects=data %>% select(atrichopogon:tipulidae) %>% as.matrix
       )
@@ -64,13 +72,13 @@ insectresponses <- insect_data %>% extract2("insects") %>% mvabund
 
 ## run glm
 insect_glm_interact <- insect_data %>% extract2("factors") %>% data.frame %>% 
-  manyglm(insectresponses~Block*species,data=.,family="poisson") 
+  manyglm(insectresponses~Block*species,data=.,family="negative.binomial") 
 ## no interaction
 insect_glm_additive <- insect_data %>% extract2("factors") %>% data.frame %>% 
-  manyglm(insectresponses~Block+species,data=.,family="poisson") 
+  manyglm(insectresponses~Block+species,data=.,family="negative.binomial") 
 
 ## check
-#plot(insect_glm)
+#plot(insect_glm_interact)
 anova(insect_glm_interact, nBoot=400, test="wald")
 
 ## not sure how to interpret
@@ -85,17 +93,19 @@ insect_statistic <- insect_interact_anova$uni.test %>% t %>% data.frame %>%
   select(-X.Intercept.,
          Block_wald=Block,
          species_wald=species) %>%
-  (function(df) data.frame(spp=rownames(df),df)) %>%
+  l(df -> data.frame(spp=rownames(df),df)) %>%
   set_rownames(NULL)
 
 insect_sig <- insect_interact_anova$uni.p %>% t %>% data.frame %>% 
   select(-X.Intercept.,
          Block_p=Block,
          species_p=species) %>%
-  (function(df) data.frame(spp=rownames(df),df)) %>%
+  l(df -> data.frame(spp=rownames(df),df)) %>%
   set_rownames(NULL)
 
-left_join(insect_sig,insect_statistic) %>%
+insect_wald <- left_join(insect_sig,insect_statistic)
+
+insect_wald %>%
   ggplot(aes(x="insect",y=species_wald,fill=species_p<0.05)) +
   geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
 
@@ -163,7 +173,9 @@ zoop_sig <- zoop_interact_anova$uni.p %>% t %>% data.frame %>%
   (function(df) data.frame(spp=rownames(df),df)) %>%
   set_rownames(NULL)
 
-left_join(zoop_sig,zoop_statistic) %>%
+zoop_wald <- left_join(zoop_sig,zoop_statistic) 
+
+zoop_wald %>%
   ggplot(aes(x="zoop",y=species_wald,fill=species_p<0.05)) +
   geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
 
@@ -278,24 +290,67 @@ ldply(bact_results,extract2,"bact_species_wald") %>%
          species_wald) %>%
   ggplot(aes(x=block,y=species_wald))+geom_point()
 
-ldply(bact_results,extract2,"bact_species_wald") %>%
+bact_wald <- ldply(bact_results,extract2,"bact_species_wald") %>%
   select(block=.id,
          species_p,
          species_wald) %>%
   group_by(block) %>%
-  summarize(meanwald=mean(species_wald),
-            nsig=sum(species_p<0.05),
-            sd_wald=sd(species_wald)
+  summarize(sd_wald=sd(species_wald),
+            species_wald=mean(species_wald)
+#             species_p=sum(species_p>0.05),       
   )
 
 
 
+# graphing ----------------------------------------------------------------
 
-
-
-%>%
-  ggplot(aes(x="bact",y=species_wald,fill=species_p<0.05)) +
+insect_wald %>%
+  ggplot(aes(x="insect",y=species_wald,fill=species_p<0.05)) +
   geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
+
+zoop_wald %>%
+  ggplot(aes(x="zoop",y=species_wald,fill=species_p<0.05)) +
+  geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
+
+library(wesanderson)
+
+pal <- wes.palette(4,name = "GrandBudapest")[-1] #%>% rev
+
+rbind_list(insect_wald %>% mutate(Taxa="insect"),
+           zoop_wald %>% mutate(Taxa="zoop"),
+           bact_wald %>% mutate(Taxa="bact")
+) %>% 
+  mutate(sd_wald=sd_wald %>% is.na %>% ifelse(0,sd_wald),
+         Taxa2=factor(Taxa,levels = c("insect","zoop","bact")
+                     ) %>%
+           as.numeric %>% jitter(0.6),
+         species_wald=species_wald+1,
+         sig=species_p %>% is.na %>% ifelse(1,species_p),
+         sig=sig %>% is_less_than(0.05) 
+  ) %>%
+  ggplot(aes(x=Taxa2,
+             y=species_wald,
+             shape=factor(sig),
+             ymin=species_wald-sd_wald,
+             ymax=species_wald+sd_wald,
+             colour=factor(Taxa),
+             fill=factor(Taxa)
+  )
+  ) +
+  geom_linerange()+geom_point(size=10)+scale_y_log10(limits=c(1,700))+scale_shape_manual(values=c(1,21)) +
+  scale_colour_manual(values = pal)+
+  scale_fill_manual(values = pal)+
+  scale_x_continuous(breaks=c(1,2,3), 
+                     labels=c("insect", "zooplankton", "bacteria"),
+                     limits=c(0.8,3.2)) + 
+  theme_bw()+theme(legend.position="none")+ ylab("Wald's test statistic") + xlab(NULL) +
+  theme(axis.title.y = element_text(family="Oxygen",size=40),
+        axis.text=element_text(family="Oxygen",size=40)
+  )
+ggsave("test.svg",width = 20,height = 20, units="in")
+
+
+ggsave("test.png",width = 20,height = 20, units="in")
 
 
 
