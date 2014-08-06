@@ -39,9 +39,11 @@ bact <- list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",
 # renaming insects taxa ---------------------------------------------------
 
 ## correct variable spellings
-insects %>%
+insects_renamed <- insects %>%
   left_join(insectnames) %>%
-  select(sampling, bromeliad, Spp = sp_name, abundance)
+  select(sampling, bromeliad, Spp = sp_name, abundance) %>%
+  group_by(sampling, bromeliad, Spp) %>%
+  summarise(abundance = sum(abundance))
 
 
 # insects in threespp experiment ------------------------------------------
@@ -51,18 +53,18 @@ insect_data <- blocks %>%
   filter(experiment == "threespp") %>%
   select(Block = block) %>%
   ## merge to bromeliad
-  left_join(bromeliad) %>%
-  mutate(bromeliad = Brom) %>%
-  select(- Brom) %>%
+  left_join(bromeliad %>% select(Brom, Block, species)) %>%
   # and add the animals
-  left_join(insects %>%
-              filter(sampling == "final")
-            ## FIX
+  left_join(insects_renamed %>%
+              filter(sampling == "final") %>%
+              spread(key = Spp, abundance, fill = 0) %>%
+              mutate(Brom = bromeliad) %>%
+              select(-bromeliad)
             ) %>%
   # set up a list object a la mvabund
   l(data -> {
-      list(factors=data %>% select(Block,species) %>% as.matrix,
-           insects=data %>% select(atrichopogon:tipulidae) %>% as.matrix
+      list(factors=data %>% select(Block, species) %>% as.matrix,
+           insects=data %>% select(-Block, -Brom, -species, -sampling) %>% as.matrix
       )
     }
   )
@@ -74,8 +76,8 @@ insectresponses <- insect_data %>% extract2("insects") %>% mvabund
 insect_glm_interact <- insect_data %>% extract2("factors") %>% data.frame %>% 
   manyglm(insectresponses~Block*species,data=.,family="negative.binomial") 
 ## no interaction
-insect_glm_additive <- insect_data %>% extract2("factors") %>% data.frame %>% 
-  manyglm(insectresponses~Block+species,data=.,family="negative.binomial") 
+# insect_glm_additive <- insect_data %>% extract2("factors") %>% data.frame %>% 
+#   manyglm(insectresponses~Block+species,data=.,family="negative.binomial") 
 
 ## check
 #plot(insect_glm_interact)
