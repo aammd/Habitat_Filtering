@@ -18,6 +18,8 @@ blocks <-
 insects <-   read.table("~/Dropbox/PhD/brazil2013/experiments/data/insect.communities.table.txt",
   header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df()
 
+insectnames <- read.csv(file = "data/insectnames.csv") %>% tbl_df()
+
 zoop <-  read.table("~/Dropbox/PhD/brazil2013/experiments/data/zoop.txt",
                     header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df
 
@@ -37,13 +39,9 @@ bact <- list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",
 # renaming insects taxa ---------------------------------------------------
 
 ## correct variable spellings
-insects <- insects %>% 
-  mutate(spp2=ifelse(spp%in%c("leptagrion","Leptagrion"),"Leptagrion",spp),
-         spp3=ifelse(spp2%in%c("ostra","elpidium","elp"),"Elpidium",spp2),
-         spp4=ifelse(spp3%in%c("diptera","Diptera"),"Diptera",spp3)) %>%
-  select(sampling,bromeliad,Spp = spp4,abundance)
-
-## what insect taxa are there?
+insects %>%
+  left_join(insectnames) %>%
+  select(sampling, bromeliad, Spp = sp_name, abundance)
 
 
 # insects in threespp experiment ------------------------------------------
@@ -58,8 +56,9 @@ insect_data <- blocks %>%
   select(- Brom) %>%
   # and add the animals
   left_join(insects %>%
-              filter(sampling == "final") %>%
-              spread(Spp, abundance, fill = 0)) %>%
+              filter(sampling == "final")
+            ## FIX
+            ) %>%
   # set up a list object a la mvabund
   l(data -> {
       list(factors=data %>% select(Block,species) %>% as.matrix,
