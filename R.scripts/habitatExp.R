@@ -33,9 +33,6 @@ bact <- list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",
   lapply(read.table,comment.char="#",
          header=TRUE,stringsAsFactors=FALSE,sep=",")
 
-# llply(list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",pattern="*.csv",full.names=TRUE),count.fields,comment.char="#")
-
-
 # renaming insects taxa ---------------------------------------------------
 
 ## correct variable spellings
