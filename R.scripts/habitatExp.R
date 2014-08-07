@@ -90,7 +90,7 @@ bacteria_list <- plyr::laply(bacteria_list,function(DF,.bromeliad=bromeliad){
 insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad, 
                            .taxa = insects_renamed, 
                            run_interaction_model = FALSE, 
-                           sampletime = "final", 
+                           sampletime = "final", glm_family = "negative.binomial",
                            organisms = "insects") {
   ## select blocks
   insect_data <- .blocks %>%
@@ -124,10 +124,10 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
   insect_glm_interact <- insect_data %>% 
     extract2("factors") %>% 
     data.frame %>% 
-    manyglm(insectresponses~Block*species, data=., family="negative.binomial") 
+    manyglm(insectresponses ~ Block * species, data = ., family = glm_family) 
   
   ## name the model output
-  model_name <- paste0(organisms, "_interaction_summary_", sampletime, ".Rdata")
+  model_name <- paste0(organisms, "_interaction_summary_", sampletime, "_", glm_family, ".Rdata")
   
   # summary gives overall fit
   if (run_interaction_model) {
@@ -140,7 +140,7 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
   }
   
   ## name the anova output
-  anova_name <- paste0(organisms, "_interaction_anova_", sampletime, ".Rdata")
+  anova_name <- paste0(organisms, "_interaction_anova_", sampletime, "_", glm_family, ".Rdata")
   
   # anova gives us values for each animal
   if (run_interaction_model) {
@@ -178,50 +178,74 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
        manyglm = insect_glm_interact)
 }
 
-
+rerun <- FALSE
 ## calculating model objects
-if (FALSE) {
+if (rerun) {
   ## initial insects
-  insect_manyglm(run_interaction_model = TRUE, sampletime = "initial")
+  insect_manyglm(run_interaction_model = rerun, sampletime = "initial")
+  insect_manyglm(run_interaction_model = rerun, sampletime = "initial", glm_family = "poisson")
   ## final insects
-  insect_manyglm(run_interaction_model = TRUE, sampletime = "final")
+  insect_manyglm(run_interaction_model = rerun, sampletime = "final")
+  insect_manyglm(run_interaction_model = rerun, sampletime = "final", glm_family = "poisson")
   ## initial zoops
   insect_manyglm(.taxa = zoop_combined,
-                 run_interaction_model = TRUE,
+                 run_interaction_model = rerun,
                  organisms = "zoops",
                  sampletime = "initial")
+  insect_manyglm(.taxa = zoop_combined,
+                 run_interaction_model = rerun,
+                 organisms = "zoops",
+                 sampletime = "initial", glm_family = "poisson")
   ## final zoops
   insect_manyglm(.taxa = zoop_combined,
-                 run_interaction_model = TRUE,
+                 run_interaction_model = rerun,
                  organisms = "zoops",
                  sampletime = "final")
+  insect_manyglm(.taxa = zoop_combined,
+                 run_interaction_model = rerun,
+                 organisms = "zoops",
+                 sampletime = "final", glm_family = "poisson")
 } else {
   ## LOADING model objects
-
-  insect_initial <- insect_manyglm(run_interaction_model = FALSE,
-                                   sampletime = "initial")
-  insect_final <- insect_manyglm(run_interaction_model = FALSE,
-                                 sampletime = "final")
-  zoop_initial <- insect_manyglm(.taxa = zoop_combined,
-                                 run_interaction_model = FALSE,
-                                 organisms = "zoops",
-                                 sampletime = "initial")
-  zoop_final <- insect_manyglm(.taxa = zoop_combined,
-                               run_interaction_model = FALSE,
-                               organisms = "zoops",
-                               sampletime = "final")
+  ## initial insects
+  insect_initial_nbin <- insect_manyglm(run_interaction_model = rerun, sampletime = "initial")
+  insect_initial_pois <- insect_manyglm(run_interaction_model = rerun, sampletime = "initial", glm_family = "poisson")
+  ## final insects
+  insect_final_nbin <- insect_manyglm(run_interaction_model = rerun, sampletime = "final")
+  insect_final_pois <- insect_manyglm(run_interaction_model = rerun, sampletime = "final", glm_family = "poisson")
+  ## initial zoops
+  zoop_initial_nbin <- insect_manyglm(.taxa = zoop_combined,
+                 run_interaction_model = rerun,
+                 organisms = "zoops",
+                 sampletime = "initial")
+  zoop_initial_pois <- insect_manyglm(.taxa = zoop_combined,
+                 run_interaction_model = rerun,
+                 organisms = "zoops",
+                 sampletime = "initial", glm_family = "poisson")
+  ## final zoops
+  zoop_final_nbin <- insect_manyglm(.taxa = zoop_combined,
+                 run_interaction_model = rerun,
+                 organisms = "zoops",
+                 sampletime = "final")
+  zoop_final_posis <- insect_manyglm(.taxa = zoop_combined,
+                 run_interaction_model = rerun,
+                 organisms = "zoops",
+                 sampletime = "final", glm_family = "poisson")
 }
 
 #check assumptions
 
-insect_initial$manyglm %>% plot
-insect_final$manyglm %>% plot
-zoop_initial$manyglm %>% plot
-zoop_final$manyglm %>% plot
+insect_initial_nbin$manyglm %>% plot
+insect_initial_pois$manyglm %>% plot
+
+zoop_initial_nbin$manyglm %>% plot
+zoop_initial_pois$manyglm %>% plot
+
+
 
 # Bacteria from threespp --------------------------------------------------
 
-if (TRUE) {
+if (FALSE) {
   bact_results <- plyr::llply(bacteria_list,function(BACTERIA){
 ## select blocks
 bact_data <- blocks %>%
@@ -330,17 +354,18 @@ library(wesanderson)
 
 pal <- wes.palette(4,name = "GrandBudapest")[-1] #%>% rev
 
-rbind_list(insect_final$plotting_data %>% mutate(Taxa="insect"),
-           zoop_final$plotting_data %>% mutate(Taxa="zoop"),
+rbind_list(insect_final_nbin$plotting_data %>% mutate(Taxa="insect"),
+           zoop_final_nbin$plotting_data %>% mutate(Taxa="zoop"),
            bact_wald %>% mutate(Taxa="bact")
 ) %>% 
-  mutate(sd_wald=sd_wald %>% is.na %>% ifelse(0,sd_wald),
-         Taxa2=factor(Taxa,levels = c("insect","zoop","bact")
+  mutate(sd_wald = sd_wald %>% is.na %>% ifelse(0,sd_wald),
+         Taxa2 = factor(Taxa,levels = c("insect","zoop","bact")
                      ) %>%
            as.numeric %>% jitter(0.6),
          species_wald=species_wald+1,
-         sig=species_p %>% is.na %>% ifelse(1,species_p),
-         sig=sig %>% is_less_than(0.05) 
+         sig = species_p %>% is.na %>% ifelse(1,species_p),
+         sig = sig %>% is_less_than(0.05),
+         mean_wald = mean(species_wald)
   ) %>%
   ggplot(aes(x=Taxa2,
              y=species_wald,
@@ -351,20 +376,34 @@ rbind_list(insect_final$plotting_data %>% mutate(Taxa="insect"),
              fill=factor(Taxa)
   )
   ) +
-  geom_linerange()+geom_point(size=10)+scale_y_log10(limits=c(1,700))+scale_shape_manual(values=c(1,21)) +
-  scale_colour_manual(values = pal)+
-  scale_fill_manual(values = pal)+
+  geom_linerange() + 
+  geom_point(size=20) +
+  scale_y_log10(limits=c(1,100)) + 
+  scale_shape_manual(values=c(1,21)) +
+  scale_colour_manual(values = pal) +
+  scale_fill_manual(values = pal) +
   scale_x_continuous(breaks=c(1,2,3), 
-                     labels=c("insect", "zooplankton", "bacteria"),
+                     labels=c("invertebrate", "zooplankton", "bacteria"),
                      limits=c(0.8,3.2)) + 
-  theme_bw()+theme(legend.position="none")+ ylab("Wald's test statistic") + xlab(NULL) +
+  theme_bw() +
+  theme(legend.position="none") +
+  ylab("Environmental effect size") + xlab(NULL) +
   theme(axis.title.y = element_text(family="Oxygen",size=40),
         axis.text=element_text(family="Oxygen",size=40)
   )
 ggsave("test.svg",width = 20,height = 20, units="in")
 
 
-ggsave("test.png",width = 20,height = 20, units="in")
+rbind_list(insect_final_nbin$plotting_data %>% mutate(Taxa="insect"),
+           zoop_final_nbin$plotting_data %>% mutate(Taxa="zoop"),
+           bact_wald %>% mutate(Taxa="bact")
+) %>%
+  group_by(
+
+
+
+
+  ggsave("test.png",width = 20,height = 20, units="in")
 
 
 
