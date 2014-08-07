@@ -9,6 +9,11 @@ library(tidyr)
 library(mvabund)
 library(magrittr)
 
+
+# run slow calculations? --------------------------------------------------
+
+run_interaction_model <- FALSE
+
 # read in data ------------------------------------------------------------
 
 blocks <-
@@ -72,32 +77,55 @@ insectresponses <- insect_data %>%
   mvabund
 
 ## run glm
-insect_glm_interact <- insect_data %>% extract2("factors") %>% data.frame %>% 
-  manyglm(insectresponses~Block*species,data=.,family="negative.binomial") 
+insect_glm_interact <- insect_data %>% 
+  extract2("factors") %>% 
+  data.frame %>% 
+  manyglm(insectresponses~Block*species, data=., family="negative.binomial") 
+
 ## no interaction
 # insect_glm_additive <- insect_data %>% extract2("factors") %>% data.frame %>% 
 #   manyglm(insectresponses~Block+species,data=.,family="negative.binomial") 
 
 ## check
-#plot(insect_glm_interact)
-anova(insect_glm_interact, nBoot=400, test="wald")
+# plot(insect_glm_interact)
+# anova(insect_glm_interact, nBoot=400, test="wald")
 
 ## not sure how to interpret
-drop1(insect_glm_interact)
+# drop1(insect_glm_interact)
 
 # summary gives overall fit
-insect_interact_summary <- insect_glm_interact %>% summary(resamp="residual")
+if (run_interaction_model) {
+  insect_interact_summary <- insect_glm_interact %>% summary(resamp="residual")
+  save(insect_interact_summary, file = "insect_interaction_summary.Rdata")
+} else {
+  load("insect_interaction_summary.Rdata")
+}
+  
 # anova gives us values for each animal
-insect_interact_anova  <- insect_glm_interact %>% anova(resamp="perm.resid",p.uni="adjusted", show.time="all")
-
-insect_statistic <- insect_interact_anova$uni.test %>% t %>% data.frame %>% 
+if (run_interaction_model) {
+  insect_interact_anova  <- insect_glm_interact %>% 
+    anova(resamp="perm.resid", p.uni="adjusted", show.time="all")
+  save(insect_interact_anova, file = "insect_interaction_anova.Rdata")
+} else {
+  load("insect_interaction_anova.Rdata")
+}
+  
+  
+  
+insect_statistic <- insect_interact_anova %>%
+  extract2("uni.test") %>% 
+  t %>% 
+  data.frame %>% 
   select(-X.Intercept.,
          Block_wald=Block,
          species_wald=species) %>%
   l(df -> data.frame(spp=rownames(df),df)) %>%
   set_rownames(NULL)
 
-insect_sig <- insect_interact_anova$uni.p %>% t %>% data.frame %>% 
+insect_sig <- insect_interact_anova %>%
+  extract2("uni.p") %>%
+  t %>% 
+  data.frame %>% 
   select(-X.Intercept.,
          Block_p=Block,
          species_p=species) %>%
