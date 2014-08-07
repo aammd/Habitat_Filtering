@@ -44,6 +44,10 @@ insects_renamed <- insects %>%
   group_by(sampling, bromeliad, Spp) %>%
   summarise(abundance = sum(abundance))
 
+zoop_combined <- zoop %>%
+  group_by(sampling, bromeliad, Spp) %>%
+  summarise(abundance = sum(abundance))
+
 
 # insects in threespp experiment ------------------------------------------
 
@@ -134,7 +138,8 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
 
   list(plotting_data = left_join(insect_sig, insect_statistic),
        manyglm_summary = insect_interact_summary,
-       manyglm_anova = insect_interact_anova)
+       manyglm_anova = insect_interact_anova,
+       manyglm = insect_glm_interact)
 }
 
 #insect_manyglm(run_interaction_model = TRUE, sampletime = "initial")
@@ -144,10 +149,22 @@ insect_final <- insect_manyglm(run_interaction_model = FALSE, sampletime = "fina
 
 ## zoo?
 
-insect_manyglm(.taxa = zoop, run_interaction_model = TRUE, organisms = "zoops",
-               sampletime = "initial")
-
-
+# insect_manyglm(.taxa = zoop_combined,
+#                run_interaction_model = TRUE,
+#                organisms = "zoops",
+#                sampletime = "initial")
+zoop_initial <- insect_manyglm(.taxa = zoop_combined,
+                               run_interaction_model = FALSE,
+                               organisms = "zoops",
+                               sampletime = "initial")
+# insect_manyglm(.taxa = zoop_combined,
+#                run_interaction_model = TRUE,
+#                organisms = "zoops",
+#                sampletime = "final")
+zoop_final <- insect_manyglm(.taxa = zoop_combined,
+                               run_interaction_model = FALSE,
+                               organisms = "zoops",
+                               sampletime = "final")
 
 ## graphing insects threespp ----------
 
