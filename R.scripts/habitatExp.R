@@ -14,22 +14,22 @@ library(ggplot2)
 # read in data ------------------------------------------------------------
 
 blocks <-
-  read.table("~/Dropbox/PhD/brazil2013/experiments/data/blocks.txt",header=TRUE,comment.char="#",
+  read.table("data/blocks.txt",header=TRUE,comment.char="#",
              stringsAsFactors=FALSE) %>% tbl_df()
 
-insects <-   read.table("~/Dropbox/PhD/brazil2013/experiments/data/insect.communities.table.txt",
+insects <-   read.table("data/insect.communities.table.txt",
   header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df()
 
 insectnames <- read.csv(file = "data/insectnames.csv") %>% tbl_df()
 
-zoop <-  read.table("~/Dropbox/PhD/brazil2013/experiments/data/zoop.txt",
+zoop <-  read.table("data/zoop.txt",
                     header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df
 
 bromeliad <-
-  read.table("~/Dropbox/PhD/brazil2013/experiments/data/bromeliad.volumes.txt",comment.char="#",
+  read.table("data/bromeliad.volumes.txt",comment.char="#",
     header=TRUE,stringsAsFactors=FALSE) %>% tbl_df
 
-bact <- list.files("~/Dropbox/PhD/brazil2013/experiments/data/bacteria/",
+bact <- list.files("data/bacteria/",
                    pattern="*.csv",
                    full.names=TRUE) %>% 
   lapply(read.table,comment.char="#",
@@ -48,9 +48,10 @@ insects_renamed <- insects %>%
 # insects in threespp experiment ------------------------------------------
 
 insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad, 
-                           .insects_renamed = insects_renamed, 
+                           .taxa = insects_renamed, 
                            run_interaction_model = FALSE, 
-                           sampletime = "final") {
+                           sampletime = "final", 
+                           organisms = "insects") {
   ## select blocks
   insect_data <- .blocks %>%
     filter(experiment == "threespp") %>%
@@ -58,7 +59,7 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
     ## merge to bromeliad
     left_join(.bromeliad %>% select(Brom, Block, species)) %>%
     # and add the animals
-    left_join(.insects_renamed %>%
+    left_join(.taxa %>%
                 filter(sampling == sampletime) %>%
                 spread(key = Spp, abundance, fill = 0) %>%
                 mutate(Brom = bromeliad) %>%
@@ -85,32 +86,30 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
     data.frame %>% 
     manyglm(insectresponses~Block*species, data=., family="negative.binomial") 
   
-  ## no interaction
-  # insect_glm_additive <- insect_data %>% extract2("factors") %>% data.frame %>% 
-  #   manyglm(insectresponses~Block+species,data=.,family="negative.binomial") 
+  ## name the model output
+  model_name <- paste0(organisms, "_interaction_summary_", sampletime, ".Rdata")
   
-  ## check
-  # plot(insect_glm_interact)
-  # anova(insect_glm_interact, nBoot=400, test="wald")
-  
-  ## not sure how to interpret
-  # drop1(insect_glm_interact)
-  model_name <- paste0("insect_interaction_summary", "_", sampletime, ".Rdata")
   # summary gives overall fit
   if (run_interaction_model) {
-    insect_interact_summary <- insect_glm_interact %>% summary(resamp="residual")
+    insect_interact_summary <- insect_glm_interact %>% 
+      summary(resamp="residual")
     save(insect_interact_summary, file = model_name)
+    message(paste("I just created the file",model_name))
   } else {
     load(model_name)
   }
+  
+  ## name the anova output
+  anova_name <- paste0(organisms, "_interaction_anova_", sampletime, ".Rdata")
   
   # anova gives us values for each animal
   if (run_interaction_model) {
     insect_interact_anova  <- insect_glm_interact %>% 
       anova(resamp="perm.resid", p.uni="adjusted", show.time="all")
-    save(insect_interact_anova, file = "insect_interaction_anova.Rdata")
+    save(insect_interact_anova, file = anova_name)
+    message(paste("I just created the file", anova_name))
   } else {
-    load("insect_interaction_anova.Rdata")
+    load(anova_name)
   }
   
   insect_statistic <- insect_interact_anova %>%
@@ -138,13 +137,13 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
        manyglm_anova = insect_interact_anova)
 }
 
-insect_wald <- insect_manyglm()
+insect_wald_initial <- insect_manyglm(run_interaction_model = TRUE, sampletime = "initial")
 
 insect_wald_initial <- insect_manyglm(run_interaction_model = TRUE, sampletime = "initial")
 
 ## graphing insects threespp ----------
 
-insect_wald_initial %>%
+insect_wald$plotting_data %>%
   ggplot(aes(x = "insect", y = species_wald, fill = species_p < 0.05)) +
   geom_point(shape = 21, size = 5, alpha = 0.7) +
   scale_fill_manual(values = c(NA, "black")) + 
