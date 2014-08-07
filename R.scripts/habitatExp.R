@@ -8,11 +8,8 @@ library(dplyr)
 library(tidyr)
 library(mvabund)
 library(magrittr)
+library(ggplot2)
 
-
-# run slow calculations? --------------------------------------------------
-
-run_interaction_model <- FALSE
 
 # read in data ------------------------------------------------------------
 
@@ -50,100 +47,113 @@ insects_renamed <- insects %>%
 
 # insects in threespp experiment ------------------------------------------
 
-## select blocks
-insect_data <- blocks %>%
-  filter(experiment == "threespp") %>%
-  select(Block = block) %>%
-  ## merge to bromeliad
-  left_join(bromeliad %>% select(Brom, Block, species)) %>%
-  # and add the animals
-  left_join(insects_renamed %>%
-              filter(sampling == "final") %>%
-              spread(key = Spp, abundance, fill = 0) %>%
-              mutate(Brom = bromeliad) %>%
-              select(-bromeliad)
-            ) %>%
-  # set up a list object a la mvabund
-  l(data -> {
-      list(factors=data %>% select(Block, species) %>% as.matrix,
-           insects=data %>% select(-Block, -Brom, -species, -sampling) %>% as.matrix
-      )
-    }
-  )
+insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad, 
+                           .insects_renamed = insects_renamed, 
+                           run_interaction_model = FALSE, 
+                           sampletime = "final") {
+  ## select blocks
+  insect_data <- .blocks %>%
+    filter(experiment == "threespp") %>%
+    select(Block = block) %>%
+    ## merge to bromeliad
+    left_join(.bromeliad %>% select(Brom, Block, species)) %>%
+    # and add the animals
+    left_join(.insects_renamed %>%
+                filter(sampling == sampletime) %>%
+                spread(key = Spp, abundance, fill = 0) %>%
+                mutate(Brom = bromeliad) %>%
+                select(-bromeliad)
+    ) %>%
+    # set up a list object a la mvabund
+    l(data -> {
+      list(factors = data %>% 
+             select(Block, species) %>% 
+             as.matrix,
+           insects = data %>% 
+             select(-Block, -Brom, -species, -sampling) %>% 
+             as.matrix)}
+    )
+  
+  ## call mvabund on responses
+  insectresponses <- insect_data %>% 
+    extract2("insects") %>%
+    mvabund
+  
+  ## run glm
+  insect_glm_interact <- insect_data %>% 
+    extract2("factors") %>% 
+    data.frame %>% 
+    manyglm(insectresponses~Block*species, data=., family="negative.binomial") 
+  
+  ## no interaction
+  # insect_glm_additive <- insect_data %>% extract2("factors") %>% data.frame %>% 
+  #   manyglm(insectresponses~Block+species,data=.,family="negative.binomial") 
+  
+  ## check
+  # plot(insect_glm_interact)
+  # anova(insect_glm_interact, nBoot=400, test="wald")
+  
+  ## not sure how to interpret
+  # drop1(insect_glm_interact)
+  model_name <- paste0("insect_interaction_summary", "_", sampletime, ".Rdata")
+  # summary gives overall fit
+  if (run_interaction_model) {
+    insect_interact_summary <- insect_glm_interact %>% summary(resamp="residual")
+    save(insect_interact_summary, file = model_name)
+  } else {
+    load(model_name)
+  }
+  
+  # anova gives us values for each animal
+  if (run_interaction_model) {
+    insect_interact_anova  <- insect_glm_interact %>% 
+      anova(resamp="perm.resid", p.uni="adjusted", show.time="all")
+    save(insect_interact_anova, file = "insect_interaction_anova.Rdata")
+  } else {
+    load("insect_interaction_anova.Rdata")
+  }
+  
+  insect_statistic <- insect_interact_anova %>%
+    extract2("uni.test") %>% 
+    t %>% 
+    data.frame %>% 
+    select(-X.Intercept.,
+           Block_wald=Block,
+           species_wald=species) %>%
+    l(df -> data.frame(spp=rownames(df),df)) %>%
+    set_rownames(NULL)
+  
+  insect_sig <- insect_interact_anova %>%
+    extract2("uni.p") %>%
+    t %>% 
+    data.frame %>% 
+    select(-X.Intercept.,
+           Block_p=Block,
+           species_p=species) %>%
+    l(df -> data.frame(spp=rownames(df),df)) %>%
+    set_rownames(NULL)
 
-## call mvabund on responses
-insectresponses <- insect_data %>% 
-  extract2("insects") %>%
-  mvabund
-
-## run glm
-insect_glm_interact <- insect_data %>% 
-  extract2("factors") %>% 
-  data.frame %>% 
-  manyglm(insectresponses~Block*species, data=., family="negative.binomial") 
-
-## no interaction
-# insect_glm_additive <- insect_data %>% extract2("factors") %>% data.frame %>% 
-#   manyglm(insectresponses~Block+species,data=.,family="negative.binomial") 
-
-## check
-# plot(insect_glm_interact)
-# anova(insect_glm_interact, nBoot=400, test="wald")
-
-## not sure how to interpret
-# drop1(insect_glm_interact)
-
-# summary gives overall fit
-if (run_interaction_model) {
-  insect_interact_summary <- insect_glm_interact %>% summary(resamp="residual")
-  save(insect_interact_summary, file = "insect_interaction_summary.Rdata")
-} else {
-  load("insect_interaction_summary.Rdata")
+  list(plotting_data = left_join(insect_sig, insect_statistic),
+       manyglm_summary = insect_interact_summary,
+       manyglm_anova = insect_interact_anova)
 }
-  
-# anova gives us values for each animal
-if (run_interaction_model) {
-  insect_interact_anova  <- insect_glm_interact %>% 
-    anova(resamp="perm.resid", p.uni="adjusted", show.time="all")
-  save(insect_interact_anova, file = "insect_interaction_anova.Rdata")
-} else {
-  load("insect_interaction_anova.Rdata")
-}
-  
-  
-  
-insect_statistic <- insect_interact_anova %>%
-  extract2("uni.test") %>% 
-  t %>% 
-  data.frame %>% 
-  select(-X.Intercept.,
-         Block_wald=Block,
-         species_wald=species) %>%
-  l(df -> data.frame(spp=rownames(df),df)) %>%
-  set_rownames(NULL)
 
-insect_sig <- insect_interact_anova %>%
-  extract2("uni.p") %>%
-  t %>% 
-  data.frame %>% 
-  select(-X.Intercept.,
-         Block_p=Block,
-         species_p=species) %>%
-  l(df -> data.frame(spp=rownames(df),df)) %>%
-  set_rownames(NULL)
+insect_wald <- insect_manyglm()
 
-insect_wald <- left_join(insect_sig,insect_statistic)
+insect_wald_initial <- insect_manyglm(run_interaction_model = TRUE, sampletime = "initial")
 
-insect_wald %>%
-  ggplot(aes(x="insect",y=species_wald,fill=species_p<0.05)) +
-  geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
+## graphing insects threespp ----------
 
-
+insect_wald_initial %>%
+  ggplot(aes(x = "insect", y = species_wald, fill = species_p < 0.05)) +
+  geom_point(shape = 21, size = 5, alpha = 0.7) +
+  scale_fill_manual(values = c(NA, "black")) + 
+  scale_y_log10()
 
 # Zoops in threespp -------------------------------------------------------
 
 zoops_final_cast <- zoop %>%
-  filter(sampling=="final") %>%
+  filter(sampling == "final") %>%
   dcast(bromeliad~spp,value.var = "abundance",fill = 0)
 
 ## select blocks
