@@ -67,7 +67,9 @@ insect_data <- blocks %>%
   )
 
 ## call mvabund on responses
-insectresponses <- insect_data %>% extract2("insects") %>% mvabund
+insectresponses <- insect_data %>% 
+  extract2("insects") %>%
+  mvabund
 
 ## run glm
 insect_glm_interact <- insect_data %>% extract2("factors") %>% data.frame %>% 
