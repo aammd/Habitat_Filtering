@@ -45,9 +45,44 @@ insects_renamed <- insects %>%
   group_by(sampling, bromeliad, Spp) %>%
   summarise(abundance = sum(abundance))
 
+# combining zooplankton ---------------------------------------------------
+
 zoop_combined <- zoop %>%
   group_by(sampling, bromeliad, Spp) %>%
   summarise(abundance = sum(abundance))
+
+# rearrange bacteria ------------------------------------------------------
+
+bacteria_list <- lapply(bact,function(DF) {
+  
+  plotdates <- do.call(rbind,strsplit(DF$sample,split=" "))
+  
+  samp.dates <- paste(apply(plotdates[,-1],1,paste,collapse="-"),"2013",sep="-")
+  samp.dates <- dmy(samp.dates)
+  
+  duration <- (max(samp.dates)-samp.dates)<as.duration(259200)
+  
+  sampling <- c("initial","final")[duration+1]
+  
+  DF <- DF[,!names(DF)%in%c("sample")]
+  
+  DF <- plyr::rename(DF,c("Block"="block"))
+  
+  data.frame(bromeliad=plotdates[,1],sampling,DF,stringsAsFactors=FALSE)%>%
+    filter(sampling=="final") %>%
+    select(-block,-sampling)
+}) 
+
+## go through this list, identify the block, and put the block names in a vector
+## then set that vector as names for the list.
+bacteria_list <- plyr::laply(bacteria_list,function(DF,.bromeliad=bromeliad){
+  DF %>%
+    select(Brom=bromeliad) %>%
+    left_join(.bromeliad) %>%
+    extract2("Block") %>% unique
+}
+) %>%
+  set_names(bacteria_list,.)
 
 
 # insects in threespp experiment ------------------------------------------
@@ -184,44 +219,10 @@ insect_final$manyglm %>% plot
 zoop_initial$manyglm %>% plot
 zoop_final$manyglm %>% plot
 
-
-# rearrange bacteria ------------------------------------------------------
-
-bacteria_list <- lapply(bact,function(DF) {
-  
-  plotdates <- do.call(rbind,strsplit(DF$sample,split=" "))
-  
-  samp.dates <- paste(apply(plotdates[,-1],1,paste,collapse="-"),"2013",sep="-")
-  samp.dates <- dmy(samp.dates)
-  
-  duration <- (max(samp.dates)-samp.dates)<as.duration(259200)
-  
-  sampling <- c("initial","final")[duration+1]
-  
-  DF <- DF[,!names(DF)%in%c("sample")]
-  
-  DF <- plyr::rename(DF,c("Block"="block"))
-  
-  data.frame(bromeliad=plotdates[,1],sampling,DF,stringsAsFactors=FALSE)%>%
-    filter(sampling=="final") %>%
-    select(-block,-sampling)
-}) 
-
-## go through this list, identify the block, and put the block names in a vector
-## then set that vector as names for the list.
-bacteria_list <- plyr::laply(bacteria_list,function(DF,.bromeliad=bromeliad){
-  DF %>%
-    select(Brom=bromeliad) %>%
-    left_join(.bromeliad) %>%
-    extract2("Block") %>% unique
-}
-) %>%
-  set_names(bacteria_list,.)
-
 # Bacteria from threespp --------------------------------------------------
 
-
-bact_results <- plyr::llply(bacteria_list,function(BACTERIA){
+if (TRUE) {
+  bact_results <- plyr::llply(bacteria_list,function(BACTERIA){
 ## select blocks
 bact_data <- blocks %>%
   filter(experiment=="threespp") %>%
@@ -263,14 +264,14 @@ bact_statistic <- bact_species_anova$uni.test %>% t %>% data.frame %>%
   select(-X.Intercept.,
          #Block_wald=Block,
          species_wald=species) %>%
-  (function(df) data.frame(spp=rownames(df),df)) %>%
+  l(df -> {data.frame(spp=rownames(df),df)}) %>%
   set_rownames(NULL)
 
 bact_sig <- bact_species_anova$uni.p %>% t %>% data.frame %>% 
   select(-X.Intercept.,
          #Block_p=Block,
          species_p=species) %>%
-  (function(df) data.frame(spp=rownames(df),df)) %>%
+  l(df -> {data.frame(spp=rownames(df),df)}) %>%
   set_rownames(NULL)
 
 bact_species_wald <- left_join(bact_sig,bact_statistic)
@@ -281,18 +282,23 @@ list("bact_glm_species"=bact_glm_species,
      "bact_species_anova"=bact_species_anova,
      "bact_species_wald"=bact_species_wald)
 })
+  save(bact_results, file = "bacteria_results_final.Rdata")
+  message(paste("I just created the file","bacteria_results_final.Rdata"))
+} else {
+  load("bacteria_results_final.Rdata")
+}
 
 ## check with plots
 par(mfrow=c(2,3))
 lapply(bact_results,function(x) plot(x$bact_glm_species))
 
-ldply(bact_results,extract2,"bact_species_wald") %>%
+plyr::ldply(bact_results,extract2,"bact_species_wald") %>%
   select(block=.id,
          species_p,
          species_wald) %>%
   ggplot(aes(x=block,y=species_wald))+geom_point()
 
-bact_wald <- ldply(bact_results,extract2,"bact_species_wald") %>%
+bact_wald <- plyr::ldply(bact_results,extract2,"bact_species_wald") %>%
   select(block=.id,
          species_p,
          species_wald) %>%
@@ -302,34 +308,30 @@ bact_wald <- ldply(bact_results,extract2,"bact_species_wald") %>%
 #             species_p=sum(species_p>0.05),       
   )
 
-
-
 # graphing ----------------------------------------------------------------
 
 ## graphing insects threespp ----------
 
-insect_wald$plotting_data %>%
+insect_final$plotting_data %>%
   ggplot(aes(x = "insect", y = species_wald, fill = species_p < 0.05)) +
   geom_point(shape = 21, size = 5, alpha = 0.7) +
   scale_fill_manual(values = c(NA, "black")) + 
   scale_y_log10()
 
-
-
-insect_wald %>%
-  ggplot(aes(x="insect",y=species_wald,fill=species_p<0.05)) +
-  geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
-
-zoop_wald %>%
-  ggplot(aes(x="zoop",y=species_wald,fill=species_p<0.05)) +
-  geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
+# insect_wald %>%
+#   ggplot(aes(x="insect",y=species_wald,fill=species_p<0.05)) +
+#   geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
+# 
+# zoop_wald %>%
+#   ggplot(aes(x="zoop",y=species_wald,fill=species_p<0.05)) +
+#   geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
 
 library(wesanderson)
 
 pal <- wes.palette(4,name = "GrandBudapest")[-1] #%>% rev
 
-rbind_list(insect_wald %>% mutate(Taxa="insect"),
-           zoop_wald %>% mutate(Taxa="zoop"),
+rbind_list(insect_final$plotting_data %>% mutate(Taxa="insect"),
+           zoop_final$plotting_data %>% mutate(Taxa="zoop"),
            bact_wald %>% mutate(Taxa="bact")
 ) %>% 
   mutate(sd_wald=sd_wald %>% is.na %>% ifelse(0,sd_wald),
