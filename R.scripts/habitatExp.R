@@ -9,6 +9,7 @@ library(tidyr)
 library(mvabund)
 library(magrittr)
 library(ggplot2)
+library(lubridate)
 
 
 # read in data ------------------------------------------------------------
@@ -142,111 +143,51 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
        manyglm = insect_glm_interact)
 }
 
-#insect_manyglm(run_interaction_model = TRUE, sampletime = "initial")
-insect_initial <- insect_manyglm(run_interaction_model = FALSE, sampletime = "initial")
-#insect_manyglm(run_interaction_model = TRUE, sampletime = "final")
-insect_final <- insect_manyglm(run_interaction_model = FALSE, sampletime = "final")
 
-## zoo?
+## calculating model objects
+if (FALSE) {
+  ## initial insects
+  insect_manyglm(run_interaction_model = TRUE, sampletime = "initial")
+  ## final insects
+  insect_manyglm(run_interaction_model = TRUE, sampletime = "final")
+  ## initial zoops
+  insect_manyglm(.taxa = zoop_combined,
+                 run_interaction_model = TRUE,
+                 organisms = "zoops",
+                 sampletime = "initial")
+  ## final zoops
+  insect_manyglm(.taxa = zoop_combined,
+                 run_interaction_model = TRUE,
+                 organisms = "zoops",
+                 sampletime = "final")
+} else {
+  ## LOADING model objects
 
-# insect_manyglm(.taxa = zoop_combined,
-#                run_interaction_model = TRUE,
-#                organisms = "zoops",
-#                sampletime = "initial")
-zoop_initial <- insect_manyglm(.taxa = zoop_combined,
-                               run_interaction_model = FALSE,
-                               organisms = "zoops",
-                               sampletime = "initial")
-# insect_manyglm(.taxa = zoop_combined,
-#                run_interaction_model = TRUE,
-#                organisms = "zoops",
-#                sampletime = "final")
-zoop_final <- insect_manyglm(.taxa = zoop_combined,
+  insect_initial <- insect_manyglm(run_interaction_model = FALSE,
+                                   sampletime = "initial")
+  insect_final <- insect_manyglm(run_interaction_model = FALSE,
+                                 sampletime = "final")
+  zoop_initial <- insect_manyglm(.taxa = zoop_combined,
+                                 run_interaction_model = FALSE,
+                                 organisms = "zoops",
+                                 sampletime = "initial")
+  zoop_final <- insect_manyglm(.taxa = zoop_combined,
                                run_interaction_model = FALSE,
                                organisms = "zoops",
                                sampletime = "final")
+}
 
-## graphing insects threespp ----------
+#check assumptions
 
-insect_wald$plotting_data %>%
-  ggplot(aes(x = "insect", y = species_wald, fill = species_p < 0.05)) +
-  geom_point(shape = 21, size = 5, alpha = 0.7) +
-  scale_fill_manual(values = c(NA, "black")) + 
-  scale_y_log10()
-
-# Zoops in threespp -------------------------------------------------------
-
-zoops_final_cast <- zoop %>%
-  filter(sampling == "final") %>%
-  dcast(bromeliad~spp,value.var = "abundance",fill = 0)
-
-## select blocks
-zoop_data <- blocks %>%
-  filter(experiment=="threespp") %>%
-  select(Block=block) %>%
-  ## merge to bromeliad
-  left_join(bromeliad) %>%
-  mutate(bromeliad=Brom) %>%
-  select(-Brom) %>%
-  # and add the animals
-  left_join(zoops_final_cast) %>%
-  # set up a list object a la mvabund
-  (
-    function(data) {
-      list(factors=data %>% select(Block,species) %>% as.matrix,
-           zoops=data %>% select(Bdelloidea:Tardigrada) %>% as.matrix
-      )
-    }
-  )
-
-## call mvabund on responses
-zoopresponses <- zoop_data %>% extract2("zoops") %>% mvabund
-
-## run glm
-zoop_glm_interact <- zoop_data %>% extract2("factors") %>% data.frame %>% 
-  manyglm(zoopresponses~Block*species,data=.,family="negative binomial") 
-## no interaction
-zoop_glm_additive <- zoop_data %>% extract2("factors") %>% data.frame %>% 
-  manyglm(zoopresponses~Block+species,data=.,family="poisson") 
-
-## check
-plot(zoop_glm_interact)
-
-anova(zoop_glm_interact, nBoot=400, test="wald")
-
-## not sure how to interpret
-drop1(zoop_glm_interact)
-
-# summary gives overall fit
-zoop_interact_summary <- zoop_glm_interact %>% summary(resamp="residual")
-# anova gives us values for each animal
-zoop_interact_anova  <- zoop_glm_interact %>% anova(resamp="perm.resid",p.uni="adjusted", show.time="all")
-
-zoop_statistic <- zoop_interact_anova$uni.test %>% t %>% data.frame %>% 
-  select(-X.Intercept.,
-         Block_wald=Block,
-         species_wald=species) %>%
-  (function(df) data.frame(spp=rownames(df),df)) %>%
-  set_rownames(NULL)
-
-zoop_sig <- zoop_interact_anova$uni.p %>% t %>% data.frame %>% 
-  select(-X.Intercept.,
-         Block_p=Block,
-         species_p=species) %>%
-  (function(df) data.frame(spp=rownames(df),df)) %>%
-  set_rownames(NULL)
-
-zoop_wald <- left_join(zoop_sig,zoop_statistic) 
-
-zoop_wald %>%
-  ggplot(aes(x="zoop",y=species_wald,fill=species_p<0.05)) +
-  geom_point(shape=21,size=5,alpha=0.7)+scale_fill_manual(values=c(NA, "black"))+scale_y_log10()
-
+insect_initial$manyglm %>% plot
+insect_final$manyglm %>% plot
+zoop_initial$manyglm %>% plot
+zoop_final$manyglm %>% plot
 
 
 # rearrange bacteria ------------------------------------------------------
 
-bacteria_list <- llply(bact,function(DF) {
+bacteria_list <- lapply(bact,function(DF) {
   
   plotdates <- do.call(rbind,strsplit(DF$sample,split=" "))
   
@@ -259,7 +200,7 @@ bacteria_list <- llply(bact,function(DF) {
   
   DF <- DF[,!names(DF)%in%c("sample")]
   
-  DF <- rename(DF,c("Block"="block"))
+  DF <- plyr::rename(DF,c("Block"="block"))
   
   data.frame(bromeliad=plotdates[,1],sampling,DF,stringsAsFactors=FALSE)%>%
     filter(sampling=="final") %>%
@@ -268,7 +209,7 @@ bacteria_list <- llply(bact,function(DF) {
 
 ## go through this list, identify the block, and put the block names in a vector
 ## then set that vector as names for the list.
-bacteria_list <- laply(bacteria_list,function(DF,.bromeliad=bromeliad){
+bacteria_list <- plyr::laply(bacteria_list,function(DF,.bromeliad=bromeliad){
   DF %>%
     select(Brom=bromeliad) %>%
     left_join(.bromeliad) %>%
@@ -280,7 +221,7 @@ bacteria_list <- laply(bacteria_list,function(DF,.bromeliad=bromeliad){
 # Bacteria from threespp --------------------------------------------------
 
 
-bact_results <- llply(bacteria_list,function(BACTERIA){
+bact_results <- plyr::llply(bacteria_list,function(BACTERIA){
 ## select blocks
 bact_data <- blocks %>%
   filter(experiment=="threespp") %>%
@@ -293,14 +234,12 @@ bact_data <- blocks %>%
   ## note that for bacteria, they are joined in the opposite direction!
   left_join(BACTERIA,
             .                        # this dot essentially makes this a "right join".
-            ) %>% 
+  ) %>% 
   # set up a list object a la mvabund
-  (
-    function(data) {
+  l(data -> {
       list(factors=data %>% select(Block,species) %>% as.matrix,
            bacts=data %>% select(starts_with("X")) %>% as.matrix
-      )
-    }
+      )}
   )
 
 ## call mvabund on responses
@@ -366,6 +305,16 @@ bact_wald <- ldply(bact_results,extract2,"bact_species_wald") %>%
 
 
 # graphing ----------------------------------------------------------------
+
+## graphing insects threespp ----------
+
+insect_wald$plotting_data %>%
+  ggplot(aes(x = "insect", y = species_wald, fill = species_p < 0.05)) +
+  geom_point(shape = 21, size = 5, alpha = 0.7) +
+  scale_fill_manual(values = c(NA, "black")) + 
+  scale_y_log10()
+
+
 
 insect_wald %>%
   ggplot(aes(x="insect",y=species_wald,fill=species_p<0.05)) +
