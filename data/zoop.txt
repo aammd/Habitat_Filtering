@@ -1,4 +1,4 @@
-sampling	bromeliad	spp	abundance
+sampling	bromeliad	Spp	abundance
 initial	A5	Bdelloidea	3
 initial	N5	Bdelloidea	51
 initial	V3	Bdelloidea	9

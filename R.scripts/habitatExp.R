@@ -137,9 +137,17 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
        manyglm_anova = insect_interact_anova)
 }
 
-insect_wald_initial <- insect_manyglm(run_interaction_model = TRUE, sampletime = "initial")
+#insect_manyglm(run_interaction_model = TRUE, sampletime = "initial")
+insect_initial <- insect_manyglm(run_interaction_model = FALSE, sampletime = "initial")
+#insect_manyglm(run_interaction_model = TRUE, sampletime = "final")
+insect_final <- insect_manyglm(run_interaction_model = FALSE, sampletime = "final")
 
-insect_wald_initial <- insect_manyglm(run_interaction_model = TRUE, sampletime = "initial")
+## zoo?
+
+insect_manyglm(.taxa = zoop, run_interaction_model = TRUE, organisms = "zoops",
+               sampletime = "initial")
+
+
 
 ## graphing insects threespp ----------
 
