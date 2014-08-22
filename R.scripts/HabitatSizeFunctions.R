@@ -40,8 +40,8 @@ TaxaTimeSelector <- function(.blocks = blocks, .bromeliad = bromeliad,
 ## abundances.  Also defaults to setting strata as Block. For bacteria (which
 ## have to be analyzed separately) just set .strata to NULL
 
-AdonisData <- function(Data, .strata = Data[[1]]$Block, ...){  
-  adonis(Data[[2]] ~ species, data = Data[[1]], strata = .strata, ...)
+AdonisData <- function(Data, .strata = Data[[1]]$Block, .data = Data[[1]], ...){  
+  adonis(Data[[2]] ~ species, data = .data, strata = .strata, ...)
 }
 
 ## wrapper for filter that removes samples that failed to run (ie were NA in the data)
@@ -69,7 +69,7 @@ BacteriaTimeSelector <- function(.bacteria_list_item,
       left_join(.bacteria_list_item,
                 .         # this dot essentially makes this a "right join".
       ) %>% 
-      ## the following removes all rows with .
+      ## the following removes all rows with NAs.
       FilterNABacteriaRows %>%
       # and now we filter to keep initial, final or both:
       filter(sampling %in% sampletime) %>%
@@ -78,4 +78,54 @@ BacteriaTimeSelector <- function(.bacteria_list_item,
         factors=data %>% select(Block,species,sampling),
         bacts=data %>% select(starts_with("X"))
       )))
+}
+
+InsectZooBactAbds <- function(SampleTime = "initial"){
+  
+  ## list of abundances
+  
+  TaxaAbundances <- vector("list",length = 3)
+  names(TaxaAbundances) <- c("insects","zoops","bacteria")
+  TaxaAbundances[["insects"]]  <-  TaxaTimeSelector(sampletime = SampleTime)
+  TaxaAbundances[["zoops"]]  <-  TaxaTimeSelector(.taxa = zoop_combined, sampletime = SampleTime)
+  TaxaAbundances[["bacteria"]]  <-  lapply(bacteria_list, BacteriaTimeSelector, sampletime = SampleTime)
+  
+  if(SampleTime == "initial") {
+    zerorows <- TaxaAbundances[["zoops"]]$taxa %>%
+      rowSums(na.rm = TRUE) %>%
+      equals(0) %>%
+      which
+    
+    TaxaAbundances[["zoops"]] <- lapply(TaxaAbundances[["zoops"]],
+                                        function(data) data[-zerorows, ])
+  }
+  TaxaAbundances
+}
+
+CommunityAdonis <- function(data_list){
+  
+  list(
+    insects  = AdonisData(data_list[["insects"]]),
+    zoops    = AdonisData(data_list[["zoops"]]),
+    bacteria = lapply(data_list[["bacteria"]], AdonisData, .strata = NULL)
+  )
+  
+}
+
+plotter <- function(RESP = RESP){
+  rbind(
+    sapply(perm_initial[1:2], function(dat) dat[[1]]["species",RESP]) %>%
+      (l(x ~ data.frame(sample = "initial", organisms = names(x), value = x))),
+    sapply(perm_initial$bacteria, function(dat) dat[[1]]["species",RESP]) %>%
+      data.frame(sample = "initial", organisms = "bacteria", value = .),
+    sapply(perm_final[1:2], function(dat) dat[[1]]["species",RESP]) %>%
+      (l(x ~ data.frame(sample = "final", organisms = names(x), value = x))),
+    sapply(perm_final$bacteria, function(dat) dat[[1]]["species",RESP]) %>%
+      data.frame(sample = "final", organisms = "bacteria", value = .)
+  ) %>%
+    ggplot(aes(x = organisms, y = value, colour = sample)) + 
+    geom_point(size = 3) + 
+    scale_color_manual(values = c("grey", "black")) + 
+    theme_bw() +
+    ylab(RESP)
 }
