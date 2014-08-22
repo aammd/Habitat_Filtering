@@ -57,9 +57,9 @@ bacteria_list <- lapply(bact,function(DF) {
   
   DF <- plyr::rename(DF,c("Block"="block"))
   
-  data.frame(bromeliad=plotdates[,1],sampling,DF,stringsAsFactors=FALSE)%>%
-    filter(sampling=="final") %>%
-    select(-block,-sampling)
+  data.frame(bromeliad=plotdates[,1],sampling,DF,stringsAsFactors=FALSE) %>%
+   # filter(sampling=="final") %>%
+    select(-block)
 }) 
 
 ## go through this list, identify the block, and put the block names in a vector
