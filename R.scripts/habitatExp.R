@@ -11,6 +11,7 @@ library(magrittr)
 library(ggplot2)
 library(lubridate)
 library(vegan)
+library(pander)
 
 source("R.scripts/read_clean_data.R")
 
@@ -47,17 +48,26 @@ AdonisData <- function(Data, ...){
 }
 
 # final insects
-AdonisData(TaxaTimeSelector())
+insectfinal <- AdonisData(TaxaTimeSelector())
 
 # inital insects
-AdonisData(TaxaTimeSelector(sampletime = "initial"))
+insectinitial <- AdonisData(TaxaTimeSelector(sampletime = "initial"))
+
+inizoop <- TaxaTimeSelector(.taxa = zoop_combined, 
+                 sampletime = "initial")
+
+zerorows <- inizoop$insects %>%
+  rowSums(na.rm = TRUE) %>%
+  equals(0) %>%
+  which
+  
+inizoop2 <- lapply(inizoop,function(data) data[-zerorows, ])
 
 # initial zoop -- WON'T RUN
-# AdonisData(TaxaTimeSelector(.taxa = zoop_combined, 
-#                             sampletime = "initial"), 
-#            method = "bray")
+AdonisData(inizoop2, 
+           method = "bray")
 
-AdonisData(TaxaTimeSelector(.taxa = zoop_combined, 
+zf <- AdonisData(TaxaTimeSelector(.taxa = zoop_combined, 
                             sampletime = "final"), 
            method = "bray")
 
@@ -90,19 +100,19 @@ BacteriaTimeSelector <- function(.bacteria_list = bacteria_list,
              bacts=data %>% select(starts_with("X")))
       }
       ))
-  }
-  )
+  })
 }
   
   #bacteria_adonis_ready$Eccleson$bacts
 
 bacteria_adonis_ready <- BacteriaTimeSelector()
 lapply(bacteria_adonis_ready, function(Data, ...){  
-  adonis(Data[[2]] ~ species*sampling, data = Data[[1]], strata = Data[[1]]$Block, ...)
+  adonis(Data[[2]] ~ species*sampling, data = Data[[1]], ...)
 })
 
-BacteriaTimeSelector(sampletime = "initial") %>%
+bactlist_initial <- BacteriaTimeSelector(sampletime = "initial") %>%
   lapply(AdonisData)
   
-BacteriaTimeSelector(sampletime = "final") %>%
+bactlist_final <- BacteriaTimeSelector(sampletime = "final") %>%
   lapply(AdonisData)
+
