@@ -1,7 +1,6 @@
 ## file for analyzing the habitat experiment
 ## Andrew MacDonald, 2014
 
-
 # packages ----------------------------------------------------------------
 
 library(dplyr)
@@ -16,42 +15,21 @@ library(pander)
 source("R.scripts/read_clean_data.R")
 source("R.scripts/HabitatSizeFunctions.R")
 
+abds_initial <- InsectZooBactAbds(SampleTime = "initial")
 
-## Insects: PERMANOVA -----------------------------------------------------
+perm_initial <- CommunityAdonis(data_list = abds_initial)
 
-# Inital insects
-insect_initial <- AdonisData(TaxaTimeSelector(sampletime = "initial"))
+abds_final <- InsectZooBactAbds(SampleTime = "final")
 
-# Final insects
-insect_final <- AdonisData(TaxaTimeSelector())
+perm_final <- CommunityAdonis(data_list = abds_final)
+
+str(perm_initial[[1]])
 
 
-# zooplankton: PERMANOVA --------------------------------------------------
 
-# Initial zooplankton
-inizoop <- TaxaTimeSelector(.taxa = zoop_combined, 
-                 sampletime = "initial")
 
-## this dataset requires some post-processing due to ugly data 
-zerorows <- inizoop$taxa %>%
-  rowSums(na.rm = TRUE) %>%
-  equals(0) %>%
-  which
-  
-zooplankton_initial <- lapply(inizoop,function(data) data[-zerorows, ]) %>%
-  AdonisData(method = "bray")
+plotter("F.Model")
 
-zooplankton_final <- AdonisData(TaxaTimeSelector(.taxa = zoop_combined, 
-                                                 sampletime = "final"), 
-                                method = "bray")
+plotter("Pr(>F)")
 
-bacteria_adonis_ready <- lapply(bacteria_list, BacteriaTimeSelector, sampletime = c("initial","final"))
-
-# bacteria: PERMANOVA -----------------------------------------------------
-
-bactlist_initial <- lapply(bacteria_list, BacteriaTimeSelector, sampletime = c("initial")) %>%
-  lapply(AdonisData, .strata = NULL)
-  
-bactlist_final <- lapply(bacteria_list, BacteriaTimeSelector, sampletime = c("final")) %>%
-  lapply(AdonisData, .strata = NULL)
-
+plotter("R2")
