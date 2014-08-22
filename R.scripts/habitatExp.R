@@ -15,49 +15,43 @@ library(pander)
 
 source("R.scripts/read_clean_data.R")
 source("R.scripts/HabitatSizeFunctions.R")
+
+
 ## Insects: PERMANOVA -----------------------------------------------------
 
-# final insects
-insectfinal <- AdonisData(TaxaTimeSelector())
+# Inital insects
+insect_initial <- AdonisData(TaxaTimeSelector(sampletime = "initial"))
 
-# inital insects
-insectinitial <- AdonisData(TaxaTimeSelector(sampletime = "initial"))
+# Final insects
+insect_final <- AdonisData(TaxaTimeSelector())
 
+
+# zooplankton: PERMANOVA --------------------------------------------------
+
+# Initial zooplankton
 inizoop <- TaxaTimeSelector(.taxa = zoop_combined, 
                  sampletime = "initial")
 
-zerorows <- inizoop$insects %>%
+## this dataset requires some post-processing due to ugly data 
+zerorows <- inizoop$taxa %>%
   rowSums(na.rm = TRUE) %>%
   equals(0) %>%
   which
   
-inizoop2 <- lapply(inizoop,function(data) data[-zerorows, ])
+zooplankton_initial <- lapply(inizoop,function(data) data[-zerorows, ]) %>%
+  AdonisData(method = "bray")
 
-# initial zoop -- WON'T RUN
-AdonisData(inizoop2, 
-           method = "bray")
+zooplankton_final <- AdonisData(TaxaTimeSelector(.taxa = zoop_combined, 
+                                                 sampletime = "final"), 
+                                method = "bray")
 
-zf <- AdonisData(TaxaTimeSelector(.taxa = zoop_combined, 
-                            sampletime = "final"), 
-           method = "bray")
+bacteria_adonis_ready <- lapply(bacteria_list, BacteriaTimeSelector, sampletime = c("initial","final"))
 
-# Bacteria from threespp --------------------------------------------------
+# bacteria: PERMANOVA -----------------------------------------------------
 
-
-  #bacteria_adonis_ready$Eccleson$bacts
-
-
-lapply(bacteria_list, BacteriaTimeSelector, sampletime = c("initial","final"))
-
-
-bacteria_adonis_ready <- BacteriaTimeSelector()
-lapply(bacteria_adonis_ready, function(Data, ...){  
-  adonis(Data[[2]] ~ species*sampling, data = Data[[1]], ...)
-})
-
-bactlist_initial <- BacteriaTimeSelector(sampletime = "initial") %>%
-  lapply(AdonisData)
+bactlist_initial <- lapply(bacteria_list, BacteriaTimeSelector, sampletime = c("initial")) %>%
+  lapply(AdonisData, .strata = NULL)
   
-bactlist_final <- BacteriaTimeSelector(sampletime = "final") %>%
-  lapply(AdonisData)
+bactlist_final <- lapply(bacteria_list, BacteriaTimeSelector, sampletime = c("final")) %>%
+  lapply(AdonisData, .strata = NULL)
 
