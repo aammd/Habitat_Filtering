@@ -235,13 +235,14 @@ if (rerun) {
 
 #check assumptions
 
-insect_initial_nbin$manyglm %>% plot
-insect_initial_pois$manyglm %>% plot
+insect_final_nbin$manyglm %>% plot
+insect_final_pois$manyglm %>% plot
 
 zoop_initial_nbin$manyglm %>% plot
 zoop_initial_pois$manyglm %>% plot
 
-
+insect_final_nbin$manyglm_summary
+zoop_final_nbin$manyglm_summary
 
 # Bacteria from threespp --------------------------------------------------
 
@@ -312,7 +313,10 @@ list("bact_glm_species"=bact_glm_species,
   load("bacteria_results_final.Rdata")
 }
 
-## check with plots
+bact_results %>% lapply(function(blk) extract2(blk,"bact_species_anova"))
+
+
+    ## check with plots
 par(mfrow=c(2,3))
 lapply(bact_results,function(x) plot(x$bact_glm_species))
 
@@ -354,19 +358,18 @@ library(wesanderson)
 
 pal <- wes.palette(4,name = "GrandBudapest")[-1] #%>% rev
 
-rbind_list(insect_final_nbin$plotting_data %>% mutate(Taxa="insect"),
-           zoop_final_nbin$plotting_data %>% mutate(Taxa="zoop"),
-           bact_wald %>% mutate(Taxa="bact")
-) %>% 
+rbind_list(insect_final_nbin$plotting_data %>%mutate(Taxa = "insect"),
+           zoop_final_nbin$plotting_data %>% mutate(Taxa = "zoop"),
+           bact_wald %>% mutate(Taxa = "bact")) %>% 
   mutate(sd_wald = sd_wald %>% is.na %>% ifelse(0,sd_wald),
-         Taxa2 = factor(Taxa,levels = c("insect","zoop","bact")
-                     ) %>%
-           as.numeric %>% jitter(0.6),
-         species_wald=species_wald+1,
+         Taxa2 = factor(Taxa,levels = c("insect","zoop","bact")) %>%
+           as.numeric %>% 
+           jitter(0.6),
+         species_wald = species_wald + 1,
          sig = species_p %>% is.na %>% ifelse(1,species_p),
-         sig = sig %>% is_less_than(0.05),
-         mean_wald = mean(species_wald)
-  ) %>%
+         sig = sig %>% is_less_than(0.05)) %>%
+  group_by(Taxa) %>%
+  mutate(mean_wald = mean(species_wald)) %>% extract2("mean_wald")
   ggplot(aes(x=Taxa2,
              y=species_wald,
              shape=factor(sig),

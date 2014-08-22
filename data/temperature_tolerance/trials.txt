@@ -1,8 +1,0 @@
-## data on each individual temperature trial conducted in or around Cardoso Island in 2012			
-## data mostly collected by Pedro Trasmonte	supervised by Andrew MacDonald		
-## Date = date of trial			
-## species = morphospecies name			
-## interval.augment = how many minutes between increases in temperature			
-## trial.name = combination of date and species	forming a unique identity code for each trial.		
-Date	species	interval.augmentation	trial.name
-2012/05/03	tabanid	5	tab.3.may
