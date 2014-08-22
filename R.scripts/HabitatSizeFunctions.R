@@ -53,11 +53,9 @@ FilterNABacteriaRows <- function(data) {
            not)
 }
 
-BacteriaTimeSelector <- function(.blocks = blocks, .bromeliad = bromeliad, 
-                                 .bacteria_list = bacteria_list,
+BacteriaTimeSelector <- function(.bacteria_list_item,
+                                 .blocks = blocks, .bromeliad = bromeliad, 
                                  sampletime = c("initial","final")){
-  
-  plyr::llply(bacteria_list,function(BACTERIA){
     ## select blocks
     bact_data <- .blocks %>%
       filter(experiment=="threespp") %>%
@@ -68,7 +66,7 @@ BacteriaTimeSelector <- function(.blocks = blocks, .bromeliad = bromeliad,
       select(-Brom) %>%
       # and add the animals
       ## note that for bacteria, they are joined in the opposite direction!
-      left_join(BACTERIA,
+      left_join(.bacteria_list_item,
                 .         # this dot essentially makes this a "right join".
       ) %>% 
       ## the following removes all rows with .
@@ -80,5 +78,4 @@ BacteriaTimeSelector <- function(.blocks = blocks, .bromeliad = bromeliad,
         factors=data %>% select(Block,species,sampling),
         bacts=data %>% select(starts_with("X"))
       )))
-  })
 }
