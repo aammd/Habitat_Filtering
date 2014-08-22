@@ -4,22 +4,22 @@
 # read in data ------------------------------------------------------------
 
 blocks <-
-  read.table("data/blocks.txt",header=TRUE,comment.char="#",
+  read.table("../data/blocks.txt",header=TRUE,comment.char="#",
              stringsAsFactors=FALSE) %>% tbl_df()
 
-insects <-   read.table("data/insect.communities.table.txt",
+insects <-   read.table("../data/insect.communities.table.txt",
                         header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df()
 
-insectnames <- read.csv(file = "data/insectnames.csv") %>% tbl_df()
+insectnames <- read.csv(file = "../data/insectnames.csv") %>% tbl_df()
 
-zoop <-  read.table("data/zoop.txt",
+zoop <-  read.table("../data/zoop.txt",
                     header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df
 
 bromeliad <-
-  read.table("data/bromeliad.volumes.txt",comment.char="#",
+  read.table("../data/bromeliad.volumes.txt",comment.char="#",
              header=TRUE,stringsAsFactors=FALSE) %>% tbl_df
 
-bact <- list.files("data/bacteria/",
+bact <- list.files("../data/bacteria/",
                    pattern="*.csv",
                    full.names=TRUE) %>% 
   lapply(read.table,comment.char="#",
