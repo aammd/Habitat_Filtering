@@ -1,0 +1,35 @@
+---
+title: "figures"
+author: "Andrew MacDonald"
+date: '2014-08-22'
+output: html_document
+---
+
+```{r message=FALSE, echo=FALSE}
+library(dplyr)
+library(tidyr)
+library(mvabund)
+library(magrittr)
+library(ggplot2)
+library(lubridate)
+library(vegan)
+library(pander)
+
+source("read_clean_data.R")
+source("HabitatSizeFunctions.R")
+
+abds_initial <- InsectZooBactAbds(SampleTime = "initial")
+
+perm_initial <- CommunityAdonis(data_list = abds_initial)
+
+abds_final <- InsectZooBactAbds(SampleTime = "final")
+
+perm_final <- CommunityAdonis(data_list = abds_final)
+
+plotter("F.Model")
+
+plotter("Pr(>F)")
+
+plotter("R2")
+```
+
