@@ -15,8 +15,8 @@ library(lubridate)
 library(vegan)
 library(pander)
 
-source("read_clean_data.R")
-source("HabitatSizeFunctions.R")
+source("./R.scripts/read_clean_data.R")
+source("./R.scripts/HabitatSizeFunctions.R")
 
 abds_initial <- InsectZooBactAbds(SampleTime = "initial")
 
