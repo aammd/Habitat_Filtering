@@ -101,6 +101,8 @@ InsectZooBactAbds <- function(SampleTime = "initial"){
     
     TaxaAbundances[["zoops"]] <- lapply(TaxaAbundances[["zoops"]],
                                         function(data) data[-zerorows, ])
+    
+    class(TaxaAbundances[["zoops"]]) <- "ExpAbd"
   }
   TaxaAbundances
 }
@@ -119,20 +121,6 @@ CommunityAdonis <- function(data_list, testclass, fun, ...){
   
 adonisValueExtract <- function(dat, RESP) dat[["aov.tab"]]["species",RESP]
 
-
-
-extractor <- function(RESP){
-  rbind(
-    sapply(perm_initial[1:2], function(dat) dat[[1]]["species",RESP]) %>%
-      (l(x ~ data.frame(sample = "initial", organisms = names(x), value = x))),
-    sapply(perm_initial$bacteria, function(dat) dat[[1]]["species",RESP]) %>%
-      data.frame(sample = "initial", organisms = "bacteria", value = .),
-    sapply(perm_final[1:2], function(dat) dat[[1]]["species",RESP]) %>%
-      (l(x ~ data.frame(sample = "final", organisms = names(x), value = x))),
-    sapply(perm_final$bacteria, function(dat) dat[[1]]["species",RESP]) %>%
-      data.frame(sample = "final", organisms = "bacteria", value = .)
-  )
-}
 
 
 plotter <- function(permanova_data, RESP = RESP){
