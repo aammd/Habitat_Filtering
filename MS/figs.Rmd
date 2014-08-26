@@ -18,20 +18,21 @@ library(pander)
 source("../R.scripts/read_clean_data.R")
 source("../R.scripts/HabitatSizeFunctions.R")
 
+
+## select abundances
 abds_initial <- InsectZooBactAbds(SampleTime = "initial")
-
-perm_initial <- CommunityAdonis(data_list = abds_initial)
-
 abds_final <- InsectZooBactAbds(SampleTime = "final")
 
-perm_final <- CommunityAdonis(data_list = abds_final)
+perm_initial <- lapply(abds_initial, CommunityAdonis, 
+                       testclass = "ExpAbd", fun = AdonisData, .strata = NULL)
+perm_final <- lapply(abds_final, CommunityAdonis, 
+                     testclass = "ExpAbd", fun = AdonisData, .strata = NULL)
 
-recurse(perm_final, adonisValueExtract)
+lapply(perm_initial, CommunityAdonis, testclass = "adonis", 
+       function(x) adonisValueExtract(x, RESP = "R2"))
 
 
-rapply(perm_final, f = adonisValueExtract, classes = "adonis", how = "list")
-
-
+Q
 plotter("F.Model")
 
 plotter("Pr(>F)")
