@@ -26,6 +26,12 @@ abds_final <- InsectZooBactAbds(SampleTime = "final")
 
 perm_final <- CommunityAdonis(data_list = abds_final)
 
+recurse(perm_final, adonisValueExtract)
+
+
+rapply(perm_final, f = adonisValueExtract, classes = "adonis", how = "list")
+
+
 plotter("F.Model")
 
 plotter("Pr(>F)")

@@ -13,7 +13,7 @@ TaxaTimeSelector <- function(.blocks = blocks, .bromeliad = bromeliad,
                              .taxa = insects_renamed,
                              sampletime = "final") {
   ## select blocks
-  .blocks %>%
+  taxadata <- .blocks %>%
     filter(experiment == "threespp") %>%
     select(Block = block) %>%
     ## merge to bromeliad
@@ -32,7 +32,8 @@ TaxaTimeSelector <- function(.blocks = blocks, .bromeliad = bromeliad,
            taxa = data %>% 
              select(-Block, -Brom, -species, -sampling))
     }))
-  
+  class(taxadata) <- "ExpAbd"
+  taxadata
 }
 ## outputs a list of length 2 = first element is block and bromeliad variables, second is a species matrix.
 
@@ -78,6 +79,8 @@ BacteriaTimeSelector <- function(.bacteria_list_item,
         factors=data %>% select(Block,species,sampling),
         bacts=data %>% select(starts_with("X"))
       )))
+    class(bact_data) <- "ExpAbd"
+    bact_data
 }
 
 InsectZooBactAbds <- function(SampleTime = "initial"){
@@ -103,13 +106,14 @@ InsectZooBactAbds <- function(SampleTime = "initial"){
 }
 
 
-## Rewrite with logic
-CommunityAdonis <- function(data_list,fun){  
-  if( length(data_list) == 2 &&
-        inherits(data_list, "list") ) {
+## ... passes refinements of the `strata` argument to AdonisData, otherwise does nothing
+## add a "testclass" argument, or perhaps a "logical test" arguement:
+## if I go with testclass, must have a new class. 
+CommunityAdonis <- function(data_list, testclass, fun, ...){  
+  if(inherits(data_list, testclass)) {
     fun(data_list)
   } else {
-    lapply(data_list, fun, .strata = NULL)
+    lapply(data_list, fun, ...)
   }
 }
   
