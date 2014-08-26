@@ -40,8 +40,8 @@ TaxaTimeSelector <- function(.blocks = blocks, .bromeliad = bromeliad,
 ## abundances.  Also defaults to setting strata as Block. For bacteria (which
 ## have to be analyzed separately) just set .strata to NULL
 
-AdonisData <- function(Data, .strata = Data[[1]]$Block, .data = Data[[1]], ...){  
-  adonis(Data[[2]] ~ species, data = .data, strata = .strata, ...)
+AdonisData <- function(Data, .strata = Data[[1]]$Block, ...){  
+  adonis(Data[[2]] ~ species, data = Data[[1]], strata = .strata, ...)
 }
 
 ## wrapper for filter that removes samples that failed to run (ie were NA in the data)
@@ -102,17 +102,22 @@ InsectZooBactAbds <- function(SampleTime = "initial"){
   TaxaAbundances
 }
 
-CommunityAdonis <- function(data_list){
-  
-  list(
-    insects  = AdonisData(data_list[["insects"]]),
-    zoops    = AdonisData(data_list[["zoops"]]),
-    bacteria = lapply(data_list[["bacteria"]], AdonisData, .strata = NULL)
-  )
-  
-}
 
-plotter <- function(RESP = RESP){
+## Rewrite with logic
+CommunityAdonis <- function(data_list,fun){  
+  if( length(data_list) == 2 &&
+        inherits(data_list, "list") ) {
+    fun(data_list)
+  } else {
+    lapply(data_list, fun, .strata = NULL)
+  }
+}
+  
+adonisValueExtract <- function(dat, RESP) dat[["aov.tab"]]["species",RESP]
+
+
+
+extractor <- function(RESP){
   rbind(
     sapply(perm_initial[1:2], function(dat) dat[[1]]["species",RESP]) %>%
       (l(x ~ data.frame(sample = "initial", organisms = names(x), value = x))),
@@ -122,7 +127,12 @@ plotter <- function(RESP = RESP){
       (l(x ~ data.frame(sample = "final", organisms = names(x), value = x))),
     sapply(perm_final$bacteria, function(dat) dat[[1]]["species",RESP]) %>%
       data.frame(sample = "final", organisms = "bacteria", value = .)
-  ) %>%
+  )
+}
+
+
+plotter <- function(permanova_data, RESP = RESP){
+  permanova_data %>%
     ggplot(aes(x = organisms, y = value, colour = sample)) + 
     geom_point(size = 3) + 
     scale_color_manual(values = c("grey", "black")) + 
