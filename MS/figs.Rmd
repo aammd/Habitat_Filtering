@@ -19,24 +19,65 @@ source("../R.scripts/read_clean_data.R")
 source("../R.scripts/HabitatSizeFunctions.R")
 
 
-## select abundances
-abds_initial <- InsectZooBactAbds(SampleTime = "initial")
-abds_final <- InsectZooBactAbds(SampleTime = "final")
-
-perm_initial <- lapply(abds_initial, CommunityAdonis, 
-                       testclass = "ExpAbd", fun = AdonisData, .strata = NULL)
-perm_final <- lapply(abds_final, CommunityAdonis, 
-                     testclass = "ExpAbd", fun = AdonisData, .strata = NULL)
-
-lapply(perm_initial, CommunityAdonis, testclass = "adonis", 
-       function(x) adonisValueExtract(x, RESP = "R2"))
+## run analysis:
+speciesAnalysis <- list(initial = "initial",
+                        final = "final") %>%
+  lapply(InsectZooBactAbds) %>%
+  lapply(runadonis)
 
 
-Q
-plotter("F.Model")
+lapply(speciesAnalysis, extractResp("R2")) %>%
+  lapply(function(x) {
+    names(x[["bacteria"]]) <- NULL
+    x}) %>%
+  unlist %>%
+  data.frame(X = names(.), value = .) %>%
+  set_rownames(NULL) %>%
+  separate(X,into = c("sample","organisms"), sep = "\\.") %>%
+  mutate(organisms = gsub("\\d","",organisms)) %>%
+  mutate(organisms = factor(organisms, levels = c("insects", "zoops", "bacteria"))) %>%
+  ggplot(aes(x = organisms, y = value, colour = sample)) + 
+  geom_point(size = 3) + 
+  scale_color_manual(values = c("grey", "black")) + 
+  theme_bw()
 
-plotter("Pr(>F)")
+```
+
+```{r}
+sppabds <- speciesAnalysis <- list(initial = "initial",
+                        final = "final") %>%
+  lapply(InsectZooBactAbds)
+
+splittr  <- function(dat){
+  fs <- split(dat$factors, dat$factors$Block)
+  ts <- split(dat$taxa, dat$factors$Block)
+  Map(function(a, b) list(factors = a, taxa = b), fs, ts)
+  }
+
+sppabdsreplace <- lapply(sppabds, function(listdata) {
+  replacers <- lapply(listdata[1:2], CommunityAdonis, testclass = "ExpAbd", splittr)
+  listdata[1:2] <- replacers
+  listdata
+  })
+
+plotter <- function(RESP){
+sppabdsreplace %>%
+  lapply(runadonis) %>%
+  lapply(extractResp(RESP)) %>%
+  unlist %>%
+  data.frame(X = names(.), value = .) %>%
+  set_rownames(NULL) %>%
+  separate(X,into = c("sample","organisms", "doctor"), sep = "\\.") %>%
+  mutate(organisms = gsub("\\d","",organisms)) %>%
+  mutate(organisms = factor(organisms, levels = c("insects", "zoops", "bacteria"))) %>%
+  ggplot(aes(x = organisms, y = value, colour = sample)) + 
+  geom_point(size = 3) + 
+  scale_color_manual(values = c("grey", "black")) + 
+  theme_bw() +
+  ylab(RESP)
+}
 
 plotter("R2")
+
 ```
 
