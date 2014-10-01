@@ -121,13 +121,15 @@ CommunityAdonis <- function(data_list, testclass, fun, ...){
   
 adonisValueExtract <- function(dat, RESP) dat[["aov.tab"]]["species",RESP]
 
+runadonis <- function(x) lapply(x, CommunityAdonis, 
+                                testclass = "ExpAbd", fun = AdonisData, .strata = NULL)
 
-
-plotter <- function(permanova_data, RESP = RESP){
-  permanova_data %>%
-    ggplot(aes(x = organisms, y = value, colour = sample)) + 
-    geom_point(size = 3) + 
-    scale_color_manual(values = c("grey", "black")) + 
-    theme_bw() +
-    ylab(RESP)
+extractResp <- function(RESP = "R2") {
+  function(adonisanswers) {
+    lapply(adonisanswers, CommunityAdonis, testclass = "adonis", 
+           function(x) adonisValueExtract(x, RESP))
+  }
 }
+
+
+
