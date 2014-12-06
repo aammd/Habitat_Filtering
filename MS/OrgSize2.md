@@ -109,59 +109,60 @@ habitat in our two analyses.
 _Vriesea neoglutinosa_ (partial shade), and _Neoregelia cruenta_ (deep shade).
 * However, all species show some variation, occuring in many different habitats; the extreme case is Neoregelia, which is so common and broadly distributed that it overlaps with all other species.
 * That made Neoregelia a good choice for our within-species experiment.
-
 * because _A. nudicaulis_ is very small and this was
 the maximum volume we could obtain while simultaneously selecting average-
 sized plants.
+The bromeliads grow in ; these communities
+show strong habitat differences for macroinvertebrates, weaker differences for
+zooplankton and none for bacteria (Farjalla et al. 2010).
 
 We performed our experiments at the Parque Nacional de Jurubatiba, Northeast
 Rio de Janeiro state, Brazil. The landscape is composed of large semi-open
 patches of shrubs which form shady patches interspersed with very exposed,
 sunny habitats. Bromeliads form dense colonies in the landscape, which is
 a dry sandy habitat (_restinga_ vegetation). The landscape is composed of
-large semi-open patches of shrubs which form shady patches interspersed with a
-very exposed, sandy habitat. Bromeliad taxa here are known to contain diverse
-communities of macroinvertebrates, zooplankton and bacteria; these communities
-show strong habitat differences for macroinvertebrates, weaker differences for
-zooplankton and none for bacteria (Farjalla et al. 2010).
+large semi-open stands of shrubs which create a mosiac of shade interspersed with
+very exposed, open sand. Bromeliad taxa here are known to contain diverse
+communities of macroinvertebrates, zooplankton and bacteria. 
 
-Topic: Each experimental block contained six bromeliads from contrasting conditions.
-
-We created our starting communities by sampling six bromeliads (between-
-species: two of each species; within-species: three from each habitat) and
-then redistributing their macroinvertebrate fauna and a water inoculum for
+Each experimental block contained six bromeliads; all six communities were
+combined to form the starting community for all bromeliads in the block. we
+created our starting communities by sampling six bromeliads (between- species:
+two of each species; within-species: three from open habitat, three from closed) and then
+redistributing their macroinvertebrate fauna and tank water for
 zooplankton and bacteria. We refer to these starting communities as
 "homogenized". Macroinvertebrate communities were sampled by washing the
 plants throughly and seiving the water through 1mm and 180µm mesh. They were
 then identified to the lowest taxonomic level possible in the field (genus or
-family). Homogenized communities were the arithmetic mean of the densities
-of each group in original communities (though often lower due to natural
-mortality). To homogenize zooplankton, protist and bacteria communities, we
-collected an equal volume of inoculum from each plant, mixed and returned
-equal volumes to all bromeliads. In our first experiment we used 100ml of
-inoculum from each plant, standardizing the volume drawn from each. 
+family). Homogenized communities contained the mean abundance of each
+macroinvertebrate morphospecies group from all six original communities
+(adjusted for slight mortality during captivity). To homogenize zooplankton,
+protist and bacteria communities, we collected an equal volume of tank water
+from each plant, mixed and returned equal volumes to all bromeliads. In our
+first experiment we used 100ml of inoculum from each plant, standardizing the
+volume drawn from each.
 
 The experiment lasted for 2 weeks.
 
 All bromeliads were sterilized, returned to their original habitat and stocked
-with the homogenized community. We sterilized plants by thoroughly rinsing them
-with water, followed by 70% ethanol, and then hanging them upside down to dry
-overnight. We confirmed that this technique removed all invertebrates and most detritus by dissecting a steralized bromeliad. A bromeliad dissected after this process contained no insects. Plants
-were replaced in a similar local habitat to their original, and enclosed in a
-2mm mesh cage to prevent colonization by insects.
+with the homogenized community. We sterilized plants by thoroughly rinsing
+them with water, followed by 70% ethanol, and then hanging them upside down to
+dry overnight. We confirmed that this technique removed all invertebrates and
+most detritus by dissecting a steralized bromeliad. Plants were replaced in a
+similar local habitat to their original, and enclosed in a 2mm mesh cage to
+prevent colonization by insects.
 
-We sampled and preserved all macroinvertebrates, and a sample of zooplankton and
-bacteria, at the end of the experiment. Macroinvertebrates were identified while
-live and preserved in ethanol.  Zooplankton were collected on 50-micron Nytex
-mesh and fixed in 5% buffered formalin. Subsamples (>100 individuals) were then
-identified to the lowest taxonomic unit possible (species in most cases, except
-for bdelloid rotifers and harpaticoid copepods, left at the level of class and
-order, respectively). We measured bacterial community composition using
-denaturing gradient gel electrophoresis (DGGE; Muyzer et al. 1993). This
-analysis furnishes an approximation of bacterial diversity in the form of
-Operational Taxonomic Units (OTUs). In all our collection methods we stayed as
-close as possible to techniques used in the previous observational work
-(Farjalla et al. 2010).
+We sampled and preserved all macroinvertebrates, and a sample of zooplankton
+and bacteria, at the end of the experiment. Macroinvertebrates were identified
+while live and preserved in ethanol.  Zooplankton were collected on 50-micron
+Nytex mesh and fixed in 5% buffered formalin. Subsamples (>100 individuals)
+were then identified to the lowest taxonomic unit possible (species in most
+cases, except for bdelloid rotifers and harpaticoid copepods, left at the
+level of class and order, respectively). We measured bacterial community
+composition using denaturing gradient gel electrophoresis (DGGE; Muyzer et al.
+1993). This analysis furnishes an approximation of bacterial diversity in the
+form of Operational Taxonomic Units (OTUs). We based our collection methods as
+closely as possible upon previous observational work (Farjalla et al. 2010).
 
 ### Analyses
 
