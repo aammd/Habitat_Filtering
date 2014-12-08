@@ -68,7 +68,7 @@ species in the same community. This is the "size-plasticity" hypothesis of
 Farjalla et al (2012). Bacteria and other small organisms are broadly
 generalist in their ability to consume carbon sources and persist in different
 climates (Finlay 2002) and are less constrained by the complex physiological
-pathways posessed by larger metazoans. Additionally, smaller-bodied organisms
+pathways possessed by larger metazoans. Additionally, smaller-bodied organisms
 have shorter generation times and generally larger populations, which may
 allow them the opportunity to evolve to a novel environment more rapidly than
 larger-bodied organisms.
@@ -92,11 +92,13 @@ environmental signal across all groups. We made predictions for two sources of e
 
 * __Within-species__: One of the bromeliad species used in the between-species experiment is a broad habitat generalist. We conducted a second experiment with this species, testing how local environmental conditions (i.e. shady or exposed) influences community composition, while holding bromeliad species constant.
 
+In both experiments we expect the amount of environmental signal in different groups to follow the order macroinvertebrates > zooplankton > bacteria.  We furthermore expected weaker results in the within-species experiment, since the bromeliad species itself is an important source of environmental variation for the organisms which live within.
+
 ## Methods
 
 ### Study site and bromeliad species
 
-We focussed on three species of bromeliads from contrasting habitats; the same
+We focused on three species of bromeliads from contrasting habitats; the same
 taxa as were surveyed in the original observational work. Each species was
 collected from a habitat where they are commonly found: _Aechmea nudicaulis_
 (full sun habitats), _Vriesea neoglutinosa_ (partial shade), and _Neoregelia
@@ -105,11 +107,11 @@ common and broadly distributed that it is found alongside all other species.
 This made _Neoregelia_ a good choice for our within-species experiment. 
 
 We performed our experiments at the Parque Nacional de Jurubatiba, Northeast
-Rio de Janeiro state, Brazil. The landscape is composed of large semi-open
+Rio de Janeiro state, Brazil ($22^{\circ}$ S $41^{\circ}$). The landscape is composed of large semi-open
 patches of shrubs which form shady patches interspersed with very exposed,
 sunny habitats. Bromeliads form dense colonies in the landscape, which is
 a dry sandy habitat (_restinga_ vegetation). The landscape is composed of
-large semi-open stands of shrubs which create a mosiac of shade interspersed with
+large semi-open stands of shrubs which create a mosaic of shade interspersed with
 very exposed, open sand. Bromeliad taxa here are known to contain diverse
 communities of macroinvertebrates, zooplankton and bacteria. 
 
@@ -120,7 +122,7 @@ sampling six bromeliads (between-species: two of each species; within-species:
 three from open habitat, three from closed) and then redistributing their
 macroinvertebrate fauna and tank water for zooplankton and bacteria. We refer
 to these starting communities as "homogenized". Macroinvertebrate communities
-were sampled by washing the plants throughly and seiving the water through 1mm
+were sampled by washing the plants thoroughly and passing the water through 1mm
 and 180µm mesh. They were then identified to the lowest taxonomic level
 possible in the field (genus or family). Homogenized communities contained the
 mean abundance of each macroinvertebrate morphospecies group from all six
@@ -134,11 +136,11 @@ All bromeliads were sterilized, returned to their original habitat and stocked
 with the homogenized community. We sterilized plants by thoroughly rinsing
 them with water, followed by 70% ethanol, and then hanging them upside down to
 dry overnight. We confirmed that this technique removed all invertebrates and
-most detritus by dissecting a steralized bromeliad. Plants were replaced in a
+most detritus by dissecting a sterilized bromeliad. Plants were replaced in a
 similar local habitat to their original, and enclosed in a 2mm mesh cage to
 prevent colonization by insects. 
 
-The experiment lasted for 2 weeks, after which we sampled and preserved all
+The experiment lasted for 12 days, after which we sampled and preserved all
 macroinvertebrates, and a sample of zooplankton and bacteria.
 Macroinvertebrates were identified while live and preserved in ethanol.
 Zooplankton were collected on 50-micron Nytex mesh and fixed in 5% buffered
@@ -153,10 +155,7 @@ previous observational work (Farjalla et al. 2010).
 
 ### Analyses
 
-<!-- hypotheses you tested and what type of results you were
-expecting -->
-
-For eacn of our two experiments, we performed a pair of statistical tests: a
+For each of our two experiments, we performed a pair of statistical tests: a
 permutation test (PERMANOVA) to detect differences in the degree of
 environmental signal among groups, and a multivariate regression of abundance
 to identify those taxa which contributed most to the differences. PERMANOVA
@@ -167,7 +166,7 @@ a greater difference in community composition emerge among the
 macroinvertebrates, less among the zooplankton, and little to none among
 bacteria.
 
-References
+## References
 
 Farjalla, V. F., Srivastava, D. S., Marino, N. a C., Azevedo, F. D., Dib, V.,
 Lopes, P. M., Esteves, F. A. (2012). Ecological determinism increases with
@@ -176,5 +175,5 @@ organism size. Ecology, 93(7), 1752–9.
 Muyzer G., de Waal E.C., Uitterlinden A.G. (1993). Profiling of complex
 microbial populations by denaturing gradient gel electrophoresis analysis of
 polymerase chain reaction-amplified genes coding for 16S rRNA. Applied
-Environmental Microbiolology, 59(3), 695-700.
+Environmental Microbiology, 59(3), 695-700.
 
