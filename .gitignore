@@ -15,3 +15,6 @@ MS/habitat_organism_size_MS.pdf
 .Rhistory
 *.Rhistory
 *.Rproj
+*.sublime-*
+MS/*.docx
+MS/*.pdf
