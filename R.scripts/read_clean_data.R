@@ -9,9 +9,6 @@ blocks <-
              stringsAsFactors=FALSE) %>% tbl_df()
 
 
-zoop <-  read.table("../data/zoop.txt",
-                    header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df
-
 bromeliad <-
   read.table("../data/bromeliad.volumes.txt",comment.char="#",
              header=TRUE,stringsAsFactors=FALSE) %>% tbl_df
@@ -21,13 +18,6 @@ bact <- list.files("../data/bacteria/",
                    full.names=TRUE) %>% 
   lapply(read.table,comment.char="#",
          header=TRUE,stringsAsFactors=FALSE,sep=",")
-
-
-# combining zooplankton ---------------------------------------------------
-
-zoop_combined <- zoop %>%
-  group_by(sampling, bromeliad, Spp) %>%
-  summarise(abundance = sum(abundance))
 
 # rearrange bacteria ------------------------------------------------------
 
