@@ -1,5 +1,5 @@
 ## reading and combining the insect data
-## Andrew MacDonald, Dec 2014s
+## Andrew MacDonald, Dec 2014
 
 library(dplyr)
 
