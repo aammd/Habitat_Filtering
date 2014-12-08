@@ -1,19 +1,16 @@
 ## script for cleaning and organising our data
 
-library(dplyr)
+library("dplyr")
+library("magrittr")
+library("lubridate")
 
 # read in data ------------------------------------------------------------
 
-blocks <-
-  read.table("../data/blocks.txt",header=TRUE,comment.char="#",
-             stringsAsFactors=FALSE) %>% tbl_df()
-
-
 bromeliad <-
-  read.table("../data/bromeliad.volumes.txt",comment.char="#",
+  read.table("../raw-data/bromeliad.volumes.txt",comment.char="#",
              header=TRUE,stringsAsFactors=FALSE) %>% tbl_df
 
-bact <- list.files("../data/bacteria/",
+bact <- list.files("../raw-data/bacteria/",
                    pattern="*.csv",
                    full.names=TRUE) %>% 
   lapply(read.table,comment.char="#",
@@ -43,11 +40,12 @@ bacteria_list <- lapply(bact,function(DF) {
 
 ## go through this list, identify the block, and put the block names in a vector
 ## then set that vector as names for the list.
-bacteria_list <- plyr::laply(bacteria_list,function(DF,.bromeliad=bromeliad){
+plyr::laply(bacteria_list,function(DF,.bromeliad=bromeliad){
   DF %>%
     select(Brom=bromeliad) %>%
     left_join(.bromeliad) %>%
     extract2("Block") %>% unique
 }
 ) %>%
-  set_names(bacteria_list,.)
+  set_names(bacteria_list,.) %>%
+  save(file = "../data/bacteria.Rdata")
