@@ -1,16 +1,13 @@
 ## script for cleaning and organising our data
 
 library(dplyr)
+
 # read in data ------------------------------------------------------------
 
 blocks <-
   read.table("../data/blocks.txt",header=TRUE,comment.char="#",
              stringsAsFactors=FALSE) %>% tbl_df()
 
-insects <-   read.table("../data/insect.communities.table.txt",
-                        header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df()
-
-insectnames <- read.csv(file = "../data/insectnames.csv") %>% tbl_df()
 
 zoop <-  read.table("../data/zoop.txt",
                     header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% tbl_df
@@ -25,14 +22,6 @@ bact <- list.files("../data/bacteria/",
   lapply(read.table,comment.char="#",
          header=TRUE,stringsAsFactors=FALSE,sep=",")
 
-# renaming insects taxa ---------------------------------------------------
-
-## correct variable spellings
-insects_renamed <- insects %>%
-  left_join(insectnames) %>%
-  select(sampling, bromeliad, Spp = sp_name, abundance) %>%
-  group_by(sampling, bromeliad, Spp) %>%
-  summarise(abundance = sum(abundance))
 
 # combining zooplankton ---------------------------------------------------
 
