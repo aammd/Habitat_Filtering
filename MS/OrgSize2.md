@@ -17,22 +17,22 @@ bibliography: /home/andrew/Documents/reference/Mendeley_reference_lists/04_OrgSi
 
 ## Abstract
 
-Species composition of local communities often varies in response to
-differences in the environment. Local organisms are "filtered" from the
-regional species pool when their sensitivity to local environmental conditions
-prevents their establishment or persistence. However, not all groups of
-organisms are equally sensitive to the same environmental variation.
-Observational studies have already suggested that larger-bodied species are
-more strongly filtered by habitat than smaller- bodied species. However, this
-mechanism has never been tested experimentally. In our study we placed highly
-similar aquatic communities (composed of insects, zooplankton and bacteria)
-into different environments and observed subsequent divergence in composition.
-We predicted that insects would show a strong change in composition,
-zooplankton a moderate change and bacteria little to no change. Our results are
-consistent with these predictions, with the exception of a weaker signal in
-insects than expected. These results suggest that organism size could provide
-a framework for integrating studies of environmental filtering across
-different scales and systems.
+At the local scale, species composition of often varies among habitat patches in
+response to differences in environmental variables. These differences act as
+"filters": organisms cannot occur in a habitat patch when their sensitivity to
+local environmental conditions prevents their establishment or persistence.
+However, not all groups of organisms are equally sensitive to the same
+environmental variables. Observational studies have already suggested that
+larger-bodied species are more strongly filtered by habitat than smaller- bodied
+species. However, this mechanism has never been tested experimentally. In our
+study we placed highly similar aquatic communities (composed of insects,
+zooplankton and bacteria) into different environments and observed subsequent
+divergence in composition. We predicted that insects would show a strong change
+in composition, zooplankton a moderate change and bacteria little to no change.
+Our results are consistent with these predictions, with the exception of a
+weaker signal in insects than expected. These results suggest that organism size
+could provide a framework for integrating studies of environmental filtering
+across different scales and systems.
 
 ## Introduction
 
@@ -98,47 +98,54 @@ In both experiments we expect the amount of environmental signal in different gr
 
 ### Study site and bromeliad species
 
-We focused on three species of bromeliads from contrasting habitats; the same
-taxa as were surveyed in the original observational work. Each species was
-collected from a habitat where they are commonly found: _Aechmea nudicaulis_
-(full sun habitats), _Vriesea neoglutinosa_ (partial shade), and _Neoregelia
-cruenta_ (deep shade). However, Neoregelia is also a habitat generalist; so
-common and broadly distributed that it is found alongside all other species.
-This made _Neoregelia_ a good choice for our within-species experiment. 
+We performed our experiments at the Parque Nacional de Jurubatiba, Northeast Rio
+de Janeiro state, Brazil ($22^{\circ}$ S $41^{\circ}$). The landscape is
+composed of large semi-open patches of shrubs which form shady patches
+interspersed with very exposed, sunny habitats. Bromeliads form dense colonies
+in the landscape, which is a dry sandy habitat (_restinga_ vegetation). The
+landscape is composed of large semi-open clumps of shrubs interspersed with very
+exposed, open sand. Several bromeliad taxa here are known to contain diverse
+communities of macroinvertebrates, zooplankton and bacteria.
 
-We performed our experiments at the Parque Nacional de Jurubatiba, Northeast
-Rio de Janeiro state, Brazil ($22^{\circ}$ S $41^{\circ}$). The landscape is composed of large semi-open
-patches of shrubs which form shady patches interspersed with very exposed,
-sunny habitats. Bromeliads form dense colonies in the landscape, which is
-a dry sandy habitat (_restinga_ vegetation). The landscape is composed of
-large semi-open stands of shrubs which create a mosaic of shade interspersed with
-very exposed, open sand. Bromeliad taxa here are known to contain diverse
-communities of macroinvertebrates, zooplankton and bacteria. 
+### Experimental design
 
-Each experimental block contained six bromeliads; all six communities were
-combined to form the starting community for all bromeliads in the block. Each
-experiment consisted of five blocks. We created our starting communities by
-sampling six bromeliads (between-species: two of each species; within-species:
-three from open habitat, three from closed) and then redistributing their
-macroinvertebrate fauna and tank water for zooplankton and bacteria. We refer
-to these starting communities as "homogenized". Macroinvertebrate communities
-were sampled by washing the plants thoroughly and passing the water through 1mm
-and 180µm mesh. They were then identified to the lowest taxonomic level
-possible in the field (genus or family). Homogenized communities contained the
-mean abundance of each macroinvertebrate morphospecies group from all six
-original communities (adjusted for slight mortality during captivity). To
-homogenize zooplankton, protist and bacteria communities, we collected an
-equal volume of tank water from each plant, mixed and returned equal volumes
-to all bromeliads. In our first experiment we used 100ml of inoculum from each
-plant, standardizing the volume drawn from each.
+We performed two related experiments: one which contrasted different bromeliad
+species from different habitats ("between-species"), and a second which
+contrasted the same bromeliad species from different habitats ("within-
+species"). We focused on three bromeliad species (Bromeliaceae) from three
+contrasting habitats; these species and habitats are identical to those surveyed
+by Farjalla et al. (2010). Each bromeliad species was collected from its typical
+habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
+(partial shade), and _Neoregelia cruenta_ (deep shade). However, _Neoregelia_ is
+also a habitat generalist: common and broadly distributed, it is found alongside
+all other species. Therefore, we chose _Neoregelia_  for our second, within-
+species experiment.  This second experiment compared _Neoregelia_ communities
+between full sun and deep shade.
 
-All bromeliads were sterilized, returned to their original habitat and stocked
-with the homogenized community. We sterilized plants by thoroughly rinsing
-them with water, followed by 70% ethanol, and then hanging them upside down to
-dry overnight. We confirmed that this technique removed all invertebrates and
-most detritus by dissecting a sterilized bromeliad. Plants were replaced in a
-similar local habitat to their original, and enclosed in a 2mm mesh cage to
-prevent colonization by insects. 
+Both between- and within-species experiments used similar designs: five blocks
+of six bromeliads each. To create each block in the between-species experiment,
+we collected two bromeliads of each species; in the within-species experiment we
+collected three bromeliads from open habitats and three from closed.  In both
+experiments, all bromeliads in a block were stocked with a nearly identical
+starting community, intermediate between that of all six bromeliads in that
+block. We made these starting communities by sampling, then combining, each of
+three major groups: macroinvertebrates, zooplankton and bacteria.  We sampled
+macroinvertebrates by thoroughly rinsing each bromeliad and passing the water
+through 1mm and 180μm mesh to collect aquatic macroinvertebrates.  We identified
+these animals to morphospecies, then divided them equally among the six
+bromeliads in the block.  Therefore each bromeliad received the average density
+of each morphospecies, correcting for a small amount of mortality in captivity.
+
+We sampled the starting zooplankton and bacteria communities by mixing an equal
+volume of filtered tank water from each plant (approximately 100ml plant^-1^),
+returning the same volumes to all bromeliads.  We emptied bromeliads by hanging
+them upside down to dry for at least 24 hours and rinsing with 70% ethanol. Any
+coarse detritus found in the bromeliads was cleaned, frozen and thawed (to kill
+insect resting eggs). We confirmed that this technique removed all invertebrates
+and most detritus by dissecting an empty bromeliad. Bromeliads were placed in a
+local habitat similar to their original, each enclosed in a 2mm mesh cage to
+prevent colonization by insects. We then added the starting communities of
+macroinvertebrates, zooplankton and bacteria.
 
 The experiment lasted for 12 days, after which we sampled and preserved all
 macroinvertebrates, and a sample of zooplankton and bacteria.
