@@ -38,3 +38,17 @@ insect_manyglm <- function(.blocks = blocks,
              select(-Block, -Brom, -species, -sampling) %>% 
              as.matrix)
     }
+
+  
+
+#' call mvabund on responses
+  insectresponses <- insect_data %>% 
+    extract2("insects") %>%
+    mvabund
+  
+  ## run glm
+  insect_glm_interact <- insect_data %>% 
+    extract2("factors") %>% 
+    data.frame %>% 
+    manyglm(insectresponses ~ Block * species, data = ., family = glm_family) 
+  

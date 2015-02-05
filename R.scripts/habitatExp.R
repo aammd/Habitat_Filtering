@@ -13,17 +13,7 @@ insect_manyglm <- function(.blocks = blocks,
                            organisms = "insects") {
 
   
-  ## call mvabund on responses
-  insectresponses <- insect_data %>% 
-    extract2("insects") %>%
-    mvabund
-  
-  ## run glm
-  insect_glm_interact <- insect_data %>% 
-    extract2("factors") %>% 
-    data.frame %>% 
-    manyglm(insectresponses ~ Block * species, data = ., family = glm_family) 
-  
+
   ## name the model output
   model_name <- paste0(organisms, "_interaction_summary_", sampletime, "_", glm_family, ".Rdata")
   
