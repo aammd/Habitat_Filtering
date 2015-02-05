@@ -4,8 +4,9 @@
 #' 
 #' This function is a wrapper for a dplyr pipeline that merges block, 
 #' bromeliad and taxa datasets, and configures them in a convenient way 
-#' for both `adonis`and `mvabund`. 
-#' 
+#' for both `adonis`and `mvabund`. outputs a list of length 2:
+#'  first element is block and bromeliad variables
+#'  second is a species matrix. 
 #' 
 #' @param .blocks blocks dataset
 #' @param .bromeliad bromeliad datasets
@@ -21,7 +22,8 @@ TaxaTimeSelector <- function(.blocks = blocks,
     filter(experiment == "threespp") %>%
     select(Block = block) %>%
     ## merge to bromeliad
-    left_join(.bromeliad %>% select(Brom, Block, species)) %>%
+    left_join(.bromeliad %>% 
+                select(Brom, Block, species)) %>%
     # and add the animals
     left_join(.taxa %>%
                 filter(sampling == sampletime) %>%
@@ -30,16 +32,19 @@ TaxaTimeSelector <- function(.blocks = blocks,
                 select(-bromeliad)
     ) %>%
     # set up a list object a la mvabund
-    (l(data ~ {
-      list(factors = data %>% 
+    {
+      list(factors = . %>% 
              select(Block, species),
-           taxa = data %>% 
+           taxa = . %>% 
              select(-Block, -Brom, -species, -sampling))
-    }))
+    }
+  
+  ## set the class to a made-up thing, for use with 
   class(taxadata) <- "ExpAbd"
   taxadata
 }
-## outputs a list of length 2 = first element is block and bromeliad variables, second is a species matrix.
+
+
 
 ## runs `adonis` on the output of TaxaTimeSelector. Knows where to find species
 ## abundances.  Also defaults to setting strata as Block. For bacteria (which
