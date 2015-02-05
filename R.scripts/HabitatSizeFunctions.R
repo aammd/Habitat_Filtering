@@ -1,15 +1,19 @@
 ## Funtions for the analysis of the habitat-organism size experiment
 
-## This function is a wrapper for a dplyr pipeline that merges block, bromeliad
-## and taxa datasets, and configures them in a convenient way for both `adonis`
-## and `mvabund`.
-## Arguments:
-## .blocks = blocks dataset
-## .bromeliad = bromeliad datasets
-## .taxa = the insect taxa to merge. This can vary.
-## sampletime = final or initial (or both) -- the sampling period.
+#' Put all the organisms into a list
+#' 
+#' This function is a wrapper for a dplyr pipeline that merges block, 
+#' bromeliad and taxa datasets, and configures them in a convenient way 
+#' for both `adonis`and `mvabund`. 
+#' 
+#' 
+#' @param .blocks blocks dataset
+#' @param .bromeliad bromeliad datasets
+#' @param .taxa the insect taxa to merge. This can vary.
+#' @param .sampletime final or initial (or both) -- the sampling period.
 
-TaxaTimeSelector <- function(.blocks = blocks, .bromeliad = bromeliad, 
+TaxaTimeSelector <- function(.blocks = blocks, 
+                             .bromeliad = bromeliad, 
                              .taxa = insects_renamed,
                              sampletime = "final") {
   ## select blocks
