@@ -17,7 +17,7 @@ insect_manyglm <- function(.blocks = blocks,
                            sampletime = "final",
                            which_exp = "threespp") {
   ## select blocks
-  insect_data <- .blocks %>%
+  .blocks %>%
     filter(experiment == which_exp) %>%
     select(Block = block) %>%
     ## merge to bromeliad

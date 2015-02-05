@@ -2,24 +2,14 @@
 ## Andrew MacDonald, 2014
 
 
-# packages ----------------------------------------------------------------
-
-library(dplyr)
-library(tidyr)
-library(mvabund)
-library(magrittr)
-library(ggplot2)
-library(lubridate)
-
-source("R.scripts/read_clean_data.R")
-
-
 # insects in threespp experiment ------------------------------------------
 
-insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad, 
+insect_manyglm <- function(.blocks = blocks,
+                           .bromeliad = bromeliad, 
                            .taxa = insects_renamed, 
                            run_interaction_model = FALSE, 
-                           sampletime = "final", glm_family = "negative.binomial",
+                           sampletime = "final", 
+                           glm_family = "negative.binomial",
                            organisms = "insects") {
   ## select blocks
   insect_data <- .blocks %>%
@@ -35,14 +25,15 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
                 select(-bromeliad)
     ) %>%
     # set up a list object a la mvabund
-    l(data -> {
-      list(factors = data %>% 
+    {
+      list(factors = . %>% 
              select(Block, species) %>% 
              as.matrix,
-           insects = data %>% 
+           insects = . %>% 
              select(-Block, -Brom, -species, -sampling) %>% 
-             as.matrix)}
-    )
+             as.matrix)
+    }
+    
   
   ## call mvabund on responses
   insectresponses <- insect_data %>% 
@@ -177,65 +168,65 @@ zoop_final_nbin$manyglm_summary
 
 if (FALSE) {
   bact_results <- plyr::llply(bacteria_list,function(BACTERIA){
-## select blocks
-bact_data <- blocks %>%
-  filter(experiment=="threespp") %>%
-  select(Block=block) %>%
-  ## merge to bromeliad
-  left_join(bromeliad) %>%
-  mutate(bromeliad=Brom) %>%
-  select(-Brom) %>%
-  # and add the animals
-  ## note that for bacteria, they are joined in the opposite direction!
-  left_join(BACTERIA,
-            .                        # this dot essentially makes this a "right join".
-  ) %>% 
-  # set up a list object a la mvabund
-  l(data -> {
-      list(factors=data %>% select(Block,species) %>% as.matrix,
-           bacts=data %>% select(starts_with("X")) %>% as.matrix
-      )}
-  )
-
-## call mvabund on responses
-bactresponses <- bact_data %>% extract2("bacts") %>% mvabund
-
-## run glm
-bact_glm_species <- bact_data %>% extract2("factors") %>% data.frame %>% 
-  manyglm(bactresponses~species,data=.,family="binomial") 
-
-bact_total_aov <- anova(bact_glm_species, nBoot=400, test="wald")
-
-## not sure how to interpret
-#drop1(bact_glm_species)
-
-# summary gives overall fit
-bact_species_summary <- bact_glm_species %>% summary(resamp="pit.trap")
-# anova gives us values for each animal
-bact_species_anova  <- bact_glm_species %>% anova(resamp="pit.trap",p.uni="adjusted", show.time="all")
-
-bact_statistic <- bact_species_anova$uni.test %>% t %>% data.frame %>% 
-  select(-X.Intercept.,
-         #Block_wald=Block,
-         species_wald=species) %>%
-  l(df -> {data.frame(spp=rownames(df),df)}) %>%
-  set_rownames(NULL)
-
-bact_sig <- bact_species_anova$uni.p %>% t %>% data.frame %>% 
-  select(-X.Intercept.,
-         #Block_p=Block,
-         species_p=species) %>%
-  l(df -> {data.frame(spp=rownames(df),df)}) %>%
-  set_rownames(NULL)
-
-bact_species_wald <- left_join(bact_sig,bact_statistic)
-
-list("bact_glm_species"=bact_glm_species,
-     "bact_total_aov"=bact_total_aov,
-     "bact_species_summary"=bact_species_summary,
-     "bact_species_anova"=bact_species_anova,
-     "bact_species_wald"=bact_species_wald)
-})
+    ## select blocks
+    bact_data <- blocks %>%
+      filter(experiment=="threespp") %>%
+      select(Block=block) %>%
+      ## merge to bromeliad
+      left_join(bromeliad) %>%
+      mutate(bromeliad=Brom) %>%
+      select(-Brom) %>%
+      # and add the animals
+      ## note that for bacteria, they are joined in the opposite direction!
+      left_join(BACTERIA,
+                .                        # this dot essentially makes this a "right join".
+      ) %>% 
+      # set up a list object a la mvabund
+      l(data -> {
+        list(factors=data %>% select(Block,species) %>% as.matrix,
+             bacts=data %>% select(starts_with("X")) %>% as.matrix
+        )}
+      )
+    
+    ## call mvabund on responses
+    bactresponses <- bact_data %>% extract2("bacts") %>% mvabund
+    
+    ## run glm
+    bact_glm_species <- bact_data %>% extract2("factors") %>% data.frame %>% 
+      manyglm(bactresponses~species,data=.,family="binomial") 
+    
+    bact_total_aov <- anova(bact_glm_species, nBoot=400, test="wald")
+    
+    ## not sure how to interpret
+    #drop1(bact_glm_species)
+    
+    # summary gives overall fit
+    bact_species_summary <- bact_glm_species %>% summary(resamp="pit.trap")
+    # anova gives us values for each animal
+    bact_species_anova  <- bact_glm_species %>% anova(resamp="pit.trap",p.uni="adjusted", show.time="all")
+    
+    bact_statistic <- bact_species_anova$uni.test %>% t %>% data.frame %>% 
+      select(-X.Intercept.,
+             #Block_wald=Block,
+             species_wald=species) %>%
+      l(df -> {data.frame(spp=rownames(df),df)}) %>%
+      set_rownames(NULL)
+    
+    bact_sig <- bact_species_anova$uni.p %>% t %>% data.frame %>% 
+      select(-X.Intercept.,
+             #Block_p=Block,
+             species_p=species) %>%
+      l(df -> {data.frame(spp=rownames(df),df)}) %>%
+      set_rownames(NULL)
+    
+    bact_species_wald <- left_join(bact_sig,bact_statistic)
+    
+    list("bact_glm_species"=bact_glm_species,
+         "bact_total_aov"=bact_total_aov,
+         "bact_species_summary"=bact_species_summary,
+         "bact_species_anova"=bact_species_anova,
+         "bact_species_wald"=bact_species_wald)
+  })
   save(bact_results, file = "bacteria_results_final.Rdata")
   message(paste("I just created the file","bacteria_results_final.Rdata"))
 } else {
