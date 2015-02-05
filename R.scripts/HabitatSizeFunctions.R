@@ -33,10 +33,8 @@ TaxaTimeSelector <- function(.blocks = blocks,
     ) %>%
     # set up a list object a la mvabund
     {
-      list(factors = . %>% 
-             select(Block, species),
-           taxa = . %>% 
-             select(-Block, -Brom, -species, -sampling))
+      list(factors = select(., Block, species),
+           taxa = select(., -Block, -Brom, -species, -sampling))
     }
   
   ## set the class to a made-up thing, for use with 
