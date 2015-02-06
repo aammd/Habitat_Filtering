@@ -54,7 +54,8 @@ AdonisData <- function(Data, .strata = Data[[1]]$Block, ...){
 
 ## wrapper for filter that removes samples that failed to run (ie were NA in the data)
 FilterNABacteriaRows <- function(data) {
-  filter(data,data %>% 
+  filter(data,
+         data %>% 
            select(starts_with("X")) %>%
            rowSums %>%
            is.na %>%
@@ -66,15 +67,14 @@ BacteriaTimeSelector <- function(.bacteria_list_item,
                                  sampletime = c("initial","final")){
     ## select blocks
     bact_data <- .blocks %>%
-      filter(experiment=="threespp") %>%
-      select(Block=block) %>%
+      filter(experiment == "threespp") %>%
+      rename(Block = block) %>%
       ## merge to bromeliad
-      left_join(.bromeliad) %>%
-      mutate(bromeliad=Brom) %>%
-      select(-Brom) %>%
+      left_join(.bromeliad) %>% 
+      rename(bromeliad = Brom) %>% 
       # and add the animals
       ## note that for bacteria, they are joined in the opposite direction!
-      left_join(.bacteria_list_item,
+      right_join(.bacteria_list_item),
                 .         # this dot essentially makes this a "right join".
       ) %>% 
       ## the following removes all rows with NAs.
@@ -82,12 +82,16 @@ BacteriaTimeSelector <- function(.bacteria_list_item,
       # and now we filter to keep initial, final or both:
       filter(sampling %in% sampletime) %>%
       # set up a list object , separating predictors (first) and response(second)
-      (l(data ~ list(
-        factors=data %>% select(Block,species,sampling),
-        bacts=data %>% select(starts_with("X"))
-      )))
+      {list(
+        factors = select(., Block,species,sampling),
+        bacts = select(., starts_with("X"))
+      )}
     class(bact_data) <- "ExpAbd"
     bact_data
+}
+
+Select_bact_list_initial <- function(.blocks = blocks, .bromeliad = bromeliad,.bact_list = bact_list){
+  lapply(.bact_list, BacteriaTimeSelector,  sampletime = "initial")
 }
 
 InsectZooBactAbds <- function(SampleTime = "initial"){
