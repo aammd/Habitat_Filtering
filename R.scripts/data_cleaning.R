@@ -26,41 +26,21 @@ clean_zooplankton <-  . %>%
 
 ## script for cleaning and organising our data
 
-read_bact_list <- . %>%
-  list.files(pattern="*.csv",
-             full.names=TRUE) %>% 
-  lapply(read.table,comment.char="#",
-         header=TRUE,stringsAsFactors=FALSE,sep=",")
+read_bact_list <- function(dir = "raw-data/bacteria/"){
+  dir %>%
+    list.files(pattern="*.csv",
+               full.names=TRUE) %>% 
+    lapply(read.table,comment.char="#",
+           header=TRUE,stringsAsFactors=FALSE,sep=",")
+}
 
-
-clean_bact <- . %>%
+clean_bact2 <- . %>%
   separate(sample, c("Brom", "day", "month")) %>% 
-  mutate(sampling = ifelse(day == max(day), "final", "initial"))
+  mutate(date = paste(day, month, "2013", sep = "-"),
+         date = dmy(date),
+         sampling = ifelse(date > mean(date), "final", "initial"))
 
-clean_all_bact <- . %>% lapply(clean_bact)
-  
-
-
-read_organize_bact <- function(bact = bact_list, bromeliad_volumes = bromeliad){
-  bacteria_list <- lapply(bact,function(DF) {
-    
-    plotdates <- do.call(rbind,strsplit(DF$sample,split=" "))
-    
-    samp.dates <- paste(apply(plotdates[,-1],1,paste,collapse="-"),"2013",sep="-")
-    samp.dates <- dmy(samp.dates)
-    
-    duration <- (max(samp.dates)-samp.dates)<as.duration(259200)
-    
-    sampling <- c("initial","final")[duration+1]
-    
-    DF <- DF[,!names(DF)%in%c("sample")]
-    
-    DF <- plyr::rename(DF,c("Block"="block"))
-    
-    data.frame(bromeliad=plotdates[,1],sampling,DF,stringsAsFactors=FALSE) %>%
-      # filter(sampling=="final") %>%
-      select(-block)
-  }) 
+clean_all_bact <- . %>% lapply(clean_bact2)
   
   ## go through this list, identify the block, and put the block names in a vector
   ## then set that vector as names for the list.
