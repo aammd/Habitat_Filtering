@@ -1,17 +1,16 @@
 ## reading and combining the insect data
 ## Andrew MacDonald, Dec 2014
 
-read_insects <- function(dat) read.table(dat, header = TRUE, comment.char="#", stringsAsFactors=FALSE)
+read_data <- function(dat) read.table(dat, header = TRUE, comment.char="#", stringsAsFactors=FALSE)
 
-clean_insect_names <- function(community_data, name_data, output) {
+clean_insect_names <- function(community_data, name_data) {
   ## correct variable spellings
   community_data %>%
     left_join(name_data) %>%
     select(sampling, bromeliad, Spp = sp_name, abundance) %>%
     group_by(sampling, bromeliad, Spp) %>%
     summarise(abundance = sum(abundance)) %>%
-    as.data.frame %>%
-    write.csv(file = output, row.names = FALSE)
+    as.data.frame
 }
 
 ## reading and combining the zoop data
@@ -23,26 +22,26 @@ clean_zooplankton <-  . %>%
   tbl_df %>%
   group_by(sampling, bromeliad, Spp) %>%
   summarise(abundance = sum(abundance)) %>%
-  as.data.frame %>%
-  write.csv(file = "data/zoops.csv", row.names = FALSE)
+  as.data.frame
 
 ## script for cleaning and organising our data
 
-read_organize_bact <- function(bacteria_data, bromeliad_volumes, output){
-  # read in data ------------------------------------------------------------
+read_bact_list <- . %>%
+  list.files(pattern="*.csv",
+             full.names=TRUE) %>% 
+  lapply(read.table,comment.char="#",
+         header=TRUE,stringsAsFactors=FALSE,sep=",")
+
+
+clean_bact <- . %>%
+  separate(sample, c("Brom", "day", "month")) %>% 
+  mutate(sampling = ifelse(day == max(day), "final", "initial"))
+
+clean_all_bact <- . %>% lapply(clean_bact)
   
-  bromeliad <-
-    read.table(bromeliad_volumes,comment.char="#",
-               header=TRUE,stringsAsFactors=FALSE) %>% tbl_df
-  
-  bact <- list.files(bacteria_data,
-                     pattern="*.csv",
-                     full.names=TRUE) %>% 
-    lapply(read.table,comment.char="#",
-           header=TRUE,stringsAsFactors=FALSE,sep=",")
-  
-  # rearrange bacteria ------------------------------------------------------
-  
+
+
+read_organize_bact <- function(bact = bact_list, bromeliad_volumes = bromeliad){
   bacteria_list <- lapply(bact,function(DF) {
     
     plotdates <- do.call(rbind,strsplit(DF$sample,split=" "))
@@ -72,6 +71,5 @@ read_organize_bact <- function(bacteria_data, bromeliad_volumes, output){
       extract2("Block") %>% unique
   }
   ) %>%
-    set_names(bacteria_list,.) %>%
-    save(file = output)
+    set_names(bacteria_list,.)
 }
