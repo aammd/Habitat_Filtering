@@ -44,15 +44,17 @@ TaxaTimeSelector <- function(.blocks = blocks,
 
 
 
-## runs `adonis` on the output of TaxaTimeSelector. Knows where to find species
-## abundances.  Also defaults to setting strata as Block. For bacteria (which
-## have to be analyzed separately) just set .strata to NULL
+## runs `adonis` on the output of TaxaTimeSelector. Knows
+## where to find species abundances.  Also defaults to
+## setting strata as Block. For bacteria (which have to be
+## analyzed separately) just set .strata to NULL
 
 AdonisData <- function(Data, .strata = Data[[1]]$Block, ...){  
   adonis(Data[[2]] ~ species, data = Data[[1]], strata = .strata, ...)
 }
 
-## wrapper for filter that removes samples that failed to run (ie were NA in the data)
+## wrapper for filter that removes samples that failed to
+## run (ie were NA in the data)
 FilterNABacteriaRows <- function(data) {
   filter(data,
          data %>% 
@@ -71,12 +73,11 @@ BacteriaTimeSelector <- function(.bacteria_list_item,
       rename(Block = block) %>%
       ## merge to bromeliad
       left_join(.bromeliad) %>% 
-      rename(bromeliad = Brom) %>% 
+      select(Brom, species) %>% 
       # and add the animals
       ## note that for bacteria, they are joined in the opposite direction!
-      right_join(.bacteria_list_item),
-                .         # this dot essentially makes this a "right join".
-      ) %>% 
+      right_join(.bacteria_list_item) %>%
+      # this dot essentially makes this a "right join".
       ## the following removes all rows with NAs.
       FilterNABacteriaRows %>%
       # and now we filter to keep initial, final or both:
@@ -94,27 +95,36 @@ Select_bact_list_initial <- function(.blocks = blocks, .bromeliad = bromeliad,.b
   lapply(.bact_list, BacteriaTimeSelector,  sampletime = "initial")
 }
 
-InsectZooBactAbds <- function(SampleTime = "initial"){
+check_bact <- . %>% extract2(bactlist, .) %>% extract2(2)  %>% tbl_df %>% glimpse
+
+check_fact <- . %>% extract2(bactlist, .) %>% extract2(1)  %>% tbl_df %>% glimpse
+
+fix_zoop_initial <- function(.TaxaAbundances = list_initial){
+  zerorows <- .TaxaAbundances[["zoops"]]$taxa %>%
+    rowSums(na.rm = TRUE) %>%
+    equals(0) %>%
+    which
+  
+  .TaxaAbundances[["zoops"]] <- lapply(.TaxaAbundances[["zoops"]],
+                                      function(data) data[-zerorows, ])
+  
+  class(.TaxaAbundances[["zoops"]]) <- "ExpAbd"
+  
+  .TaxaAbundances
+}
+
+
+InsectZooBactAbds <- function(sampletime = "initial", .insectlist = insectlist, 
+                              .zooplist = zooplist, .bactlist = bactlist){
   
   ## list of abundances
   
   TaxaAbundances <- vector("list",length = 3)
   names(TaxaAbundances) <- c("insects","zoops","bacteria")
-  TaxaAbundances[["insects"]]  <-  TaxaTimeSelector(sampletime = SampleTime)
-  TaxaAbundances[["zoops"]]  <-  TaxaTimeSelector(.taxa = zoop_combined, sampletime = SampleTime)
-  TaxaAbundances[["bacteria"]]  <-  lapply(bacteria_list, BacteriaTimeSelector, sampletime = SampleTime)
-  
-  if(SampleTime == "initial") {
-    zerorows <- TaxaAbundances[["zoops"]]$taxa %>%
-      rowSums(na.rm = TRUE) %>%
-      equals(0) %>%
-      which
-    
-    TaxaAbundances[["zoops"]] <- lapply(TaxaAbundances[["zoops"]],
-                                        function(data) data[-zerorows, ])
-    
-    class(TaxaAbundances[["zoops"]]) <- "ExpAbd"
-  }
+  TaxaAbundances[["insects"]]  <-  .insectlist
+  TaxaAbundances[["zoops"]]  <-  .zooplist
+  TaxaAbundances[["bacteria"]]  <-  .bactlist
+
   TaxaAbundances
 }
 
@@ -130,10 +140,13 @@ CommunityAdonis <- function(data_list, testclass, fun, ...){
   }
 }
   
+
+runadonis <- partial(CommunityAdonis, testclass = "ExpAbd", 
+                     fun = AdonisData, .strata = NULL)
+
+
 adonisValueExtract <- function(dat, RESP) dat[["aov.tab"]]["species",RESP]
 
-runadonis <- function(x) lapply(x, CommunityAdonis, 
-                                testclass = "ExpAbd", fun = AdonisData, .strata = NULL)
 
 extractResp <- function(RESP = "R2") {
   function(adonisanswers) {
