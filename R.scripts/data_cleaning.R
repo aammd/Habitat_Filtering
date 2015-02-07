@@ -41,15 +41,3 @@ clean_bact2 <- . %>%
          sampling = ifelse(date > mean(date), "final", "initial"))
 
 clean_all_bact <- . %>% lapply(clean_bact2)
-  
-  ## go through this list, identify the block, and put the block names in a vector
-  ## then set that vector as names for the list.
-  plyr::laply(bacteria_list,function(DF,.bromeliad=bromeliad){
-    DF %>%
-      select(Brom=bromeliad) %>%
-      left_join(.bromeliad) %>%
-      extract2("Block") %>% unique
-  }
-  ) %>%
-    set_names(bacteria_list,.)
-}
