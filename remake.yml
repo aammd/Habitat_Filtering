@@ -12,14 +12,18 @@ packages:
   - ggplot2
   - lubridate
   - vegan
+  - pryr
 
 targets:
   all:
     depends: 
-      - insectlist
-      - zooplist
-      - bactlist
+      - list_initial
       
+  code: 
+    depends:
+      - R.scripts/data_cleaning.R
+      - R.scripts/HabitatSizeFunctions.R
+
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
   
@@ -62,5 +66,8 @@ targets:
   bactlist:
     command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
 
-  insect_adonis:
-    command: AdonisData(insectlist)
+  list_initial: 
+    command: InsectZooBactAbds(.insectlist = insectlist, .zooplist = zooplist, .bactlist = bactlist)
+  
+  adonis_initial:
+    command: runadonis(list_initial)
