@@ -106,7 +106,7 @@ fix_zoop_initial <- function(.TaxaAbundances = list_initial){
     which
   
   .TaxaAbundances[["zoops"]] <- lapply(.TaxaAbundances[["zoops"]],
-                                      function(data) data[-zerorows, ])
+                                       function(data) data[-zerorows, ])
   
   class(.TaxaAbundances[["zoops"]]) <- "ExpAbd"
   
@@ -136,24 +136,8 @@ CommunityAdonis <- function(data_list, testclass, fun, ...){
   if(inherits(data_list, testclass)) {
     fun(data_list)
   } else {
-    lapply(data_list, fun, ...)
+    lapply(data_list, CommunityAdonis, testclass, fun, ...)
   }
 }
-  
-
-runadonis <- partial(CommunityAdonis, testclass = "ExpAbd", 
-                     fun = AdonisData, .strata = NULL)
-
-
-adonisValueExtract <- function(dat, RESP) dat[["aov.tab"]]["species",RESP]
-
-
-extractResp <- function(RESP = "R2") {
-  function(adonisanswers) {
-    lapply(adonisanswers, CommunityAdonis, testclass = "adonis", 
-           function(x) adonisValueExtract(x, RESP))
-  }
-}
-
 
 
