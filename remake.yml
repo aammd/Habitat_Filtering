@@ -1,0 +1,66 @@
+## All R files that are used must be listed here:
+sources:
+  - R.scripts/data_cleaning.R
+  - R.scripts/HabitatSizeFunctions.R
+  
+packages:
+  - dplyr
+  - magrittr
+  - lubridate
+  - tidyr
+  - mvabund
+  - ggplot2
+  - lubridate
+  - vegan
+
+targets:
+  all:
+    depends: 
+      - insectlist
+      - zooplist
+      - bactlist
+      
+  insects:
+    command: read_data("raw-data/insect.communities.table.txt")
+  
+  insectnames:
+    command: read.csv("raw-data/insectnames.csv", stringsAsFactors=FALSE)
+    
+  blocks:
+    command: read_data("raw-data/blocks.txt")
+    
+  bromeliad:
+    command: read_data("raw-data/bromeliad.volumes.txt")
+
+  inverts:
+    command: clean_insect_names(insects, insectnames)
+    quiet: true
+
+  zoops:
+    command: clean_zooplankton("raw-data/zoop.txt")
+    
+  bact_list:
+    depends:
+      - raw-data/bacteria/block1.csv
+      - raw-data/bacteria/block2.csv
+      - raw-data/bacteria/block3.csv
+      - raw-data/bacteria/block4.csv
+      - raw-data/bacteria/block5.csv
+    command: read_bact_list()
+    
+  #command: read_organize_bact("raw-data/bacteria/", "raw-data/bromeliad.volumes.txt", target_name)
+
+  bact_list_clean2:
+    command: clean_all_bact(bact_list)
+    
+  insectlist:
+    command: TaxaTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = inverts)
+      
+  zooplist:
+    command: TaxaTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = zoops)
+  
+  bactlist:
+    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
+
+  insect_adonis:
+    command: AdonisData(insectlist)
