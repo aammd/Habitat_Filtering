@@ -67,7 +67,7 @@ targets:
   bactlist:
     command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
 
-  list_initial: 
+  list_initial:
     command: InsectZooBactAbds(.insectlist = insectlist, .zooplist = zooplist, .bactlist = bactlist)
   
   adonis_initial:
