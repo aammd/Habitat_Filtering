@@ -1,7 +1,7 @@
 ## All R files that are used must be listed here:
 sources:
   - R.scripts/data_cleaning.R
-  - R.scripts/HabitatSizeFunctions.R
+  - R.scripts/data_organizing.R
   
 packages:
   - dplyr
@@ -18,11 +18,12 @@ targets:
   all:
     depends: 
       - list_initial
-      
+      - code
+
   code: 
     depends:
       - R.scripts/data_cleaning.R
-      - R.scripts/HabitatSizeFunctions.R
+      - R.scripts/data_organizing.R
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
