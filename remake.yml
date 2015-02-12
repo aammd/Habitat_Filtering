@@ -2,6 +2,8 @@
 sources:
   - R.scripts/data_cleaning.R
   - R.scripts/data_organizing.R
+  - R.scripts/run_analyses.R
+  - R.scripts/results.R
   
 packages:
   - dplyr
@@ -24,6 +26,8 @@ targets:
     depends:
       - R.scripts/data_cleaning.R
       - R.scripts/data_organizing.R
+      - R.scripts/run_analyses.R
+      - R.scripts/results.R
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
