@@ -16,7 +16,8 @@ CommunityAdonis <- function(data_list, testclass, fun, ...){
   if(inherits(data_list, testclass)) {
     fun(data_list)
   } else {
-    lapply(data_list, CommunityAdonis, testclass, fun, ...)
+    ## if we go down to this level, there is a nested list -- i.e.,  bacteria
+    lapply(data_list, CommunityAdonis, testclass, fun, .strata = NULL, ...)
   }
 }
 
