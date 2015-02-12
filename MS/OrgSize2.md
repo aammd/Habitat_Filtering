@@ -3,14 +3,14 @@ title: "The effect of habitat variation on organisms of different body size"
 author: "A. Andrew M. MacDonald, Vinicius F. Farjalla , Diane S. Srivastava"
 fontsize: 12pt
 output:
+  word_document:
+    reference_docx: formatting/reference.docx
+  md_document: default
   pdf_document:
     includes:
       in_header: formatting/myheader.tex
     latex_engine: xelatex
-  md_document: default
   html_document: default
-  word_document:
-    reference_docx: formatting/reference.docx
 geometry: margin=1in
 bibliography: /home/andrew/Documents/reference/Mendeley_reference_lists/04_OrgSizeHabitat.bib
 ---
@@ -56,7 +56,11 @@ decreases from insects (strong signal), zooplankton (moderate signal) and bacter
 
 Why should the strength of environmental filtering decrease with organism
 size? There are two possible mechanisms that may make communities of smaller
-organisms less strongly filtered: increased dispersal rates and increased
+organisms less strongly filtered: 
+
+
+
+increased dispersal rates and increased
 plasticity. Dispersal rates increase when smaller organisms are easily
 passively carried (e.g. by wind). Increased dispersal brings new immigrants
 into a community, many of whom may not be able to persist without the constant
@@ -88,7 +92,7 @@ zooplankton and absent in bacteria. If instead differences in communities are
 driven by spatial processes we will see no difference in the strength of
 environmental signal across all groups. We made predictions for two sources of environmental variation:
 
-* __Between-species__: Our site contains three bromeliad species with different habitat preferences. We took advantage of this variation to select bromeliads of different species from different habitats. This creates the maximum differences in habitat possible, and is similar to the variation censused by Farjalla et al (2012). In this experiment, "habitat variation" includes variation in the local environment (sun/shade, amount of detritus input) and variation in bromeliad species.
+* __Between-species__: Our site contains three bromeliad species with different habitat preferences. We took advantage of this variation to select bromeliads of different species from different habitats. This creates the maximum differences in habitat possible, and is similar to the variation censused by Farjalla et al (2012). In this experiment, "habitat variation" includes variation in the local environment (sun/shade, amount of detritus input) and variation in bromeliad species.`
 
 * __Within-species__: One of the bromeliad species used in the between-species experiment is a broad habitat generalist. We conducted a second experiment with this species, testing how local environmental conditions (i.e. shady or exposed) influences community composition, while holding bromeliad species constant.
 
@@ -101,18 +105,19 @@ In both experiments we expect the amount of environmental signal in different gr
 We performed our experiments at the Parque Nacional de Jurubatiba, Northeast Rio
 de Janeiro state, Brazil ($22^{\circ}$ S $41^{\circ}$). The landscape is
 composed of large semi-open patches of shrubs which form shady patches
-interspersed with very exposed, sunny habitats. Bromeliads form dense colonies
-in the landscape, which is a dry sandy habitat (_restinga_ vegetation). The
+interspersed with very exposed, sunny habitats (_restinga_ vegetation).
+Bromeliads (Bromeliaceae) form dense colonies within this landscape. The
 landscape is composed of large semi-open clumps of shrubs interspersed with very
-exposed, open sand. Several bromeliad taxa here are known to contain diverse
-communities of macroinvertebrates, zooplankton and bacteria.
+exposed, open sand. Several bromeliad taxa here collect standing water
+(phytotelmata) in deep leaf axils, and are known to contain diverse communities
+of macroinvertebrates, zooplankton and bacteria.
 
 ### Experimental design
 
-We performed two related experiments: one which contrasted different bromeliad
-species from different habitats ("between-species"), and a second which
+We performed two related experiments: the first contrasted different bromeliad
+species from different habitats ("between-species"), while the second
 contrasted the same bromeliad species from different habitats ("within-
-species"). We focused on three bromeliad species (Bromeliaceae) from three
+species"). We focused on three bromeliad species from three
 contrasting habitats; these species and habitats are identical to those surveyed
 by Farjalla et al. (2010). Each bromeliad species was collected from its typical
 habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
@@ -124,41 +129,45 @@ between full sun and deep shade.
 
 Both between- and within-species experiments used similar designs: five blocks
 of six bromeliads each. To create each block in the between-species experiment,
-we collected two bromeliads of each species; in the within-species experiment we
-collected three bromeliads from open habitats and three from closed.  In both
+we collected two bromeliads of each of the three species; in the within-species experiment we
+collected three bromeliads from open habitats and three from closed habitats.  In both
 experiments, all bromeliads in a block were stocked with a nearly identical
 starting community, intermediate between that of all six bromeliads in that
 block. We made these starting communities by sampling, then combining, each of
-three major groups: macroinvertebrates, zooplankton and bacteria.  We sampled
-macroinvertebrates by thoroughly rinsing each bromeliad and passing the water
-through 1mm and 180μm mesh to collect aquatic macroinvertebrates.  We identified
-these animals to morphospecies, then divided them equally among the six
-bromeliads in the block.  Therefore each bromeliad received the average density
-of each morphospecies, correcting for a small amount of mortality in captivity.
+three major groups: macroinvertebrates, zooplankton and bacteria.  
 
+We sampled macroinvertebrates by thoroughly rinsing each bromeliad and passing
+the water through 1mm and 180μm mesh to collect aquatic macroinvertebrates.  We
+identified these animals to morphospecies, then divided them equally among the
+six bromeliads in the block.  Therefore each bromeliad received the average
+density of each morphospecies, except for a small number which died in
+captivity. 
+<!-- design rationale. continue paragraph. --> 
 We sampled the starting zooplankton and bacteria communities by mixing an equal
 volume of filtered tank water from each plant (approximately 100ml plant^-1^),
-returning the same volumes to all bromeliads.  We emptied bromeliads by hanging
-them upside down to dry for at least 24 hours and rinsing with 70% ethanol. Any
-coarse detritus found in the bromeliads was cleaned, frozen and thawed (to kill
-insect resting eggs). We confirmed that this technique removed all invertebrates
-and most detritus by dissecting an empty bromeliad. Bromeliads were placed in a
-local habitat similar to their original, each enclosed in a 2mm mesh cage to
-prevent colonization by insects. We then added the starting communities of
-macroinvertebrates, zooplankton and bacteria.
+returning the same volumes to all bromeliads.  
 
-The experiment lasted for 12 days, after which we sampled and preserved all
+We emptied bromeliads by hanging them upside down to dry for at least 24 hours
+and then rinsing each plant with 70% ethanol. Any coarse detritus found in the
+bromeliads was similarly cleaned, frozen and thawed (to kill insect resting eggs). We
+confirmed that this technique removed all invertebrates and most detritus by
+dissecting an empty bromeliad. Bromeliads were placed in a local habitat similar
+to their original, each enclosed in a 2mm mesh cage to prevent colonization by
+insects. We then added the starting communities of macroinvertebrates,
+zooplankton and bacteria.
+
+The experiment lasted for 12 days, after which we collected all
 macroinvertebrates, and a sample of zooplankton and bacteria.
 Macroinvertebrates were identified while live and preserved in ethanol.
 Zooplankton were collected on 50-micron Nytex mesh and fixed in 5% buffered
-formalin. Subsamples (>100 individuals) were then identified to the lowest
+formalin. Subsamples were then identified to the lowest
 taxonomic unit possible (species in most cases, except for bdelloid rotifers
 and harpaticoid copepods, left at the level of class and order, respectively).
 We measured bacterial community composition using denaturing gradient gel
 electrophoresis (DGGE; Muyzer et al. 1993). This analysis furnishes an
 approximation of bacterial diversity in the form of Operational Taxonomic
-Units (OTUs). We based our collection methods as closely as possible upon
-previous observational work (Farjalla et al. 2010).
+Units (OTUs). We based these collection methods as closely as possible upon
+previous observational work, to facilitate a direct comparison (Farjalla et al. 2010).
 
 ### Analyses
 
@@ -167,7 +176,7 @@ permutation test (PERMANOVA) to detect differences in the degree of
 environmental signal among groups, and a multivariate regression of abundance
 to identify those taxa which contributed most to the differences. PERMANOVA
 measures the amount of difference in community composition between treatment
-groups and compares this to the expected distribution under a null hypothesis.
+groups and compares this to the expected distribution under a null hypothesis of no treatment effects.
 If larger-bodied groups of organisms are more filtered, then we expect to find
 a greater difference in community composition emerge among the
 macroinvertebrates, less among the zooplankton, and little to none among
