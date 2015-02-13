@@ -102,14 +102,6 @@ FilterNABacteriaRows <- function(data) {
 }
 
 
-Select_bact_list_initial <- function(.blocks = blocks, .bromeliad = bromeliad,.bact_list = bact_list){
-  lapply(.bact_list, BacteriaTimeSelector,  sampletime = "initial")
-}
-
-check_bact <- . %>% extract2(bactlist, .) %>% extract2(2)  %>% tbl_df %>% glimpse
-
-check_fact <- . %>% extract2(bactlist, .) %>% extract2(1)  %>% tbl_df %>% glimpse
-
 fix_zoop_initial <- function(.TaxaAbundances = list_initial){
   zerorows <- .TaxaAbundances[["zoops"]]$taxa %>%
     rowSums(na.rm = TRUE) %>%
