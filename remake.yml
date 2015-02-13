@@ -19,6 +19,7 @@ packages:
 targets:
   all:
     depends: 
+      - insectlist
       - list_initial
       - code
 
@@ -48,19 +49,21 @@ targets:
   zoops:
     command: clean_zooplankton("raw-data/zoop.txt")
     
-  bact_list:
-    depends:
-      - raw-data/bacteria/block1.csv
-      - raw-data/bacteria/block2.csv
-      - raw-data/bacteria/block3.csv
-      - raw-data/bacteria/block4.csv
-      - raw-data/bacteria/block5.csv
-    command: read_bact_list()
-    
-  #command: read_organize_bact("raw-data/bacteria/", "raw-data/bromeliad.volumes.txt", target_name)
+  bact_1:
+    command: read_clean_bact("raw-data/bacteria/block1.csv"")
+        
+  bact_2:
+    command: read_clean_bact("raw-data/bacteria/block2.csv"")
+        
+  bact_3:
+    command: read_clean_bact("raw-data/bacteria/block3.csv"")
+        
+  bact_4:
+    command: read_clean_bact("raw-data/bacteria/block4.csv"")
+        
+  bact_5:
+    command: read_clean_bact("raw-data/bacteria/block5.csv"")
 
-  bact_list_clean2:
-    command: clean_all_bact(bact_list)
     
   insectlist:
     command: TaxaTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = inverts)
@@ -68,11 +71,11 @@ targets:
   zooplist:
     command: TaxaTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = zoops)
   
-  bactlist:
-    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
+#  bactlist:
+#    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
 
-  list_initial:
-    command: InsectZooBactAbds(.insectlist = insectlist, .zooplist = zooplist, .bactlist = bactlist)
+#  list_initial:
+#    command: InsectZooBactAbds(.insectlist = insectlist, .zooplist = zooplist, .bactlist = bactlist)
   
-  adonis_initial:
-    command: runadonis(list_initial)
+#  adonis_initial:
+#    command: runadonis(list_initial)
