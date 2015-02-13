@@ -13,10 +13,10 @@
 #' @param .taxa the insect taxa to merge. This can vary.
 #' @param .sampletime final or initial (or both) -- the sampling period.
 
-TaxaTimeSelector <- function(.blocks = blocks, 
-                             .bromeliad = bromeliad, 
-                             .taxa = insects_renamed,
-                             sampletime = "final") {
+TaxaTimeSelector <- function(.blocks, 
+                             .bromeliad, 
+                             .taxa,
+                             sampletime) {
   which_blocks <- .blocks %>%
     filter(experiment == "threespp") %>%
     select(Block = block)
@@ -68,6 +68,27 @@ BactTimeSelector <- function(.blocks = blocks,
   }
 }
 
+
+
+TaxaTimeSelector_ini <- partial(TaxaTimeSelector, 
+                                .blocks = blocks, 
+                                .bromeliad = bromeliad,
+                                sampletime = "initial")
+
+TaxaTimeSelector_fin <- partial(TaxaTimeSelector, 
+                                  .blocks = blocks, 
+                                  .bromeliad = bromeliad,
+                                  sampletime = "final")
+
+BactTimeSelector_ini <- partial(BactTimeSelector, 
+                                .blocks = blocks, 
+                                .bromeliad = bromeliad,
+                                sampletime = "initial")
+
+BactTimeSelector_fin <- partial(BactTimeSelector, 
+                                  .blocks = blocks, 
+                                  .bromeliad = bromeliad,
+                                  sampletime = "final")
 
 ## wrapper for filter that removes samples that failed to
 ## run (ie were NA in the data)
