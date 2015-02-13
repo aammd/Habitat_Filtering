@@ -20,15 +20,6 @@ targets:
   all:
     depends: 
       - insectlist
-      - list_initial
-      - code
-
-  code: 
-    depends:
-      - R.scripts/data_cleaning.R
-      - R.scripts/data_organizing.R
-      - R.scripts/run_analyses.R
-      - R.scripts/results.R
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
@@ -50,19 +41,19 @@ targets:
     command: clean_zooplankton("raw-data/zoop.txt")
     
   bact_1:
-    command: read_clean_bact("raw-data/bacteria/block1.csv"")
+    command: read_clean_bact("raw-data/bacteria/block1.csv")
         
   bact_2:
-    command: read_clean_bact("raw-data/bacteria/block2.csv"")
+    command: read_clean_bact("raw-data/bacteria/block2.csv")
         
   bact_3:
-    command: read_clean_bact("raw-data/bacteria/block3.csv"")
+    command: read_clean_bact("raw-data/bacteria/block3.csv")
         
   bact_4:
-    command: read_clean_bact("raw-data/bacteria/block4.csv"")
+    command: read_clean_bact("raw-data/bacteria/block4.csv")
         
   bact_5:
-    command: read_clean_bact("raw-data/bacteria/block5.csv"")
+    command: read_clean_bact("raw-data/bacteria/block5.csv")
 
     
   insectlist:
