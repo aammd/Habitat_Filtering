@@ -17,29 +17,27 @@ TaxaTimeSelector <- function(.blocks = blocks,
                              .bromeliad = bromeliad, 
                              .taxa = insects_renamed,
                              sampletime = "final") {
-  ## select blocks
-  taxadata <- .blocks %>%
+  which_blocks <- .blocks %>%
     filter(experiment == "threespp") %>%
-    select(Block = block) %>%
-    ## merge to bromeliad
-    left_join(.bromeliad %>% 
-                select(Brom, Block, species)) %>%
-    # and add the animals
-    left_join(.taxa %>%
-                filter(sampling == sampletime) %>%
-                spread(key = Spp, abundance, fill = 0) %>%
-                mutate(Brom = bromeliad) %>%
-                select(-bromeliad)
-    ) %>%
-    # set up a list object a la mvabund
-    {
-      list(factors = select(., Block, species),
-           taxa = select(., -Block, -Brom, -species, -sampling))
-    }
+    select(Block = block)
   
-  ## set the class to a made-up thing, for use with 
-  class(taxadata) <- "ExpAbd"
-  taxadata
+  which_broms <- .bromeliad %>%
+    semi_join(which_blocks) %>%
+    select(Brom, Block, species)
+  
+  which_taxa <- .taxa %>%
+    filter(sampling == sampletime) %>%
+    rename(Brom = bromeliad)
+  
+  brom_taxa <- left_join(which_broms, which_taxa) %>%
+    spread(Spp, abundance, fill = 0)
+  
+  ###tests could go here
+  brom_taxa %>% 
+  {
+    list(factors = select(., Block, species),
+         taxa = select(., -Block, -Brom, -species, -sampling))
+  }
 }
 
 
