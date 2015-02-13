@@ -41,6 +41,32 @@ TaxaTimeSelector <- function(.blocks = blocks,
 }
 
 
+BactTimeSelector <- function(.blocks = blocks, 
+                             .bromeliad = bromeliad, 
+                             .taxa,
+                             sampletime = "final") {
+  
+  which_blocks <- .blocks %>%
+    filter(experiment == "threespp") %>%
+    select(Block = block)
+  
+  which_broms <- .bromeliad %>%
+    semi_join(which_blocks) %>%
+    select(Brom, Block, species)
+  
+  which_taxa <- .taxa %>%
+    filter(sampling == sampletime) %>%
+    select(-Block)
+  
+  brom_taxa <- left_join(which_taxa, which_broms)
+  
+  ###tests could go here
+  brom_taxa %>% 
+  {
+    list(factors = select(., species),
+         taxa = select(., starts_with("X")))
+  }
+}
 
 
 ## wrapper for filter that removes samples that failed to
@@ -54,32 +80,6 @@ FilterNABacteriaRows <- function(data) {
            not)
 }
 
-BacteriaTimeSelector <- function(.bacteria_list_item,
-                                 .blocks = blocks, .bromeliad = bromeliad, 
-                                 sampletime = c("initial","final")){
-    ## select blocks
-    bact_data <- .blocks %>%
-      filter(experiment == "threespp") %>%
-      rename(Block = block) %>%
-      ## merge to bromeliad
-      left_join(.bromeliad) %>% 
-      select(Brom, species) %>% 
-      # and add the animals
-      ## note that for bacteria, they are joined in the opposite direction!
-      right_join(.bacteria_list_item) %>%
-      # this dot essentially makes this a "right join".
-      ## the following removes all rows with NAs.
-      FilterNABacteriaRows %>%
-      # and now we filter to keep initial, final or both:
-      filter(sampling %in% sampletime) %>%
-      # set up a list object , separating predictors (first) and response(second)
-      {list(
-        factors = select(., Block,species,sampling),
-        bacts = select(., starts_with("X"))
-      )}
-    class(bact_data) <- "ExpAbd"
-    bact_data
-}
 
 Select_bact_list_initial <- function(.blocks = blocks, .bromeliad = bromeliad,.bact_list = bact_list){
   lapply(.bact_list, BacteriaTimeSelector,  sampletime = "initial")
