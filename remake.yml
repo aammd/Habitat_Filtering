@@ -62,10 +62,13 @@ targets:
 
     
   insectlist:
-    command: TaxaTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = inverts)
+    command: TaxaTimeSelector(.taxa = inverts)
       
   zooplist:
-    command: TaxaTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = zoops)
+    command: TaxaTimeSelector(.taxa = zoops)
+    
+  bact_1_list: 
+    command: BactTimeSelector(.taxa = bact_1)
   
 #  bactlist:
 #    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
