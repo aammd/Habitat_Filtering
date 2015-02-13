@@ -24,20 +24,18 @@ clean_zooplankton <-  . %>%
   summarise(abundance = sum(abundance)) %>%
   as.data.frame
 
-## script for cleaning and organising our data
 
-read_bact_list <- function(dir = "raw-data/bacteria/"){
-  dir %>%
-    list.files(pattern="*.csv",
-               full.names=TRUE) %>% 
-    lapply(read.table,comment.char="#",
-           header=TRUE,stringsAsFactors=FALSE,sep=",")
-}
+## alias for reading bacteria
+read_bact <- function(x) read.table(x, comment.char="#",
+                                    header=TRUE, stringsAsFactors=FALSE,
+                                    sep=",")
 
-clean_bact2 <- . %>%
+clean_bact <- . %>%
   separate(sample, c("Brom", "day", "month")) %>% 
   mutate(date = paste(day, month, "2013", sep = "-"),
          date = dmy(date),
          sampling = ifelse(date > mean(date), "final", "initial"))
 
-clean_all_bact <- . %>% lapply(clean_bact2)
+read_clean_bact <- . %>%
+  read_bact %>%
+  clean_bact
