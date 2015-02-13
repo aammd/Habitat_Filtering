@@ -19,12 +19,10 @@ packages:
 targets:
   all:
     depends: 
-      - insectlist
-      - bact_1
-      - bact_2
-      - bact_3
-      - bact_4
-      - bact_5
+      - insect_ini
+      - insect_fin
+      - bact_1_ini
+      - bact_1_fin
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
@@ -61,14 +59,89 @@ targets:
     command: read_clean_bact("raw-data/bacteria/block5.csv")
 
     
-  insectlist:
-    command: TaxaTimeSelector(.taxa = inverts)
-      
-  zooplist:
-    command: TaxaTimeSelector(.taxa = zoops)
+  insect_ini:
+    depends:
+      - blocks
+      - bromeliad
+    command: TaxaTimeSelector_ini(.taxa = inverts)
     
-  bact_1_list: 
-    command: BactTimeSelector(.taxa = bact_1)
+  insect_fin:
+    depends:
+      - blocks
+      - bromeliad
+    command: TaxaTimeSelector_fin(.taxa = inverts)
+      
+  zoop_ini:
+    depends:
+      - blocks
+      - bromeliad
+    command: TaxaTimeSelector_ini(.taxa = zoops)
+          
+  zoop_fin:
+    depends:
+      - blocks
+      - bromeliad
+    command: TaxaTimeSelector_fin(.taxa = zoops)
+    
+  bact_1_ini: 
+    depends:
+      - blocks
+      - bromeliad
+    command: BactTimeSelector_ini(.taxa = bact_1)   
+    
+  bact_1_fin:
+    depends:
+      - blocks
+      - bromeliad
+    command: BactTimeSelector_fin(.taxa = bact_1)
+        
+  bact_2_ini: 
+    depends:
+      - blocks
+      - bromeliad
+    command: BactTimeSelector_ini(.taxa = bact_2)   
+    
+  bact_2_fin: 
+    depends:
+      - blocks
+      - bromeliad
+    command: BactTimeSelector_fin(.taxa = bact_2)
+        
+  bact_3_ini: 
+    depends:
+      - blocks
+      - bromeliad
+    command: BactTimeSelector_ini(.taxa = bact_3)   
+    
+  bact_3_fin: 
+    depends:
+      - blocks
+      - bromeliad
+    command: BactTimeSelector_fin(.taxa = bact_3)
+    
+  bact_4_ini: 
+    depends:
+      - blocks
+      - bromeliad
+    command: BactTimeSelector_ini(.taxa = bact_4)   
+    
+  bact_4_fin: 
+    depends:
+      - blocks
+      - bromeliad
+    command: BactTimeSelector_fin(.taxa = bact_4)
+      
+  bact_5_ini: 
+    depends:
+      - blocks
+      - bromeliad
+    command: BactTimeSelector_ini(.taxa = bact_5)   
+    
+  bact_5_fin:
+    depends:
+      - blocks
+      - bromeliad
+    command: BactTimeSelector_fin(.taxa = bact_5)
   
 #  bactlist:
 #    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
