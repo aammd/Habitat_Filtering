@@ -20,6 +20,11 @@ targets:
   all:
     depends: 
       - insectlist
+      - bact_1
+      - bact_2
+      - bact_3
+      - bact_4
+      - bact_5
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
