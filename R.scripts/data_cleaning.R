@@ -1,7 +1,9 @@
 ## reading and combining the insect data
 ## Andrew MacDonald, Dec 2014
 
-read_data <- function(dat) read.table(dat, header = TRUE, comment.char="#", stringsAsFactors=FALSE)
+read_data <- function(dat) read.table(dat, header = TRUE, 
+                                      comment.char="#", 
+                                      stringsAsFactors=FALSE)
 
 clean_insect_names <- function(community_data, name_data) {
   ## correct variable spellings
