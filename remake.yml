@@ -19,21 +19,7 @@ packages:
 targets:
   all:
     depends: 
-      - insect_ini
-      - insect_fin
-      - zoop_ini
-      - zoop_fin
-      - bact_1_ini
-      - bact_1_fin
-      - bact_2_ini
-      - bact_2_fin
-      - bact_3_ini
-      - bact_3_fin
-      - bact_4_ini
-      - bact_4_fin
-      - bact_5_ini
-      - bact_5_fin
-      - bact_list_ini
+      - adonis_list
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
@@ -68,55 +54,42 @@ targets:
         
   bact_5:
     command: read_clean_bact("raw-data/bacteria/block5.csv")
+    
+  meta_list:
+    command: list(zoops = zoops, inverts = inverts)
 
   bact_list:
-    command: list(bact_1, bact_2, bact_3, bact_4, bact_5)
+    command: >
+      list(bact_1 = bact_1, bact_2 = bact_2, bact_3 = bact_3,
+           bact_4 = bact_4, bact_5 = bact_5)
     
-  insect_ini:
-    command: TaxaTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = inverts, sampletime = I("initial"))
+  meta_list_ini:
+    command: lapply_meta(meta_list, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("initial"))
     
-  insect_fin:
-    command: TaxaTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = inverts, sampletime = I("final"))
-      
-  zoop_ini:
-    command: TaxaTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = zoops, sampletime = I("initial"))
-          
-  zoop_fin:
-    command: TaxaTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = zoops, sampletime = I("final"))
-    
+  meta_list_fin:
+    command: lapply_meta(meta_list, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))
+
   bact_list_ini:
     command: lapply_bact(bact_list, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("initial"))   
+
+  bact_list_fin:
+    command: lapply_bact(bact_list, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))   
+
+  meta_ini_adonis:
+    command: lapply_adonis(meta_list_ini)
     
-  bact_1_ini: 
-    command: BactTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = bact_1, sampletime = I("initial"))   
+  meta_fin_adonis:
+    command: lapply_adonis(meta_list_fin)
     
-  bact_1_fin:
-    command: BactTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = bact_1, sampletime = I("final"))
-      
-  bact_2_ini: 
-    command: BactTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = bact_2, sampletime = I("initial"))   
+  bact_ini_adonis:
+    command: lapply_adonis(bact_list_ini)
     
-  bact_2_fin: 
-    command: BactTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = bact_2, sampletime = I("final"))
-        
-  bact_3_ini: 
-    command: BactTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = bact_3, sampletime = I("initial"))   
+  bact_fin_adonis:
+    command: lapply_adonis(bact_list_fin)
     
-  bact_3_fin: 
-    command: BactTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = bact_3, sampletime = I("final"))
-    
-  bact_4_ini: 
-    command: BactTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = bact_4, sampletime = I("initial"))   
-    
-  bact_4_fin: 
-    command: BactTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = bact_4, sampletime = I("final"))
-      
-  bact_5_ini: 
-    command: BactTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = bact_5, sampletime = I("initial"))   
-    
-  bact_5_fin:
-    command: BactTimeSelector(.blocks = blocks, .bromeliad = bromeliad, .taxa = bact_5, sampletime = I("final"))
-  
+  adonis_list:
+    command: list(meta_ini_adonis, meta_fin_adonis, bact_ini_adonis, bact_fin_adonis)
+
 #  bactlist:
 #    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
 
