@@ -69,37 +69,32 @@ BactTimeSelector <- function(.blocks = blocks,
 }
 
 
+## wrapper that lets us work over a list:
+lapply_maker <- function(f){
+  function(x, ...) lapply(x, f, ...)
+}
 
-TaxaTimeSelector_ini <- partial(TaxaTimeSelector, 
-                                .blocks = blocks, 
-                                .bromeliad = bromeliad,
-                                sampletime = "initial")
+lapply_bact <- lapply_maker(BactTimeSelector)
 
-TaxaTimeSelector_fin <- partial(TaxaTimeSelector, 
-                                  .blocks = blocks, 
-                                  .bromeliad = bromeliad,
-                                  sampletime = "final")
+lapply_meta <- lapply_maker(TaxaTimeSelector)
 
-BactTimeSelector_ini <- partial(BactTimeSelector, 
-                                .blocks = blocks, 
-                                .bromeliad = bromeliad,
-                                sampletime = "initial")
-
-BactTimeSelector_fin <- partial(BactTimeSelector, 
-                                  .blocks = blocks, 
-                                  .bromeliad = bromeliad,
-                                  sampletime = "final")
 
 ## wrapper for filter that removes samples that failed to
 ## run (ie were NA in the data)
 FilterNABacteriaRows <- function(data) {
-  filter(data,
-         data %>% 
-           select(starts_with("X")) %>%
-           rowSums %>%
-           is.na %>%
-           not)
+  OKrows <- data %>%
+    extract2("taxa") %>%
+    select(starts_with("X")) %>%
+    rowSums %>%
+    is.na %>%
+    not
+  
+  newfac <- filter(data$factors, OKrows)
+  newtax <- filter(data$taxa, OKrows)
+  list(factors = newfac, taxa = newtax)
 }
+
+lapply_narow2 <- lapply_maker(FilterNABacteriaRows)
 
 
 fix_zoop_initial <- function(.TaxaAbundances = list_initial){
