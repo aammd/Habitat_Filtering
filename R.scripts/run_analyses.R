@@ -11,20 +11,26 @@ AdonisData <- function(Data, .strata = Data[["factors"]]$Block, ...){
 
 lapply_adonis <- lapply_maker(AdonisData)
 
-run_manyglm2 <- function(data_list, glm_family = "poisson"){  
+lapply_adonis_noNA <- . %>%
+  lapply_narow %>% 
+  lapply_adonis
+
+run_manyglm <- function(data_list, glm_family = "poisson", .formula){  
   #' call mvabund on responses
   responses <- data_list %>% 
     extract2("taxa") %>%
     mvabund
   
+  f <- as.formula(.formula)
+  
   ## run glm
-  insect_glm_interact <- data_list %>% 
+  data_list %>% 
     extract2("factors") %>% 
     data.frame %>% 
-    manyglm(responses ~ Block * species, data = ., family = glm_family)
+    manyglm(f, data = ., family = glm_family)
 }
 
-lapply_manyglm <- lapply_maker(run_manyglm2)
+lapply_manyglm <- lapply_maker(run_manyglm)
 
 ## ... passes refinements of the `strata` argument to AdonisData, otherwise does nothing
 ## add a "testclass" argument, or perhaps a "logical test" arguement:
