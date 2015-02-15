@@ -20,6 +20,13 @@ targets:
   all:
     depends: 
       - adonis_list
+      - manyglm_list
+      - code
+  
+  code:
+    depends:
+      - R.scripts/data_organizing.R
+      - R.scripts/run_analyses.R
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
@@ -74,7 +81,15 @@ targets:
 
   bact_list_fin:
     command: lapply_bact(bact_list, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))   
+    
+  ## remove NA rows from bacteria lists:
+  bact_list_ini_noNA:
+    command: lapply_narow(bact_list_ini)
+    
+  bact_list_fin_noNA:
+    command: lapply_narow(bact_list_fin)
 
+  # perform permanovas:
   meta_ini_adonis:
     command: lapply_adonis(meta_list_ini)
     
@@ -82,13 +97,31 @@ targets:
     command: lapply_adonis(meta_list_fin)
     
   bact_ini_adonis:
-    command: lapply_adonis(bact_list_ini)
+    command: lapply_adonis(bact_list_ini_noNA, .strata = NULL)
     
   bact_fin_adonis:
-    command: lapply_adonis(bact_list_fin)
-    
+    command: lapply_adonis(bact_list_fin_noNA, .strata = NULL)
+
   adonis_list:
-    command: list(meta_ini_adonis, meta_fin_adonis, bact_ini_adonis, bact_fin_adonis)
+    command: > 
+      list(meta_ini_adonis, meta_fin_adonis, 
+           bact_ini_adonis, bact_fin_adonis)
+  
+  # now run manyglm with poisson:
+  meta_ini_manyglm:
+    command: lapply_manyglm(meta_list_ini, .formula = I("responses ~ Block * species"))
+    
+  meta_fin_manyglm:
+    command: lapply_manyglm(meta_list_fin, .formula = I("responses ~ Block * species"))
+    
+  bact_ini_manyglm:
+    command: lapply_manyglm(bact_list_ini, .formula = I("responses ~ species"))
+    
+  bact_fin_manyglm:
+    command: lapply_manyglm(bact_list_fin, .formula = I("responses ~ species"))
+
+  manyglm_list:
+    command: list(meta_ini_manyglm, meta_fin_manyglm, bact_ini_manyglm, bact_fin_manyglm)
 
 #  bactlist:
 #    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
