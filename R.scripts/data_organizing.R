@@ -94,7 +94,7 @@ FilterNABacteriaRows <- function(data) {
   list(factors = newfac, taxa = newtax)
 }
 
-lapply_narow2 <- lapply_maker(FilterNABacteriaRows)
+lapply_narow <- lapply_maker(FilterNABacteriaRows)
 
 
 fix_zoop_initial <- function(.TaxaAbundances = list_initial){
