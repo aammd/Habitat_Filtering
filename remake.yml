@@ -15,13 +15,15 @@ packages:
   - lubridate
   - vegan
   - pryr
-
+  - rmarkdown
+  
 targets:
   all:
     depends: 
       - adonis_results
       - manyglm_list
       - code
+      - reports/test.html
   
   code:
     depends:
@@ -111,22 +113,39 @@ targets:
            
   adonis_results:
     command: result_df(adonis_list)
+    
+  adonis_summary:
+    command: get_summary_adonis(adonis_results)
+    
+  adonis.csv:
+    command: write_results(adonis_summary, file = target_name)
+    
+  reports/test.html:
+    depends: adonis.csv
+    command: render("reports/test.Rmd", output_file = target_name)
   
   # now run manyglm with poisson:
-  meta_ini_manyglm:
+  meta_ini_manyglm_pois:
     command: lapply_manyglm(meta_list_ini, .formula = I("responses ~ Block * species"))
     
-  meta_fin_manyglm:
+  meta_fin_manyglm_pois:
     command: lapply_manyglm(meta_list_fin, .formula = I("responses ~ Block * species"))
     
-  bact_ini_manyglm:
+  bact_ini_manyglm_pois:
     command: lapply_manyglm(bact_list_ini, .formula = I("responses ~ species"))
     
-  bact_fin_manyglm:
+  bact_fin_manyglm_pois:
     command: lapply_manyglm(bact_list_fin, .formula = I("responses ~ species"))
 
   manyglm_list:
-    command: list(meta_ini_manyglm, meta_fin_manyglm, bact_ini_manyglm, bact_fin_manyglm)
+    command: >
+      list(meta_ini_manyglm_pois = meta_ini_manyglm_pois,
+           meta_fin_manyglm_pois = meta_fin_manyglm_pois,
+           bact_ini_manyglm_pois = bact_ini_manyglm_pois,
+           bact_fin_manyglm_pois = bact_fin_manyglm_pois)
+           
+  manyglm_results:
+    command: result_df(adonis_list)
 
 #  bactlist:
 #    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
