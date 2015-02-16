@@ -32,6 +32,26 @@ run_manyglm <- function(data_list, glm_family = "poisson", .formula){
 
 lapply_manyglm <- lapply_maker(run_manyglm)
 
+
+
+result_df <- function(result_list){
+  
+  outs <- vector(mode = "list", length = 4L)
+  
+  for(i in 1:4){
+    outs[[i]] <- data_frame(result = result_list[[i]]) %>% 
+      mutate(dataset = names(result_list[[i]]),
+             samp = names(result_list)[i])
+  }
+  
+  outs %>% 
+    rbind_all %>% 
+    separate(samp, into = c("grp", "time", "tech"))
+}
+
+
+
+
 ## ... passes refinements of the `strata` argument to AdonisData, otherwise does nothing
 ## add a "testclass" argument, or perhaps a "logical test" arguement:
 ## if I go with testclass, must have a new class. 
