@@ -18,5 +18,7 @@ MS/habitat_organism_size_MS.pdf
 *.sublime-*
 MS/*.docx
 MS/*.pdf
-
+adonis.csv
+adonis_summary.Rdata
+reports/test.html
 .remake/
