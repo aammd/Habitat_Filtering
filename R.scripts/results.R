@@ -4,9 +4,15 @@
 adonisValueExtract <- function(dat, RESP) dat[["aov.tab"]]["species",RESP]
 
 
-extractResp <- function(RESP = "R2") {
-  function(adonisanswers) {
-    lapply(adonisanswers, CommunityAdonis, testclass = "adonis", 
-           function(x) adonisValueExtract(x, RESP))
-  }
+get_summary_adonis <- . %>%
+  rowwise %>%
+  mutate(R2 = adonisValueExtract(result, "R2"),
+         F.Model = adonisValueExtract(result, "F.Model"),
+         p = adonisValueExtract(result, "Pr(>F)")
+  )
+
+write_results <- function(dat, file){
+  dat %>% 
+    select(-result) %>% 
+    write.csv(file = file, row.names = FALSE)
 }
