@@ -70,7 +70,7 @@ BactTimeSelector <- function(.blocks = blocks,
 
 
 ## wrapper that lets us work over a list:
-lapply_maker <- function(f){
+lapply_maker <- function(f, ...){
   function(x, ...) lapply(x, f, ...)
 }
 
