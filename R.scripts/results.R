@@ -16,3 +16,7 @@ write_results <- function(dat, file){
     select(-result) %>% 
     write.csv(file = file, row.names = FALSE)
 }
+
+get_info_manyglm <-  . %>%
+  rowwise %>%
+  do(aov = anova(.$result, resamp="perm.resid", p.uni="adjusted"))
