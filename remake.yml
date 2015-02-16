@@ -24,6 +24,7 @@ targets:
       - manyglm_list
       - code
       - reports/test.html
+      - manyglm_anova
   
   code:
     depends:
@@ -122,7 +123,7 @@ targets:
     
   reports/test.html:
     depends: adonis.csv
-    command: render("reports/test.Rmd", output_file = target_name)
+    command: render("reports/test.Rmd")
   
   # now run manyglm with poisson:
   meta_ini_manyglm_pois:
@@ -144,8 +145,11 @@ targets:
            bact_ini_manyglm_pois = bact_ini_manyglm_pois,
            bact_fin_manyglm_pois = bact_fin_manyglm_pois)
            
-  manyglm_results:
-    command: result_df(adonis_list)
+  manyglm_result:
+    command: result_df(manyglm_list, I(c("grp", "time", "tech", "dist")))
+    
+  manyglm_anova:
+    command: get_info_manyglm(manyglm_result)
 
 #  bactlist:
 #    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
