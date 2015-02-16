@@ -19,7 +19,7 @@ packages:
 targets:
   all:
     depends: 
-      - adonis_list
+      - adonis_results
       - manyglm_list
       - code
   
@@ -104,8 +104,13 @@ targets:
 
   adonis_list:
     command: > 
-      list(meta_ini_adonis, meta_fin_adonis, 
-           bact_ini_adonis, bact_fin_adonis)
+      list(meta_ini_adonis = meta_ini_adonis, 
+           meta_fin_adonis = meta_fin_adonis, 
+           bact_ini_adonis = bact_ini_adonis,
+           bact_fin_adonis = bact_fin_adonis)
+           
+  adonis_results:
+    command: result_df(adonis_list)
   
   # now run manyglm with poisson:
   meta_ini_manyglm:
@@ -125,7 +130,6 @@ targets:
 
 #  bactlist:
 #    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
-
 #  list_initial:
 #    command: InsectZooBactAbds(.insectlist = insectlist, .zooplist = zooplist, .bactlist = bactlist)
   
