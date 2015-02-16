@@ -34,7 +34,7 @@ lapply_manyglm <- lapply_maker(run_manyglm)
 
 
 
-result_df <- function(result_list){
+result_df <- function(result_list, intolist = c("grp", "time", "tech")){
   
   outs <- vector(mode = "list", length = 4L)
   
@@ -46,7 +46,7 @@ result_df <- function(result_list){
   
   outs %>% 
     rbind_all %>% 
-    separate(samp, into = c("grp", "time", "tech"))
+    separate(samp, into = intolist)
 }
 
 
