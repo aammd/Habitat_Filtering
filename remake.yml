@@ -153,10 +153,3 @@ targets:
   aov_manyglm:
     command: get_info_manyglm(manyglm_result)
 
-#  bactlist:
-#    command: Select_bact_list_initial(.blocks = blocks, .bromeliad = bromeliad, .bact_list = bact_list_clean2)
-#  list_initial:
-#    command: InsectZooBactAbds(.insectlist = insectlist, .zooplist = zooplist, .bactlist = bactlist)
-  
-#  adonis_initial:
-#    command: runadonis(list_initial)
