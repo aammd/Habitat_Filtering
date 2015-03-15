@@ -109,7 +109,7 @@ interspersed with very exposed, sunny habitats (_restinga_ vegetation).
 Bromeliads (Bromeliaceae) form dense colonies within this landscape. The
 landscape is composed of large semi-open clumps of shrubs interspersed with very
 exposed, open sand. Several bromeliad taxa here collect standing water
-(phytotelmata) in deep leaf axils, and are known to contain diverse communities
+(phytotelmata) in deep leaf axils, and are known to contain diverse communities 
 of macroinvertebrates, zooplankton and bacteria.
 
 ### Experimental design
