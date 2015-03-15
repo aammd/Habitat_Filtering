@@ -1,10 +1,5 @@
 ## All R files that are used must be listed here:
-sources:
-  - R.scripts/data_cleaning.R
-  - R.scripts/data_organizing.R
-  - R.scripts/run_analyses.R
-  - R.scripts/results.R
-  
+
 packages:
   - dplyr
   - magrittr
@@ -16,6 +11,13 @@ packages:
   - vegan
   - pryr
   - rmarkdown
+
+sources:
+  - R.scripts/results.R
+  - R.scripts/data_cleaning.R
+  - R.scripts/data_organizing.R
+  - R.scripts/run_analyses.R
+  
   
 targets:
   all:
@@ -24,7 +26,7 @@ targets:
       - manyglm_list
       - code
       - reports/test.html
-      - manyglm_anova
+      - aov_manyglm
   
   code:
     depends:
@@ -148,7 +150,7 @@ targets:
   manyglm_result:
     command: result_df(manyglm_list, I(c("grp", "time", "tech", "dist")))
     
-  manyglm_anova:
+  aov_manyglm:
     command: get_info_manyglm(manyglm_result)
 
 #  bactlist:

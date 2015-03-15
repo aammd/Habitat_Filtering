@@ -1,5 +1,5 @@
 ## running the analyses
-
+library("pryr")
 ## runs `adonis` on the output of TaxaTimeSelector. Knows
 ## where to find species abundances.  Also defaults to
 ## setting strata as Block. For bacteria (which have to be
