@@ -120,11 +120,11 @@ targets:
   adonis_summary:
     command: get_summary_adonis(adonis_results)
     
-  adonis.csv:
+  reports/adonis.csv:
     command: write_results(adonis_summary, file = target_name)
     
   reports/test.html:
-    depends: adonis.csv
+    depends: reports/adonis.csv
     command: render("reports/test.Rmd")
   
   # now run manyglm with poisson:
