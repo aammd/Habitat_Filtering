@@ -15,6 +15,7 @@ lapply_adonis_noNA <- . %>%
   lapply_narow %>% 
   lapply_adonis
 
+## mvabund approach
 run_manyglm <- function(data_list, glm_family = "poisson", .formula){  
   #' call mvabund on responses
   responses <- data_list %>% 
@@ -31,8 +32,6 @@ run_manyglm <- function(data_list, glm_family = "poisson", .formula){
 }
 
 lapply_manyglm <- lapply_maker(run_manyglm)
-
-
 
 result_df <- function(result_list, intolist = c("grp", "time", "tech")){
   
