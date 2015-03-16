@@ -18,25 +18,6 @@ plyr::ldply(bact_results,extract2,"bact_species_wald") %>%
          species_wald) %>%
   ggplot(aes(x=block,y=species_wald))+geom_point()
 
-bact_wald <- plyr::ldply(bact_results,extract2,"bact_species_wald") %>%
-  select(block=.id,
-         species_p,
-         species_wald) %>%
-  group_by(block) %>%
-  summarize(sd_wald=sd(species_wald),
-            species_wald=mean(species_wald)
-#             species_p=sum(species_p>0.05),       
-  )
-
-
-
-
-rbind_list(insect_final_nbin$plotting_data %>% mutate(Taxa="insect"),
-           zoop_final_nbin$plotting_data %>% mutate(Taxa="zoop"),
-           bact_wald %>% mutate(Taxa="bact")
-) %>%
-  group_by(
-
 
 
 
