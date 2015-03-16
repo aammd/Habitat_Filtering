@@ -68,17 +68,6 @@ BactTimeSelector <- function(.blocks = blocks,
   }
 }
 
-
-## wrapper that lets us work over a list:
-lapply_maker <- function(f, ...){
-  function(x, ...) lapply(x, f, ...)
-}
-
-lapply_bact <- lapply_maker(BactTimeSelector)
-
-lapply_meta <- lapply_maker(TaxaTimeSelector)
-
-
 ## wrapper for filter that removes samples that failed to
 ## run (ie were NA in the data)
 FilterNABacteriaRows <- function(data) {
@@ -93,5 +82,14 @@ FilterNABacteriaRows <- function(data) {
   newtax <- filter(data$taxa, OKrows)
   list(factors = newfac, taxa = newtax)
 }
+
+## wrapper that lets us work over a list:
+lapply_maker <- function(f, ...){
+  function(x, ...) lapply(x, f, ...)
+}
+
+lapply_bact <- lapply_maker(BactTimeSelector)
+
+lapply_meta <- lapply_maker(TaxaTimeSelector)
 
 lapply_narow <- lapply_maker(FilterNABacteriaRows)
