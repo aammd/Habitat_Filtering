@@ -27,11 +27,7 @@ targets:
       - code
       - reports/test.html
       - anova_manyglm
-  
-  code:
-    depends:
-      - R.scripts/data_organizing.R
-      - R.scripts/run_analyses.R
+
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
