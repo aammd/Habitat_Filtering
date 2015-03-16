@@ -4,16 +4,6 @@
 
 
 
-#check assumptions
-
-insect_final_nbin$manyglm %>% plot
-insect_final_pois$manyglm %>% plot
-
-zoop_initial_nbin$manyglm %>% plot
-zoop_initial_pois$manyglm %>% plot
-
-insect_final_nbin$manyglm_summary
-zoop_final_nbin$manyglm_summary
 
 # Bacteria from threespp --------------------------------------------------
 
