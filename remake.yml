@@ -24,10 +24,10 @@ targets:
     depends: 
       - adonis_results
       - manyglm_list
-      - code
       - reports/test.html
       - anova_manyglm
 
+### read in data, including each bacterial file
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
@@ -62,15 +62,17 @@ targets:
         
   bact_5:
     command: read_clean_bact("raw-data/bacteria/block5.csv")
-    
-  meta_list:
-    command: list(zoops = zoops, inverts = inverts)
+   
+## store data as a list
 
   bact_list:
     command: >
       list(bact_1 = bact_1, bact_2 = bact_2, bact_3 = bact_3,
            bact_4 = bact_4, bact_5 = bact_5)
-    
+       
+  meta_list:
+    command: list(zoops = zoops, inverts = inverts)
+
   meta_list_ini:
     command: lapply_meta(meta_list, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("initial"))
     
