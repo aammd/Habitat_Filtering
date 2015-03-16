@@ -24,7 +24,7 @@ targets:
     depends: 
       - adonis_results_meta
       - manyglm_list_meta
-      - reports/test_meta.html
+      - reports/with_block.html
       - anova_manyglm_meta
 
 ### read in data, including each bacterial file
@@ -107,9 +107,9 @@ targets:
   reports/adonis_meta.csv:
     command: write_results(adonis_summary_meta, file = target_name)
     
-  reports/test.html:
+  reports/with_block.html:
     depends: reports/adonis_meta.csv
-    command: render("reports/test_meta.Rmd")
+    command: render("reports/with_block.Rmd")
 
   ### perform manyglm
 
@@ -158,9 +158,7 @@ targets:
   ### processing adonis results
   adonis_list:
     command: > 
-      list(meta_ini_adonis = meta_ini_adonis, 
-           meta_fin_adonis = meta_fin_adonis, 
-           bact_ini_adonis = bact_ini_adonis,
+      list(bact_ini_adonis = bact_ini_adonis,
            bact_fin_adonis = bact_fin_adonis)
            
   adonis_results:
@@ -186,9 +184,7 @@ targets:
 
   manyglm_list:
     command: >
-      list(meta_ini_manyglm_pois = meta_ini_manyglm_pois,
-           meta_fin_manyglm_pois = meta_fin_manyglm_pois,
-           bact_ini_manyglm_pois = bact_ini_manyglm_pois,
+      list(bact_ini_manyglm_pois = bact_ini_manyglm_pois,
            bact_fin_manyglm_pois = bact_fin_manyglm_pois)
            
   manyglm_result:
