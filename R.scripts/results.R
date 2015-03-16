@@ -27,7 +27,7 @@ write_results <- function(dat, file){
 ## run the anova on the manyglm output
 get_info_manyglm <-  . %>%
   group_by(dataset, grp, time, tech, dist) %>%
-  do(aov_result = anova(.$result,
+  do(aov_result = anova(.[["result"]][[1]],
                         resamp="perm.resid",
                         p.uni="adjusted")
      )
@@ -54,6 +54,10 @@ insect_sig <- . %>%
 
 ## left join the stastics and their pvals into a dataframe.
 ## essentially tidying it.
-species_stats <- . %>% 
-  rowwise %>% 
-  do(left_join(insect_statistic(.$aov_result), insect_sig(.$aov_result)))
+## note that this must be done only to metazoans, so e.g.
+## filter(anova_manyglm, grp == "meta") %>% species_stats
+species_stats <- function(data){
+  data %>% 
+    rowwise %>% 
+    do(left_join(insect_statistic(.$aov_result), insect_sig(.$aov_result)))
+}

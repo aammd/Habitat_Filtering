@@ -26,7 +26,7 @@ targets:
       - manyglm_list
       - code
       - reports/test.html
-      - aov_manyglm
+      - anova_manyglm
   
   code:
     depends:
@@ -150,6 +150,6 @@ targets:
   manyglm_result:
     command: result_df(manyglm_list, I(c("grp", "time", "tech", "dist")))
     
-  aov_manyglm:
+  anova_manyglm:
     command: get_info_manyglm(manyglm_result)
 
