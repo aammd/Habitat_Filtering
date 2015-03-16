@@ -1,0 +1,7 @@
+"dataset","grp","time","tech","R2","F.Model","p"
+"zoops","meta","ini","adonis",NA,NA,NA
+"inverts","meta","ini","adonis",0.296757352640811,5.696787980216,0.001
+"bact","meta","ini","adonis",0.0376812644559809,0.528615989034,0.195
+"zoops","meta","fin","adonis",0.187518040673954,3.115753550021,0.004
+"inverts","meta","fin","adonis",0.234173838464638,4.128021446714,0.001
+"bact","meta","fin","adonis",0.0318096797302592,0.443539526649,0.015

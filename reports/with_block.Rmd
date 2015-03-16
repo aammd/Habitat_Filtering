@@ -1,0 +1,15 @@
+---
+title: "test"
+author: "Andrew MacDonald"
+date: "February 16, 2015"
+output: html_document
+---
+
+```{r}
+library(knitr)
+library(magrittr)
+
+read.csv("adonis_meta.csv") %>%
+  kable
+```
+
