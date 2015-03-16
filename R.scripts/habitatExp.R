@@ -5,24 +5,6 @@
 
 
 
-# Bacteria from threespp --------------------------------------------------
-
-
-    ## check with plots
-par(mfrow=c(2,3))
-lapply(bact_results,function(x) plot(x$bact_glm_species))
-
-plyr::ldply(bact_results,extract2,"bact_species_wald") %>%
-  select(block=.id,
-         species_p,
-         species_wald) %>%
-  ggplot(aes(x=block,y=species_wald))+geom_point()
-
-
-
-
-  ggsave("test.png",width = 20,height = 20, units="in")
-
 
 
 
