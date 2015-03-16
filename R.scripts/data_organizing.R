@@ -93,3 +93,24 @@ lapply_bact <- lapply_maker(BactTimeSelector)
 lapply_meta <- lapply_maker(TaxaTimeSelector)
 
 lapply_narow <- lapply_maker(FilterNABacteriaRows)
+
+## combine all bacteria into one long data frame
+
+bact_list_to_df <- function(bactlist){
+  bactlist %>%
+    # gather all columns that start with X (ie the "species") into one
+    lapply(function(x) gather(x, key = sp, 
+                              value = pres, 
+                              starts_with("X"))) %>%
+    rbind_all %>% 
+    select(sampling, bromeliad = Brom, Spp = sp, abundance = pres)
+}
+
+## given a list of bacterial species, how many occur across blocks
+count_common_spp <- . %>%
+  filter(pres != 0) %>% 
+  select(Block,sp) %>% 
+  distinct %>% 
+  group_by(sp) %>% 
+  tally %>% 
+  extract2("n")
