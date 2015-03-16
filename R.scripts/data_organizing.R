@@ -95,38 +95,3 @@ FilterNABacteriaRows <- function(data) {
 }
 
 lapply_narow <- lapply_maker(FilterNABacteriaRows)
-
-
-fix_zoop_initial <- function(.TaxaAbundances = list_initial){
-  zerorows <- .TaxaAbundances[["zoops"]]$taxa %>%
-    rowSums(na.rm = TRUE) %>%
-    equals(0) %>%
-    which
-  
-  .TaxaAbundances[["zoops"]] <- lapply(.TaxaAbundances[["zoops"]],
-                                       function(data) data[-zerorows, ])
-  
-  class(.TaxaAbundances[["zoops"]]) <- "ExpAbd"
-  
-  .TaxaAbundances
-}
-
-
-InsectZooBactAbds <- function(sampletime = "initial", .insectlist = insectlist, 
-                              .zooplist = zooplist, .bactlist = bactlist){
-  
-  ## list of abundances
-  
-  TaxaAbundances <- vector("list",length = 3)
-  names(TaxaAbundances) <- c("insects","zoops","bacteria")
-  TaxaAbundances[["insects"]]  <-  .insectlist
-  TaxaAbundances[["zoops"]]  <-  .zooplist
-  TaxaAbundances[["bacteria"]]  <-  .bactlist
-
-  TaxaAbundances
-}
-
-
-
-
-
