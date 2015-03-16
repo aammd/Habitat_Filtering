@@ -35,9 +35,11 @@ lapply_manyglm <- lapply_maker(run_manyglm)
 
 result_df <- function(result_list, intolist = c("grp", "time", "tech")){
   
-  outs <- vector(mode = "list", length = 4L)
+  len_res <- length(result_list)
   
-  for(i in 1:4){
+  outs <- vector(mode = "list", length = len_res)
+  
+  for(i in 1:len_res){
     outs[[i]] <- data_frame(result = result_list[[i]]) %>% 
       mutate(dataset = names(result_list[[i]]),
              samp = names(result_list)[i])
