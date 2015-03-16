@@ -2,62 +2,7 @@
 ## Andrew MacDonald, 2014
 
 
-# insects in threespp experiment ------------------------------------------
 
-rerun <- FALSE
-## calculating model objects
-if (rerun) {
-  ## initial insects
-  insect_manyglm(run_interaction_model = rerun, sampletime = "initial")
-  insect_manyglm(run_interaction_model = rerun, sampletime = "initial", glm_family = "poisson")
-  ## final insects
-  insect_manyglm(run_interaction_model = rerun, sampletime = "final")
-  insect_manyglm(run_interaction_model = rerun, sampletime = "final", glm_family = "poisson")
-  ## initial zoops
-  insect_manyglm(.taxa = zoop_combined,
-                 run_interaction_model = rerun,
-                 organisms = "zoops",
-                 sampletime = "initial")
-  insect_manyglm(.taxa = zoop_combined,
-                 run_interaction_model = rerun,
-                 organisms = "zoops",
-                 sampletime = "initial", glm_family = "poisson")
-  ## final zoops
-  insect_manyglm(.taxa = zoop_combined,
-                 run_interaction_model = rerun,
-                 organisms = "zoops",
-                 sampletime = "final")
-  insect_manyglm(.taxa = zoop_combined,
-                 run_interaction_model = rerun,
-                 organisms = "zoops",
-                 sampletime = "final", glm_family = "poisson")
-} else {
-  ## LOADING model objects
-  ## initial insects
-  insect_initial_nbin <- insect_manyglm(run_interaction_model = rerun, sampletime = "initial")
-  insect_initial_pois <- insect_manyglm(run_interaction_model = rerun, sampletime = "initial", glm_family = "poisson")
-  ## final insects
-  insect_final_nbin <- insect_manyglm(run_interaction_model = rerun, sampletime = "final")
-  insect_final_pois <- insect_manyglm(run_interaction_model = rerun, sampletime = "final", glm_family = "poisson")
-  ## initial zoops
-  zoop_initial_nbin <- insect_manyglm(.taxa = zoop_combined,
-                 run_interaction_model = rerun,
-                 organisms = "zoops",
-                 sampletime = "initial")
-  zoop_initial_pois <- insect_manyglm(.taxa = zoop_combined,
-                 run_interaction_model = rerun,
-                 organisms = "zoops",
-                 sampletime = "initial", glm_family = "poisson")
-  ## final zoops
-  zoop_final_nbin <- insect_manyglm(.taxa = zoop_combined,
-                 run_interaction_model = rerun,
-                 organisms = "zoops",
-                 sampletime = "final")
-  zoop_final_posis <- insect_manyglm(.taxa = zoop_combined,
-                 run_interaction_model = rerun,
-                 organisms = "zoops",
-                 sampletime = "final", glm_family = "poisson")
-}
 
 #check assumptions
 
