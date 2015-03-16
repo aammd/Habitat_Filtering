@@ -49,21 +49,3 @@ result_df <- function(result_list, intolist = c("grp", "time", "tech")){
     separate(samp, into = intolist)
 }
 
-
-
-
-## ... passes refinements of the `strata` argument to AdonisData, otherwise does nothing
-## add a "testclass" argument, or perhaps a "logical test" arguement:
-## if I go with testclass, must have a new class. 
-CommunityAdonis <- function(data_list, testclass, fun, ...){  
-  if(inherits(data_list, testclass)) {
-    fun(data_list)
-  } else {
-    ## if we go down to this level, there is a nested list -- i.e.,  bacteria
-    lapply(data_list, CommunityAdonis, testclass, fun, .strata = NULL, ...)
-  }
-}
-
-runadonis <- partial(CommunityAdonis, testclass = "ExpAbd", 
-                     fun = AdonisData, .strata = NULL)
-
