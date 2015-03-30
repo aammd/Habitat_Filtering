@@ -114,3 +114,39 @@ count_common_spp <- . %>%
   group_by(sp) %>% 
   tally %>% 
   extract2("n")
+
+
+
+
+TaxaTimeSelector_split <- function(.blocks, 
+                             .bromeliad, 
+                             .taxa,
+                             sampletime) {
+  which_blocks <- .blocks %>%
+    filter(experiment == "threespp") %>%
+    select(Block = block)
+  
+  which_broms <- .bromeliad %>%
+    semi_join(which_blocks) %>%
+    select(Brom, Block, species)
+  
+  which_taxa <- .taxa %>%
+    filter(sampling == sampletime) %>%
+    rename(Brom = bromeliad)
+  
+  brom_taxa <- left_join(which_broms, which_taxa) %>%
+    spread(Spp, abundance, fill = 0)
+  
+  taxa_list <- split(brom_taxa, brom_taxa$Block)
+  
+  format_list <- function(dat){
+    list(factors = select(dat, Block, species),
+         taxa = select(dat, -Block, -Brom, -species, -sampling))
+  }
+  
+  lapply(taxa_list, format_list)
+  ###tests could go here
+  
+}
+
+lapply_splitter <- lapply_maker(TaxaTimeSelector_split)
