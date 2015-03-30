@@ -22,10 +22,8 @@ sources:
 targets:
   all:
     depends: 
-      - adonis_results_meta
-      - manyglm_list_meta
+      - reports/test.html
       - reports/with_block.html
-      - anova_manyglm_meta
 
 ### read in data, including each bacterial file
 
