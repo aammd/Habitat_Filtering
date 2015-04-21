@@ -22,3 +22,5 @@ adonis.csv
 adonis_summary.Rdata
 reports/test.html
 .remake/
+
+reports/*.html
