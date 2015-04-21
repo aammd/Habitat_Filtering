@@ -1,15 +1,21 @@
 ---
 title: "test"
 author: "Andrew MacDonald"
-date: "February 16, 2015"
 output: html_document
 ---
 
 ```{r}
 library(knitr)
 library(magrittr)
+library("ggplot2")
 
-read.csv("adonis_meta.csv") %>%
-  kable
+adonis_block <- read.csv("adonis_meta.csv")
+
+kable(adonis_block)
+```
+
+
+```{r}
+ggplot(adonis_block, aes(x = dataset, colour = time, y = R2)) + geom_point() + theme_bw()
 ```
 
