@@ -29,6 +29,7 @@ TaxaTimeSelector <- function(.blocks,
     filter(sampling == sampletime) %>%
     rename(Brom = bromeliad)
   
+  brom_taxa <- which_taxa %>%
     filter(Spp != "none") %>%
     spread(Spp, abundance, fill = 0) %>% 
     left_join(which_broms, .) %>% 
