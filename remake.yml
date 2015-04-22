@@ -70,17 +70,26 @@ targets:
   bact_df:
     command: bact_list_to_df(bact_list)
        
-  meta_list:
-    command: list(zoops = zoops, inverts = inverts, bact = bact_df)
-
 ## WITH BLOCK setup
 
-  meta_list_ini:
-    command: lapply(meta_list, I(TaxaTimeSelector), .blocks = blocks, .bromeliad = bromeliad, sampletime = I("initial"))
-    
-  meta_list_fin:
-    command: lapply_meta(meta_list, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))
+  inverts_tts_ini:
+    command: TaxaTimeSelector(inverts, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("initial"))
 
+  zoops_tts_ini:
+    command: TaxaTimeSelector(zoops, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("initial"))
+
+  bact_tts_ini:
+    command: TaxaTimeSelector(bact_df, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("initial"))
+
+  inverts_tts_fin:
+    command: TaxaTimeSelector(inverts, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))
+
+  zoops_tts_fin:
+    command: TaxaTimeSelector(zoops, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))
+
+  bact_tts_fin:
+    command: TaxaTimeSelector(bact_df, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))  
+    
   ### perform permanovas
 
   meta_ini_adonis:
