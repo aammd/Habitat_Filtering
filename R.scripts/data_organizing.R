@@ -29,8 +29,14 @@ TaxaTimeSelector <- function(.blocks,
     filter(sampling == sampletime) %>%
     rename(Brom = bromeliad)
   
-  brom_taxa <- left_join(which_broms, which_taxa) %>%
-    spread(Spp, abundance, fill = 0)
+    filter(Spp != "none") %>%
+    spread(Spp, abundance, fill = 0) %>% 
+    left_join(which_broms, .) %>% 
+    mutate(sampling = sampletime)# %>% ## cheating! NAs introduced in this factor are removed
+    ## now only need to remove the NA values! could just get a vector of their names and na to 0
+    
+  brom_taxa[is.na(brom_taxa)] <- 0
+    
   
   ###tests could go here
   brom_taxa %>% 
