@@ -15,7 +15,7 @@ geometry: margin=1in
 bibliography: /home/andrew/Documents/reference/Mendeley_reference_lists/04_OrgSizeHabitat.bib
 ---
 
-## Abstract
+# Abstract
 
 At the local scale, species composition of often varies among habitat patches in
 response to differences in environmental variables. These differences act as
@@ -34,7 +34,7 @@ weaker signal in insects than expected. These results suggest that organism size
 could provide a framework for integrating studies of environmental filtering
 across different scales and systems.
 
-## Introduction
+# Introduction
 
 Community composition of local patches varies in response to the environment;
 however not all species within a community respond in the same degree.
@@ -93,11 +93,23 @@ environmental signal across all groups. We made predictions for two sources of e
 
 * __Within-species__: One of the bromeliad species used in the between-species experiment is a broad habitat generalist. We conducted a second experiment with this species, testing how local environmental conditions (i.e. shady or exposed) influences community composition, while holding bromeliad species constant.
 
-In both experiments we expect the amount of environmental signal in different groups to be less in smaller groups (that is, macroinvertebrates > zooplankton > bacteria).  We furthermore expected weaker results in the within-species experiment, since the bromeliad species itself is an important source of environmental variation for the organisms which live within.
+In both experiments we expect the amount of environmental signal in different groups to be less in smaller groups (that is, macroinvertebrates > zooplankton > bacteria).  We expect weaker results in the within-species experiment, since the bromeliad species itself is an important source of environmental variation for the organisms which live within.
 
-## Methods
+# Methods
 
-### Study site and bromeliad species
+## Experimental design
+
+We performed two related experiments: the first contrasted different bromeliad
+species from different habitats ("between-species"), while the second
+contrasted the same bromeliad species from different habitats ("within-
+species"). We focused on three bromeliad species from three
+contrasting habitats; these species and habitats are identical to those surveyed
+by Farjalla et al. (2010). Each bromeliad species was collected from its typical
+habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
+(partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat range at this site, occuring in both full shade and full sun. This large habitat range enabled us to conduct a second, within-species experiment.  This second experiment compared _Neoregelia_ communities
+between full sun and deep shade.
+
+### Study site
 
 We performed our experiments at the Parque Nacional de Jurubatiba, Northeast Rio
 de Janeiro state, Brazil ($22^{\circ}$ S $41^{\circ}$). The landscape is
@@ -109,20 +121,7 @@ exposed, open sand. Several bromeliad taxa here collect standing water
 (phytotelmata) in deep leaf axils, and are known to contain diverse communities 
 of macroinvertebrates, zooplankton and bacteria.
 
-### Experimental design
-
-We performed two related experiments: the first contrasted different bromeliad
-species from different habitats ("between-species"), while the second
-contrasted the same bromeliad species from different habitats ("within-
-species"). We focused on three bromeliad species from three
-contrasting habitats; these species and habitats are identical to those surveyed
-by Farjalla et al. (2010). Each bromeliad species was collected from its typical
-habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
-(partial shade), and _Neoregelia cruenta_ (deep shade). However, _Neoregelia_ is
-also a habitat generalist: common and broadly distributed, it is found alongside
-all other species. Therefore, we chose _Neoregelia_  for our second, within-
-species experiment.  This second experiment compared _Neoregelia_ communities
-between full sun and deep shade.
+## Experimental design
 
 Both between- and within-species experiments used similar designs: five blocks
 of six bromeliads each. To create each block in the between-species experiment,
@@ -136,17 +135,15 @@ three major groups: macroinvertebrates, zooplankton and bacteria.
 We sampled macroinvertebrates by thoroughly rinsing each bromeliad and passing
 the water through 1mm and 180μm mesh to collect aquatic macroinvertebrates.  We
 identified these animals to morphospecies, then divided them equally among the
-six bromeliads in the block.  Therefore each bromeliad received the average
-density of each morphospecies, except for a small number which died in
-captivity. 
-<!-- design rationale. continue paragraph. --> 
+six bromeliads in the block.  
+
 We sampled the starting zooplankton and bacteria communities by mixing an equal
 volume of filtered tank water from each plant (approximately 100ml plant^-1^),
 returning the same volumes to all bromeliads.  
 
 We emptied bromeliads by hanging them upside down to dry for at least 24 hours
 and then rinsing each plant with 70% ethanol. Any coarse detritus found in the
-bromeliads was similarly cleaned, frozen and thawed (to kill insect resting eggs). We
+bromeliads was similarly cleaned, frozen and thawed (to kill any macroinvertebrates eggs). We
 confirmed that this technique removed all invertebrates and most detritus by
 dissecting an empty bromeliad. Bromeliads were placed in a local habitat similar
 to their original, each enclosed in a 2mm mesh cage to prevent colonization by
