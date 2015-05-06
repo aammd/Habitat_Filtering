@@ -1,4 +1,4 @@
----
+k---
 title: "The effect of habitat variation on organisms of different body size"
 author: "A. Andrew M. MacDonald, Vinicius F. Farjalla , Diane S. Srivastava"
 fontsize: 12pt
@@ -39,17 +39,17 @@ across different scales and systems.
 Community composition of local patches varies in response to the environment;
 however not all species within a community respond in the same degree.
 "Habitat filtering" occurs when qualities of the habitat (abiotic or biotic)
-prevent species from colonizing or persisting in a habitat. In contrast,
+prevent species from colonizing or persisting. In contrast,
 neutral models of biodiversity consider all individuals in a community to be
 demographically equivalent; differences in species composition are therefore
 the result of dispersal and demographic stochasticity. This has led to the
 approach of partitioning variance in community composition into variation
 correlated with space, with environmental distance, or with their interaction.
 These studies have returned mixed results for different groups of organisms
-and systems (Cottenie). In one of the first studies across different groups of
+and systems (Cottenie). One reason for these mixed results is the very different qualities of habitats compared or groups of organisms compared. In one of the first studies across different groups of
 organisms in the same community, Farjalla et al (2012) demonstrated that body
 size is a key trait determining environmental signal in community composition.
-They found that larger bodied organisms show a greater degree of
+They found that groups of organisms which are physically larger show a greater degree of
 habitat filtering: there is weaker environmental structure as body size
 decreases from insects (strong signal), zooplankton (moderate signal) and bacteria
 (weak signal).
@@ -57,8 +57,6 @@ decreases from insects (strong signal), zooplankton (moderate signal) and bacter
 Why should the strength of environmental filtering decrease with organism
 size? There are two possible mechanisms that may make communities of smaller
 organisms less strongly filtered: 
-
-
 
 increased dispersal rates and increased
 plasticity. Dispersal rates increase when smaller organisms are easily
@@ -78,8 +76,7 @@ allow them the opportunity to evolve to a novel environment more rapidly than
 larger-bodied organisms.
 
 The size-plasticity hypothesis makes a testable prediction about the
-consequences of environmental variation for similar communities: community
-composition will become diverge in different environments, but this divergence
+consequences of environmental variation for similar communities: for communities which begin at a simiar species composition will diverge under different environments, but this divergence
 will be greatest between larger species and increasingly weak in smaller
 organisms. To test these predictions, we performed a manipulative experiment
 in the same habitat as Farjalla et al. (2012). We studied the same groups of
@@ -96,7 +93,7 @@ environmental signal across all groups. We made predictions for two sources of e
 
 * __Within-species__: One of the bromeliad species used in the between-species experiment is a broad habitat generalist. We conducted a second experiment with this species, testing how local environmental conditions (i.e. shady or exposed) influences community composition, while holding bromeliad species constant.
 
-In both experiments we expect the amount of environmental signal in different groups to follow the order macroinvertebrates > zooplankton > bacteria.  We furthermore expected weaker results in the within-species experiment, since the bromeliad species itself is an important source of environmental variation for the organisms which live within.
+In both experiments we expect the amount of environmental signal in different groups to be less in smaller groups (that is, macroinvertebrates > zooplankton > bacteria).  We furthermore expected weaker results in the within-species experiment, since the bromeliad species itself is an important source of environmental variation for the organisms which live within.
 
 ## Methods
 
@@ -181,6 +178,10 @@ If larger-bodied groups of organisms are more filtered, then we expect to find
 a greater difference in community composition emerge among the
 macroinvertebrates, less among the zooplankton, and little to none among
 bacteria.
+
+## Results  
+
+![](../)
 
 ## References
 
