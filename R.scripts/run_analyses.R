@@ -9,6 +9,10 @@ AdonisData <- function(Data, .strata = Data[["factors"]]$Block, ...){
   adonis(Data[["taxa"]] ~ species, data = Data[["factors"]], strata = .strata, ...)
 }
 
+species_r2 <- function(adonis_result){
+  adonis_result[["aov.tab"]][["F.Model"]][[1]]
+}
+
 lapply_adonis <- lapply_maker(AdonisData)
 
 lapply_adonis_noNA <- . %>%
