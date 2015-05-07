@@ -61,3 +61,29 @@ species_stats <- function(data){
     rowwise %>% 
     do(left_join(insect_statistic(.$aov_result), insect_sig(.$aov_result)))
 }
+
+r2_plot <- function(.inverts_adonis_ini, .inverts_adonis_fin,
+                    .zoops_adonis_ini, .zoops_adonis_fin,
+                    .bact_adonis_ini, .bact_adonis_fin){ ## does this need to be substitute?
+  list(data_frame(name = as.character(quote(.inverts_adonis_ini)), 
+                  number = species_r2(.inverts_adonis_ini)),
+       data_frame(name = as.character(quote(.zoops_adonis_ini)), 
+                  number = species_r2(.zoops_adonis_ini)),
+       data_frame(name = as.character(quote(.bact_adonis_ini)), 
+                  number = species_r2(.bact_adonis_ini)),
+       data_frame(name = as.character(quote(.inverts_adonis_fin)), 
+                  number = species_r2(.inverts_adonis_fin)),
+       data_frame(name = as.character(quote(.zoops_adonis_fin)), 
+                  number = species_r2(.zoops_adonis_fin)),
+       data_frame(name = as.character(quote(.bact_adonis_fin)), 
+                  number = species_r2(.bact_adonis_fin))
+  ) %>%
+    rbind_all %>% 
+    mutate(name = gsub(x = name, pattern = "\\.", replacement = "")) %>%
+    separate(name, into = c("taxa", "method", "time")) %>% 
+    mutate(taxa = factor(taxa, levels = c("inverts", "zoops", "bact"))) %>%
+    ggplot(aes(x = taxa, colour = time, y = number)) + 
+    geom_point(size = 6) +
+    ylab(expression(r^2*" value")) +
+    theme_bw()
+}
