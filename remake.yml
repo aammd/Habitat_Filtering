@@ -22,6 +22,7 @@ targets:
   all:
     depends: 
       - figures/Fig1.png
+      - MS/OrgSize.pdf
 
 ### read in data, including each bacterial file
 
@@ -115,8 +116,15 @@ targets:
               zoops_adonis_ini, zoops_adonis_fin,
               bact_adonis_ini, bact_adonis_fin)
     plot: true
+    
+  figures/Fig1.pdf:
+    command: > 
+      r2_plot(inverts_adonis_ini, inverts_adonis_fin,
+              zoops_adonis_ini, zoops_adonis_fin,
+              bact_adonis_ini, bact_adonis_fin)
+    plot: true
 
-  reports/withblock_adonis.md:
+  MS/SuppMatt.md:
     depends:
       - inverts_adonis_ini
       - zoops_adonis_ini
@@ -125,6 +133,11 @@ targets:
       - zoops_adonis_fin
       - bact_adonis_fin
     knitr: true
+    
+  MS/OrgSize.pdf:
+    depends:
+      - figures/Fig1.pdf
+    command: render("MS/OrgSize.md")
 
   ### processing adonis results
 #  adonis_list_meta:
