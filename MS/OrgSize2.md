@@ -1,4 +1,4 @@
-k---
+---
 title: "The effect of habitat variation on organisms of different body size"
 author: "A. Andrew M. MacDonald, Vinicius F. Farjalla , Diane S. Srivastava"
 fontsize: 12pt
@@ -178,7 +178,7 @@ bacteria.
 
 ## Results  
 
-![](../)
+![](../figures/Fig1.png)
 
 ## References
 
