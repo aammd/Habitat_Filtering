@@ -1,0 +1,41 @@
+---
+title: "withblock_adonis"
+author: "Andrew MacDonald"
+date: "April 22, 2015"
+output: html_document
+---
+
+# Before
+
+## insects
+```{r results = 'asis'}
+inverts_adonis_ini
+```
+
+## zooplankton
+```{r results = 'asis'}
+zoops_adonis_ini
+```
+
+## bacteria
+```{r results = 'asis'}
+bact_adonis_ini
+```
+
+# After
+## insects
+```{r results = 'asis'}
+inverts_adonis_fin
+```
+
+## zooplankton
+```{r results = 'asis'}
+zoops_adonis_fin
+```
+
+## bacteria
+```{r results = 'asis'}
+bact_adonis_fin
+```
+
+
