@@ -3,14 +3,14 @@ title: "The effect of habitat variation on organisms of different body size"
 author: "A. Andrew M. MacDonald, Vinicius F. Farjalla , Diane S. Srivastava"
 fontsize: 12pt
 output:
-  word_document:
-    reference_docx: formatting/reference.docx
-  md_document: default
   pdf_document:
     includes:
       in_header: formatting/myheader.tex
     latex_engine: xelatex
+  md_document: default
   html_document: default
+  word_document:
+    reference_docx: formatting/reference.docx
 geometry: margin=1in
 bibliography: /home/andrew/Documents/reference/Mendeley_reference_lists/04_OrgSizeHabitat.bib
 ---
