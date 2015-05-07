@@ -1,3 +1,6 @@
+## this just presents the bromeliads in the 2nd experiment blocks for the benefit of a collaborator who needed this info
+
+
 library("readr")
 library("dplyr")
 library("magrittr")
