@@ -24,3 +24,4 @@ reports/test.html
 .remake/
 
 reports/*.html
+MS/*.html
