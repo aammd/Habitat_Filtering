@@ -21,8 +21,7 @@ sources:
 targets:
   all:
     depends: 
-      - reports/test.html
-      - reports/with_block.html
+      - figures/Fig1.png
 
 ### read in data, including each bacterial file
 
@@ -68,7 +67,7 @@ targets:
            bact_4 = bact_4, bact_5 = bact_5)
 
   bact_df:
-    command: bact_list_to_df(bact_list)
+    command: bact_list_to_df(bact_list) # combined bact across all blocks
        
 ## WITH BLOCK setup
 
@@ -92,30 +91,59 @@ targets:
     
   ### perform permanovas
 
-  meta_ini_adonis:
-    command: lapply_adonis(meta_list_ini)
+  inverts_adonis_ini:
+    command: AdonisData(inverts_tts_ini, method = I("euclid"))
+
+  zoops_adonis_ini:
+    command: AdonisData(zoops_tts_ini, method = I("euclid"))
+
+  bact_adonis_ini:
+    command: AdonisData(bact_tts_ini, method = I("euclid"))
+
+  inverts_adonis_fin:
+    command: AdonisData(inverts_tts_fin, method = I("euclid"))
+
+  zoops_adonis_fin:
+    command: AdonisData(zoops_tts_fin, method = I("euclid"))
+
+  bact_adonis_fin:
+    command: AdonisData(bact_tts_fin, method = I("euclid"))
     
-  meta_fin_adonis:
-    command: lapply_adonis(meta_list_fin)
+  figures/Fig1.png:
+    command: > 
+      r2_plot(inverts_adonis_ini, inverts_adonis_fin,
+              zoops_adonis_ini, zoops_adonis_fin,
+              bact_adonis_ini, bact_adonis_fin)
+    plot: true
+
+  reports/withblock_adonis.md:
+    depends:
+      - inverts_adonis_ini
+      - zoops_adonis_ini
+      - bact_adonis_ini
+      - inverts_adonis_fin
+      - zoops_adonis_fin
+      - bact_adonis_fin
+    knitr: true
 
   ### processing adonis results
-  adonis_list_meta:
-    command: > 
-      list(meta_ini_adonis = meta_ini_adonis, 
-           meta_fin_adonis = meta_fin_adonis)
-           
-  adonis_results_meta:
-    command: result_df(adonis_list_meta)
-    
-  adonis_summary_meta:
-    command: get_summary_adonis(adonis_results_meta)
-    
-  reports/adonis_meta.csv:
-    command: write_results(adonis_summary_meta, file = target_name)
-    
-  reports/with_block.html:
-    depends: reports/adonis_meta.csv
-    command: render("reports/with_block.Rmd")
+#  adonis_list_meta:
+#    command: > 
+#      list(meta_ini_adonis = meta_ini_adonis, 
+#           meta_fin_adonis = meta_fin_adonis)
+#           
+#  adonis_results_meta:
+#    command: result_df(adonis_list_meta)
+#    
+#  adonis_summary_meta:
+#    command: get_summary_adonis(adonis_results_meta)
+#    
+#  reports/adonis_meta.csv:
+#    command: write_results(adonis_summary_meta, file = target_name)
+#    
+#  reports/with_block.html:
+#    depends: reports/adonis_meta.csv
+#    command: render("reports/with_block.Rmd")
 
   ### perform manyglm
 
@@ -140,45 +168,6 @@ targets:
 
 ## WITHOUT BLOCK setup (split list)
 
-  bact_list_ini:
-    command: lapply_bact(bact_list, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("initial"))   
-
-  bact_list_fin:
-    command: lapply_bact(bact_list, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))   
-    
-  ## remove NA rows from bacteria lists:
-  bact_list_ini_noNA:
-    command: lapply_narow(bact_list_ini)
-    
-  bact_list_fin_noNA:
-    command: lapply_narow(bact_list_fin)
-
-  ## perform permanovas:
-   
-  bact_ini_adonis:
-    command: lapply_adonis(bact_list_ini_noNA, .strata = NULL)
-    
-  bact_fin_adonis:
-    command: lapply_adonis(bact_list_fin_noNA, .strata = NULL)
-
-  ### processing adonis results
-  adonis_list:
-    command: > 
-      list(bact_ini_adonis = bact_ini_adonis,
-           bact_fin_adonis = bact_fin_adonis)
-           
-  adonis_results:
-    command: result_df(adonis_list)
-    
-  adonis_summary:
-    command: get_summary_adonis(adonis_results)
-    
-  reports/adonis.csv:
-    command: write_results(adonis_summary, file = target_name)
-    
-  reports/test.html:
-    depends: reports/adonis.csv
-    command: render("reports/test.Rmd")
   
   # now run manyglm with poisson:
     
