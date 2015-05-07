@@ -178,7 +178,7 @@ bacteria.
 
 ## Results  
 
-![](../figures/Fig1.png)
+![fig1](../figures/Fig1.png)
 
 ## References
 
