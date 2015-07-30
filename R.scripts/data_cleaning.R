@@ -38,14 +38,17 @@ clean_bact <- . %>%
          date = dmy(date),
          sampling = ifelse(date > mean(date), "final", "initial"))
 
-clean_bact_win <- . %>%
-  separate(sample, c("Brom", "month"))
+clean_bact_win <- function(df){
+  df %>%
+    separate(sample, c("Brom", "month")) %>% 
+    mutate(sampling = ifelse(month == "may", "final", "initial"))
+}
 
 ## compose intoi reading functions
 read_clean_bact <- . %>%
   read_bact %>%
   clean_bact
 
-read_clean_bact_win <- . %>% 
+read_clean_bact_within <- . %>% 
   read_bact %>% 
   clean_bact_win
