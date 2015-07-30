@@ -108,7 +108,7 @@ bact_list_to_df <- function(bactlist){
     # gather all columns that start with X (ie the "species") into one
     lapply(function(x) gather(x, key = sp, 
                               value = pres, 
-                              starts_with("X"))) %>%
+                              starts_with("X"), convert = TRUE)) %>%
     rbind_all %>% 
     select(sampling, bromeliad = Brom, Spp = sp, abundance = pres)
 }
