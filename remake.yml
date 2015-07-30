@@ -46,19 +46,19 @@ targets:
     command: clean_zooplankton("raw-data/zoop.txt")
     
   bact_1:
-    command: read_clean_bact("raw-data/bacteria/block1.csv")
+    command: read_clean_bact("raw-data/bacteria/between_species/block1.csv")
         
   bact_2:
-    command: read_clean_bact("raw-data/bacteria/block2.csv")
+    command: read_clean_bact("raw-data/bacteria/between_species/block2.csv")
         
   bact_3:
-    command: read_clean_bact("raw-data/bacteria/block3.csv")
+    command: read_clean_bact("raw-data/bacteria/between_species/block3.csv")
         
   bact_4:
-    command: read_clean_bact("raw-data/bacteria/block4.csv")
+    command: read_clean_bact("raw-data/bacteria/between_species/block4.csv")
         
   bact_5:
-    command: read_clean_bact("raw-data/bacteria/block5.csv")
+    command: read_clean_bact("raw-data/bacteria/between_species/block5.csv")
    
 ## store data as a list
 
