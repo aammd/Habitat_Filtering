@@ -59,6 +59,18 @@ targets:
         
   bact_5:
     command: read_clean_bact("raw-data/bacteria/between_species/block5.csv")
+    
+## within spp experiment
+  bact_2_win:
+    command: read_clean_bact_win("raw-data/bacteria/within_species/bloco2.csv")
+    
+  ## within spp experiment
+  bact_4_win:
+    command: read_clean_bact_win("raw-data/bacteria/within_species/bloco4.csv")
+    
+  ## within spp experiment
+  bact_5_win:
+    command: read_clean_bact_win("raw-data/bacteria/within_species/bloco5.csv")
    
 ## store data as a list
 
