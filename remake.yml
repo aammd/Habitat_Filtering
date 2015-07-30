@@ -23,6 +23,7 @@ targets:
     depends: 
       - figures/Fig1.png
       - MS/OrgSize.pdf
+      - bact_list_within
 
 ### read in data, including each bacterial file
 
@@ -61,16 +62,16 @@ targets:
     command: read_clean_bact("raw-data/bacteria/between_species/block5.csv")
     
 ## within spp experiment
-  bact_2_win:
-    command: read_clean_bact_win("raw-data/bacteria/within_species/bloco2.csv")
+  bact_2_within:
+    command: read_clean_bact_within("raw-data/bacteria/within_species/bloco2.csv")
     
   ## within spp experiment
-  bact_4_win:
-    command: read_clean_bact_win("raw-data/bacteria/within_species/bloco4.csv")
+  bact_4_within:
+    command: read_clean_bact_within("raw-data/bacteria/within_species/bloco4.csv")
     
   ## within spp experiment
-  bact_5_win:
-    command: read_clean_bact_win("raw-data/bacteria/within_species/bloco5.csv")
+  bact_5_within:
+    command: read_clean_bact_within("raw-data/bacteria/within_species/bloco5.csv")
    
 ## store data as a list
 
@@ -78,10 +79,17 @@ targets:
     command: >
       list(bact_1 = bact_1, bact_2 = bact_2, bact_3 = bact_3,
            bact_4 = bact_4, bact_5 = bact_5)
+           
+  bact_list_within:
+    command: >
+      list(bact_2 = bact_2_within, 
+           bact_4 = bact_4_within, 
+           bact_5 = bact_5_within)
 
   bact_df:
     command: bact_list_to_df(bact_list) # combined bact across all blocks
-       
+
+
 ## WITH BLOCK setup
 
   inverts_tts_ini:
