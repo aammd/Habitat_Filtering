@@ -23,7 +23,6 @@ targets:
     depends: 
       - figures/Fig1.png
       - MS/OrgSize.pdf
-      - inverts_tts_ini_win
       - inverts_adonis_win_ini
       - zoops_adonis_win_ini
       - bact_adonis_win_ini
@@ -148,13 +147,13 @@ targets:
   ### bacteria
   bact_tts_win_ini:
     command: > 
-      TaxaTimeSelector(bact, .blocks = blocks, 
+      TaxaTimeSelector(bact_df, .blocks = blocks, 
       .bromeliad = bromeliad, sampletime = I("initial"),
       .experiment = I("withinsp"))
 
   bact_tts_win_fin:
     command: > 
-      TaxaTimeSelector(bact, .blocks = blocks, 
+      TaxaTimeSelector(bact_df, .blocks = blocks, 
       .bromeliad = bromeliad, sampletime = I("fin"),
       .experiment = I("withinsp"))
 
