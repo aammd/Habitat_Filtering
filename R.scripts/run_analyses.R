@@ -5,9 +5,8 @@ library("pryr")
 ## setting strata as Block. For bacteria (which have to be
 ## analyzed separately) just set .strata to NULL
 
-AdonisData <- function(Data, .strata = Data[["factors"]]$Block,
-                       .data = Data[["factors"]], ...){  
-  adonis(Data[["taxa"]] ~ species, data = .data, strata = .strata, ...)
+AdonisData <- function(Data, .strata = Data[["factors"]]$Block, ...){  
+  adonis(Data[["taxa"]] ~ species, data = Data[["factors"]], strata = .strata, ...)
 }
 
 species_r2 <- function(adonis_result){
