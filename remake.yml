@@ -45,7 +45,9 @@ targets:
 
   zoops:
     command: clean_zooplankton("raw-data/zoop.txt")
-    
+
+# bacteria
+## three species experiment
   bact_1:
     command: read_clean_bact("raw-data/bacteria/between_species/block1.csv")
         
@@ -61,20 +63,17 @@ targets:
   bact_5:
     command: read_clean_bact("raw-data/bacteria/between_species/block5.csv")
     
-## within spp experiment
+## within sp experiment
   bact_2_within:
     command: read_clean_bact_within("raw-data/bacteria/within_species/bloco2.csv")
     
-  ## within spp experiment
   bact_4_within:
     command: read_clean_bact_within("raw-data/bacteria/within_species/bloco4.csv")
     
-  ## within spp experiment
   bact_5_within:
     command: read_clean_bact_within("raw-data/bacteria/within_species/bloco5.csv")
    
-## store data as a list
-
+## Process bacteria data into a list
   bact_list:
     command: >
       list(bact_1 = bact_1, bact_2 = bact_2, bact_3 = bact_3,
@@ -86,15 +85,15 @@ targets:
            bact_4 = bact_4_within, 
            bact_5 = bact_5_within)
 
+### three species
   bact_df:
-    command: bact_list_to_df(bact_list) # combined bact across all blocks
+    command: bact_list_to_df(bact_list) 
 
+### within species
   bact_df_within:
-    command: bact_list_to_df(bact_list_within) # combined bact across all blocks
+    command: bact_list_to_df(bact_list_within) 
 
-
-## WITH BLOCK setup
-
+## THREE SPECIES
   inverts_tts_ini:
     command: TaxaTimeSelector(inverts, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("initial"))
 
@@ -113,7 +112,7 @@ targets:
   bact_tts_fin:
     command: TaxaTimeSelector(bact_df, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))  
     
-## WITHIN BLOCK 
+## WITHIN SPECIES 
 ### inverts
   inverts_tts_ini_win:
     command: > 
