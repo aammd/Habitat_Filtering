@@ -91,6 +91,22 @@ FilterNABacteriaRows <- function(data) {
   list(factors = newfac, taxa = newtax)
 }
 
+#' Rename Habitat column to species
+#' 
+#' For the within-species experiment this is essential, since "species" differences are basically between habitat.
+#'
+#' @param .bromeliad full bromliad data.frame
+#'
+#' @return a dataframe with "species" as "open" or "closed"
+brom_within <- function(.bromeliad){
+ .bromeliad %>% 
+    select(-species) %>% 
+    rename(species = Habitat) %>% 
+    select(Brom, Block, species)
+}
+
+
+
 ## wrapper that lets us work over a list:
 lapply_maker <- function(f, ...){
   function(x, ...) lapply(x, f, ...)
