@@ -16,9 +16,10 @@
 TaxaTimeSelector <- function(.blocks, 
                              .bromeliad, 
                              .taxa,
-                             sampletime) {
+                             sampletime, 
+                             .experiment = "threespp") {
   which_blocks <- .blocks %>%
-    filter(experiment == "threespp") %>%
+    filter(experiment == .experiment) %>%
     select(Block = block)
   
   which_broms <- .bromeliad %>%
