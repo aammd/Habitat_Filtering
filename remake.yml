@@ -23,7 +23,7 @@ targets:
     depends: 
       - figures/Fig1.png
       - MS/OrgSize.pdf
-      - bact_list_within
+      - inverts_tts_ini_win
 
 ### read in data, including each bacterial file
 
@@ -89,6 +89,9 @@ targets:
   bact_df:
     command: bact_list_to_df(bact_list) # combined bact across all blocks
 
+  bact_df_within:
+    command: bact_list_to_df(bact_list_within) # combined bact across all blocks
+
 
 ## WITH BLOCK setup
 
@@ -110,6 +113,46 @@ targets:
   bact_tts_fin:
     command: TaxaTimeSelector(bact_df, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))  
     
+## WITHIN BLOCK 
+### inverts
+  inverts_tts_ini_win:
+    command: > 
+      TaxaTimeSelector(inverts, .blocks = blocks, 
+      .bromeliad = bromeliad, sampletime = I("initial"),
+      .experiment = I("withinsp"))
+
+  inverts_tts_fin_win:
+    command: > 
+      TaxaTimeSelector(inverts, .blocks = blocks, 
+      .bromeliad = bromeliad, sampletime = I("fin"),
+      .experiment = I("withinsp"))
+
+### zoops    
+  zoops_tts_ini_win:
+    command: > 
+      TaxaTimeSelector(zoops, .blocks = blocks, 
+      .bromeliad = bromeliad, sampletime = I("initial"),
+      .experiment = I("withinsp"))
+
+  zoops_tts_fin_win:
+    command: > 
+      TaxaTimeSelector(zoops, .blocks = blocks, 
+      .bromeliad = bromeliad, sampletime = I("fin"),
+      .experiment = I("withinsp"))
+      
+  ### bacteria
+  bact_tts_ini_win:
+    command: > 
+      TaxaTimeSelector(bact, .blocks = blocks, 
+      .bromeliad = bromeliad, sampletime = I("initial"),
+      .experiment = I("withinsp"))
+
+  bact_tts_fin_win:
+    command: > 
+      TaxaTimeSelector(bact, .blocks = blocks, 
+      .bromeliad = bromeliad, sampletime = I("fin"),
+      .experiment = I("withinsp"))
+
   ### perform permanovas
 
   inverts_adonis_ini:
