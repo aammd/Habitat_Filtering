@@ -118,43 +118,49 @@ targets:
     command: TaxaTimeSelector(bact_df, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))  
     
 ## WITHIN SPECIES 
+
+### first adjust the bromeliad data to rename Habitat to species
+#### in both experiments the "species" column is the taxa of interest
+  bromeliad_win:
+    command: brom_within(bromeliad)
+
 ### inverts
   inverts_tts_win_ini:
     command: > 
       TaxaTimeSelector(inverts, .blocks = blocks, 
-      .bromeliad = bromeliad, sampletime = I("initial"),
+      .bromeliad = bromeliad_win, sampletime = I("initial"),
       .experiment = I("withinsp"))
 
   inverts_tts_win_fin:
     command: > 
       TaxaTimeSelector(inverts, .blocks = blocks, 
-      .bromeliad = bromeliad, sampletime = I("final"),
+      .bromeliad = bromeliad_win, sampletime = I("final"),
       .experiment = I("withinsp"))
 
 ### zoops    
   zoops_tts_win_ini:
     command: > 
       TaxaTimeSelector(zoops, .blocks = blocks, 
-      .bromeliad = bromeliad, sampletime = I("initial"),
+      .bromeliad = bromeliad_win, sampletime = I("initial"),
       .experiment = I("withinsp"))
 
   zoops_tts_win_fin:
     command: > 
       TaxaTimeSelector(zoops, .blocks = blocks, 
-      .bromeliad = bromeliad, sampletime = I("final"),
+      .bromeliad = bromeliad_win, sampletime = I("final"),
       .experiment = I("withinsp"))
       
   ### bacteria
   bact_tts_win_ini:
     command: > 
       TaxaTimeSelector(bact_df, .blocks = blocks, 
-      .bromeliad = bromeliad, sampletime = I("initial"),
+      .bromeliad = bromeliad_win, sampletime = I("initial"),
       .experiment = I("withinsp"))
 
   bact_tts_win_fin:
     command: > 
       TaxaTimeSelector(bact_df, .blocks = blocks, 
-      .bromeliad = bromeliad, sampletime = I("final"),
+      .bromeliad = bromeliad_win, sampletime = I("final"),
       .experiment = I("withinsp"))
 
   ### perform permanovas
