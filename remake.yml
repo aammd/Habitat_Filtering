@@ -128,7 +128,7 @@ targets:
   inverts_tts_win_fin:
     command: > 
       TaxaTimeSelector(inverts, .blocks = blocks, 
-      .bromeliad = bromeliad, sampletime = I("fin"),
+      .bromeliad = bromeliad, sampletime = I("final"),
       .experiment = I("withinsp"))
 
 ### zoops    
@@ -141,7 +141,7 @@ targets:
   zoops_tts_win_fin:
     command: > 
       TaxaTimeSelector(zoops, .blocks = blocks, 
-      .bromeliad = bromeliad, sampletime = I("fin"),
+      .bromeliad = bromeliad, sampletime = I("final"),
       .experiment = I("withinsp"))
       
   ### bacteria
@@ -154,7 +154,7 @@ targets:
   bact_tts_win_fin:
     command: > 
       TaxaTimeSelector(bact_df, .blocks = blocks, 
-      .bromeliad = bromeliad, sampletime = I("fin"),
+      .bromeliad = bromeliad, sampletime = I("final"),
       .experiment = I("withinsp"))
 
   ### perform permanovas
