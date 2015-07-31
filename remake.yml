@@ -24,6 +24,12 @@ targets:
       - figures/Fig1.png
       - MS/OrgSize.pdf
       - inverts_tts_ini_win
+      - inverts_adonis_win_ini
+      - zoops_adonis_win_ini
+      - bact_adonis_win_ini
+      - inverts_adonis_win_fin
+      - zoops_adonis_win_fin
+      - bact_adonis_win_fin
 
 ### read in data, including each bacterial file
 
@@ -114,39 +120,39 @@ targets:
     
 ## WITHIN SPECIES 
 ### inverts
-  inverts_tts_ini_win:
+  inverts_tts_win_ini:
     command: > 
       TaxaTimeSelector(inverts, .blocks = blocks, 
       .bromeliad = bromeliad, sampletime = I("initial"),
       .experiment = I("withinsp"))
 
-  inverts_tts_fin_win:
+  inverts_tts_win_fin:
     command: > 
       TaxaTimeSelector(inverts, .blocks = blocks, 
       .bromeliad = bromeliad, sampletime = I("fin"),
       .experiment = I("withinsp"))
 
 ### zoops    
-  zoops_tts_ini_win:
+  zoops_tts_win_ini:
     command: > 
       TaxaTimeSelector(zoops, .blocks = blocks, 
       .bromeliad = bromeliad, sampletime = I("initial"),
       .experiment = I("withinsp"))
 
-  zoops_tts_fin_win:
+  zoops_tts_win_fin:
     command: > 
       TaxaTimeSelector(zoops, .blocks = blocks, 
       .bromeliad = bromeliad, sampletime = I("fin"),
       .experiment = I("withinsp"))
       
   ### bacteria
-  bact_tts_ini_win:
+  bact_tts_win_ini:
     command: > 
       TaxaTimeSelector(bact, .blocks = blocks, 
       .bromeliad = bromeliad, sampletime = I("initial"),
       .experiment = I("withinsp"))
 
-  bact_tts_fin_win:
+  bact_tts_win_fin:
     command: > 
       TaxaTimeSelector(bact, .blocks = blocks, 
       .bromeliad = bromeliad, sampletime = I("fin"),
@@ -154,6 +160,7 @@ targets:
 
   ### perform permanovas
 
+## THREE SPECIES
   inverts_adonis_ini:
     command: AdonisData(inverts_tts_ini, method = I("euclid"))
 
@@ -171,7 +178,28 @@ targets:
 
   bact_adonis_fin:
     command: AdonisData(bact_tts_fin, method = I("euclid"))
+
+  ## WITHIN SPECIES
     
+  inverts_adonis_win_ini:
+    command: AdonisData(inverts_tts_win_ini, method = I("euclid"))
+
+  zoops_adonis_win_ini:
+    command: AdonisData(zoops_tts_win_ini, method = I("euclid"))
+
+  bact_adonis_win_ini:
+    command: AdonisData(bact_tts_win_ini, method = I("euclid"))
+
+  inverts_adonis_win_fin:
+    command: AdonisData(inverts_tts_win_fin, method = I("euclid"))
+
+  zoops_adonis_win_fin:
+    command: AdonisData(zoops_tts_win_fin, method = I("euclid"))
+
+  bact_adonis_win_fin:
+    command: AdonisData(bact_tts_win_fin, method = I("euclid"))
+
+  ## Figures  
   figures/Fig1.png:
     command: > 
       r2_plot(inverts_adonis_ini, inverts_adonis_fin,
