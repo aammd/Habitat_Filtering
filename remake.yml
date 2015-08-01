@@ -23,12 +23,7 @@ targets:
     depends: 
       - figures/Fig1.png
       - MS/OrgSize.pdf
-      - inverts_adonis_win_ini
-      - zoops_adonis_win_ini
-      - bact_adonis_win_ini
-      - inverts_adonis_win_fin
-      - zoops_adonis_win_fin
-      - bact_adonis_win_fin
+      - figures/Fig2.pdf
 
 ### read in data, including each bacterial file
 
@@ -153,13 +148,13 @@ targets:
   ### bacteria
   bact_tts_win_ini:
     command: > 
-      TaxaTimeSelector(bact_df, .blocks = blocks, 
+      TaxaTimeSelector(bact_df_within, .blocks = blocks, 
       .bromeliad = bromeliad_win, sampletime = I("initial"),
       .experiment = I("withinsp"))
 
   bact_tts_win_fin:
     command: > 
-      TaxaTimeSelector(bact_df, .blocks = blocks, 
+      TaxaTimeSelector(bact_df_within, .blocks = blocks, 
       .bromeliad = bromeliad_win, sampletime = I("final"),
       .experiment = I("withinsp"))
 
@@ -217,6 +212,13 @@ targets:
       r2_plot(inverts_adonis_ini, inverts_adonis_fin,
               zoops_adonis_ini, zoops_adonis_fin,
               bact_adonis_ini, bact_adonis_fin)
+    plot: true
+    
+  figures/Fig2.pdf:
+    command: > 
+      r2_plot(inverts_adonis_win_ini, inverts_adonis_win_fin,
+              zoops_adonis_win_ini, zoops_adonis_win_fin,
+              bact_adonis_win_ini, bact_adonis_win_fin)
     plot: true
 
   MS/SuppMatt.md:
