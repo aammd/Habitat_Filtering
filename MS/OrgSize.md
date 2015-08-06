@@ -17,12 +17,7 @@ bibliography: /home/andrew/Documents/reference/Mendeley_reference_lists/04_OrgSi
 
 # Abstract
 
-At the local scale, species composition of often varies among habitat patches in
-response to differences in environmental variables. These differences act as
-"filters": organisms cannot occur in a habitat patch when their sensitivity to
-local environmental conditions prevents their establishment or persistence.
-However, not all groups of organisms are equally sensitive to the same
-environmental variables. Observational studies have already suggested that
+The species of all groups of organisms respond to their environment, but not all groups respond to the same degree. Observational studies have already suggested that
 larger-bodied species are more strongly filtered by habitat than smaller- bodied
 species. However, this mechanism has never been tested experimentally. In our
 study we placed highly similar aquatic communities (composed of insects,
@@ -76,7 +71,7 @@ allow them the opportunity to evolve to a novel environment more rapidly than
 larger-bodied organisms.
 
 The size-plasticity hypothesis makes a testable prediction about the
-consequences of environmental variation for similar communities: for communities which begin at a simiar species composition will diverge under different environments, but this divergence
+consequences of environmental variation for similar communities: communities which begin at a simiar species composition will diverge under different environments, but this divergence
 will be greatest between larger species and increasingly weak in smaller
 organisms. To test these predictions, we performed a manipulative experiment
 in the same habitat as Farjalla et al. (2012). We studied the same groups of
@@ -89,7 +84,7 @@ zooplankton and absent in bacteria. If instead differences in communities are
 driven by spatial processes we will see no difference in the strength of
 environmental signal across all groups. We made predictions for two sources of environmental variation:
 
-* __Between-species__: Our site contains three bromeliad species with different habitat preferences. We took advantage of this variation to select bromeliads of different species from different habitats. This creates the maximum differences in habitat possible, and is similar to the variation censused by Farjalla et al (2012). In this experiment, "habitat variation" includes variation in the local environment (sun/shade, amount of detritus input) and variation in bromeliad species.`
+* __Between-species__: Our site contains three bromeliad species with different habitat preferences. We took advantage of this variation to select bromeliads of different species from different habitats. This creates the maximum differences in habitat possible, and is similar to the variation observed by Farjalla et al (2012). In this experiment, "habitat variation" includes variation in the local environment (sun/shade, amount of detritus input) and variation in bromeliad species.`
 
 * __Within-species__: One of the bromeliad species used in the between-species experiment is a broad habitat generalist. We conducted a second experiment with this species, testing how local environmental conditions (i.e. shady or exposed) influences community composition, while holding bromeliad species constant.
 
