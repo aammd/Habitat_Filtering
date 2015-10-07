@@ -12,7 +12,7 @@ output:
   word_document:
     reference_docx: formatting/reference.docx
 geometry: margin=1in
-bibliography: /home/andrew/Documents/reference/Mendeley_reference_lists/04_OrgSizeHabitat.bib
+bibliography: references.bib
 ---
 
 # Abstract
