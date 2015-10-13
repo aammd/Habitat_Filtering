@@ -17,6 +17,7 @@ bibliography: /home/andrew/Documents/reference/Mendeley_reference_lists/04_OrgSi
 
 ```{r echo=FALSE}
 fig_nums <- captioner()
+tab_nums <- captioner()
 ```
 
 
@@ -96,7 +97,7 @@ environmental signal across all groups. We made predictions for two sources of e
 
 * __Between-species__: Our site contains three bromeliad species with different habitat preferences. We took advantage of this variation to select bromeliads of different species from different habitats. This creates the maximum differences in habitat possible, and is similar to the variation censused by Farjalla et al (2012). In this experiment, "habitat variation" includes variation in the local environment (sun/shade, amount of detritus input) and variation in bromeliad species.`
 
-* __Within-species__: One of the bromeliad species used in the between-species experiment is a broad habitat generalist. We conducted a second experiment with this species, testing how local environmental conditions (i.e. shady or exposed) influences community composition, while holding bromeliad species constant.
+* __Within-species__: One of the bromeliad species used in the between-species experiment is a broad habitat generalist. We conducted a second experiment with this species, testing how local environmental conditions (i.e. shady or exposed) influence community composition, while holding bromeliad species constant.
 
 In both experiments we expect the amount of environmental signal in different groups to be less in smaller groups (that is, macroinvertebrates > zooplankton > bacteria).  We expect weaker results in the within-species experiment, since the bromeliad species itself is an important source of environmental variation for the organisms which live within.
 
@@ -161,7 +162,7 @@ Macroinvertebrates were identified while live and preserved in ethanol.
 Zooplankton were collected on 50-micron Nytex mesh and fixed in 5% buffered
 formalin. Subsamples were then identified to the lowest
 taxonomic unit possible (species in most cases, except for bdelloid rotifers
-and harpaticoid copepods, left at the level of class and order, respectively).
+and harpaticoid copepods, left at the level of class and order, respectively). 
 We measured bacterial community composition using denaturing gradient gel
 electrophoresis (DGGE; Muyzer et al. 1993). This analysis furnishes an
 approximation of bacterial diversity in the form of Operational Taxonomic
@@ -181,6 +182,23 @@ a greater difference in community composition emerge among the
 macroinvertebrates, less among the zooplankton, and little to none among
 bacteria.
 
+## Tables
+
+```{r echo=FALSE}
+getF <- function(x) sprintf("%.2f", x[["aov.tab"]][["F.Model"]][[1]])
+getP <- function(x) x[["aov.tab"]][["Pr(>F)"]][[1]]
+getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
+```
+
+`r tab_nums("perm_3sp", "Results from PERMAOVAs run on each of the three groups of organisms, both before and after the experiment. Both F-ratios and R^2^ values are higher for inverts than they are for zooplankton or bacteria")`
+|                    |        | F                            | p                            | R^2^                         |
+| -------- | ------------------| ---------|--------- | ---------- |
+| macroinvertebrates | before | `r getF(inverts_adonis_ini)` | `r getP(inverts_adonis_ini)` | `r getR(inverts_adonis_ini)` |
+|                    | after  | `r getF(inverts_adonis_fin)` | `r getP(inverts_adonis_fin)` | `r getR(inverts_adonis_fin)` |
+| zooplankton        | before | `r getF(zoops_adonis_ini)` | `r getP(zoops_adonis_ini)` | `r getR(zoops_adonis_ini)` |
+|                    | after  | `r getF(zoops_adonis_fin)` | `r getP(zoops_adonis_fin)` | `r getR(zoops_adonis_fin)` |
+| bacteria           | before | `r getF(bact_adonis_ini)` | `r getP(bact_adonis_ini)` | `r getR(bact_adonis_ini)` |
+|                    | after  | `r getF(bact_adonis_fin)` | `r getP(bact_adonis_fin)` | `r getR(bact_adonis_fin)`                             |
 
 
 ## Figures
@@ -189,14 +207,19 @@ bacteria.
 `r fig_nums("bw_spp", "The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker")`
 
 
-![fig2](../figures/Fig2.pdf)
-fig_nums("win_sp", "The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker; however this effect is not as extreme as in the model using multiple species.")
-```
-
 
 ## Results  
 
 Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (`r fig_nums("bw_spp")` )
+
+
+results results
+
+We found more signal in insects and zooplankton relative to bacteria. These differences can be seen in 
+
+Can we get an effect size out of the insects relative to the zooplankton and bacteria? we could, instead of using PERMANOVAs with block as a random factor, we could actually just test this effect size metric on animals from large to small with ordinal contrasts. 
+
+Another possibility: is there a convenient way to measure the differences between the initial and final community compositions. 
 
 ## References
 
