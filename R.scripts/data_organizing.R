@@ -27,7 +27,7 @@ TaxaTimeSelector <- function(.blocks,
     select(Brom, Block, species)
   
   which_taxa <- .taxa %>%
-    filter(sampling == sampletime) %>%
+    filter(sampling %in% sampletime) %>%
     rename(Brom = bromeliad)
   
   brom_taxa <- which_taxa %>%
