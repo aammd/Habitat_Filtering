@@ -83,13 +83,15 @@ mds_plotmaker <- function(taxa_mds, env_vars, maintitle){
 }
 
 
-mds_plot_list <- function(answer_list){
-  mds_plotmaker(answer_list[[3]], answer_list[[1]])
+mds_plot_list <- function(answer_list, MT){
+  mds_plotmaker(answer_list[[3]], answer_list[[1]], maintitle = MT)
 }
 
 ## function to go over all elements in a list and do the mds_plot_list thing:
 
 plot_taxa_mds <- function(mds_list){
   par(mfrow = c(2,3))
-  for
+  for (i in names(mds_list)) {
+    mds_plot_list(mds_list[[i]], i)
+  }
 }
