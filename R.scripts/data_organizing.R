@@ -41,11 +41,18 @@ TaxaTimeSelector <- function(.blocks,
     
   
   ###tests could go here
-  brom_taxa %>% 
+  outlist <- brom_taxa %>% 
   {
     list(factors = select(., Block, species, sampling),
          taxa = select(., -Block, -Brom, -species, -sampling))
   }
+  
+  zerocols <- colSums(outlist$taxa) == 0
+  if (any(zerocols)) {
+    message("removing absent taxa")
+    outlist$taxa <- outlist$taxa[,!zerocols]
+  }
+  return(outlist)  
 }
 
 
