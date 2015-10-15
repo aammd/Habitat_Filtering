@@ -63,3 +63,20 @@ invert_mds_augment <- function(invert_list){
   return(invert_list)
 }
 
+zoop_mds_augment <- function(invert_list){
+  set.seed(4812)
+  inverts_mds <- metaMDS(invert_list[[2]],
+                         distance = "euclid", k = 2, trymax = 650)
+  
+  invert_list[[3]] <- inverts_mds
+  return(invert_list)
+}
+
+bact_mds_augment <- function(invert_list){
+  set.seed(4812)
+  inverts_mds <- metaMDS(invert_list[[2]],
+                         distance = "raup", k = 2, trymax = 650)
+  
+  invert_list[[3]] <- inverts_mds
+  return(invert_list)
+}
