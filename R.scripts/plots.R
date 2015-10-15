@@ -5,7 +5,7 @@
 #' @param env_vars the enviro variables from TaxaTimeSelector
 #'
 #' @return a nice plot
-mds_plotmaker <- function(taxa_mds, env_vars){
+mds_plotmaker <- function(taxa_mds, env_vars, maintitle){
   # define colours and shapes
   ## plot with colours for species
   mastercols <- viridis(5)
@@ -16,7 +16,7 @@ mds_plotmaker <- function(taxa_mds, env_vars){
   shapes.vec <- c(initial = 21, final = 22)
   
   ## draw empty plot
-  plot(taxa_mds, display = "sites", type = "n")
+  plot(taxa_mds, display = "sites", type = "n", main = maintitle)
   
   ## define hulls by the combination of species and sampling
   env_vars %<>%
@@ -85,4 +85,11 @@ mds_plotmaker <- function(taxa_mds, env_vars){
 
 mds_plot_list <- function(answer_list){
   mds_plotmaker(answer_list[[3]], answer_list[[1]])
+}
+
+## function to go over all elements in a list and do the mds_plot_list thing:
+
+plot_taxa_mds <- function(mds_list){
+  par(mfrow = c(2,3))
+  for
 }
