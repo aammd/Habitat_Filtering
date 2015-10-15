@@ -33,17 +33,17 @@ TaxaTimeSelector <- function(.blocks,
   brom_taxa <- which_taxa %>%
     filter(Spp != "none") %>%
     spread(Spp, abundance, fill = 0) %>% 
-    left_join(which_broms, .) %>% 
-    mutate(sampling = sampletime)# %>% ## cheating! NAs introduced in this factor are removed
-    ## now only need to remove the NA values! could just get a vector of their names and na to 0
-    
+    left_join(which_broms, .)
+  
+
+  
   brom_taxa[is.na(brom_taxa)] <- 0
     
   
   ###tests could go here
   brom_taxa %>% 
   {
-    list(factors = select(., Block, species),
+    list(factors = select(., Block, species, sampling),
          taxa = select(., -Block, -Brom, -species, -sampling))
   }
 }
@@ -174,3 +174,7 @@ TaxaTimeSelector_split <- function(.blocks,
 }
 
 lapply_splitter <- lapply_maker(TaxaTimeSelector_split)
+
+filter_block <- function(.blocks, bk) {
+  dplyr::filter(.blocks, block == bk)
+}
