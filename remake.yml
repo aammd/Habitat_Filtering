@@ -11,6 +11,9 @@ packages:
   - vegan
   - pryr
   - rmarkdown
+  - captioner
+  - ibuttonr
+  - viridis
 
 sources:
   - R.scripts/results.R
@@ -24,6 +27,12 @@ targets:
       - figures/Fig1.png
       - MS/OrgSize.pdf
       - figures/Fig2.pdf
+      - testtab.pdf
+      - inverts_ini_fin_Baker_mds
+      - inverts_ini_fin_Davidson_mds
+      - inverts_ini_fin_Eccleson_mds
+      - inverts_ini_fin_Tennant_mds
+      - inverts_ini_fin_Smith_mds
 
 ### read in data, including each bacterial file
 
@@ -230,8 +239,89 @@ targets:
       - zoops_adonis_fin
       - bact_adonis_fin
     knitr: true
+
+  MS/OrgSize.md:
+    depends:
+      - inverts_adonis_ini
+      - zoops_adonis_ini
+      - bact_adonis_ini
+      - inverts_adonis_fin
+      - zoops_adonis_fin
+      - bact_adonis_fin
+    knitr: true
     
   MS/OrgSize.pdf:
     depends:
       - figures/Fig1.pdf
     command: render("MS/OrgSize.md")
+    
+## supp matt figs
+
+  ### get blocks
+  blocks_Bacer:
+    command: filter_block(blocks, I("Baker"))
+    
+    ### get blocks
+  blocks_Davidson:
+    command: filter_block(blocks, I("Davidson"))
+    ### get blocks
+
+  blocks_Eccleson:
+    command: filter_block(blocks, I("Eccleson"))
+    ### get blocks
+
+  blocks_Tennant:
+    command: filter_block(blocks, I("Tennant"))
+    ### get blocks
+
+  blocks_Smith:
+    command: filter_block(blocks, I("Smith"))
+    
+    
+  ## subset inverts
+
+  inverts_ini_fin_Baker:
+    command: TaxaTimeSelector(inverts,
+                                  .blocks = blocks_Bacer,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                      I("final"))))
+
+  inverts_ini_fin_Davidson:
+    command: TaxaTimeSelector(inverts,
+                                  .blocks = blocks_Davidson,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  inverts_ini_fin_Eccleson:
+    command: TaxaTimeSelector(inverts,
+                                  .blocks = blocks_Eccleson,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  inverts_ini_fin_Tennant:
+    command: TaxaTimeSelector(inverts,
+                                  .blocks = blocks_Tennant,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  inverts_ini_fin_Smith:
+    command: TaxaTimeSelector(inverts,
+                                  .blocks = blocks_Smith,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  inverts_ini_fin_Baker_mds:
+    command: invert_mds_augment(inverts_ini_fin_Baker)
+  inverts_ini_fin_Davidson_mds:
+    command: invert_mds_augment(inverts_ini_fin_Davidson)
+  inverts_ini_fin_Eccleson_mds:
+    command: invert_mds_augment(inverts_ini_fin_Eccleson)
+  inverts_ini_fin_Tennant_mds:
+    command: invert_mds_augment(inverts_ini_fin_Tennant)
+  inverts_ini_fin_Smith_mds:
+    command: invert_mds_augment(inverts_ini_fin_Smith)
