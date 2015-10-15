@@ -21,6 +21,7 @@ sources:
   - R.scripts/data_organizing.R
   - R.scripts/run_analyses.R
   - R.scripts/plots.R
+  - R.scripts/test_disperson
   
 targets:
   all:
@@ -28,10 +29,10 @@ targets:
       - figures/Fig1.png
       - MS/OrgSize.pdf
       - figures/Fig2.pdf
-      - testtab.pdf
-      - inverts.pdf
-      - zoop.pdf
-      - bact.pdf
+      - figures/inverts.pdf
+      - figures/zoop.pdf
+      - figures/bact.pdf
+      - disper_list
 
 ### read in data, including each bacterial file
 
@@ -339,7 +340,7 @@ targets:
            Tennant = inverts_ini_fin_Tennant_mds,
            Smith = inverts_ini_fin_Smith_mds)
   
-  inverts.pdf:
+  figures/inverts.pdf:
     plot: true
     command: plot_taxa_mds(invert_mds_list)
 
@@ -405,7 +406,7 @@ targets:
            Tennant = zoops_ini_fin_Tennant_mds,
            Smith = zoops_ini_fin_Smith_mds)
   
-  zoop.pdf:
+  figures/zoop.pdf:
     plot: true
     command: plot_taxa_mds(zoop_mds_list)
 
@@ -471,6 +472,57 @@ targets:
            Tennant = bact_ini_fin_Tennant_mds,
            Smith = bact_ini_fin_Smith_mds)
   
-  bact.pdf:
+  figures/bact.pdf:
     plot: true
     command: plot_taxa_mds(bact_mds_list)
+
+  inverts_ini_fin_Baker_disp:
+    command: make_betadisp(inverts_ini_fin_Baker)
+  inverts_ini_fin_Davidson_disp:
+    command: make_betadisp(inverts_ini_fin_Davidson)
+  inverts_ini_fin_Eccleson_disp:
+    command: make_betadisp(inverts_ini_fin_Eccleson)
+  inverts_ini_fin_Tennant_disp:
+    command: make_betadisp(inverts_ini_fin_Tennant)
+  inverts_ini_fin_Smith_disp:
+    command: make_betadisp(inverts_ini_fin_Smith)
+  zoops_ini_fin_Baker_disp:
+    command: make_betadisp(zoops_ini_fin_Baker)
+  zoops_ini_fin_Davidson_disp:
+    command: make_betadisp(zoops_ini_fin_Davidson)
+  zoops_ini_fin_Eccleson_disp:
+    command: make_betadisp(zoops_ini_fin_Eccleson)
+  zoops_ini_fin_Tennant_disp:
+    command: make_betadisp(zoops_ini_fin_Tennant)
+  zoops_ini_fin_Smith_disp:
+    command: make_betadisp(zoops_ini_fin_Smith)
+  bact_ini_fin_Baker_disp:
+    command: make_betadisp(bact_ini_fin_Baker)
+  bact_ini_fin_Davidson_disp:
+    command: make_betadisp(bact_ini_fin_Davidson)
+  bact_ini_fin_Eccleson_disp:
+    command: make_betadisp(bact_ini_fin_Eccleson)
+  bact_ini_fin_Tennant_disp:
+    command: make_betadisp(bact_ini_fin_Tennant)
+  bact_ini_fin_Smith_disp:
+    command: make_betadisp(bact_ini_fin_Smith)  
+
+  disper_list:
+    command: >
+    list(
+      inverts_Baker = inverts_ini_fin_Baker_disp,
+      inverts_Davidson = inverts_ini_fin_Davidson_disp,
+      inverts_Eccleson = inverts_ini_fin_Eccleson_disp,
+      inverts_Tennant = inverts_ini_fin_Tennant_disp,
+      inverts_Smith = inverts_ini_fin_Smith_disp,
+      zoops_Baker = zoops_ini_fin_Baker_disp,
+      zoops_Davidson = zoops_ini_fin_Davidson_disp,
+      zoops_Eccleson = zoops_ini_fin_Eccleson_disp,
+      zoops_Tennant = zoops_ini_fin_Tennant_disp,
+      zoops_Smith = zoops_ini_fin_Smith_disp,
+      bact_Baker = bact_ini_fin_Baker_disp,
+      bact_Davidson = bact_ini_fin_Davidson_disp,
+      bact_Eccleson = bact_ini_fin_Eccleson_disp,
+      bact_Tennant = bact_ini_fin_Tennant_disp,
+      bact_Smith = bact_ini_fin_Smith_disp
+        )
