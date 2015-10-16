@@ -12,7 +12,8 @@ output:
   word_document:
     reference_docx: formatting/reference.docx
 geometry: margin=1in
-bibliography: /home/andrew/Documents/reference/Mendeley_reference_lists/04_OrgSizeHabitat.bib
+bibliography: orgsize.bib
+csl: formatting/the-american-naturalist.csl
 ---
 
 ```{r echo=FALSE}
@@ -191,6 +192,7 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 ```
 
 `r tab_nums("perm_3sp", "Results from PERMAOVAs run on each of the three groups of organisms, both before and after the experiment. Both F-ratios and R^2^ values are higher for inverts than they are for zooplankton or bacteria")`
+
 |                    |        | F                            | p                            | R^2^                         |
 | -------- | ------------------| ---------|--------- | ---------- |
 | macroinvertebrates | before | `r getF(inverts_adonis_ini)` | `r getP(inverts_adonis_ini)` | `r getR(inverts_adonis_ini)` |
@@ -203,23 +205,35 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 
 ## Figures
 
-![fig1](../figures/Fig1.pdf)
+![disp](../figures/plot_disp_taxa.pdf)
+`r fig_nums("disp", "behold the figure of dispersion")`
+
+![between](../figures/Fig1.pdf)
 `r fig_nums("bw_spp", "The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker")`
 
-
+![within](../figures/Fig2.pdf)
+`r fig_nums("ftwo", "this would seem to be figure 2")`
 
 ## Results  
 
 Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (`r fig_nums("bw_spp")` )
 
 
-results results
-
 We found more signal in insects and zooplankton relative to bacteria. These differences can be seen in 
 
 Can we get an effect size out of the insects relative to the zooplankton and bacteria? we could, instead of using PERMANOVAs with block as a random factor, we could actually just test this effect size metric on animals from large to small with ordinal contrasts. 
 
 Another possibility: is there a convenient way to measure the differences between the initial and final community compositions. 
+
+## Discussion
+
+We did discover different amounts of environmental signal ithe different groups -- more in invertebrates and zooplankton than in bacteria. In the direction that we expected, based on the size-sensitivity hypothesis. We found support for these same patterns when we examined individual species responses -- more species of insects showed a change in response to environmental variation than did zooplankton. No bacteria OTU ever showed a predictable difference between before and after. Just as Farjalla et al predicted, the strength of environmental fitlering is in negative proportion to body size. Over the same time interval, insects and zooplankton developed more of a response to the environment than did bacteria. 
+
+The difference between insects and zooplankton was not as great as we expected it would be. that was probably because we were missing the active vs passive differences. Insect females choose where to place their eggs, evalutating resources and predation risk (citecitecite). On the other hand, the macroinvertebrate taxa that did respond are also the more abundant taxa; it may be that we only had the ability to detect patterns for these taxa. Both of these issues at once (should we do permanova on mortality?). Both size does predict some of the variation in response to the environment. Since active dispersers are also larger, there is then a relationship between that life history and body size -- larger animals are more likely to disperse actively. It may be that those groups show a response in that direction as well. 
+
+In conclusion, here we have shown that a hypothesis made by variance partitioning and by observations, can be supported by a manipulative experiment and a different statistical approach. that, I guess, is probably good news for variance partitioning methods, which have come under a lot of criticism lately. iN our experiment we removed the variation in community composition between habitats, and were essentially able to watch the recovery of beta diversity in our system. Measured as both turnover and dispersion, in that test I haven't even done yet. 
+
+In other words our experiment has not only confirmed some aspects of the body size habitat senstivity experiment, but also investigated the rate at which beta diversity is recovered for these different groups. p 
 
 ## References
 
