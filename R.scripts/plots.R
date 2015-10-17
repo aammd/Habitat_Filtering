@@ -95,3 +95,32 @@ plot_taxa_mds <- function(mds_list){
     mds_plot_list(mds_list[[i]], i)
   }
 }
+
+one_one_plot <- function(.disp_diffs){
+  # ## plot on 1:1 line
+  .disp_diffs %>% 
+    ggplot(aes(x = initial, y = final, colour = taxa)) +
+    geom_point(size = 2) +
+    #scale_y_log10() + scale_x_log10() 
+    geom_abline(intercept = 0, slope = 1)
+  ## could be extended with geom_errorbar and geom_errorbarh
+}
+
+
+## helper function to make data long
+disp_to_long <- function(.disp_diffs){
+  .disp_diffs %>% 
+    gather("timing", "value", initial:final)%>% 
+    mutate(taxa = ordered(taxa,
+                          levels = c("inverts", 
+                                     "zoops",
+                                     "bact")))
+}
+
+
+plot_disp_taxa <- function(.disp_difs_long){
+  .disp_difs_long %>% 
+    ggplot(aes(x = timing, y = value)) +
+    geom_point() + 
+    facet_wrap(~taxa)
+}
