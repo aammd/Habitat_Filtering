@@ -18,7 +18,7 @@ csl: formatting/the-american-naturalist.csl
 
 ```{r echo=FALSE}
 fig_nums <- captioner()
-tab_nums <- captioner()
+tab_nums <- captioner(prefix = "Table")
 ```
 
 
@@ -54,7 +54,7 @@ approach of partitioning variance in community composition into variation
 correlated with space, with environmental distance, or with their interaction.
 These studies have returned mixed results for different groups of organisms
 and systems (Cottenie). One reason for these mixed results is the very different qualities of habitats compared or groups of organisms compared. In one of the first studies across different groups of
-organisms in the same community, Farjalla et al (2012) demonstrated that body
+organisms in the same community, Farjalla et al. [-@Farjalla2012] demonstrated that body
 size is a key trait determining environmental signal in community composition.
 They found that groups of organisms which are physically larger show a greater degree of
 habitat filtering: there is weaker environmental structure as body size
@@ -74,7 +74,7 @@ similarity between patches even when their environments favour different
 community compositions. Increased plasticity, on the other hand, occurs when
 smaller-bodied species have broader fundamental niches than larger-bodied
 species in the same community. This is the "size-plasticity" hypothesis of
-Farjalla et al (2012). Bacteria and other small organisms are broadly
+Farjalla et al  [-@Farjalla2012]. Bacteria and other small organisms are broadly
 generalist in their ability to consume carbon sources and persist in different
 climates (Finlay 2002) and are less constrained by the complex physiological
 pathways possessed by larger metazoans. Additionally, smaller-bodied organisms
@@ -86,7 +86,7 @@ The size-plasticity hypothesis makes a testable prediction about the
 consequences of environmental variation for similar communities: for communities which begin at a simiar species composition will diverge under different environments, but this divergence
 will be greatest between larger species and increasingly weak in smaller
 organisms. To test these predictions, we performed a manipulative experiment
-in the same habitat as Farjalla et al. (2012). We studied the same groups of
+in the same habitat as Farjalla et al.  [-@Farjalla2012]. We studied the same groups of
 organisms (insects, zooplankton and bacteria) in the same patchy, highly
 variable habitat (three species of tank bromeliads). We created communities
 that were as similar as possible in composition, then exposed these
@@ -111,7 +111,7 @@ species from different habitats ("between-species"), while the second
 contrasted the same bromeliad species from different habitats ("within-
 species"). We focused on three bromeliad species from three
 contrasting habitats; these species and habitats are identical to those surveyed
-by Farjalla et al. (2010). Each bromeliad species was collected from its typical
+by Farjalla et al.  [-@Farjalla2012]. Each bromeliad species was collected from its typical
 habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
 (partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat range at this site, occuring in both full shade and full sun. This large habitat range enabled us to conduct a second, within-species experiment.  This second experiment compared _Neoregelia_ communities
 between full sun and deep shade.
@@ -168,7 +168,7 @@ We measured bacterial community composition using denaturing gradient gel
 electrophoresis (DGGE; Muyzer et al. 1993). This analysis furnishes an
 approximation of bacterial diversity in the form of Operational Taxonomic
 Units (OTUs). We based these collection methods as closely as possible upon
-previous observational work, to facilitate a direct comparison (Farjalla et al. 2010).
+previous observational work, to facilitate a direct comparison  [@Farjalla2012].
 
 ### Analyses
 
