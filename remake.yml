@@ -14,6 +14,7 @@ packages:
   - captioner
   - ibuttonr
   - viridis
+  - stargazer
 
 sources:
   - R.scripts/results.R
@@ -21,7 +22,7 @@ sources:
   - R.scripts/data_organizing.R
   - R.scripts/run_analyses.R
   - R.scripts/plots.R
-  - R.scripts/test_disperson
+  - R.scripts/test_disperson.R
   
 targets:
   all:
@@ -29,10 +30,8 @@ targets:
       - figures/Fig1.png
       - MS/OrgSize.pdf
       - figures/Fig2.pdf
-      - figures/inverts.pdf
-      - figures/zoop.pdf
-      - figures/bact.pdf
-      - disper_list
+      - disp_diffs
+      - MS/SuppMatt.pdf
 
 ### read in data, including each bacterial file
 
@@ -230,31 +229,6 @@ targets:
               bact_adonis_win_ini, bact_adonis_win_fin)
     plot: true
 
-  MS/SuppMatt.md:
-    depends:
-      - inverts_adonis_ini
-      - zoops_adonis_ini
-      - bact_adonis_ini
-      - inverts_adonis_fin
-      - zoops_adonis_fin
-      - bact_adonis_fin
-    knitr: true
-
-  MS/OrgSize.md:
-    depends:
-      - inverts_adonis_ini
-      - zoops_adonis_ini
-      - bact_adonis_ini
-      - inverts_adonis_fin
-      - zoops_adonis_fin
-      - bact_adonis_fin
-    knitr: true
-    
-  MS/OrgSize.pdf:
-    depends:
-      - figures/Fig1.pdf
-    command: render("MS/OrgSize.md")
-    
 ## supp matt figs
 
   ### get blocks
@@ -477,52 +451,106 @@ targets:
     command: plot_taxa_mds(bact_mds_list)
 
   inverts_ini_fin_Baker_disp:
-    command: make_betadisp(inverts_ini_fin_Baker)
+    command: make_betadisp(inverts_ini_fin_Baker, I("raup"))
   inverts_ini_fin_Davidson_disp:
-    command: make_betadisp(inverts_ini_fin_Davidson)
+    command: make_betadisp(inverts_ini_fin_Davidson, I("raup"))
   inverts_ini_fin_Eccleson_disp:
-    command: make_betadisp(inverts_ini_fin_Eccleson)
+    command: make_betadisp(inverts_ini_fin_Eccleson, I("raup"))
   inverts_ini_fin_Tennant_disp:
-    command: make_betadisp(inverts_ini_fin_Tennant)
+    command: make_betadisp(inverts_ini_fin_Tennant, I("raup"))
   inverts_ini_fin_Smith_disp:
-    command: make_betadisp(inverts_ini_fin_Smith)
+    command: make_betadisp(inverts_ini_fin_Smith, I("raup"))
   zoops_ini_fin_Baker_disp:
-    command: make_betadisp(zoops_ini_fin_Baker)
+    command: make_betadisp(zoops_ini_fin_Baker, I("raup"))
   zoops_ini_fin_Davidson_disp:
-    command: make_betadisp(zoops_ini_fin_Davidson)
+    command: make_betadisp(zoops_ini_fin_Davidson, I("raup"))
   zoops_ini_fin_Eccleson_disp:
-    command: make_betadisp(zoops_ini_fin_Eccleson)
+    command: make_betadisp(zoops_ini_fin_Eccleson, I("raup"))
   zoops_ini_fin_Tennant_disp:
-    command: make_betadisp(zoops_ini_fin_Tennant)
+    command: make_betadisp(zoops_ini_fin_Tennant, I("raup"))
   zoops_ini_fin_Smith_disp:
-    command: make_betadisp(zoops_ini_fin_Smith)
+    command: make_betadisp(zoops_ini_fin_Smith, I("raup"))
   bact_ini_fin_Baker_disp:
-    command: make_betadisp(bact_ini_fin_Baker)
+    command: make_betadisp(bact_ini_fin_Baker, I("raup"))
   bact_ini_fin_Davidson_disp:
-    command: make_betadisp(bact_ini_fin_Davidson)
+    command: make_betadisp(bact_ini_fin_Davidson, I("raup"))
   bact_ini_fin_Eccleson_disp:
-    command: make_betadisp(bact_ini_fin_Eccleson)
+    command: make_betadisp(bact_ini_fin_Eccleson, I("raup"))
   bact_ini_fin_Tennant_disp:
-    command: make_betadisp(bact_ini_fin_Tennant)
+    command: make_betadisp(bact_ini_fin_Tennant, I("raup"))
   bact_ini_fin_Smith_disp:
-    command: make_betadisp(bact_ini_fin_Smith)  
+    command: make_betadisp(bact_ini_fin_Smith, I("raup")  )
 
   disper_list:
     command: >
-    list(
-      inverts_Baker = inverts_ini_fin_Baker_disp,
-      inverts_Davidson = inverts_ini_fin_Davidson_disp,
-      inverts_Eccleson = inverts_ini_fin_Eccleson_disp,
-      inverts_Tennant = inverts_ini_fin_Tennant_disp,
-      inverts_Smith = inverts_ini_fin_Smith_disp,
-      zoops_Baker = zoops_ini_fin_Baker_disp,
-      zoops_Davidson = zoops_ini_fin_Davidson_disp,
-      zoops_Eccleson = zoops_ini_fin_Eccleson_disp,
-      zoops_Tennant = zoops_ini_fin_Tennant_disp,
-      zoops_Smith = zoops_ini_fin_Smith_disp,
-      bact_Baker = bact_ini_fin_Baker_disp,
-      bact_Davidson = bact_ini_fin_Davidson_disp,
-      bact_Eccleson = bact_ini_fin_Eccleson_disp,
-      bact_Tennant = bact_ini_fin_Tennant_disp,
-      bact_Smith = bact_ini_fin_Smith_disp
+      list(
+            inverts_Baker = inverts_ini_fin_Baker_disp,
+            inverts_Davidson = inverts_ini_fin_Davidson_disp,
+            inverts_Eccleson = inverts_ini_fin_Eccleson_disp,
+            inverts_Tennant = inverts_ini_fin_Tennant_disp,
+            inverts_Smith = inverts_ini_fin_Smith_disp,
+            zoops_Baker = zoops_ini_fin_Baker_disp,
+            zoops_Davidson = zoops_ini_fin_Davidson_disp,
+            zoops_Eccleson = zoops_ini_fin_Eccleson_disp,
+            zoops_Tennant = zoops_ini_fin_Tennant_disp,
+            zoops_Smith = zoops_ini_fin_Smith_disp,
+            bact_Baker = bact_ini_fin_Baker_disp,
+            bact_Davidson = bact_ini_fin_Davidson_disp,
+            bact_Eccleson = bact_ini_fin_Eccleson_disp,
+            bact_Tennant = bact_ini_fin_Tennant_disp,
+            bact_Smith = bact_ini_fin_Smith_disp
         )
+
+  disp_diffs:
+    command: get_mean_disps(displist = disper_list)
+
+### figures
+  figures/one_one_plot.pdf:
+    plot: true
+    command: one_one_plot(disp_diffs)
+
+  disp_difs_long:
+    command: disp_to_long(disp_diffs)
+    
+  figures/plot_disp_taxa.pdf:
+    plot: true
+    command: plot_disp_taxa(disp_difs_long)
+
+### DOCUMENTS
+
+  MS/SuppMatt.md:
+    depends:
+      - inverts_adonis_ini
+      - zoops_adonis_ini
+      - bact_adonis_ini
+      - inverts_adonis_fin
+      - zoops_adonis_fin
+      - bact_adonis_fin
+      - disper_list
+      - disp_difs_long 
+    knitr: true
+    
+  MS/SuppMatt.pdf:
+    depends:
+      - figures/inverts.pdf
+      - figures/zoop.pdf
+      - figures/bact.pdf
+      - figures/one_one_plot.pdf
+    command: render("MS/SuppMatt.md", output_format = I("pdf_document"))
+
+  MS/OrgSize.md:
+    depends:
+      - inverts_adonis_ini
+      - zoops_adonis_ini
+      - bact_adonis_ini
+      - inverts_adonis_fin
+      - zoops_adonis_fin
+      - bact_adonis_fin
+    knitr: true
+    
+  MS/OrgSize.pdf:
+    depends:
+      - figures/Fig1.pdf
+      - figures/Fig2.pdf
+      - figures/plot_disp_taxa.pdf
+    command: render("MS/OrgSize.md")
