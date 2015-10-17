@@ -28,9 +28,9 @@ manyglm_anova <- function(manyglm_output){
   anova(manyglm_output, resamp="perm.resid", p.uni="adjusted", show.time="all")
 }
   
-
+get_model_stats <- function(anova_output){
   
-  insect_statistic <- insect_interact_anova %>%
+  insect_statistic <- anova_output %>%
     extract2("uni.test") %>% 
     t %>% 
     data.frame %>% 
@@ -40,7 +40,7 @@ manyglm_anova <- function(manyglm_output){
     l(df -> data.frame(spp=rownames(df),df)) %>%
     set_rownames(NULL)
   
-  insect_sig <- insect_interact_anova %>%
+  insect_sig <- anova_output %>%
     extract2("uni.p") %>%
     t %>% 
     data.frame %>% 
@@ -50,8 +50,5 @@ manyglm_anova <- function(manyglm_output){
     l(df -> data.frame(spp=rownames(df),df)) %>%
     set_rownames(NULL)
   
-  list(plotting_data = left_join(insect_sig, insect_statistic),
-       manyglm_summary = insect_interact_summary,
-       manyglm_anova = insect_interact_anova,
-       manyglm = insect_glm_interact)
+  left_join(insect_sig, insect_statistic)
 }
