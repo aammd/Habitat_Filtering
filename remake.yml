@@ -23,6 +23,7 @@ sources:
   - R.scripts/run_analyses.R
   - R.scripts/plots.R
   - R.scripts/test_disperson.R
+  - R.scripts/run_manyglm.R
   
 targets:
   all:
