@@ -12,8 +12,12 @@ output:
   word_document:
     reference_docx: formatting/reference.docx
 geometry: margin=1in
-bibliography: /home/andrew/Documents/reference/Mendeley_reference_lists/04_OrgSizeHabitat.bib
+bibliography: orgsize.bib
+csl: formatting/the-american-naturalist.csl
 ---
+
+
+
 
 # Abstract
 
@@ -47,7 +51,7 @@ approach of partitioning variance in community composition into variation
 correlated with space, with environmental distance, or with their interaction.
 These studies have returned mixed results for different groups of organisms
 and systems (Cottenie). One reason for these mixed results is the very different qualities of habitats compared or groups of organisms compared. In one of the first studies across different groups of
-organisms in the same community, Farjalla et al (2012) demonstrated that body
+organisms in the same community, Farjalla et al. [-@Farjalla2012] demonstrated that body
 size is a key trait determining environmental signal in community composition.
 They found that groups of organisms which are physically larger show a greater degree of
 habitat filtering: there is weaker environmental structure as body size
@@ -67,7 +71,7 @@ similarity between patches even when their environments favour different
 community compositions. Increased plasticity, on the other hand, occurs when
 smaller-bodied species have broader fundamental niches than larger-bodied
 species in the same community. This is the "size-plasticity" hypothesis of
-Farjalla et al (2012). Bacteria and other small organisms are broadly
+Farjalla et al  [-@Farjalla2012]. Bacteria and other small organisms are broadly
 generalist in their ability to consume carbon sources and persist in different
 climates (Finlay 2002) and are less constrained by the complex physiological
 pathways possessed by larger metazoans. Additionally, smaller-bodied organisms
@@ -79,7 +83,7 @@ The size-plasticity hypothesis makes a testable prediction about the
 consequences of environmental variation for similar communities: for communities which begin at a simiar species composition will diverge under different environments, but this divergence
 will be greatest between larger species and increasingly weak in smaller
 organisms. To test these predictions, we performed a manipulative experiment
-in the same habitat as Farjalla et al. (2012). We studied the same groups of
+in the same habitat as Farjalla et al.  [-@Farjalla2012]. We studied the same groups of
 organisms (insects, zooplankton and bacteria) in the same patchy, highly
 variable habitat (three species of tank bromeliads). We created communities
 that were as similar as possible in composition, then exposed these
@@ -91,7 +95,7 @@ environmental signal across all groups. We made predictions for two sources of e
 
 * __Between-species__: Our site contains three bromeliad species with different habitat preferences. We took advantage of this variation to select bromeliads of different species from different habitats. This creates the maximum differences in habitat possible, and is similar to the variation censused by Farjalla et al (2012). In this experiment, "habitat variation" includes variation in the local environment (sun/shade, amount of detritus input) and variation in bromeliad species.`
 
-* __Within-species__: One of the bromeliad species used in the between-species experiment is a broad habitat generalist. We conducted a second experiment with this species, testing how local environmental conditions (i.e. shady or exposed) influences community composition, while holding bromeliad species constant.
+* __Within-species__: One of the bromeliad species used in the between-species experiment is a broad habitat generalist. We conducted a second experiment with this species, testing how local environmental conditions (i.e. shady or exposed) influence community composition, while holding bromeliad species constant.
 
 In both experiments we expect the amount of environmental signal in different groups to be less in smaller groups (that is, macroinvertebrates > zooplankton > bacteria).  We expect weaker results in the within-species experiment, since the bromeliad species itself is an important source of environmental variation for the organisms which live within.
 
@@ -104,7 +108,7 @@ species from different habitats ("between-species"), while the second
 contrasted the same bromeliad species from different habitats ("within-
 species"). We focused on three bromeliad species from three
 contrasting habitats; these species and habitats are identical to those surveyed
-by Farjalla et al. (2010). Each bromeliad species was collected from its typical
+by Farjalla et al.  [-@Farjalla2012]. Each bromeliad species was collected from its typical
 habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
 (partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat range at this site, occuring in both full shade and full sun. This large habitat range enabled us to conduct a second, within-species experiment.  This second experiment compared _Neoregelia_ communities
 between full sun and deep shade.
@@ -130,16 +134,16 @@ collected three bromeliads from open habitats and three from closed habitats.  I
 experiments, all bromeliads in a block were stocked with a nearly identical
 starting community, intermediate between that of all six bromeliads in that
 block. We made these starting communities by sampling, then combining, each of
-three major groups: macroinvertebrates, zooplankton and bacteria.  
+three major groups: macroinvertebrates, zooplankton and bacteria. 
 
 We sampled macroinvertebrates by thoroughly rinsing each bromeliad and passing
 the water through 1mm and 180μm mesh to collect aquatic macroinvertebrates.  We
 identified these animals to morphospecies, then divided them equally among the
-six bromeliads in the block.  
+six bromeliads in the block. 
 
 We sampled the starting zooplankton and bacteria communities by mixing an equal
 volume of filtered tank water from each plant (approximately 100ml plant^-1^),
-returning the same volumes to all bromeliads.  
+returning the same volumes to all bromeliads. 
 
 We emptied bromeliads by hanging them upside down to dry for at least 24 hours
 and then rinsing each plant with 70% ethanol. Any coarse detritus found in the
@@ -156,12 +160,12 @@ Macroinvertebrates were identified while live and preserved in ethanol.
 Zooplankton were collected on 50-micron Nytex mesh and fixed in 5% buffered
 formalin. Subsamples were then identified to the lowest
 taxonomic unit possible (species in most cases, except for bdelloid rotifers
-and harpaticoid copepods, left at the level of class and order, respectively).
+and harpaticoid copepods, left at the level of class and order, respectively). 
 We measured bacterial community composition using denaturing gradient gel
 electrophoresis (DGGE; Muyzer et al. 1993). This analysis furnishes an
 approximation of bacterial diversity in the form of Operational Taxonomic
 Units (OTUs). We based these collection methods as closely as possible upon
-previous observational work, to facilitate a direct comparison (Farjalla et al. 2010).
+previous observational work, to facilitate a direct comparison  [@Farjalla2012].
 
 ### Analyses
 
@@ -176,9 +180,53 @@ a greater difference in community composition emerge among the
 macroinvertebrates, less among the zooplankton, and little to none among
 bacteria.
 
+## Tables
+
+
+
+Table  1: Results from PERMAOVAs run on each of the three groups of organisms, both before and after the experiment. Both F-ratios and R^2^ values are higher for inverts than they are for zooplankton or bacteria
+
+|                    |        | F                            | p                            | R^2^                         |
+| -------- | ------------------| ---------|--------- | ---------- |
+| macroinvertebrates | before | 7.03 | 0.001 | 0.34 |
+|                    | after  | 6.42 | 0.002 | 0.32 |
+| zooplankton        | before | 2.58 | 0.004 | 0.16 |
+|                    | after  | 1.73 | 0.131 | 0.11 |
+| bacteria           | before | 0.69 | 0.096 | 0.05 |
+|                    | after  | 0.63 | 0.016 | 0.04                             |
+
+
+## Figures
+
+![disp](../figures/plot_disp_taxa.pdf)
+Figure  1: behold the figure of dispersion
+
+![between](../figures/Fig1.pdf)
+Figure  2: The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker
+
+![within](../figures/Fig2.pdf)
+Figure  3: this would seem to be figure 2
+
 ## Results  
 
-![fig1](../figures/Fig1.pdf)
+Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (Figure  2: The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker )
+
+
+We found more signal in insects and zooplankton relative to bacteria. These differences can be seen in 
+
+Can we get an effect size out of the insects relative to the zooplankton and bacteria? we could, instead of using PERMANOVAs with block as a random factor, we could actually just test this effect size metric on animals from large to small with ordinal contrasts. 
+
+Another possibility: is there a convenient way to measure the differences between the initial and final community compositions. 
+
+## Discussion
+
+We did discover different amounts of environmental signal ithe different groups -- more in invertebrates and zooplankton than in bacteria. In the direction that we expected, based on the size-sensitivity hypothesis. We found support for these same patterns when we examined individual species responses -- more species of insects showed a change in response to environmental variation than did zooplankton. No bacteria OTU ever showed a predictable difference between before and after. Just as Farjalla et al predicted, the strength of environmental fitlering is in negative proportion to body size. Over the same time interval, insects and zooplankton developed more of a response to the environment than did bacteria. 
+
+The difference between insects and zooplankton was not as great as we expected it would be. that was probably because we were missing the active vs passive differences. Insect females choose where to place their eggs, evalutating resources and predation risk (citecitecite). On the other hand, the macroinvertebrate taxa that did respond are also the more abundant taxa; it may be that we only had the ability to detect patterns for these taxa. Both of these issues at once (should we do permanova on mortality?). Both size does predict some of the variation in response to the environment. Since active dispersers are also larger, there is then a relationship between that life history and body size -- larger animals are more likely to disperse actively. It may be that those groups show a response in that direction as well. 
+
+In conclusion, here we have shown that a hypothesis made by variance partitioning and by observations, can be supported by a manipulative experiment and a different statistical approach. that, I guess, is probably good news for variance partitioning methods, which have come under a lot of criticism lately. iN our experiment we removed the variation in community composition between habitats, and were essentially able to watch the recovery of beta diversity in our system. Measured as both turnover and dispersion, in that test I haven't even done yet. 
+
+In other words our experiment has not only confirmed some aspects of the body size habitat senstivity experiment, but also investigated the rate at which beta diversity is recovered for these different groups. p 
 
 ## References
 
