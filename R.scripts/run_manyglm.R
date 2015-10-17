@@ -2,8 +2,7 @@
 # insects in threespp experiment ------------------------------------------
 
 run_manyglm <- function(Data, 
-                           sampletime = "final", glm_family = "negative.binomial",
-                           organisms = "insects") {
+                        glm_family = "negative.binomial") {
 
   ## call mvabund on responses
   insectresponses <- Data %>% 
