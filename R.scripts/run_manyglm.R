@@ -20,19 +20,11 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
   return(insect_glm_interact)
 }
 
+make_summary <- function(manyglm_output){
+  summary(manyglm_output, resamp = "residual")
+}
 
-  ## name the model output
-  model_name <- paste0(organisms, "_interaction_summary_", sampletime, "_", glm_family, ".Rdata")
-  
-  # summary gives overall fit
-  if (run_interaction_model) {
-    insect_interact_summary <- insect_glm_interact %>% 
-      summary(resamp="residual")
-    save(insect_interact_summary, file = model_name)
-    message(paste("I just created the file",model_name))
-  } else {
-    load(model_name)
-  }
+
   
   ## name the anova output
   anova_name <- paste0(organisms, "_interaction_anova_", sampletime, "_", glm_family, ".Rdata")
