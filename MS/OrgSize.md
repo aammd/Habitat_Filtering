@@ -93,11 +93,13 @@ zooplankton and absent in bacteria. If instead differences in communities are
 driven by spatial processes we will see no difference in the strength of
 environmental signal across all groups. We made predictions for two sources of environmental variation:
 
-* __Between-species__: Our site contains three bromeliad species with different habitat preferences. We took advantage of this variation to select bromeliads of different species from different habitats. This creates the maximum differences in habitat possible, and is similar to the variation censused by Farjalla et al (2012). In this experiment, "habitat variation" includes variation in the local environment (sun/shade, amount of detritus input) and variation in bromeliad species.`
+Our experiment tested three predictions of the size-plasticity hypothesis
 
-* __Within-species__: One of the bromeliad species used in the between-species experiment is a broad habitat generalist. We conducted a second experiment with this species, testing how local environmental conditions (i.e. shady or exposed) influence community composition, while holding bromeliad species constant.
+* __Variance in community composition (goal 1)__: more variance should appear in organism groups that are more sensitive to the environment.
 
-In both experiments we expect the amount of environmental signal in different groups to be less in smaller groups (that is, macroinvertebrates > zooplankton > bacteria).  We expect weaker results in the within-species experiment, since the bromeliad species itself is an important source of environmental variation for the organisms which live within.
+* __environmental signal__: ;arger organisms should also create a more striking difference with regard to the environment. the effect size of the environment whould increase for larger groups. 
+
+* Organism traits: Within and organism group that responds to environmental signal, we should see a relationship to particular traits. Such as body size (within a group) and dispersal mode. 
 
 # Methods
 
@@ -168,6 +170,7 @@ Units (OTUs). We based these collection methods as closely as possible upon
 previous observational work, to facilitate a direct comparison  [@Farjalla2012].
 
 ### Analyses
+
 
 For each of our two experiments, we performed a pair of statistical tests: a
 permutation test (PERMANOVA) to detect differences in the degree of
