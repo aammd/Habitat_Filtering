@@ -33,6 +33,7 @@ targets:
       - figures/Fig2.pdf
       - disp_diffs
       - MS/SuppMatt.pdf
+      - inverts_manyglm_fin
 
 ### read in data, including each bacterial file
 
@@ -166,6 +167,13 @@ targets:
       TaxaTimeSelector(bact_df_within, .blocks = blocks, 
       .bromeliad = bromeliad_win, sampletime = I("final"),
       .experiment = I("withinsp"))
+
+#####################
+## perform manyglm analysis
+
+  inverts_manyglm_fin:
+    command: run_manyglm(inverts_tts_fin)
+
 
   ### perform permanovas
 
