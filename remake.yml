@@ -31,7 +31,6 @@ targets:
       - figures/Fig1.png
       - MS/OrgSize.pdf
       - figures/Fig2.pdf
-      - disp_diffs
       - MS/SuppMatt.pdf
       - inverts_manyglm_fin
 
