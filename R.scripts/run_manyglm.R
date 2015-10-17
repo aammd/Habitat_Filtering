@@ -24,20 +24,11 @@ make_summary <- function(manyglm_output){
   summary(manyglm_output, resamp = "residual")
 }
 
+manyglm_anova <- function(manyglm_output){
+  anova(manyglm_output, resamp="perm.resid", p.uni="adjusted", show.time="all")
+}
+  
 
-  
-  ## name the anova output
-  anova_name <- paste0(organisms, "_interaction_anova_", sampletime, "_", glm_family, ".Rdata")
-  
-  # anova gives us values for each animal
-  if (run_interaction_model) {
-    insect_interact_anova  <- insect_glm_interact %>% 
-      anova(resamp="perm.resid", p.uni="adjusted", show.time="all")
-    save(insect_interact_anova, file = anova_name)
-    message(paste("I just created the file", anova_name))
-  } else {
-    load(anova_name)
-  }
   
   insect_statistic <- insect_interact_anova %>%
     extract2("uni.test") %>% 
