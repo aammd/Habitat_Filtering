@@ -1,8 +1,17 @@
 ---
-title: "withblock_adonis"
-author: "Andrew MacDonald"
-date: "April 22, 2015"
-output: html_document
+title: "Supplementary Material"
+author: "A. Andrew M. MacDonald; Diane S. Srivastava; Vinicius"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    includes:
+      in_header: formatting/myheader_suppmatt.tex
+  md_document: default
+  html_document: default
+  word_document:
+    reference_docx: reference.docx
+geometry: margin=1in
+fontsize: 12pt
 ---
 
 # Before
@@ -38,4 +47,33 @@ zoops_adonis_fin
 bact_adonis_fin
 ```
 
+
+## dispersion anovas
+
+```{r results="asis"}
+aovs_disp <- lapply(disper_list, anova)
+
+lapply(aovs_disp, stargazer::stargazer)
+
+```
+![](../figures/inverts.pdf)
+![](../figures/zoop.pdf)
+![](../figures/bact.pdf)
+
+![](../figures/one_one_plot.pdf)
+
+```{r}
+disp_difs_long  %>% 
+  lm(value ~ taxa * timing, data = .) %>% 
+  summary
+
+```
+
+
+```{r results='asis'}
+disp_difs_long  %>% 
+  lm(value ~ taxa * timing, data = .) %>% 
+  stargazer()
+
+```
 
