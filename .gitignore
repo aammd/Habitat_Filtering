@@ -25,3 +25,8 @@ reports/test.html
 
 reports/*.html
 MS/*.html
+MS/discussion
+photos/*
+outline.md
+*.log
+xtable*
