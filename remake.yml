@@ -32,7 +32,8 @@ targets:
       - MS/OrgSize.pdf
       - figures/Fig2.pdf
       - MS/SuppMatt.pdf
-      - inverts_manyglm_fin
+      - inverts_manyglm_fin_sum
+      - inverts_manyglm_fin_aov_tidy
 
 ### read in data, including each bacterial file
 
@@ -169,9 +170,18 @@ targets:
 
 #####################
 ## perform manyglm analysis
-
+  ## run manyglm
   inverts_manyglm_fin:
     command: run_manyglm(inverts_tts_fin)
+  ## obtain summaries and anovas
+  inverts_manyglm_fin_sum:
+    command: make_summary(inverts_manyglm_fin)
+  inverts_manyglm_fin_aov:
+    command: manyglm_anova(inverts_manyglm_fin)
+  ## tidy anova output
+  inverts_manyglm_fin_aov_tidy:
+    command: get_model_stats(inverts_manyglm_fin_aov)
+
 
 
   ### perform permanovas
