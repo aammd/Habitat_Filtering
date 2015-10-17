@@ -1,19 +1,17 @@
 ## run and report the manyglm results
 # insects in threespp experiment ------------------------------------------
 
-insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad, 
-                           .taxa = insects_renamed, 
-                           run_interaction_model = FALSE, 
+run_manyglm <- function(Data, 
                            sampletime = "final", glm_family = "negative.binomial",
                            organisms = "insects") {
 
   ## call mvabund on responses
-  insectresponses <- insect_data %>% 
+  insectresponses <- Data %>% 
     extract2("taxa") %>%
     mvabund
   
   ## run glm
-  insect_glm_interact <- insect_data %>% 
+  insect_glm_interact <- Data %>% 
     extract2("factors") %>% 
     data.frame %>% 
     manyglm(insectresponses ~ Block * species, data = ., family = glm_family) 
