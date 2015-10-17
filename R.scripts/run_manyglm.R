@@ -17,7 +17,10 @@ insect_manyglm <- function(.blocks = blocks, .bromeliad = bromeliad,
     extract2("factors") %>% 
     data.frame %>% 
     manyglm(insectresponses ~ Block * species, data = ., family = glm_family) 
-  
+  return(insect_glm_interact)
+}
+
+
   ## name the model output
   model_name <- paste0(organisms, "_interaction_summary_", sampletime, "_", glm_family, ".Rdata")
   
