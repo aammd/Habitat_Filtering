@@ -32,19 +32,18 @@ get_model_stats <- function(anova_output){
     t %>% 
     data.frame %>% 
     select(-X.Intercept.,
-           Block_wald=Block,
-           species_wald=species) %>%
-    l(df -> data.frame(spp=rownames(df),df)) %>%
-    set_rownames(NULL)
+           Block_wald = Block,
+           species_wald = species) %>%
+    add_rownames()
   
   insect_sig <- anova_output %>%
     extract2("uni.p") %>%
     t %>% 
     data.frame %>% 
     select(-X.Intercept.,
-           Block_p=Block,
-           species_p=species) %>%
-    l(df -> data.frame(spp=rownames(df),df)) %>%
+           Block_p = Block,
+           species_p = species) %>%
+    add_rownames() %>%
     set_rownames(NULL)
   
   left_join(insect_sig, insect_statistic)
