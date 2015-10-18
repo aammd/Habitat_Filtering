@@ -34,6 +34,8 @@ targets:
       - MS/SuppMatt.pdf
       - inverts_manyglm_fin_sum
       - inverts_manyglm_fin_aov_tidy
+      - zoops_manyglm_fin_sum
+      - zoops_manyglm_fin_aov_tidy
 
 ### read in data, including each bacterial file
 
