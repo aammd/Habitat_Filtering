@@ -183,6 +183,20 @@ targets:
     command: get_model_stats(inverts_manyglm_fin_aov)
 
 
+## perform manyglm analysis
+  ## run manyglm
+  zoops_manyglm_fin:
+    command: run_manyglm(zoops_tts_fin)
+  ## obtain summaries and anovas
+  zoops_manyglm_fin_sum:
+    command: make_summary(zoops_manyglm_fin)
+  zoops_manyglm_fin_aov:
+    command: manyglm_anova(zoops_manyglm_fin)
+  ## tidy anova output
+  zoops_manyglm_fin_aov_tidy:
+    command: get_model_stats(zoops_manyglm_fin_aov)
+
+
 
   ### perform permanovas
 
