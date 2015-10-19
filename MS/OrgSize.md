@@ -79,8 +79,6 @@ Question 3: The specific taxa responding to environmental variation will possess
 
 # Methods
 
-## Experimental design
-
 ### Study site
 
 We performed our experiments at the Parque Nacional de Jurubatiba, Northeast Rio
@@ -94,7 +92,6 @@ exposed, open sand. Several bromeliad taxa here collect standing water
 of macroinvertebrates, zooplankton and bacteria.
 
 ## Experimental design
-
 
 We used the same three bromeliad used by Farjalla et al. [-@Farjalla2012]. Each bromeliad species was collected from its typical
 habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
