@@ -46,5 +46,25 @@ get_model_stats <- function(anova_output){
     add_rownames() %>%
     set_rownames(NULL)
   
-  left_join(insect_sig, insect_statistic)
+  left_join(insect_sig, insect_statistic, by = "rowname")
+}
+
+### modified for bacteria ####
+
+
+run_manyglm_bact <- function(Data, 
+                             glm_family = "negative.binomial") {
+  
+  ## call mvabund on responses
+  bactresponses <- Data %>% 
+    extract2("taxa") %>%
+    mvabund
+  
+  ## run glm
+  insect_glm_interact <- Data %>% 
+    extract2("factors") %>% 
+    data.frame %>% 
+    manyglm(bactresponses ~ species,data = .,family = "binomial") 
+  
+  return(insect_glm_interact)
 }
