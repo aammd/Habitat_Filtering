@@ -40,80 +40,46 @@ across different scales and systems.
 
 # Introduction
 
-Community composition of local patches varies in response to the environment;
-however not all species within a community respond in the same degree.
-"Habitat filtering" occurs when qualities of the habitat (abiotic or biotic)
-prevent species from colonizing or persisting. In contrast,
-neutral models of biodiversity consider all individuals in a community to be
-demographically equivalent; differences in species composition are therefore
-the result of dispersal and demographic stochasticity. This has led to the
-approach of partitioning variance in community composition into variation
-correlated with space, with environmental distance, or with their interaction.
-These studies have returned mixed results for different groups of organisms
-and systems (Cottenie). One reason for these mixed results is the very different qualities of habitats compared or groups of organisms compared. In one of the first studies across different groups of
+models of community assembly explain how local species composition are assembled from the regional species pool. They can be divided into neutral and niche-based processes. Neutral processes are based on the demographic equivalence of all species. the relative abundance of species in any local patch is dependent on their frequency in the regional species pool, paired with stochastic demographic processes such as immigration and emigration. In contrast, niche-based models of community assembly emphasize the trait differences among species. In these models, species are able to coexiest if they posses sufficeniently different traits (stabilizing processes) and their relative abundance is due to differences in their fitness (e.g. survival and reproduction). Niche-based models emphasize how the presence of species in a site is correlated with the abiotic and biotic conditions of that site. These determine whether a species is able to colonize or persist in a given patch. In niche-based, as in neutral models, variance in community composition is also derived from stochasticity in demographic processes. Both categorite of model also make predictions about how patches differ from each other in species composition (beta diversity). In a neutral model, differences between patches are caused by stochasticity in demographic processes, particularly dispersa.  In a niche-based model this variation is increased by variation among habitat patches, which selects for different species compositions in each. Separating the different patterns produced by these two methods usually involves variance partitioning. This approach has its detractors. But the question remains for ecologists: when and under what circumstances will local communities be assembled by neutral or niche-based processes? 
+
+ In one of the first studies across different groups of
 organisms in the same community, Farjalla et al. [-@Farjalla2012] demonstrated that body
-size is a key trait determining environmental signal in community composition.
-They found that groups of organisms which are physically larger show a greater degree of
+size is a key trait determining environmental signal in community composition. They conducted an observational study across many different organism types, spanning orders of magnitude in body size, along a single environmental gradient. They considered two different hypotheses regarding how increasing body size should change the balance of niche-based vs neutral community assembly processes. The size-dispersal and size-plasticity hypotheses. The former hypothesis suggests that larger animals have weaker dispersal -- therefore more stochasticity in community composition -- while smaller organisms have such high dispersal rates that variation in composition must be driven by the suitability of the local environment. In contrast the size-plasticity hypothesis suggests that more important than the ability to disperse is the differences in the local environment. That is, smaller organisms should be less sensitive to environmental variation (ie more plastic) and larger organisms more so. They found that groups of organisms which are physically larger show a greater degree of
 habitat filtering: there is weaker environmental structure as body size
 decreases from insects (strong signal), zooplankton (moderate signal) and bacteria
-(weak signal).
+(weak signal). Their analysis of observational data found support for the size-plasticity hypothesis.
 
-Why should the strength of environmental filtering decrease with organism
-size? There are two possible mechanisms that may make communities of smaller
-organisms less strongly filtered: 
+Why should the strenght of environmental filtering decrease with organism size? there are two possible mechanisms that may make communities of smaller organisms more strongly filtered. At the individual level, organisms which are very small maybe able to find microhabitats in a way that mitigates varation abmong patches. smaller organisms also have simpler metabolisms. Bacteria are often able to consume a wide variety of carbon sources. Bacteria can even use environmental DNA, or transfer plasmids among unrelated cells, acquiring new functions. 
 
-increased dispersal rates and increased
-plasticity. Dispersal rates increase when smaller organisms are easily
-passively carried (e.g. by wind). Increased dispersal brings new immigrants
-into a community, many of whom may not be able to persist without the constant
-supply of new immigrants. These "source-sink" dynamics (Leibold) can lead to
-similarity between patches even when their environments favour different
-community compositions. Increased plasticity, on the other hand, occurs when
-smaller-bodied species have broader fundamental niches than larger-bodied
-species in the same community. This is the "size-plasticity" hypothesis of
-Farjalla et al  [-@Farjalla2012]. Bacteria and other small organisms are broadly
-generalist in their ability to consume carbon sources and persist in different
-climates (Finlay 2002) and are less constrained by the complex physiological
-pathways possessed by larger metazoans. Additionally, smaller-bodied organisms
-have shorter generation times and generally larger populations, which may
-allow them the opportunity to evolve to a novel environment more rapidly than
-larger-bodied organisms.
+The individual-level effects suggested by the size-plasticity hypothesis are difficult to test because of population level processes: especially dispersal. At the population level, smaller organisms may also show less of a relationship with environmental variation. if smaller organisms disperse more rapidly, then we would expect to see populations of smaller species maintained, even in patches where they have negative population growth rates (i.e. mass effects). smaller organisms have higher growth rates, higher rates of turnover, and shorter generation times. This suggests that they could persiste in highly variable or fluctuation habitats, purely by demographic processes. Also, they could stick aroun by evolution, as they have larger effects population sizes (does mutation rate show an effect with regard to population size?). rapid evolution to antiobotics is well know.
+In both cases, therefore, space is an issue -- the processes of dispersal can either exaggerate or diminish the effects seen by Farjalla et al. 
 
-The size-plasticity hypothesis makes a testable prediction about the
-consequences of environmental variation for similar communities: for communities which begin at a simiar species composition will diverge under different environments, but this divergence
+However, the work of Farjalla et al suggests a manipulative experiment: to
+remove variation among patches, while preserving abiotic variation. If these
+environmental differences. We studied the same groups of organisms (insects,
+zooplankton and bacteria) in the same patchy, highly variable habitat (three
+species of tank bromeliads). We created communities that were as similar as
+possible in composition, then exposed these communities to their original
+environmental conditions.
+
+
+
+We test three different predictions of the size-plasticity hypothesis: 
+
+Question 1: communities which begin at a simiar species composition will diverge, but this divergence
 will be greatest between larger species and increasingly weak in smaller
-organisms. To test these predictions, we performed a manipulative experiment
-in the same habitat as Farjalla et al.  [-@Farjalla2012]. We studied the same groups of
-organisms (insects, zooplankton and bacteria) in the same patchy, highly
-variable habitat (three species of tank bromeliads). We created communities
-that were as similar as possible in composition, then exposed these
-communities to their original environmental conditions. We predicted community
-change to be greater and more consistent in insects, less strong in
-zooplankton and absent in bacteria. If instead differences in communities are
-driven by spatial processes we will see no difference in the strength of
-environmental signal across all groups. We made predictions for two sources of environmental variation:
+organisms
 
-Our experiment tested three predictions of the size-plasticity hypothesis
+Question 2: This increase in beta diversity will correlate with environmental differences; this correlation will be stronger for larger organisms.
 
-* __Variance in community composition (goal 1)__: more variance should appear in organism groups that are more sensitive to the environment.
+Question 3: The specific taxa responding to environmental variation will possess traits that are related to their ability to sustain highly variable environments.
 
-* __environmental signal__: ;arger organisms should also create a more striking difference with regard to the environment. the effect size of the environment whould increase for larger groups. 
 
-* Organism traits: Within and organism group that responds to environmental signal, we should see a relationship to particular traits. Such as body size (within a group) and dispersal mode. 
+
 
 # Methods
 
 ## Experimental design
-
-We performed two related experiments: the first contrasted different bromeliad
-species from different habitats ("between-species"), while the second
-contrasted the same bromeliad species from different habitats ("within-
-species"). We focused on three bromeliad species from three
-contrasting habitats; these species and habitats are identical to those surveyed
-by Farjalla et al.  [-@Farjalla2012]. Each bromeliad species was collected from its typical
-habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
-(partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat range at this site, occuring in both full shade and full sun. This large habitat range enabled us to conduct a second, within-species experiment.  This second experiment compared _Neoregelia_ communities
-between full sun and deep shade.
 
 ### Study site
 
@@ -129,8 +95,11 @@ of macroinvertebrates, zooplankton and bacteria.
 
 ## Experimental design
 
-Both between- and within-species experiments used similar designs: five blocks
-of six bromeliads each. To create each block in the between-species experiment,
+
+We used the same three bromeliad used by Farjalla et al. [-@Farjalla2012]. Each bromeliad species was collected from its typical
+habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
+(partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat range at this site, occuring in both full shade and full sun; only shade plants were used in this study.
+We created five blocks; each block consisted of six bromeliads (two of each species). To create each block in the between-species experiment,
 we collected two bromeliads of each of the three species; in the within-species experiment we
 collected three bromeliads from open habitats and three from closed habitats.  In both
 experiments, all bromeliads in a block were stocked with a nearly identical
@@ -186,8 +155,106 @@ bacteria.
 ## Tables
 
 
+Table  1: this is the table of disperions
 
-Table  1: Results from PERMAOVAs run on each of the three groups of organisms, both before and after the experiment. Both F-ratios and R^2^ values are higher for inverts than they are for zooplankton or bacteria
+```r
+disp_difs_long  %>% 
+  lm(value ~ taxa * timing, data = .) %>% 
+  stargazer(header = FALSE)
+```
+
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & value \\ 
+\hline \\[-1.8ex] 
+ taxa.L & 0.024 \\ 
+  & (0.031) \\ 
+  & \\ 
+ taxa.Q & $-$0.064$^{**}$ \\ 
+  & (0.031) \\ 
+  & \\ 
+ timingfinal & $-$0.101$^{***}$ \\ 
+  & (0.025) \\ 
+  & \\ 
+ taxa.L:timingfinal & 0.024 \\ 
+  & (0.044) \\ 
+  & \\ 
+ taxa.Q:timingfinal & 0.030 \\ 
+  & (0.044) \\ 
+  & \\ 
+ Constant & 0.385$^{***}$ \\ 
+  & (0.018) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 30 \\ 
+R$^{2}$ & 0.506 \\ 
+Adjusted R$^{2}$ & 0.403 \\ 
+Residual Std. Error & 0.069 (df = 24) \\ 
+F Statistic & 4.919$^{***}$ (df = 5; 24) \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+### another table
+
+```r
+disp_aov <- lmer(value ~ taxa * timing + (1|block), data = disp_difs_long)
+
+stargazer::stargazer(disp_aov, header = FALSE)
+```
+
+
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-2} 
+\\[-1.8ex] & value \\ 
+\hline \\[-1.8ex] 
+ taxa.L & 0.024 \\ 
+  & (0.031) \\ 
+  & \\ 
+ taxa.Q & $-$0.064$^{**}$ \\ 
+  & (0.031) \\ 
+  & \\ 
+ timingfinal & $-$0.101$^{***}$ \\ 
+  & (0.025) \\ 
+  & \\ 
+ taxa.L:timingfinal & 0.024 \\ 
+  & (0.044) \\ 
+  & \\ 
+ taxa.Q:timingfinal & 0.030 \\ 
+  & (0.044) \\ 
+  & \\ 
+ Constant & 0.385$^{***}$ \\ 
+  & (0.018) \\ 
+  & \\ 
+\hline \\[-1.8ex] 
+Observations & 30 \\ 
+Log Likelihood & 24.169 \\ 
+Akaike Inf. Crit. & $-$32.338 \\ 
+Bayesian Inf. Crit. & $-$21.128 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
+
+
+Table  2: Results from PERMAOVAs run on each of the three groups of organisms, both before and after the experiment. Both F-ratios and R^2^ values are higher for inverts than they are for zooplankton or bacteria
 
 |                    |        | F                            | p                            | R^2^                         |
 | -------- | ------------------| ---------|--------- | ---------- |
@@ -212,6 +279,12 @@ Figure  3: this would seem to be figure 2
 
 ## Results  
 
+Goal 1: dispersion differences among the different organism groups.  
+
+We found that dispersion, in all cases, was lower at the end of the experiment than at the beginning. This indicates that our treatments were effectingve in removing beta diverstiy among patches. that is, that all habitats really did end up being very similar at the beginning, as we would expect. However, the amount of this decline was the same across all organism groups (Table  1), as indicated by the 
+
+
+
 Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (Figure  2: The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker )
 
 
@@ -220,6 +293,9 @@ We found more signal in insects and zooplankton relative to bacteria. These diff
 Can we get an effect size out of the insects relative to the zooplankton and bacteria? we could, instead of using PERMANOVAs with block as a random factor, we could actually just test this effect size metric on animals from large to small with ordinal contrasts. 
 
 Another possibility: is there a convenient way to measure the differences between the initial and final community compositions. 
+
+
+
 
 ## Discussion
 
