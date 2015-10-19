@@ -86,15 +86,14 @@ Question 3: The specific taxa responding to environmental variation will possess
 
 ## Experimental design
 
-We performed two related experiments: the first contrasted different bromeliad
+We used te bromeliad
 species from different habitats ("between-species"), while the second
 contrasted the same bromeliad species from different habitats ("within-
 species"). We focused on three bromeliad species from three
 contrasting habitats; these species and habitats are identical to those surveyed
 by Farjalla et al.  [-@Farjalla2012]. Each bromeliad species was collected from its typical
 habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
-(partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat range at this site, occuring in both full shade and full sun. This large habitat range enabled us to conduct a second, within-species experiment.  This second experiment compared _Neoregelia_ communities
-between full sun and deep shade.
+(partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat range at this site, occuring in both full shade and full sun; only shade plants were used in this study.
 
 ### Study site
 
