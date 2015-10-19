@@ -15,6 +15,7 @@ packages:
   - ibuttonr
   - viridis
   - stargazer
+  - lme4
 
 sources:
   - R.scripts/results.R
@@ -36,6 +37,8 @@ targets:
       - inverts_manyglm_fin_aov_tidy
       - zoops_manyglm_fin_sum
       - zoops_manyglm_fin_aov_tidy
+      - bact_manyglm_fin_sum
+      - bact_manyglm_fin_aov_tidy
 
 ### read in data, including each bacterial file
 
@@ -171,7 +174,7 @@ targets:
       .experiment = I("withinsp"))
 
 #####################
-## perform manyglm analysis
+## perform manyglm analysis -- INVERTS
   ## run manyglm
   inverts_manyglm_fin:
     command: run_manyglm(inverts_tts_fin)
@@ -185,7 +188,7 @@ targets:
     command: get_model_stats(inverts_manyglm_fin_aov)
 
 
-## perform manyglm analysis
+## perform manyglm analysis -- ZOOP
   ## run manyglm
   zoops_manyglm_fin:
     command: run_manyglm(zoops_tts_fin)
@@ -198,7 +201,18 @@ targets:
   zoops_manyglm_fin_aov_tidy:
     command: get_model_stats(zoops_manyglm_fin_aov)
 
-
+## peform manyglm analsysis -- BACTERIA
+  ## run manyglm
+  bact_manyglm_fin:
+    command: run_manyglm(bact_tts_fin)
+  ## obtain summaries and anovas
+  bact_manyglm_fin_sum:
+    command: make_summary(bact_manyglm_fin)
+  bact_manyglm_fin_aov:
+    command: manyglm_anova(bact_manyglm_fin)
+  ## tidy anova output
+  bact_manyglm_fin_aov_tidy:
+    command: get_model_stats(bact_manyglm_fin_aov)
 
   ### perform permanovas
 
@@ -580,6 +594,7 @@ targets:
       - inverts_adonis_fin
       - zoops_adonis_fin
       - bact_adonis_fin
+      - disp_difs_long 
     knitr: true
     
   MS/OrgSize.pdf:
