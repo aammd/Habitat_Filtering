@@ -271,9 +271,6 @@ Figure  1: behold the figure of dispersion
 ![between](../figures/Fig1.pdf)
 Figure  2: The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker
 
-![within](../figures/Fig2.pdf)
-Figure  3: this would seem to be figure 2
-
 ## Results  
 
 Goal 1: dispersion differences among the different organism groups.  
