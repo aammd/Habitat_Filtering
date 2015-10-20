@@ -113,30 +113,40 @@ intermediate between that of all six bromeliads in that block. We made these
 starting communities by sampling, then combining, each of three major groups:
 macroinvertebrates, zooplankton and bacteria.
 
-**Initial collection**: We sampled macroinvertebrates by thoroughly rinsing each bromeliad and passing
-the water through 1mm and 180μm mesh to collect aquatic macroinvertebrates. These mesh sizes have been shown to separate macro invertebrates from both coarse detritus and fine particulate organic matter, facilitating their collection.
-We identified macroinvertebrates to morphospecies. We sampled the zooplankton and
-bacteria communities by collecting a water sample from each bromeliad: 100ml for zooplankton, 50ml for bacteria. Zooplankton were collected by filtering on 50-micron Nytex mesh and fixed in 5% buffered formalin. This fixed solution was then diluted to 20 ml, and a 1 ml subsample taken for analysis. Zooplankton were  identified to the lowest taxonomic unit possible (species in most cases, except for bdelloid rotifers
-and harpaticoid copepods, left at the level of class and order, respectively). Bacteria were collected by taking some of the filtrate from the zooplankton sample and filtering it a second time on a Whatman filter paper. We measured bacterial community composition using denaturing gradient gel
+**Initial collection**: We sampled macroinvertebrates by thoroughly rinsing
+each bromeliad and passing the water through 1mm and 180μm mesh to collect
+aquatic macroinvertebrates. These mesh sizes have been shown to separate macro
+invertebrates from both coarse detritus and fine particulate organic matter,
+facilitating their collection. We identified macroinvertebrates to
+morphospecies. We sampled the zooplankton and bacteria communities by
+collecting a water sample from each bromeliad: 100ml for zooplankton, 50ml for
+bacteria. Zooplankton were collected by filtering on 50-micron Nytex mesh and
+fixed in 5% buffered formalin. This fixed solution was then diluted to 20 ml,
+and a 1 ml subsample taken for analysis. Zooplankton were  identified to the
+lowest taxonomic unit possible (species in most cases, except for bdelloid
+rotifers and harpaticoid copepods, left at the level of class and order,
+respectively). Bacteria were collected by taking some of the filtrate from the
+zooplankton sample and filtering it a second time on a Whatman filter paper.
+We measured bacterial community composition using denaturing gradient gel
 electrophoresis (DGGE; Muyzer et al. 1993). This analysis furnishes an
 approximation of bacterial diversity in the form of Operational Taxonomic
-Units (OTUs).
-**Bromeliad preparation**: We emptied bromeliads by hanging them upside down to dry for at least 24 hours
-and then rinsing each plant with 70% ethanol. Any coarse detritus found in the
-bromeliads was similarly cleaned, frozen and thawed (to kill any macroinvertebrates eggs). We
-confirmed that this technique removed all invertebrates and most detritus by
-dissecting an empty bromeliad. Bromeliads were placed in a local habitat similar
-to their original, each enclosed in a 2mm mesh cage to prevent colonization by
-insects. We then added the starting communities of macroinvertebrates,
-zooplankton and bacteria.
-
-**Initial communities**: we created initial communities of zooplankton and
-microbes by mixing an equal volume of filtered tank water from each plant
-(approximately 100ml plant^-1^), returning the same volumes to all bromeliads.
-
+Units (OTUs). **Bromeliad preparation**: We emptied bromeliads by hanging them
+upside down to dry for at least 24 hours and then rinsing each plant with 70%
+ethanol. Any coarse detritus found in the bromeliads was similarly cleaned,
+frozen and thawed (to kill any macroinvertebrates eggs). We confirmed that
+this technique removed all invertebrates and most detritus by dissecting an
+empty bromeliad. Bromeliads were placed in a local habitat similar to their
+original, each enclosed in a 2mm mesh cage to prevent colonization by insects.
+We then added the starting communities of macroinvertebrates, zooplankton and
+bacteria. **Initial communities**: we created initial communities of
+zooplankton and microbes by mixing an equal volume of filtered tank water from
+each plant (approximately 100ml plant^-1^), returning the same volumes to all
+bromeliads.
 
 The experiment lasted for 12 days, after which we collected all
-macroinvertebrates, and a sample of zooplankton and bacteria. Throughout our analysis we used collection methods consistent as possible with Farjalla et al. [-@Farjalla2012], to facilitate a direct comparison .
+macroinvertebrates, and a sample of zooplankton and bacteria. Throughout our
+analysis we used collection methods consistent as possible with Farjalla et
+al. [-@Farjalla2012], to facilitate a direct comparison .
 
 
 
