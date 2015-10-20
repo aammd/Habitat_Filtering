@@ -24,7 +24,7 @@ tab <- pryr::partial(tab_nums, display = "cite")
 ```
 
 
-# Abstract
+## Abstract
 
 At the local scale, species composition of often varies among habitat patches in
 response to differences in environmental variables. These differences act as
@@ -43,7 +43,7 @@ weaker signal in insects than expected. These results suggest that organism size
 could provide a framework for integrating studies of environmental filtering
 across different scales and systems.
 
-# Introduction
+## Introduction
 
 models of community assembly explain how local species composition are assembled from the regional species pool. They can be divided into neutral and niche-based processes. Neutral processes are based on the demographic equivalence of all species. the relative abundance of species in any local patch is dependent on their frequency in the regional species pool, paired with stochastic demographic processes such as immigration and emigration. In contrast, niche-based models of community assembly emphasize the trait differences among species. In these models, species are able to coexiest if they posses sufficeniently different traits (stabilizing processes) and their relative abundance is due to differences in their fitness (e.g. survival and reproduction). Niche-based models emphasize how the presence of species in a site is correlated with the abiotic and biotic conditions of that site. These determine whether a species is able to colonize or persist in a given patch. In niche-based, as in neutral models, variance in community composition is also derived from stochasticity in demographic processes. Both categorite of model also make predictions about how patches differ from each other in species composition (beta diversity). In a neutral model, differences between patches are caused by stochasticity in demographic processes, particularly dispersa.  In a niche-based model this variation is increased by variation among habitat patches, which selects for different species compositions in each. Separating the different patterns produced by these two methods usually involves variance partitioning. This approach has its detractors. But the question remains for ecologists: when and under what circumstances will local communities be assembled by neutral or niche-based processes? 
 
@@ -82,7 +82,7 @@ Question 3: The specific taxa responding to environmental variation will possess
 
 
 
-# Methods
+## Methods
 
 ### Study site
 
@@ -149,8 +149,6 @@ analysis we used collection methods consistent as possible with Farjalla et
 al. [-@Farjalla2012], to facilitate a direct comparison .
 
 
-
-
 ### Analyses
 
 We used a different analysis for each question we posed. For question 1, we
@@ -168,7 +166,28 @@ zooplankton, and little to none among bacteria. We complemented this approach
 in question 3 with a multivariate regression of abundance [@mvabund] to
 identify those taxa which contributed most to the differences.
 
-## Tables
+
+## Results  
+
+Goal 1: dispersion differences among the different organism groups.  
+
+
+
+
+
+Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (`r fig_nums("bw_spp")` )
+
+
+We found more signal in insects and zooplankton relative to bacteria. These differences can be seen in 
+
+Can we get an effect size out of the insects relative to the zooplankton and bacteria? we could, instead of using PERMANOVAs with block as a random factor, we could actually just test this effect size metric on animals from large to small with ordinal contrasts. 
+
+Another possibility: is there a convenient way to measure the differences between the initial and final community compositions. 
+
+
+
+
+### Tables
 
 
 `r tab_nums("disp_tab", "this is the table of disperions")`
@@ -204,7 +223,7 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 |                    | after  | `r getF(bact_adonis_fin)` | `r getP(bact_adonis_fin)` | `r getR(bact_adonis_fin)`                             |
 
 
-## Figures
+### Figures
 
 ![disp](../figures/plot_disp_taxa.pdf)
 `r fig_nums("disp", "behold the figure of dispersion")`
@@ -212,29 +231,13 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 ![between](../figures/Fig1.pdf)
 `r fig_nums("bw_spp", "The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker")`
 
-## Results  
-
-Goal 1: dispersion differences among the different organism groups.  
-
-We found that dispersion, in all cases, was lower at the end of the experiment than at the beginning. This indicates that our treatments were effectingve in removing beta diverstiy among patches. that is, that all habitats really did end up being very similar at the beginning, as we would expect. However, the amount of this decline was the same across all organism groups (`r tab("disp_tab")`), as indicated by the 
-
-
-
-Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (`r fig_nums("bw_spp")` )
-
-
-We found more signal in insects and zooplankton relative to bacteria. These differences can be seen in 
-
-Can we get an effect size out of the insects relative to the zooplankton and bacteria? we could, instead of using PERMANOVAs with block as a random factor, we could actually just test this effect size metric on animals from large to small with ordinal contrasts. 
-
-Another possibility: is there a convenient way to measure the differences between the initial and final community compositions. 
-
-
 
 
 ## Discussion
 
 We did discover different amounts of environmental signal ithe different groups -- more in invertebrates and zooplankton than in bacteria. In the direction that we expected, based on the size-sensitivity hypothesis. We found support for these same patterns when we examined individual species responses -- more species of insects showed a change in response to environmental variation than did zooplankton. No bacteria OTU ever showed a predictable difference between before and after. Just as Farjalla et al predicted, the strength of environmental fitlering is in negative proportion to body size. Over the same time interval, insects and zooplankton developed more of a response to the environment than did bacteria. 
+
+We found that dispersion, in all cases, was lower at the end of the experiment than at the beginning. This indicates that our treatments were effectingve in removing beta diverstiy among patches. that is, that all habitats really did end up being very similar at the beginning, as we would expect. However, the amount of this decline was the same across all organism groups (`r tab("disp_tab")`), as indicated by the 
 
 The difference between insects and zooplankton was not as great as we expected it would be. that was probably because we were missing the active vs passive differences. Insect females choose where to place their eggs, evalutating resources and predation risk (citecitecite). On the other hand, the macroinvertebrate taxa that did respond are also the more abundant taxa; it may be that we only had the ability to detect patterns for these taxa. Both of these issues at once (should we do permanova on mortality?). Both size does predict some of the variation in response to the environment. Since active dispersers are also larger, there is then a relationship between that life history and body size -- larger animals are more likely to disperse actively. It may be that those groups show a response in that direction as well. 
 
