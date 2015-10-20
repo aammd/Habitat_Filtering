@@ -96,29 +96,32 @@ exposed, open sand. Several bromeliad taxa here collect standing water
 (phytotelmata) in deep leaf axils, and are known to contain diverse communities 
 of macroinvertebrates, zooplankton and bacteria.
 
-## Experimental design
+### Experimental design
 
-We used the same three bromeliad used by Farjalla et al. [-@Farjalla2012]. Each bromeliad species was collected from its typical
-habitat: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
-(partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat range at this site, occuring in both full shade and full sun; only shade plants were used in this study.
-We created five blocks; each block consisted of six bromeliads (two of each species). To create each block in the between-species experiment,
-we collected two bromeliads of each of the three species; in the within-species experiment we
-collected three bromeliads from open habitats and three from closed habitats.  In both
-experiments, all bromeliads in a block were stocked with a nearly identical
-starting community, intermediate between that of all six bromeliads in that
-block. We made these starting communities by sampling, then combining, each of
-three major groups: macroinvertebrates, zooplankton and bacteria. 
+We used the same three bromeliad used by Farjalla et al. [-@Farjalla2012].
+Each bromeliad species was collected from its typical habitat: _Aechmea
+nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_ (partial shade), and
+_Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat
+range at this site, occuring in both full shade and full sun; only shade
+plants were used in this study. We created five blocks; each block consisted
+of six bromeliads (two of each species). To create each block in the between-
+species experiment, we collected two bromeliads of each of the three species;
+in the within-species experiment we collected three bromeliads from open
+habitats and three from closed habitats.  In both experiments, all bromeliads
+in a block were stocked with a nearly identical starting community,
+intermediate between that of all six bromeliads in that block. We made these
+starting communities by sampling, then combining, each of three major groups:
+macroinvertebrates, zooplankton and bacteria.
 
-We sampled macroinvertebrates by thoroughly rinsing each bromeliad and passing
-the water through 1mm and 180μm mesh to collect aquatic macroinvertebrates.  We
-identified these animals to morphospecies, then divided them equally among the
-six bromeliads in the block. 
-
-We sampled the starting zooplankton and bacteria communities by mixing an equal
-volume of filtered tank water from each plant (approximately 100ml plant^-1^),
-returning the same volumes to all bromeliads. 
-
-We emptied bromeliads by hanging them upside down to dry for at least 24 hours
+**Initial collection**: We sampled macroinvertebrates by thoroughly rinsing each bromeliad and passing
+the water through 1mm and 180μm mesh to collect aquatic macroinvertebrates. These mesh sizes have been shown to separate macro invertebrates from both coarse detritus and fine particulate organic matter, facilitating their collection.
+We identified macroinvertebrates to morphospecies. We sampled the zooplankton and
+bacteria communities by collecting a water sample from each bromeliad: 100ml for zooplankton, 50ml for bacteria. Zooplankton were collected by filtering on 50-micron Nytex mesh and fixed in 5% buffered formalin. This fixed solution was then diluted to 20 ml, and a 1 ml subsample taken for analysis. Zooplankton were  identified to the lowest taxonomic unit possible (species in most cases, except for bdelloid rotifers
+and harpaticoid copepods, left at the level of class and order, respectively). Bacteria were collected by taking some of the filtrate from the zooplankton sample and filtering it a second time on a Whatman filter paper. We measured bacterial community composition using denaturing gradient gel
+electrophoresis (DGGE; Muyzer et al. 1993). This analysis furnishes an
+approximation of bacterial diversity in the form of Operational Taxonomic
+Units (OTUs).
+**Bromeliad preparation**: We emptied bromeliads by hanging them upside down to dry for at least 24 hours
 and then rinsing each plant with 70% ethanol. Any coarse detritus found in the
 bromeliads was similarly cleaned, frozen and thawed (to kill any macroinvertebrates eggs). We
 confirmed that this technique removed all invertebrates and most detritus by
@@ -127,18 +130,16 @@ to their original, each enclosed in a 2mm mesh cage to prevent colonization by
 insects. We then added the starting communities of macroinvertebrates,
 zooplankton and bacteria.
 
+**Initial communities**: we created initial communities of zooplankton and
+microbes by mixing an equal volume of filtered tank water from each plant
+(approximately 100ml plant^-1^), returning the same volumes to all bromeliads.
+
+
 The experiment lasted for 12 days, after which we collected all
-macroinvertebrates, and a sample of zooplankton and bacteria.
-Macroinvertebrates were identified while live and preserved in ethanol.
-Zooplankton were collected on 50-micron Nytex mesh and fixed in 5% buffered
-formalin. Subsamples were then identified to the lowest
-taxonomic unit possible (species in most cases, except for bdelloid rotifers
-and harpaticoid copepods, left at the level of class and order, respectively). 
-We measured bacterial community composition using denaturing gradient gel
-electrophoresis (DGGE; Muyzer et al. 1993). This analysis furnishes an
-approximation of bacterial diversity in the form of Operational Taxonomic
-Units (OTUs). We based these collection methods as closely as possible upon
-previous observational work, to facilitate a direct comparison  [@Farjalla2012].
+macroinvertebrates, and a sample of zooplankton and bacteria. Throughout our analysis we used collection methods consistent as possible with Farjalla et al. [-@Farjalla2012], to facilitate a direct comparison .
+
+
+
 
 ### Analyses
 
