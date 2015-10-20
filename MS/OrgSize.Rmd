@@ -153,17 +153,20 @@ al. [-@Farjalla2012], to facilitate a direct comparison .
 
 ### Analyses
 
-
-For each of our two experiments, we performed a pair of statistical tests: a
-permutation test (PERMANOVA) to detect differences in the degree of
-environmental signal among groups, and a multivariate regression of abundance
-to identify those taxa which contributed most to the differences. PERMANOVA
-measures the amount of difference in community composition between treatment
-groups and compares this to the expected distribution under a null hypothesis of no treatment effects.
-If larger-bodied groups of organisms are more filtered, then we expect to find
-a greater difference in community composition emerge among the
-macroinvertebrates, less among the zooplankton, and little to none among
-bacteria.
+We used a different analysis for each question we posed. For question 1, we
+used the `betadisper` function in the R package vegan [@vegan]. We used a
+permutation test to test for differences before and after the experiment
+within each block (999 null simulations block^-1^). All statistical analyses
+were conducted in R [@rcore]. We tested question 2 with a permutational ANOVA
+(PERMANOVA) to detect differences in the degree of environmental signal among
+groups. PERMANOVA measures the amount of difference in community composition
+between treatment groups and compares this to the expected distribution under
+a null hypothesis of no treatment effects. If larger-bodied groups of
+organisms are more filtered, then we expect to find a greater difference in
+community composition emerge among the macroinvertebrates, less among the
+zooplankton, and little to none among bacteria. We complemented this approach
+in question 3 with a multivariate regression of abundance [@mvabund] to
+identify those taxa which contributed most to the differences.
 
 ## Tables
 
