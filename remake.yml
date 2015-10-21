@@ -45,13 +45,13 @@ targets:
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
-  
+
   insectnames:
     command: read.csv("raw-data/insectnames.csv", stringsAsFactors=FALSE)
-    
+
   blocks:
     command: read_data("raw-data/blocks.txt")
-    
+
   bromeliad:
     command: read_data("raw-data/bromeliad.volumes.txt")
 
@@ -66,29 +66,29 @@ targets:
 ## three species experiment
   bact_1:
     command: read_clean_bact("raw-data/bacteria/between_species/block1.csv")
-        
+
   bact_2:
     command: read_clean_bact("raw-data/bacteria/between_species/block2.csv")
-        
+
   bact_3:
     command: read_clean_bact("raw-data/bacteria/between_species/block3.csv")
-        
+
   bact_4:
     command: read_clean_bact("raw-data/bacteria/between_species/block4.csv")
-        
+
   bact_5:
     command: read_clean_bact("raw-data/bacteria/between_species/block5.csv")
-    
+
 ## within sp experiment
   bact_2_within:
     command: read_clean_bact_within("raw-data/bacteria/within_species/bloco2.csv")
-    
+
   bact_4_within:
     command: read_clean_bact_within("raw-data/bacteria/within_species/bloco4.csv")
-    
+
   bact_5_within:
     command: read_clean_bact_within("raw-data/bacteria/within_species/bloco5.csv")
-   
+
 ## Process bacteria data into a list
   bact_list:
     command: >
@@ -237,7 +237,7 @@ targets:
     command: AdonisData(bact_tts_fin, method = I("euclid"))
 
   ## WITHIN SPECIES
-    
+
   inverts_adonis_win_ini:
     command: AdonisData(inverts_tts_win_ini, method = I("euclid"))
 
@@ -256,37 +256,21 @@ targets:
   bact_adonis_win_fin:
     command: AdonisData(bact_tts_win_fin, method = I("euclid"))
 
-  ## Figures  
-  figures/Fig1.png:
-    command: > 
-      r2_plot(inverts_adonis_ini, inverts_adonis_fin,
-              zoops_adonis_ini, zoops_adonis_fin,
-              bact_adonis_ini, bact_adonis_fin)
-    plot: true
-    
-  figures/Fig1.pdf:
-    command: r2_plot(r2_plot_df, mytheme)
-    plot: true
 
+## create a list of permanovas for use in plotting
   r2_plot_df:
     command: > 
       r2_plot_df_maker(inverts_adonis_ini, inverts_adonis_fin,
               zoops_adonis_ini, zoops_adonis_fin,
               bact_adonis_ini, bact_adonis_fin)
     
-  figures/Fig2.pdf:
-    command: > 
-      r2_plot(inverts_adonis_win_ini, inverts_adonis_win_fin,
-              zoops_adonis_win_ini, zoops_adonis_win_fin,
-              bact_adonis_win_ini, bact_adonis_win_fin)
-    plot: true
 
 ## supp matt figs
 
   ### get blocks
   blocks_Bacer:
     command: filter_block(blocks, I("Baker"))
-    
+
     ### get blocks
   blocks_Davidson:
     command: filter_block(blocks, I("Davidson"))
@@ -302,8 +286,8 @@ targets:
 
   blocks_Smith:
     command: filter_block(blocks, I("Smith"))
-    
-    
+
+
   ## subset inverts
 
   inverts_ini_fin_Baker:
@@ -365,7 +349,7 @@ targets:
            Eccleson = inverts_ini_fin_Eccleson_mds,
            Tennant = inverts_ini_fin_Tennant_mds,
            Smith = inverts_ini_fin_Smith_mds)
-  
+
   figures/inverts.pdf:
     plot: true
     command: plot_taxa_mds(invert_mds_list)
@@ -431,7 +415,7 @@ targets:
            Eccleson = zoops_ini_fin_Eccleson_mds,
            Tennant = zoops_ini_fin_Tennant_mds,
            Smith = zoops_ini_fin_Smith_mds)
-  
+
   figures/zoop.pdf:
     plot: true
     command: plot_taxa_mds(zoop_mds_list)
@@ -497,7 +481,7 @@ targets:
            Eccleson = bact_ini_fin_Eccleson_mds,
            Tennant = bact_ini_fin_Tennant_mds,
            Smith = bact_ini_fin_Smith_mds)
-  
+
   figures/bact.pdf:
     plot: true
     command: plot_taxa_mds(bact_mds_list)
@@ -577,6 +561,12 @@ targets:
   mypts:
     command: makept()
 
+  ## Figures  
+  figures/r2_plot.pdf:
+    command: r2_plot(r2_plot_df, mytheme)
+    plot: true
+
+
   figures/one_one_plot.pdf:
     plot: true
     command: one_one_plot(disp_diffs)
@@ -585,6 +575,16 @@ targets:
   figures/plot_disp_taxa.pdf:
     plot: true
     command: plot_disp_taxa(disp_difs_long, mytheme)
+
+###### within
+
+  figures/Fig2.pdf:
+    command: > 
+      r2_plot_df_maker(inverts_adonis_win_ini, inverts_adonis_win_fin,
+              zoops_adonis_win_ini, zoops_adonis_win_fin,
+              bact_adonis_win_ini, bact_adonis_win_fin)
+    plot: true
+
 
 ### DOCUMENTS
 
@@ -600,7 +600,7 @@ targets:
       - disp_difs_long 
       - disp_mixed
     knitr: true
-    
+
   MS/SuppMatt.pdf:
     depends:
       - figures/inverts.pdf
@@ -621,7 +621,7 @@ targets:
       - disp_mixed
       - tidy_mixed
     knitr: true
-    
+
   MS/OrgSize.pdf:
     depends:
       - figures/Fig1.pdf

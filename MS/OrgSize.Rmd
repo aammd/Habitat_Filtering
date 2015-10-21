@@ -202,7 +202,7 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 ![disp](../figures/plot_disp_taxa.pdf)
 `r fig_nums("disp", "behold the figure of dispersion")`
 
-![between](../figures/Fig1.pdf)
+![between](../figures/r2_plot.pdf)
 `r fig_nums("bw_spp", "The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker")`
 
 
