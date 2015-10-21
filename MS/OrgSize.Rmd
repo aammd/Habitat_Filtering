@@ -173,31 +173,11 @@ Goal 1: dispersion differences among the different organism groups.
 
 We hypothesized that smaller organism types should recover less dispersion than larger ones. This can be tested with the interaction between timing of sampling (intial vs final) and organism type. We measured dispersion (distance to centroid) for all five blocks before and after the experiment (Mixed effect model, F~2,20~ = `r getFP_aov(tidy_mixed, "Fvalue", "taxa:timing")`, `r check_aov_p(tidy_mixed, "taxa:timing")`). However, we did see an overall decrease in the dispersion at the end of the experiment (F~1,20~ = `r getFP_aov(tidy_mixed, "Fvalue", "timing")`, `r check_aov_p(tidy_mixed, "timing")`).
 
-Question 2:
+Question 2: 
 
-Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (`r fig_nums("bw_spp")` )
-
-
-We found more signal in insects and zooplankton relative to bacteria. These differences can be seen in 
-
-Can we get an effect size out of the insects relative to the zooplankton and bacteria? we could, instead of using PERMANOVAs with block as a random factor, we could actually just test this effect size metric on animals from large to small with ordinal contrasts. 
-
-Another possibility: is there a convenient way to measure the differences between the initial and final community compositions. 
-
-
-
+Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (`r fig_nums("bw_spp")` ). We tested this by performing six PERMANOVAs, summarized in `r tab("perm_3sp")`.
 
 ### Tables
-
-
-`r tab_nums("disp_tab", "this is the table of disperions")`
-```{r results='asis', echo = FALSE}
-disp_difs_long  %>% 
-  lm(value ~ taxa * timing, data = .) %>% 
-  stargazer(header = FALSE)
-
-```
-
 
 ```{r echo=FALSE}
 getF <- function(x) sprintf("%.2f", x[["aov.tab"]][["F.Model"]][[1]])
