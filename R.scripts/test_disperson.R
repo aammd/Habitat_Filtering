@@ -17,7 +17,7 @@ make_betadisp <- function(data_list, distmeas){
 
 
 get_mean_disps <- function(displist){
-  get_mean <- function (df, time) {
+  get_mean <- function(df, time) {
     df[["distances"]] %>% 
       .[names(df[["distances"]]) == time] %>% 
       mean
@@ -35,6 +35,10 @@ make_disp_mixedmod <- function(.disp_difs_long){
   lme(value ~ taxa*timing, random = ~1|block, data = .disp_difs_long)
 }
 
+make_disp_mixedmod_nointeract <- function(.disp_difs_long){
+  lme(value ~ taxa + timing, random = ~1|block, data = .disp_difs_long)
+}
+
 aov_mixed_tidy <- function(.aov_mixed){
   .aov_mixed %>% 
     add_rownames(var = "term") %>% 
@@ -44,9 +48,9 @@ aov_mixed_tidy <- function(.aov_mixed){
     ungroup
 }
 
-getFP_aov <- function(.aov_mixed_tidy, val){
+getFP_aov <- function(.aov_mixed_tidy, val, .term){
   .aov_mixed_tidy %>% 
-    filter(term == "taxa:timing") %>% 
+    filter(term == .term) %>% 
     select_(val) %>% 
     as.numeric
 }
@@ -59,6 +63,6 @@ check_p <- function(pv){
   }
 }
 
-check_aov_p <- function(.aov_mixed_tidy){
-  check_p(getFP_aov(.aov_mixed_tidy, "pvalue"))
+check_aov_p <- function(.aov_mixed_tidy, Term){
+  check_p(getFP_aov(.aov_mixed_tidy, "pvalue", .term = Term))
 }

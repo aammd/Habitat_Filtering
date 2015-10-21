@@ -7,21 +7,11 @@ disp_aov_err <- disp_difs_long  %>%
 
 stargazer::stargazer(disp_aov_err)
 
-library(lme4)
-disp_aov <- lmer(value ~ taxa * timing + (1|block), data = disp_difs_long)
-
-stargazer::stargazer(disp_aov)
-summary(disp_aov)
 
 
-sum_mixed <- summary(mixedmod)
-
-str(aov_mixed)
-aov_mixed$`p-value`
-
-# stargazer::stargazer(mixedmod)
-# doesn't work!
 head(disp_difs_long)
+
+## turn blocks into percent decrease
 disp_difs_long %>% 
   spread(timing, value) %>% 
   mutate(percent_dec = (initial - final)/initial) %>% 
