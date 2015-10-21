@@ -1,4 +1,8 @@
 #! /bin/bash
+		
+
+## copy over the theme from the first chapter:
+cp ../01_PredPhylo/R.scripts/FIGURE_themes.R ./R.scripts/
 
 ## obtain the bibliography from Mendeley
 cp /home/andrew/Documents/reference/Mendeley_reference_lists/@MS_habitat_size_org.bib ./MS/orgsize.bib
