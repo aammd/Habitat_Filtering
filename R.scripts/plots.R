@@ -134,3 +134,25 @@ plot_disp_taxa <- function(.disp_difs_long, the_theme){
     facet_wrap(~taxa) + 
     the_theme
 }
+
+r2_plot <- function(r2_df, the_theme){
+  newlevels <- c(inverts = "macroinvertebrates",
+                 zoops = "zooplankton",
+                 bact = "bacteria")
+  
+  r2_df %>% 
+    mutate(taxa = newlevels[taxa],
+           taxa = ordered(taxa,
+                          levels = c("macroinvertebrates", 
+                                     "zooplankton",
+                                     "bacteria")),
+           time = ifelse(time == "fin", "final", "initial"),
+           time = ordered(time, levels = c("initial", "final"))) %>% 
+    ggplot(aes(x = taxa, fill = time, y = number)) + 
+    geom_point(size = 6, shape = 21, colour = "black") +
+    ylab(expression("Environmental signa2l ("*r^2*" value)")) +
+    the_theme + 
+    scale_fill_viridis(discrete = TRUE) +
+    #scale_fill_manual(values = c("darkgreen", "lightblue")) +
+    xlab("Organism type")
+}
