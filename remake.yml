@@ -265,11 +265,14 @@ targets:
     plot: true
     
   figures/Fig1.pdf:
+    command: r2_plot(r2_plot_df, mytheme)
+    plot: true
+
+  r2_plot_df:
     command: > 
-      r2_plot(inverts_adonis_ini, inverts_adonis_fin,
+      r2_plot_df_maker(inverts_adonis_ini, inverts_adonis_fin,
               zoops_adonis_ini, zoops_adonis_fin,
               bact_adonis_ini, bact_adonis_fin)
-    plot: true
     
   figures/Fig2.pdf:
     command: > 
