@@ -104,14 +104,14 @@ nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_ (partial shade), and
 _Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat
 range at this site, occuring in both full shade and full sun; only shade
 plants were used in this study. We created five blocks; each block consisted
-of six bromeliads (two of each species). To create each block in the between-
-species experiment, we collected two bromeliads of each of the three species;
-in the within-species experiment we collected three bromeliads from open
-habitats and three from closed habitats.  In both experiments, all bromeliads
-in a block were stocked with a nearly identical starting community,
-intermediate between that of all six bromeliads in that block. We made these
-starting communities by sampling, then combining, each of three major groups:
-macroinvertebrates, zooplankton and bacteria.
+of six bromeliads, two from each species. We combined their communities and filled each bromeliad with an identical starting community (see `r fig("design")`. We made these starting communities by sampling, then
+combining, each of three major groups: macroinvertebrates, zooplankton and
+bacteria.
+
+
+![img](../photos/text_design.png)
+`r fig_nums("design", "This is the design of the experiment.")`
+
 
 **Initial collection**: We sampled macroinvertebrates by thoroughly rinsing
 each bromeliad and passing the water through 1mm and 180μm mesh to collect
@@ -191,7 +191,7 @@ Another possibility: is there a convenient way to measure the differences betwee
 
 
 `r tab_nums("disp_tab", "this is the table of disperions")`
-```{r results='asis'}
+```{r results='asis', echo = FALSE}
 disp_difs_long  %>% 
   lm(value ~ taxa * timing, data = .) %>% 
   stargazer(header = FALSE)
@@ -199,7 +199,7 @@ disp_difs_long  %>%
 ```
 
 ### another table
-```{r results='asis'}
+```{r results='asis', echo = FALSE}
 disp_aov <- lmer(value ~ taxa * timing + (1|block), data = disp_difs_long)
 
 stargazer::stargazer(disp_aov, header = FALSE)
