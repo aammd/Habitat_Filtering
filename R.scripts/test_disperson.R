@@ -31,6 +31,34 @@ get_mean_disps <- function(displist){
 }
 
 
+make_disp_mixedmod <- function(.disp_difs_long){
+  lme(value ~ taxa*timing, random = ~1|block, data = .disp_difs_long)
+}
 
+aov_mixed_tidy <- function(.aov_mixed){
+  .aov_mixed %>% 
+    add_rownames(var = "term") %>% 
+    select(term, Fvalue = `F-value`, pvalue = `p-value`) %>% 
+    group_by(term) %>% 
+    mutate_each(funs(sprintf("%.2f", .))) %>% 
+    ungroup
+}
 
-           
+getFP_aov <- function(.aov_mixed_tidy, val){
+  .aov_mixed_tidy %>% 
+    filter(term == "taxa:timing") %>% 
+    select_(val) %>% 
+    as.numeric
+}
+
+check_p <- function(pv){
+  if (pv < 0.05) {
+    "p < 0.05"
+  } else {
+    "p > 0.05"
+  }
+}
+
+check_aov_p <- function(.aov_mixed_tidy){
+  check_p(getFP_aov(.aov_mixed_tidy, "pvalue"))
+}
