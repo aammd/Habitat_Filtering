@@ -25,7 +25,8 @@ sources:
   - R.scripts/plots.R
   - R.scripts/test_disperson.R
   - R.scripts/run_manyglm.R
-  
+  - R.scripts/FIGURE_themes.R
+
 targets:
   all:
     depends: 
@@ -125,8 +126,8 @@ targets:
     command: TaxaTimeSelector(zoops, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))
 
   bact_tts_fin:
-    command: TaxaTimeSelector(bact_df, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))  
-    
+    command: TaxaTimeSelector(bact_df, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))
+
 ## WITHIN SPECIES 
 
 ### first adjust the bromeliad data to rename Habitat to species
@@ -552,17 +553,25 @@ targets:
   disp_diffs:
     command: get_mean_disps(displist = disper_list)
 
-### figures
+###  FIGURES
+
+    ## Figure themes
+  mytheme:
+    command: maketheme()
+
+  mypts:
+    command: makept()
+
   figures/one_one_plot.pdf:
     plot: true
     command: one_one_plot(disp_diffs)
 
   disp_difs_long:
     command: disp_to_long(disp_diffs)
-    
+
   figures/plot_disp_taxa.pdf:
     plot: true
-    command: plot_disp_taxa(disp_difs_long)
+    command: plot_disp_taxa(disp_difs_long, mytheme)
 
 ### DOCUMENTS
 
@@ -600,6 +609,5 @@ targets:
   MS/OrgSize.pdf:
     depends:
       - figures/Fig1.pdf
-      - figures/Fig2.pdf
       - figures/plot_disp_taxa.pdf
     command: render("MS/OrgSize.md")
