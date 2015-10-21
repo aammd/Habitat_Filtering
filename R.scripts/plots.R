@@ -109,18 +109,28 @@ one_one_plot <- function(.disp_diffs){
 
 ## helper function to make data long
 disp_to_long <- function(.disp_diffs){
+  newlevels <- c(inverts = "macroinvertebrates",
+                 zoops = "zooplankton",
+                 bact = "bacteria")
+  # browser()
   .disp_diffs %>% 
-    gather("timing", "value", initial:final)%>% 
-    mutate(taxa = ordered(taxa,
-                          levels = c("inverts", 
-                                     "zoops",
-                                     "bact")))
+    gather("timing", "value", initial:final) %>% 
+    mutate(taxa = newlevels[taxa],
+           taxa = ordered(taxa,
+                          levels = c("macroinvertebrates", 
+                                     "zooplankton",
+                                     "bacteria")))
 }
 
 
-plot_disp_taxa <- function(.disp_difs_long){
+plot_disp_taxa <- function(.disp_difs_long, the_theme){
   .disp_difs_long %>% 
-    ggplot(aes(x = timing, y = value)) +
-    geom_point() + 
-    facet_wrap(~taxa)
+    ggplot(aes(x = timing, y = value, group = block)) +
+    geom_line() +
+    geom_point(size = 4, colour = "black",
+               fill = "darkgreen", shape = 21) + 
+    ylab("Mean distance to centroid") + 
+    xlab("Time of sampling") + 
+    facet_wrap(~taxa) + 
+    the_theme
 }
