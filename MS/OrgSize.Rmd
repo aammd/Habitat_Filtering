@@ -171,9 +171,9 @@ identify those taxa which contributed most to the differences.
 
 Goal 1: dispersion differences among the different organism groups.  
 
-It doesn't go down. Mixed effect model (F~1,20~ = `r getFP_aov(tidy_mixed, "Fvalue")`, `r check_aov_p(tidy_mixed)`)
+We hypothesized that smaller organism types should recover less dispersion than larger ones. This can be tested with the interaction between timing of sampling (intial vs final) and organism type. We measured dispersion (distance to centroid) for all five blocks before and after the experiment (Mixed effect model, F~2,20~ = `r getFP_aov(tidy_mixed, "Fvalue", "taxa:timing")`, `r check_aov_p(tidy_mixed, "taxa:timing")`). However, we did see an overall decrease in the dispersion at the end of the experiment (F~1,20~ = `r getFP_aov(tidy_mixed, "Fvalue", "timing")`, `r check_aov_p(tidy_mixed, "timing")`).
 
-
+Question 2:
 
 Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (`r fig_nums("bw_spp")` )
 
