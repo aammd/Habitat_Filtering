@@ -171,7 +171,7 @@ identify those taxa which contributed most to the differences.
 
 Goal 1: dispersion differences among the different organism groups.  
 
-
+It doesn't go down. Mixed effect model (F~1,20~ = `r getFP_aov(tidy_mixed, "Fvalue")`, `r check_aov_p(tidy_mixed)`)
 
 
 
@@ -198,12 +198,6 @@ disp_difs_long  %>%
 
 ```
 
-### another table
-```{r results='asis', echo = FALSE}
-disp_aov <- lmer(value ~ taxa * timing + (1|block), data = disp_difs_long)
-
-stargazer::stargazer(disp_aov, header = FALSE)
-```
 
 ```{r echo=FALSE}
 getF <- function(x) sprintf("%.2f", x[["aov.tab"]][["F.Model"]][[1]])
