@@ -15,7 +15,7 @@ packages:
   - ibuttonr
   - viridis
   - stargazer
-  - lme4
+  - nlme
 
 sources:
   - R.scripts/results.R
@@ -553,6 +553,18 @@ targets:
   disp_diffs:
     command: get_mean_disps(displist = disper_list)
 
+  disp_difs_long:
+    command: disp_to_long(disp_diffs)
+
+  disp_mixed:
+    command: make_disp_mixedmod(disp_difs_long)
+
+  aov_mixed:
+    command: anova(disp_mixed)
+
+  tidy_mixed:
+    command: aov_mixed_tidy(aov_mixed)
+
 ###  FIGURES
 
     ## Figure themes
@@ -566,8 +578,6 @@ targets:
     plot: true
     command: one_one_plot(disp_diffs)
 
-  disp_difs_long:
-    command: disp_to_long(disp_diffs)
 
   figures/plot_disp_taxa.pdf:
     plot: true
@@ -585,6 +595,7 @@ targets:
       - bact_adonis_fin
       - disper_list
       - disp_difs_long 
+      - disp_mixed
     knitr: true
     
   MS/SuppMatt.pdf:
@@ -604,6 +615,8 @@ targets:
       - zoops_adonis_fin
       - bact_adonis_fin
       - disp_difs_long 
+      - disp_mixed
+      - tidy_mixed
     knitr: true
     
   MS/OrgSize.pdf:
