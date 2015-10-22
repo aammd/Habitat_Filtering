@@ -164,7 +164,23 @@ organisms are more filtered, then we expect to find a greater difference in
 community composition emerge among the macroinvertebrates, less among the
 zooplankton, and little to none among bacteria. We complemented this approach
 in question 3 with a multivariate regression of abundance [@mvabund] to
-identify those taxa which contributed most to the differences.
+identify those taxa which contributed most to the differences. 
+
+We used a technique called multivariate generalized linear models
+[@Warton2012] from the R package mvabund [@Wang2012;@mvabund]. This approach
+has three advantages that make it suitable for our application. First, because
+it is based on GLMs, we are able to model the mean-variance relationship
+common in count data. Distance-based metrics, on the other hand, can conflate
+differences in dispersion with differences in location [@Warton2012]. We are
+already testing for dispersion and location effects in the separate analysis
+described above with distance based methods. Therefore this multivariate GLM
+approach helps confirm our findings by accounting for both within a different
+framework. Second, it allows us to test for an interaction between our
+treatments (different bromeliad species) and blocks. Third, mvabund also
+allows for estimating individual species-level responses. These are tested
+using bootrap tests that correct for multiple comparisons. This technique lets
+us identify which species responded most to the environmental differences, and
+to relate these to traits of these species.
 
 
 ## Results  
@@ -177,7 +193,7 @@ Question 2:
 
 Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (`r fig_nums("bw_spp")` ). We tested this by performing six PERMANOVAs, summarized in `r tab("perm_3sp")`.
 
-### Tables
+### Tables	
 
 ```{r echo=FALSE}
 getF <- function(x) sprintf("%.2f", x[["aov.tab"]][["F.Model"]][[1]])
