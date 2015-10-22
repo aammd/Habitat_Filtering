@@ -655,6 +655,7 @@ targets:
   MS/OrgSize.md:
     knitr: true
     depends:
+      - blocks
       - inverts_adonis_ini
       - zoops_adonis_ini
       - bact_adonis_ini

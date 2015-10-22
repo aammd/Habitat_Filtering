@@ -137,18 +137,16 @@ level of class and order, respectively). Bacteria were collected by taking
 some of the filtrate from the zooplankton sample and filtering it a second
 time on a Whatman filter paper. We measured bacterial community composition
 using denaturing gradient gel electrophoresis (DGGE, Muyzer et al. [@Muyzer1993]). This
-analysis furnishes an approximation of bacterial diversity in the form of
+technique measures an approximation of bacterial diversity in the form of
 Operational Taxonomic Units (OTUs). **Initial communities**: we created
 initial communities of zooplankton and microbes by mixing an equal volume of
-filtered tank water from each plant (approximately 100ml plant^-1^), returning
-the same volumes to all bromeliads. **Bromeliad preparation**: We emptied
-bromeliads by hanging them upside down to dry for at least 24 hours and then
+filtered tank water from each plant (approximately 100ml plant^-1^), then dividing this mixed volume among all individual bromeliads. To create initial communities of macroinvertebrates, we simply counted them all and divided them equally among all bromeliads. **Bromeliad preparation**: We emptied
+bromeliads by washing them thoroughly, hanging them upside down to dry for at least 24 hours and then
 rinsing each plant with 70% ethanol. Any coarse detritus found in the
 bromeliads was similarly cleaned, frozen and thawed (to kill any
 macroinvertebrates eggs). We confirmed that this technique removed all
 invertebrates and most detritus by dissecting an empty bromeliad. Bromeliads
-were placed in a local habitat similar to their original, each enclosed in a
-2mm mesh cage to prevent colonization by insects. We then added the starting
+were placed in a local habitat similar to their original: _Neoregelica_ in shade, _Aechmea_ in full sun and _Vresia_ in marginal habitat. We then added the starting
 communities of macroinvertebrates, zooplankton and bacteria.
 
 Bromeliads are an open system, characterized by continual colonization and
@@ -168,20 +166,25 @@ long that bromeliads were empty.
 ### Analyses
 
 *Question 1: less beta diversity among smaller taxa*
-For question 1, we performed a test for homogeniety of multivariate dispersions [@Anderson2006]
-used the `betadisper` function in the R package vegan [@vegan]. We used a
-permutation test to test for differences before and after the experiment
-within each block (999 null simulations block^-1^). All statistical analyses
-were conducted in R [@rcore]. We tested question 2 with a permutational ANOVA
-(PERMANOVA) to detect differences in the degree of environmental signal among
-groups. PERMANOVA measures the amount of difference in community composition
-between treatment groups and compares this to the expected distribution under
-a null hypothesis of no treatment effects. If larger-bodied groups of
-organisms are more filtered, then we expect to find a greater difference in
-community composition emerge among the macroinvertebrates, less among the
-zooplankton, and little to none among bacteria. We complemented this approach
-in question 3 with a multivariate regression of abundance [@mvabund] to
-identify those taxa which contributed most to the differences. 
+The duration of our experiment is probably not enough time for our invertebrate communities to recover the 
+
+If smaller taxa are more plastic, they are unlikely to develop strong inter-
+patch differences during our experiment, or will do so more slowly than larger
+organisms. We tested this by comparing homogeniety of multivariate
+dispersions [@Anderson2006] between all six bromeliads (i.e. within one block) before and after the experiment. We repeated this comparison for all five blocks, and for all thee organism types. We used the `betadisper` function in the R package
+vegan [@vegan], which includes a permutation test to test for differences before and
+after the experiment within each block (999 null simulations block^-1^). All
+statistical analyses were conducted in R [@rcore]. We tested question 2 with a
+permutational ANOVA (PERMANOVA) to detect differences in the degree of
+environmental signal among groups. PERMANOVA measures the amount of difference
+in community composition between treatment groups and compares this to the
+expected distribution under a null hypothesis of no treatment effects. If
+larger-bodied groups of organisms are more filtered, then we expect to find a
+greater difference in community composition emerge among the
+macroinvertebrates, less among the zooplankton, and little to none among
+bacteria. We complemented this approach in question 3 with a multivariate
+regression of abundance [@mvabund] to identify those taxa which contributed
+most to the differences.
 
 We used a technique called multivariate generalized linear models
 [@Warton2012] from the R package mvabund [@Wang2012;@mvabund]. This approach
