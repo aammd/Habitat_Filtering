@@ -236,13 +236,3 @@ In conclusion, here we have shown that a hypothesis made by variance partitionin
 In other words our experiment has not only confirmed some aspects of the body size habitat senstivity experiment, but also investigated the rate at which beta diversity is recovered for these different groups. p 
 
 ## References
-
-Farjalla, V. F., Srivastava, D. S., Marino, N. a C., Azevedo, F. D., Dib, V.,
-Lopes, P. M., Esteves, F. A. (2012). Ecological determinism increases with
-organism size. Ecology, 93(7), 1752–9.
-
-Muyzer G., de Waal E.C., Uitterlinden A.G. (1993). Profiling of complex
-microbial populations by denaturing gradient gel electrophoresis analysis of
-polymerase chain reaction-amplified genes coding for 16S rRNA. Applied
-Environmental Microbiology, 59(3), 695-700.
-
