@@ -77,3 +77,19 @@ disp_difs_long  %>%
 
 ```
 
+### results of multivariate GLMS
+
+```{r}
+plot(inverts_manyglm_fin)
+```
+
+
+```{r}
+plot(zoops_manyglm_fin)
+```
+
+```{r}
+
+plot(bact_manyglm_fin)
+```
+
