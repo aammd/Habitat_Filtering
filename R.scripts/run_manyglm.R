@@ -21,8 +21,10 @@ make_summary <- function(manyglm_output){
   summary(manyglm_output, resamp = "residual")
 }
 
-manyglm_anova <- function(manyglm_output){
-  anova(manyglm_output, resamp="perm.resid", p.uni="adjusted", show.time="all")
+manyglm_anova <- function(manyglm_output,
+                          .resamp = "perm.redsid", .nboot = 1000){
+  anova(manyglm_output, resamp = .resamp,
+        p.uni = "adjusted", show.time = "all", nBoot = .nboot)
 }
   
 get_model_stats <- function(anova_output){
