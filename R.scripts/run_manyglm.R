@@ -17,8 +17,8 @@ run_manyglm <- function(Data,
   return(insect_glm_interact)
 }
 
-make_summary <- function(manyglm_output, .nboot = 1000){
-  summary(manyglm_output, nBoot = .nboot)
+make_summary <- function(manyglm_output, .resamp = "pit.trap", .nboot = 1000){
+  summary(manyglm_output, resamp = .resamp, nBoot = .nboot)
 }
 
 manyglm_anova <- function(manyglm_output,
