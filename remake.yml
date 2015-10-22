@@ -174,87 +174,6 @@ targets:
       .bromeliad = bromeliad_win, sampletime = I("final"),
       .experiment = I("withinsp"))
 
-#####################
-## perform manyglm analysis -- INVERTS
-  ## run manyglm
-  inverts_manyglm_fin:
-    command: run_manyglm(inverts_tts_fin)
-  ## obtain summaries and anovas
-  inverts_manyglm_fin_sum:
-    command: make_summary(inverts_manyglm_fin)
-  inverts_manyglm_fin_aov:
-    command: manyglm_anova(inverts_manyglm_fin)
-  ## tidy anova output
-  inverts_manyglm_fin_aov_tidy:
-    command: get_model_stats(inverts_manyglm_fin_aov)
-
-
-## perform manyglm analysis -- ZOOP
-  ## run manyglm
-  zoops_manyglm_fin:
-    command: run_manyglm(zoops_tts_fin)
-  ## obtain summaries and anovas
-  zoops_manyglm_fin_sum:
-    command: make_summary(zoops_manyglm_fin)
-  zoops_manyglm_fin_aov:
-    command: manyglm_anova(zoops_manyglm_fin)
-  ## tidy anova output
-  zoops_manyglm_fin_aov_tidy:
-    command: get_model_stats(zoops_manyglm_fin_aov)
-
-## peform manyglm analsysis -- BACTERIA
-  ## run manyglm
-  bact_manyglm_fin:
-    command: run_manyglm(bact_tts_fin)
-  ## obtain summaries and anovas
-  bact_manyglm_fin_sum:
-    command: make_summary(bact_manyglm_fin)
-  bact_manyglm_fin_aov:
-    command: manyglm_anova(bact_manyglm_fin)
-  ## tidy anova output
-  bact_manyglm_fin_aov_tidy:
-    command: get_model_stats(bact_manyglm_fin_aov)
-
-  ### perform permanovas
-
-## THREE SPECIES
-  inverts_adonis_ini:
-    command: AdonisData(inverts_tts_ini, method = I("euclid"))
-
-  zoops_adonis_ini:
-    command: AdonisData(zoops_tts_ini, method = I("euclid"))
-
-  bact_adonis_ini:
-    command: AdonisData(bact_tts_ini, method = I("euclid"))
-
-  inverts_adonis_fin:
-    command: AdonisData(inverts_tts_fin, method = I("euclid"))
-
-  zoops_adonis_fin:
-    command: AdonisData(zoops_tts_fin, method = I("euclid"))
-
-  bact_adonis_fin:
-    command: AdonisData(bact_tts_fin, method = I("euclid"))
-
-  ## WITHIN SPECIES
-
-  inverts_adonis_win_ini:
-    command: AdonisData(inverts_tts_win_ini, method = I("euclid"))
-
-  zoops_adonis_win_ini:
-    command: AdonisData(zoops_tts_win_ini, method = I("euclid"))
-
-  bact_adonis_win_ini:
-    command: AdonisData(bact_tts_win_ini, method = I("euclid"))
-
-  inverts_adonis_win_fin:
-    command: AdonisData(inverts_tts_win_fin, method = I("euclid"))
-
-  zoops_adonis_win_fin:
-    command: AdonisData(zoops_tts_win_fin, method = I("euclid"))
-
-  bact_adonis_win_fin:
-    command: AdonisData(bact_tts_win_fin, method = I("euclid"))
 
 
 ## create a list of permanovas for use in plotting
@@ -288,7 +207,10 @@ targets:
     command: filter_block(blocks, I("Smith"))
 
 
-  ## subset inverts
+  ## Create the before/after NMDS plots
+## each section has three parts: selecting the correct time
+## running the MDS
+## placing answers in a list
 
   inverts_ini_fin_Baker:
     command: >
@@ -350,11 +272,8 @@ targets:
            Tennant = inverts_ini_fin_Tennant_mds,
            Smith = inverts_ini_fin_Smith_mds)
 
-  figures/inverts.pdf:
-    plot: true
-    command: plot_taxa_mds(invert_mds_list)
 
-## subset zoops
+##  NMDS for zoops
 
   zoops_ini_fin_Baker:
     command: >
@@ -416,9 +335,6 @@ targets:
            Tennant = zoops_ini_fin_Tennant_mds,
            Smith = zoops_ini_fin_Smith_mds)
 
-  figures/zoop.pdf:
-    plot: true
-    command: plot_taxa_mds(zoop_mds_list)
 
 ## finally, bacteria
 
@@ -473,7 +389,7 @@ targets:
   bact_ini_fin_Smith_mds:
     command: bact_mds_augment(bact_ini_fin_Smith)
 
-## combine these into a list
+## combine these into a list -- list of NMDS solutions!!
   bact_mds_list:
     command: >
       list(Baker = bact_ini_fin_Baker_mds,
@@ -482,9 +398,9 @@ targets:
            Tennant = bact_ini_fin_Tennant_mds,
            Smith = bact_ini_fin_Smith_mds)
 
-  figures/bact.pdf:
-    plot: true
-    command: plot_taxa_mds(bact_mds_list)
+############################################################
+############################################################
+#                                        Disperson
 
   inverts_ini_fin_Baker_disp:
     command: make_betadisp(inverts_ini_fin_Baker, I("raup"))
@@ -552,6 +468,91 @@ targets:
   tidy_mixed:
     command: aov_mixed_tidy(aov_mixed)
 
+
+## Run the ANOVA
+
+
+#####################
+## perform manyglm analysis -- INVERTS
+  ## run manyglm
+  inverts_manyglm_fin:
+    command: run_manyglm(inverts_tts_fin, glm_family = I("negative.binomial"))
+  ## obtain summaries and anovas
+  inverts_manyglm_fin_sum:
+    command: make_summary(inverts_manyglm_fin)
+  inverts_manyglm_fin_aov:
+    command: manyglm_anova(inverts_manyglm_fin)
+  ## tidy anova output
+  inverts_manyglm_fin_aov_tidy:
+    command: get_model_stats(inverts_manyglm_fin_aov)
+
+
+## perform manyglm analysis -- ZOOP
+  ## run manyglm
+  zoops_manyglm_fin:
+    command: run_manyglm(zoops_tts_fin, glm_family = I("negative.binomial"))
+  ## obtain summaries and anovas
+  zoops_manyglm_fin_sum:
+    command: make_summary(zoops_manyglm_fin)
+  zoops_manyglm_fin_aov:
+    command: manyglm_anova(zoops_manyglm_fin)
+  ## tidy anova output
+  zoops_manyglm_fin_aov_tidy:
+    command: get_model_stats(zoops_manyglm_fin_aov)
+
+    ## peform manyglm analsysis -- BACTERIA
+  ## run manyglm
+  bact_manyglm_fin:
+    command: run_manyglm(bact_tts_fin, glm_family = I("binomial"))
+  ## obtain summaries and anovas
+  bact_manyglm_fin_sum:
+    command: make_summary(bact_manyglm_fin)
+  bact_manyglm_fin_aov:
+    command: manyglm_anova(bact_manyglm_fin)
+  ## tidy anova output
+  bact_manyglm_fin_aov_tidy:
+    command: get_model_stats(bact_manyglm_fin_aov)
+
+
+## THREE SPECIES
+  inverts_adonis_ini:
+    command: AdonisData(inverts_tts_ini, method = I("euclid"))
+
+  zoops_adonis_ini:
+    command: AdonisData(zoops_tts_ini, method = I("euclid"))
+
+  bact_adonis_ini:
+    command: AdonisData(bact_tts_ini, method = I("euclid"))
+
+  inverts_adonis_fin:
+    command: AdonisData(inverts_tts_fin, method = I("euclid"))
+
+  zoops_adonis_fin:
+    command: AdonisData(zoops_tts_fin, method = I("euclid"))
+
+  bact_adonis_fin:
+    command: AdonisData(bact_tts_fin, method = I("euclid"))
+
+  ## WITHIN SPECIES
+
+  inverts_adonis_win_ini:
+    command: AdonisData(inverts_tts_win_ini, method = I("euclid"))
+
+  zoops_adonis_win_ini:
+    command: AdonisData(zoops_tts_win_ini, method = I("euclid"))
+
+  bact_adonis_win_ini:
+    command: AdonisData(bact_tts_win_ini, method = I("euclid"))
+
+  inverts_adonis_win_fin:
+    command: AdonisData(inverts_tts_win_fin, method = I("euclid"))
+
+  zoops_adonis_win_fin:
+    command: AdonisData(zoops_tts_win_fin, method = I("euclid"))
+
+  bact_adonis_win_fin:
+    command: AdonisData(bact_tts_win_fin, method = I("euclid"))
+
 ###  FIGURES
 
     ## Figure themes
@@ -576,6 +577,19 @@ targets:
     plot: true
     command: plot_disp_taxa(disp_difs_long, mytheme)
 
+## figures of the dispersion in each block, for the supplementary material
+  figures/inverts.pdf:
+    plot: true
+    command: plot_taxa_mds(invert_mds_list)
+
+  figures/zoop.pdf:
+    plot: true
+    command: plot_taxa_mds(zoop_mds_list)
+
+  figures/bact.pdf:
+    plot: true
+    command: plot_taxa_mds(bact_mds_list)
+
 ###### within
 
   figures/Fig2.pdf:
@@ -599,6 +613,9 @@ targets:
       - disper_list
       - disp_difs_long 
       - disp_mixed
+      - inverts_manyglm_fin
+      - zoops_manyglm_fin
+      - bact_manyglm_fin
     knitr: true
 
   MS/SuppMatt.pdf:
@@ -624,6 +641,6 @@ targets:
 
   MS/OrgSize.pdf:
     depends:
-      - figures/Fig1.pdf
       - figures/plot_disp_taxa.pdf
     command: render("MS/OrgSize.md")
+
