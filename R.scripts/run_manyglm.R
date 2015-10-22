@@ -1,21 +1,20 @@
 ## run and report the manyglm results
 # insects in threespp experiment ------------------------------------------
 
-run_manyglm <- function(Data, 
-                        glm_family = "negative.binomial") {
-
-  ## call mvabund on responses
-  insectresponses <- Data %>% 
-    extract2("taxa") %>%
-    mvabund
-  
+## mvabund approach
+run_manyglm <- function(data_list, glm_family = "negative.binomial"){  
+  #' call mvabund on responses
+  responses <- data_list %>% 
+    extract2("taxa") %>% 
+    as.matrix
+  # browser()
   ## run glm
-  insect_glm_interact <- Data %>% 
+  data_list %>% 
     extract2("factors") %>% 
     data.frame %>% 
-    manyglm(insectresponses ~ Block * species, data = ., family = glm_family) 
-  return(insect_glm_interact)
+    manyglm(responses ~ Block * species, data = ., family = glm_family)
 }
+
 
 make_summary <- function(manyglm_output, .resamp = "pit.trap", .nboot = 1000){
   summary(manyglm_output, resamp = .resamp, nBoot = .nboot)
@@ -51,22 +50,18 @@ get_model_stats <- function(anova_output){
   left_join(insect_sig, insect_statistic, by = "rowname")
 }
 
-### modified for bacteria ####
+### modified for additive model ####
 
 
-run_manyglm_bact <- function(Data, 
-                             glm_family = "negative.binomial") {
-  
-  ## call mvabund on responses
-  bactresponses <- Data %>% 
-    extract2("taxa") %>%
-    mvabund
-  
+run_manyglm_add <- function(data_list, glm_family = "negative.binomial"){  
+  #' call mvabund on responses
+  responses <- data_list %>% 
+    extract2("taxa") %>% 
+    as.matrix
+  # browser()
   ## run glm
-  insect_glm_interact <- Data %>% 
+  data_list %>% 
     extract2("factors") %>% 
     data.frame %>% 
-    manyglm(bactresponses ~ species,data = .,family = "binomial") 
-  
-  return(insect_glm_interact)
+    manyglm(responses ~ Block + species, data = ., family = glm_family)
 }

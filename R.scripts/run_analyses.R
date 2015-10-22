@@ -12,27 +12,6 @@ species_r2 <- function(adonis_result){
   adonis_result[["aov.tab"]][["F.Model"]][[1]]
 }
 
-lapply_adonis <- lapply_maker(AdonisData)
-
-lapply_adonis_noNA <- . %>%
-  lapply_narow %>% 
-  lapply_adonis
-
-## mvabund approach
-run_manyglm <- function(data_list, glm_family = "negative.binomial"){  
-  #' call mvabund on responses
-  responses <- data_list %>% 
-    extract2("taxa") %>% 
-    as.matrix
-  # browser()
-  ## run glm
-  data_list %>% 
-    extract2("factors") %>% 
-    data.frame %>% 
-    manyglm(responses ~ Block * species, data = ., family = glm_family)
-}
-
-lapply_manyglm <- lapply_maker(run_manyglm)
 
 result_df <- function(result_list, intolist = c("grp", "time", "tech")){
   
