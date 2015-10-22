@@ -612,6 +612,9 @@ targets:
 ### DOCUMENTS
 
   MS/SuppMatt.md:
+    knitr: 
+      auto_figure_prefix: true
+      chdir: true
     depends:
       - inverts_adonis_ini
       - zoops_adonis_ini
@@ -624,8 +627,7 @@ targets:
       - disp_mixed
       - inverts_manyglm_fin
       - zoops_manyglm_fin
-      - bact_manyglm_fin
-    knitr: true
+      - bact_manyglm_fin  
 
   MS/SuppMatt.pdf:
     depends:
@@ -636,9 +638,7 @@ targets:
     command: render("MS/SuppMatt.md", output_format = I("pdf_document"))
 
   MS/OrgSize.md:
-    knitr:
-      chdir: true
-      auto_figure_prefix: true
+    knitr: true
     depends:
       - inverts_adonis_ini
       - zoops_adonis_ini
@@ -653,5 +653,6 @@ targets:
   MS/OrgSize.pdf:
     depends:
       - figures/plot_disp_taxa.pdf
+      - figures/r2_plot.pdf
     command: render("MS/OrgSize.md")
 
