@@ -17,12 +17,12 @@ run_manyglm <- function(Data,
   return(insect_glm_interact)
 }
 
-make_summary <- function(manyglm_output){
-  summary(manyglm_output, resamp = "residual")
+make_summary <- function(manyglm_output, .nboot = 1000){
+  summary(manyglm_output, nBoot = .nboot)
 }
 
 manyglm_anova <- function(manyglm_output,
-                          .resamp = "perm.redsid", .nboot = 1000){
+                          .resamp = "pit.trap", .nboot = 1000){
   anova(manyglm_output, resamp = .resamp,
         p.uni = "adjusted", show.time = "all", nBoot = .nboot)
 }

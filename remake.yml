@@ -506,9 +506,9 @@ targets:
     command: run_manyglm(bact_tts_fin, glm_family = I("binomial"))
   ## obtain summaries and anovas
   bact_manyglm_fin_sum:
-    command: make_summary(bact_manyglm_fin)
+    command: make_summary(bact_manyglm_fin, .resamp = I("montecarlo"), .nboot = 50)
   bact_manyglm_fin_aov:
-    command: manyglm_anova(bact_manyglm_fin)
+    command: manyglm_anova(bact_manyglm_fin, .resamp = I("montecarlo"), .nboot = 50)
   ## tidy anova output
   bact_manyglm_fin_aov_tidy:
     command: get_model_stats(bact_manyglm_fin_aov)
