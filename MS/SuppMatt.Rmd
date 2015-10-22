@@ -93,3 +93,12 @@ plot(zoops_manyglm_fin)
 plot(bact_manyglm_fin)
 ```
 
+## manyglm
+
+
+test for interactions
+```{r}
+anova(inverts_manyglm_fin, inverts_manyglm_fin_add)
+
+```
+
