@@ -485,6 +485,9 @@ targets:
   ## tidy anova output
   inverts_manyglm_fin_aov_tidy:
     command: get_model_stats(inverts_manyglm_fin_aov)
+  ## full model anova
+  inverts_manyglm_fin_all_aov:
+    command: anova(inverts_manyglm_fin,  p.uni = I("none"), show.time = I("all"), nBoot = 500)
 
 
 ## perform manyglm analysis -- ZOOP
@@ -499,6 +502,9 @@ targets:
   ## tidy anova output
   zoops_manyglm_fin_aov_tidy:
     command: get_model_stats(zoops_manyglm_fin_aov)
+  ## full model anova
+  zoops_manyglm_fin_all_aov:
+    command: anova(zoops_manyglm_fin,  p.uni = I("none"), show.time = I("all"), nBoot = 500)
 
     ## peform manyglm analsysis -- BACTERIA
   ## run manyglm
@@ -512,6 +518,9 @@ targets:
   ## tidy anova output
   bact_manyglm_fin_aov_tidy:
     command: get_model_stats(bact_manyglm_fin_aov)
+  ## full model anova
+  bact_manyglm_fin_all_aov:
+    command: anova(bact_manyglm_fin,  p.uni = I("none"), show.time = I("all"), nBoot = 50)
 
 
 ## THREE SPECIES
@@ -627,6 +636,9 @@ targets:
     command: render("MS/SuppMatt.md", output_format = I("pdf_document"))
 
   MS/OrgSize.md:
+    knitr:
+      chdir: true
+      auto_figure_prefix: true
     depends:
       - inverts_adonis_ini
       - zoops_adonis_ini
@@ -637,7 +649,6 @@ targets:
       - disp_difs_long 
       - disp_mixed
       - tidy_mixed
-    knitr: true
 
   MS/OrgSize.pdf:
     depends:
