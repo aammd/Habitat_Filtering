@@ -488,7 +488,9 @@ targets:
   ## full model anova
   inverts_manyglm_fin_all_aov:
     command: anova(inverts_manyglm_fin,  p.uni = I("none"), show.time = I("all"), nBoot = 500)
-
+## ADDITIVE
+  inverts_manyglm_fin_add:
+    command: run_manyglm_add(inverts_tts_fin, glm_family = I("negative.binomial"))
 
 ## perform manyglm analysis -- ZOOP
   ## run manyglm
@@ -505,6 +507,9 @@ targets:
   ## full model anova
   zoops_manyglm_fin_all_aov:
     command: anova(zoops_manyglm_fin,  p.uni = I("none"), show.time = I("all"), nBoot = 500)
+## ADDITIVE
+  zoops_manyglm_fin_add:
+    command: run_manyglm_add(zoops_tts_fin, glm_family = I("negative.binomial"))
 
     ## peform manyglm analsysis -- BACTERIA
   ## run manyglm
@@ -520,7 +525,11 @@ targets:
     command: get_model_stats(bact_manyglm_fin_aov)
   ## full model anova
   bact_manyglm_fin_all_aov:
-    command: anova(bact_manyglm_fin,  p.uni = I("none"), show.time = I("all"), nBoot = 50)
+    command: anova(bact_manyglm_fin,  p.uni = I("none"), resamp = I("montecarlo"), show.time = I("all"), nBoot = 50)
+## ADDITIVE
+  bact_manyglm_fin_add:
+    command: run_manyglm_add(bact_tts_fin, glm_family = I("binomial"))
+
 
 
 ## THREE SPECIES
@@ -628,6 +637,12 @@ targets:
       - inverts_manyglm_fin
       - zoops_manyglm_fin
       - bact_manyglm_fin  
+      - inverts_manyglm_fin_all_aov  
+      - zoops_manyglm_fin_all_aov  
+      - bact_manyglm_fin_all_aov
+      - inverts_manyglm_fin_add
+      - zoops_manyglm_fin_add
+      - bact_manyglm_fin_add
 
   MS/SuppMatt.pdf:
     depends:
@@ -649,6 +664,12 @@ targets:
       - disp_difs_long 
       - disp_mixed
       - tidy_mixed
+      - inverts_manyglm_fin
+      - zoops_manyglm_fin
+      - bact_manyglm_fin 
+      - inverts_manyglm_fin_add
+      - zoops_manyglm_fin_add
+      - bact_manyglm_fin_add
 
   MS/OrgSize.pdf:
     depends:
