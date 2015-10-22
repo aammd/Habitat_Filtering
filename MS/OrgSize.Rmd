@@ -84,26 +84,24 @@ Question 3: The specific taxa responding to environmental variation will possess
 
 ## Methods
 
-### Study site
-
-We performed our experiments at the Parque Nacional de Jurubatiba, Northeast Rio
-de Janeiro state, Brazil ($22^{\circ}$ S $41^{\circ}$). The landscape is
-composed of large semi-open patches of shrubs which form shady patches
-interspersed with very exposed, sunny habitats (_restinga_ vegetation).
-Bromeliads (Bromeliaceae) form dense colonies within this landscape. The
-landscape is composed of large semi-open clumps of shrubs interspersed with very
-exposed, open sand. Several bromeliad taxa here collect standing water
-(phytotelmata) in deep leaf axils, and are known to contain diverse communities 
-of macroinvertebrates, zooplankton and bacteria.
-
 ### Experimental design
 
-We used the same three bromeliad used by Farjalla et al. [-@Farjalla2012].
-Each bromeliad species was collected from its typical habitat: _Aechmea
-nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_ (partial shade), and
-_Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat
-range at this site, occuring in both full shade and full sun; only shade
-plants were used in this study. We created five blocks; each block consisted
+Our goal is to investigate the patterns observed by Farjalla et al.
+[-@Farjalla2012], therefore we performed this experiment in the same location
+and using the same environmental variation. The location we used is the Parque
+Nacional de Jurubatiba, Northeast Rio de Janeiro state, Brazil ($22^{\circ}$ S
+$41^{\circ}$); the environmental gradient is three different species of
+bromeliad. Each species of bromeliad is found in a different habitat of the
+park: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
+(partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a
+uniquely large habitat range at this site, occuring in both full shade and
+full sun; only shade plants were used in this study. As is common for
+bromeliads, plants used in this study collect standing water (phytotelmata) in
+deep leaf axils, and are known to contain diverse communities  of
+macroinvertebrates, zooplankton and bacteria.
+
+
+We created five blocks; each block consisted
 of six bromeliads, two from each species. We combined their communities and filled each bromeliad with an identical starting community (see `r fig("design")`. We made these starting communities by sampling, then
 combining, each of three major groups: macroinvertebrates, zooplankton and
 bacteria.
