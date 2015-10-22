@@ -1,5 +1,4 @@
 ## running the analyses
-library("pryr")
 ## runs `adonis` on the output of TaxaTimeSelector. Knows
 ## where to find species abundances.  Also defaults to
 ## setting strata as Block. For bacteria (which have to be
@@ -20,19 +19,17 @@ lapply_adonis_noNA <- . %>%
   lapply_adonis
 
 ## mvabund approach
-run_manyglm <- function(data_list, glm_family = "poisson", .formula){  
+run_manyglm <- function(data_list, glm_family = "negative.binomial"){  
   #' call mvabund on responses
   responses <- data_list %>% 
-    extract2("taxa") %>%
-    mvabund
-  
-  f <- as.formula(.formula)
-  
+    extract2("taxa") %>% 
+    as.matrix
+  # browser()
   ## run glm
   data_list %>% 
     extract2("factors") %>% 
     data.frame %>% 
-    manyglm(f, data = ., family = glm_family)
+    manyglm(responses ~ Block * species, data = ., family = glm_family)
 }
 
 lapply_manyglm <- lapply_maker(run_manyglm)
