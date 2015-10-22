@@ -56,6 +56,8 @@ decreases from insects (strong signal), zooplankton (moderate signal) and bacter
 
 Why should the strenght of environmental filtering decrease with organism size? there are two possible mechanisms that may make communities of smaller organisms more strongly filtered. At the individual level, organisms which are very small maybe able to find microhabitats in a way that mitigates varation abmong patches. smaller organisms also have simpler metabolisms. Bacteria are often able to consume a wide variety of carbon sources. Bacteria can even use environmental DNA, or transfer plasmids among unrelated cells, acquiring new functions. 
 
+Dispersion -- this hypothesis also tells us something about how we should expect to see communities change over time.
+
 The individual-level effects suggested by the size-plasticity hypothesis are difficult to test because of population level processes: especially dispersal. At the population level, smaller organisms may also show less of a relationship with environmental variation. if smaller organisms disperse more rapidly, then we would expect to see populations of smaller species maintained, even in patches where they have negative population growth rates (i.e. mass effects). smaller organisms have higher growth rates, higher rates of turnover, and shorter generation times. This suggests that they could persiste in highly variable or fluctuation habitats, purely by demographic processes. Also, they could stick aroun by evolution, as they have larger effects population sizes (does mutation rate show an effect with regard to population size?). rapid evolution to antiobotics is well know.
 In both cases, therefore, space is an issue -- the processes of dispersal can either exaggerate or diminish the effects seen by Farjalla et al. 
 
@@ -88,7 +90,7 @@ Question 3: The specific taxa responding to environmental variation will possess
 
 Our goal is to investigate the patterns observed by Farjalla et al.
 [-@Farjalla2012], therefore we performed this experiment in the same location
-and using the same environmental variation. The location we used is the Parque
+along the same environmental variation. The location we used is the Parque
 Nacional de Jurubatiba, Northeast Rio de Janeiro state, Brazil ($22^{\circ}$ S
 $41^{\circ}$); the environmental gradient is three different species of
 bromeliad. Each species of bromeliad is found in a different habitat of the
@@ -100,56 +102,73 @@ bromeliads, plants used in this study collect standing water (phytotelmata) in
 deep leaf axils, and are known to contain diverse communities  of
 macroinvertebrates, zooplankton and bacteria.
 
+```{r}
+str_end <- blocks %>% 
+	filter(experiment == "threespp") %>% 
+	select(setup.date) %>% 
+	mutate(sdate = ymd(setup.date)) %>% 
+	filter(sdate %in% range(sdate)) %>% 
+	.[["setup.date"]]
+```
 
-We created five blocks; each block consisted
-of six bromeliads, two from each species. We combined their communities and filled each bromeliad with an identical starting community (see `r fig("design")`. We made these starting communities by sampling, then
-combining, each of three major groups: macroinvertebrates, zooplankton and
-bacteria.
+We homogenized the community of macroinvertebrates, zooplankton and bacteria
+among all three bromeliad species. We collected six bromeliads -- two of each
+species -- sampled them, and mixed their communities together (see `r fig("design")`, description of sampling below.).  Our goal was to create identical starting community composition for all bromeliads within a block. Variation between blocks in starting community composition is thus included in the random effect of blocks. We created five blocks in this experiment between `r str_end[[1]]` and `r str_end[[2]]`.
 
+![img](../photos/text_design.png) `r fig_nums("design", "A schematic of our
+experimental design. In our initial collection (1) we sampled six bromeliads
+(two each of the three species shown here). We formed homogeneous initial communities (2) by counting equal numbers of animals (macroinvertebrates) or by mixing water samples of equal volume from all plants (zooplankton and bacteria). We then returned these initial communities to the six bromeliads (3), and replaced the bromeliads in their original habitats.")`
 
-![img](../photos/text_design.png)
-`r fig_nums("design", "This is the design of the experiment.")`
+Our experimental setup consisted of three steps (`r fig("design")`): initial
+collection, forming initial communities, and replacing them in their original
+(now empty) bromeliads. **Initial collection**: We sampled macroinvertebrates
+by thoroughly rinsing each bromeliad and passing the water through 1mm and
+180μm mesh to collect aquatic macroinvertebrates. These mesh sizes have been
+shown to separate macro invertebrates from both coarse detritus and fine
+particulate organic matter, facilitating their collection. We identified
+macroinvertebrates to morphospecies. We sampled the zooplankton and bacteria
+communities by collecting a water sample from each bromeliad: 100ml for
+zooplankton, 50ml for bacteria. Zooplankton were collected by filtering on
+50-micron Nytex mesh and fixed in 5% buffered formalin. This fixed solution
+was then diluted to 20 ml, and a 1 ml subsample taken for analysis.
+Zooplankton were  identified to the lowest taxonomic unit possible (species in
+most cases, except for bdelloid rotifers and harpaticoid copepods, left at the
+level of class and order, respectively). Bacteria were collected by taking
+some of the filtrate from the zooplankton sample and filtering it a second
+time on a Whatman filter paper. We measured bacterial community composition
+using denaturing gradient gel electrophoresis (DGGE, Muyzer et al. [@Muyzer1993]). This
+analysis furnishes an approximation of bacterial diversity in the form of
+Operational Taxonomic Units (OTUs). **Initial communities**: we created
+initial communities of zooplankton and microbes by mixing an equal volume of
+filtered tank water from each plant (approximately 100ml plant^-1^), returning
+the same volumes to all bromeliads. **Bromeliad preparation**: We emptied
+bromeliads by hanging them upside down to dry for at least 24 hours and then
+rinsing each plant with 70% ethanol. Any coarse detritus found in the
+bromeliads was similarly cleaned, frozen and thawed (to kill any
+macroinvertebrates eggs). We confirmed that this technique removed all
+invertebrates and most detritus by dissecting an empty bromeliad. Bromeliads
+were placed in a local habitat similar to their original, each enclosed in a
+2mm mesh cage to prevent colonization by insects. We then added the starting
+communities of macroinvertebrates, zooplankton and bacteria.
 
-
-**Initial collection**: We sampled macroinvertebrates by thoroughly rinsing
-each bromeliad and passing the water through 1mm and 180μm mesh to collect
-aquatic macroinvertebrates. These mesh sizes have been shown to separate macro
-invertebrates from both coarse detritus and fine particulate organic matter,
-facilitating their collection. We identified macroinvertebrates to
-morphospecies. We sampled the zooplankton and bacteria communities by
-collecting a water sample from each bromeliad: 100ml for zooplankton, 50ml for
-bacteria. Zooplankton were collected by filtering on 50-micron Nytex mesh and
-fixed in 5% buffered formalin. This fixed solution was then diluted to 20 ml,
-and a 1 ml subsample taken for analysis. Zooplankton were  identified to the
-lowest taxonomic unit possible (species in most cases, except for bdelloid
-rotifers and harpaticoid copepods, left at the level of class and order,
-respectively). Bacteria were collected by taking some of the filtrate from the
-zooplankton sample and filtering it a second time on a Whatman filter paper.
-We measured bacterial community composition using denaturing gradient gel
-electrophoresis (DGGE; Muyzer et al. 1993). This analysis furnishes an
-approximation of bacterial diversity in the form of Operational Taxonomic
-Units (OTUs). **Bromeliad preparation**: We emptied bromeliads by hanging them
-upside down to dry for at least 24 hours and then rinsing each plant with 70%
-ethanol. Any coarse detritus found in the bromeliads was similarly cleaned,
-frozen and thawed (to kill any macroinvertebrates eggs). We confirmed that
-this technique removed all invertebrates and most detritus by dissecting an
-empty bromeliad. Bromeliads were placed in a local habitat similar to their
-original, each enclosed in a 2mm mesh cage to prevent colonization by insects.
-We then added the starting communities of macroinvertebrates, zooplankton and
-bacteria. **Initial communities**: we created initial communities of
-zooplankton and microbes by mixing an equal volume of filtered tank water from
-each plant (approximately 100ml plant^-1^), returning the same volumes to all
-bromeliads.
-
-The experiment lasted for 12 days, after which we collected all
-macroinvertebrates, and a sample of zooplankton and bacteria. Throughout our
-analysis we used collection methods consistent as possible with Farjalla et
-al. [-@Farjalla2012], to facilitate a direct comparison .
+Bromeliads are an open system, characterized by continual colonization and
+emergence. Both of these processes are problematic for our question: if we
+were to allow colonization it could swamp any changes in our starting
+community composition. Conversely, if we allowed the experiment to continue
+for too long any macroinvertebrates with complex life cycles would emerge,
+leaving us with no community to sample [@Lecraw2014]. We took two steps to
+make sure that our treatment effects were not affected by colonization or
+excessive emergence. To prevent colonization we surrounded bromeliads with
+mosquito netting (mesh size approx. 1.5 mm). To prevent emergence we ended our
+experiment after 12 days, based on the results of a pilot study that
+confirmed that this was sufficient time for treatments to change, but not so
+long that bromeliads were empty.
 
 
 ### Analyses
 
-We used a different analysis for each question we posed. For question 1, we
+*Question 1: less beta diversity among smaller taxa*
+For question 1, we performed a test for homogeniety of multivariate dispersions [@Anderson2006]
 used the `betadisper` function in the R package vegan [@vegan]. We used a
 permutation test to test for differences before and after the experiment
 within each block (999 null simulations block^-1^). All statistical analyses
