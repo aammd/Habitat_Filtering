@@ -6,6 +6,7 @@ output:
     latex_engine: xelatex
     includes:
       in_header: formatting/myheader_suppmatt.tex
+    toc: true
   md_document: default
   html_document: default
   word_document:
@@ -14,68 +15,79 @@ geometry: margin=1in
 fontsize: 12pt
 ---
 
-# Before
 
-## insects
-```{r results = 'asis'}
-inverts_adonis_ini
+```{r echo=FALSE}
+Sfig_nums <- captioner()
+Stab_nums <- captioner(prefix = "Table")
+Sfig <- pryr::partial(Sfig_nums, display = "cite")
+Stab <- pryr::partial(Stab_nums, display = "cite")
 ```
 
-## zooplankton
-```{r results = 'asis'}
-zoops_adonis_ini
-```
+# Exploratory figures
 
-## bacteria
-```{r results = 'asis'}
-bact_adonis_ini
-```
-
-# After
-## insects
-```{r results = 'asis'}
-inverts_adonis_fin
-```
-
-## zooplankton
-```{r results = 'asis'}
-zoops_adonis_fin
-```
-
-## bacteria
-```{r results = 'asis'}
-bact_adonis_fin
-```
-
-
-## dispersion anovas
-
-```{r results="asis"}
-aovs_disp <- lapply(disper_list, anova)
-
-lapply(aovs_disp, stargazer::stargazer)
-
-```
 ![](../figures/inverts.pdf)
 ![](../figures/zoop.pdf)
 ![](../figures/bact.pdf)
 
-![](../figures/one_one_plot.pdf)
+# Dispersion
 
-```{r}
-disp_difs_long  %>% 
-  lm(value ~ taxa * timing, data = .) %>% 
-  summary
-
-```
-
-
+mixed effect ANOVA table
 ```{r results='asis'}
-disp_difs_long  %>% 
-  lm(value ~ taxa * timing, data = .) %>% 
-  stargazer()
-
+anova(disp_mixed) %>% 
+    knitr::kable()
 ```
+
+residual plot for the dispersion model
+```{r}
+plot(disp_mixed)
+```
+
+![](../figures/one_one_plot.pdf)
+`r Sfig_nums("one2one", "This is the different mean differences to centroid on the same plot. shown is the 1:1 line.")`
+
+# PERMANOVAS
+
+```{r, echo = FALSE}
+get_adonis_table <- function(permanova_answer){
+  permanova_answer[["aov.tab"]] %>% as.data.frame() %>% knitr::kable()
+}
+```
+
+
+## initial
+
+### inverts
+```{r results = 'asis'}
+get_adonis_table(inverts_adonis_ini)
+```
+
+### zooplankton
+```{r results = 'asis'}
+get_adonis_table(zoops_adonis_ini)
+```
+
+### bacteria
+```{r results = 'asis'}
+get_adonis_table(bact_adonis_ini)
+```
+
+## final
+### insects
+```{r results = 'asis'}
+get_adonis_table(inverts_adonis_fin)
+```
+
+### zooplankton
+```{r results = 'asis'}
+get_adonis_table(zoops_adonis_fin)
+```
+
+### bacteria
+```{r results = 'asis'}
+get_adonis_table(bact_adonis_fin)
+```
+
+# multivariate GLM
 
 ### results of multivariate GLMS
 
@@ -98,7 +110,7 @@ plot(bact_manyglm_fin)
 
 test for interactions
 ```{r}
-anova(inverts_manyglm_fin, inverts_manyglm_fin_add)
+#anova(inverts_manyglm_fin, inverts_manyglm_fin_add)
 
 ```
 
