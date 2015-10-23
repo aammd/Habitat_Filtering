@@ -148,9 +148,10 @@ r2_plot <- function(r2_df, the_theme){
                                      "bacteria")),
            time = ifelse(time == "fin", "final", "initial"),
            time = ordered(time, levels = c("initial", "final"))) %>% 
-    ggplot(aes(x = taxa, fill = time, y = number)) + 
-    geom_point(size = 6, shape = 21, colour = "black") +
-    ylab(expression("Environmental signa2l ("*r^2*" value)")) +
+    ggplot(aes(x = taxa, y = number)) + 
+    # geom_line() + 
+    geom_point(aes(fill = time, group = time), size = 6, shape = 21, colour = "black") +
+    ylab(expression("Environmental signal ("*r^2*" value)")) +
     the_theme + 
     scale_fill_viridis(discrete = TRUE) +
     #scale_fill_manual(values = c("darkgreen", "lightblue")) +
