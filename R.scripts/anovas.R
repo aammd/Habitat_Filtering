@@ -25,5 +25,6 @@ full <- anova(inverts_manyglm_fin, inverts_manyglm_nomain, nBoot = 100)
 
 zoops_manyglm_nomain <- run_manyglm_no_main_sp(zoops_tts_fin, glm_family = I("negative.binomial"))
 
-full <- anova(inverts_manyglm_fin, zoops_manyglm_nomain, nBoot = 100)
+full_zoops <- anova(zoops_manyglm_fin, zoops_manyglm_nomain, nBoot = 100)
 
+anova(zoops_manyglm_fin, zoops_manyglm_nomain, nBoot = 100, p.uni = 'adjusted')
