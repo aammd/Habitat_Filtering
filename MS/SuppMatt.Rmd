@@ -87,9 +87,11 @@ get_adonis_table(zoops_adonis_fin)
 get_adonis_table(bact_adonis_fin)
 ```
 
+
+
 # multivariate GLM
 
-### results of multivariate GLMS
+results of multivariate GLMS
 
 ```{r}
 plot(inverts_manyglm_fin)
