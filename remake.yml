@@ -671,6 +671,8 @@ targets:
       - inverts_manyglm_fin_add
       - zoops_manyglm_fin_add
       - bact_manyglm_fin_add
+      - disp_diffs
+      - r2_plot_df
 
   MS/OrgSize.pdf:
     depends:

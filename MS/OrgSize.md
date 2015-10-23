@@ -51,6 +51,8 @@ decreases from insects (strong signal), zooplankton (moderate signal) and bacter
 
 Why should the strenght of environmental filtering decrease with organism size? there are two possible mechanisms that may make communities of smaller organisms more strongly filtered. At the individual level, organisms which are very small maybe able to find microhabitats in a way that mitigates varation abmong patches. smaller organisms also have simpler metabolisms. Bacteria are often able to consume a wide variety of carbon sources. Bacteria can even use environmental DNA, or transfer plasmids among unrelated cells, acquiring new functions. 
 
+Dispersion -- this hypothesis also tells us something about how we should expect to see communities change over time.
+
 The individual-level effects suggested by the size-plasticity hypothesis are difficult to test because of population level processes: especially dispersal. At the population level, smaller organisms may also show less of a relationship with environmental variation. if smaller organisms disperse more rapidly, then we would expect to see populations of smaller species maintained, even in patches where they have negative population growth rates (i.e. mass effects). smaller organisms have higher growth rates, higher rates of turnover, and shorter generation times. This suggests that they could persiste in highly variable or fluctuation habitats, purely by demographic processes. Also, they could stick aroun by evolution, as they have larger effects population sizes (does mutation rate show an effect with regard to population size?). rapid evolution to antiobotics is well know.
 In both cases, therefore, space is an issue -- the processes of dispersal can either exaggerate or diminish the effects seen by Farjalla et al. 
 
@@ -79,198 +81,152 @@ Question 3: The specific taxa responding to environmental variation will possess
 
 ## Methods
 
-### Study site
-
-We performed our experiments at the Parque Nacional de Jurubatiba, Northeast Rio
-de Janeiro state, Brazil ($22^{\circ}$ S $41^{\circ}$). The landscape is
-composed of large semi-open patches of shrubs which form shady patches
-interspersed with very exposed, sunny habitats (_restinga_ vegetation).
-Bromeliads (Bromeliaceae) form dense colonies within this landscape. The
-landscape is composed of large semi-open clumps of shrubs interspersed with very
-exposed, open sand. Several bromeliad taxa here collect standing water
-(phytotelmata) in deep leaf axils, and are known to contain diverse communities 
-of macroinvertebrates, zooplankton and bacteria.
-
 ### Experimental design
 
-We used the same three bromeliad used by Farjalla et al. [-@Farjalla2012].
-Each bromeliad species was collected from its typical habitat: _Aechmea
-nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_ (partial shade), and
-_Neoregelia cruenta_ (full shade). _Neoregelia_ has a uniquely large habitat
-range at this site, occuring in both full shade and full sun; only shade
-plants were used in this study. We created five blocks; each block consisted
-of six bromeliads, two from each species. We combined their communities and filled each bromeliad with an identical starting community (see Figure  1. We made these starting communities by sampling, then
-combining, each of three major groups: macroinvertebrates, zooplankton and
-bacteria.
+Our goal is to investigate the patterns observed by Farjalla et al.
+[-@Farjalla2012], therefore we performed this experiment in the same location
+along the same environmental variation. The location we used is the Parque
+Nacional de Jurubatiba, Northeast Rio de Janeiro state, Brazil ($22^{\circ}$ S
+$41^{\circ}$); the environmental gradient is three different species of
+bromeliad. Each species of bromeliad is found in a different habitat of the
+park: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
+(partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a
+uniquely large habitat range at this site, occuring in both full shade and
+full sun; only shade plants were used in this study. As is common for
+bromeliads, plants used in this study collect standing water (phytotelmata) in
+deep leaf axils, and are known to contain diverse communities  of
+macroinvertebrates, zooplankton and bacteria.
 
 
-![img](../photos/text_design.png)
-Figure  1: This is the design of the experiment.
+```r
+str_end <- blocks %>% 
+	filter(experiment == "threespp") %>% 
+	select(setup.date) %>% 
+	mutate(sdate = ymd(setup.date)) %>% 
+	filter(sdate %in% range(sdate)) %>% 
+	.[["setup.date"]]
+```
 
+We homogenized the community of macroinvertebrates, zooplankton and bacteria
+among all three bromeliad species. We collected six bromeliads -- two of each
+species -- sampled them, and mixed their communities together (see Figure  1, description of sampling below.).  Our goal was to create identical starting community composition for all bromeliads within a block. Variation between blocks in starting community composition is thus included in the random effect of blocks. We created five blocks in this experiment between 2013/03/27 and 2013/04/03.
 
-**Initial collection**: We sampled macroinvertebrates by thoroughly rinsing
-each bromeliad and passing the water through 1mm and 180μm mesh to collect
-aquatic macroinvertebrates. These mesh sizes have been shown to separate macro
-invertebrates from both coarse detritus and fine particulate organic matter,
-facilitating their collection. We identified macroinvertebrates to
-morphospecies. We sampled the zooplankton and bacteria communities by
-collecting a water sample from each bromeliad: 100ml for zooplankton, 50ml for
-bacteria. Zooplankton were collected by filtering on 50-micron Nytex mesh and
-fixed in 5% buffered formalin. This fixed solution was then diluted to 20 ml,
-and a 1 ml subsample taken for analysis. Zooplankton were  identified to the
-lowest taxonomic unit possible (species in most cases, except for bdelloid
-rotifers and harpaticoid copepods, left at the level of class and order,
-respectively). Bacteria were collected by taking some of the filtrate from the
-zooplankton sample and filtering it a second time on a Whatman filter paper.
-We measured bacterial community composition using denaturing gradient gel
-electrophoresis (DGGE; Muyzer et al. 1993). This analysis furnishes an
-approximation of bacterial diversity in the form of Operational Taxonomic
-Units (OTUs). **Bromeliad preparation**: We emptied bromeliads by hanging them
-upside down to dry for at least 24 hours and then rinsing each plant with 70%
-ethanol. Any coarse detritus found in the bromeliads was similarly cleaned,
-frozen and thawed (to kill any macroinvertebrates eggs). We confirmed that
-this technique removed all invertebrates and most detritus by dissecting an
-empty bromeliad. Bromeliads were placed in a local habitat similar to their
-original, each enclosed in a 2mm mesh cage to prevent colonization by insects.
-We then added the starting communities of macroinvertebrates, zooplankton and
-bacteria. **Initial communities**: we created initial communities of
-zooplankton and microbes by mixing an equal volume of filtered tank water from
-each plant (approximately 100ml plant^-1^), returning the same volumes to all
-bromeliads.
+![img](../photos/text_design.png) Figure  1: A schematic of our
+experimental design. In our initial collection (1) we sampled six bromeliads
+(two each of the three species shown here). We formed homogeneous initial communities (2) by counting equal numbers of animals (macroinvertebrates) or by mixing water samples of equal volume from all plants (zooplankton and bacteria). We then returned these initial communities to the six bromeliads (3), and replaced the bromeliads in their original habitats.
 
-The experiment lasted for 12 days, after which we collected all
-macroinvertebrates, and a sample of zooplankton and bacteria. Throughout our
-analysis we used collection methods consistent as possible with Farjalla et
-al. [-@Farjalla2012], to facilitate a direct comparison .
+Our experimental setup consisted of three steps (Figure  1): initial
+collection, forming initial communities, and replacing them in their original
+(now empty) bromeliads. **Initial collection**: We sampled macroinvertebrates
+by thoroughly rinsing each bromeliad and passing the water through 1mm and
+180μm mesh to collect aquatic macroinvertebrates. These mesh sizes have been
+shown to separate macro invertebrates from both coarse detritus and fine
+particulate organic matter, facilitating their collection. We identified
+macroinvertebrates to morphospecies. We sampled the zooplankton and bacteria
+communities by collecting a water sample from each bromeliad: 100ml for
+zooplankton, 50ml for bacteria. Zooplankton were collected by filtering on
+50-micron Nytex mesh and fixed in 5% buffered formalin. This fixed solution
+was then diluted to 20 ml, and a 1 ml subsample taken for analysis.
+Zooplankton were  identified to the lowest taxonomic unit possible (species in
+most cases, except for bdelloid rotifers and harpaticoid copepods, left at the
+level of class and order, respectively). Bacteria were collected by taking
+some of the filtrate from the zooplankton sample and filtering it a second
+time on a Whatman filter paper. We measured bacterial community composition
+using denaturing gradient gel electrophoresis (DGGE, Muyzer et al. [@Muyzer1993]). This
+technique measures an approximation of bacterial diversity in the form of
+Operational Taxonomic Units (OTUs). **Initial communities**: we created
+initial communities of zooplankton and microbes by mixing an equal volume of
+filtered tank water from each plant (approximately 100ml plant^-1^), then dividing this mixed volume among all individual bromeliads. To create initial communities of macroinvertebrates, we simply counted them all and divided them equally among all bromeliads. **Bromeliad preparation**: We emptied
+bromeliads by washing them thoroughly, hanging them upside down to dry for at least 24 hours and then
+rinsing each plant with 70% ethanol. Any coarse detritus found in the
+bromeliads was similarly cleaned, frozen and thawed (to kill any
+macroinvertebrates eggs). We confirmed that this technique removed all
+invertebrates and most detritus by dissecting an empty bromeliad. Bromeliads
+were placed in a local habitat similar to their original: _Neoregelica_ in shade, _Aechmea_ in full sun and _Vresia_ in marginal habitat. We then added the starting
+communities of macroinvertebrates, zooplankton and bacteria.
+
+Bromeliads are an open system, characterized by continual colonization and
+emergence. Both of these processes are problematic for our question: if we
+were to allow colonization it could swamp any changes in our starting
+community composition. Conversely, if we allowed the experiment to continue
+for too long any macroinvertebrates with complex life cycles would emerge,
+leaving us with no community to sample [@Lecraw2014]. We took two steps to
+make sure that our treatment effects were not affected by colonization or
+excessive emergence. To prevent colonization we surrounded bromeliads with
+mosquito netting (mesh size approx. 1.5 mm). To prevent emergence we ended our
+experiment after 12 days, based on the results of a pilot study that
+confirmed that this was sufficient time for treatments to change, but not so
+long that bromeliads were empty.
 
 
 ### Analyses
 
-We used a different analysis for each question we posed. For question 1, we
-used the `betadisper` function in the R package vegan [@vegan]. We used a
-permutation test to test for differences before and after the experiment
-within each block (999 null simulations block^-1^). All statistical analyses
-were conducted in R [@rcore]. We tested question 2 with a permutational ANOVA
-(PERMANOVA) to detect differences in the degree of environmental signal among
-groups. PERMANOVA measures the amount of difference in community composition
-between treatment groups and compares this to the expected distribution under
-a null hypothesis of no treatment effects. If larger-bodied groups of
-organisms are more filtered, then we expect to find a greater difference in
-community composition emerge among the macroinvertebrates, less among the
-zooplankton, and little to none among bacteria. We complemented this approach
-in question 3 with a multivariate regression of abundance [@mvabund] to
-identify those taxa which contributed most to the differences.
+*Question 1: less beta diversity among smaller organism types* If smaller taxa
+are more plastic, we should see less variation in community composition among
+bromeliads for smaller organism types. That is, we should see less beta
+diversity among bromeliads at the end of the experiment than we saw at the
+beginning. We tested this by calculating multivariate dispersions
+[@Anderson2006] between all six bromeliads (i.e. distances to centroid of all bromeliads within one block) before and
+after the experiment. We repeated this comparison for all five blocks, and for
+all three organism types. We used the `betadisper` function in the R package
+vegan [@vegan], which provides a permutation test to test for differences in
+dispersion before and after the experiment within each block (999 null
+simulations block^-1^). For the purposes of this analysis, we used the Raup-Crick measure of dissimilarity. We extracted the mean distance to centroid Figure  2 for each block before and after the experiment. We did this because our hypothesis concerns an interaction: specifically, that the difference in mean distance to centroid (i.e. the slopes of lines in Figure  2) decline with decreasing organism size. This allowed us to test these differences with a mixed effect linear model including the main effect of sampling time (before and after) organism type (macroinvertebrate, zooplankton and bacteria) and their interaction, with a random effect for block.
+
+*Question 2: less environmental signal among smaller organism types*
+The size-plastisicy hypothesis predicts that variation in communiy composition among bromeliads should be more correlated with environment for larger organism types. This correlation should be weaker for smaller groups. We tested this hypothesis with a permutational ANOVA (PERMANOVA), which measures the amount of difference
+in community composition between treatment groups and compares this to the
+expected distribution under a null hypothesis of no treatment effects. In each PERMANOVA we used block as an error strata, meaning that permutations were performed within blocks. We repeated this analysis for all three organism groups, and at both "initial" and "final" sampling dates (i.e. at the beginning and end of the experiment).
+
+*Question 3: Particular traits are correlated with environmental signal*
+
+The distance-based approaches described above test the response of the whole
+community, but community-level responses are often driven by the response of a
+smaller number of species. These species often posses particular traits which
+correlate with their responses. We tested this hypothesis with multivariate
+generalized linear models [@mvabund], which is a  model-based multivariate
+alternative to distance-based methods [@Warton2012]. This technique is implemented in the R package `mvabund`  [@Wang2012;@mvabund]. We used this approach to fit the model:
+
+$log(\mu_{jkl}) =  intercept_{j} + block_{jk} + bromeliad_{jl} + block \times bromeliad_{jkl}$
+
+Where $\mu_{jkl}$ is the response of species $j$ in block $k$ to the environment of bromeliad $l$. This model is used to predict the mean of a negative binomial distribution: 
+
+$Y_{ij} \sim NegBin(\mu_{jkl}, \phi_{j})$
+
+Here, $Y_{ij}$ is the abundance of species $j$ in plant $i$. The dispersion parameter, $\phi_{j}$, measures the variablity of species $j$ (constant across sites). 
+
+This approach has three advantages that make it suitable for our application.
+First, because it is based on GLMs, we are able to model the mean-variance
+relationship common in count data. This characteristic of count data is often
+problematic for distance-based metrics, which can conflate differences in
+dispersion with differences in location [@Warton2012]. We are already testing
+for dispersion and location effects in the separate analysis described above
+with distance based methods. Therefore this multivariate GLM approach helps
+confirm our findings by accounting for both within a different framework.
+Second, because it is model-based, it allows us to test for an interaction
+between our treatments (different bromeliad species) and blocks. Significance
+in these tests is generated by permutation tests based on 1000 replications.
+Third, mvabund also allows for estimating individual species-level responses.
+This lets us identify which species responded most to the environmental
+differences, and to relate these to traits of these species.
+
+All statistical analyses were conducted in R [@rcore]. Code to reproduce the analysis published here is available at ***link to data***
 
 
-## Results  
-
-Goal 1: dispersion differences among the different organism groups.  
+## Results   
 
 
+*Question 1: less beta diversity among smaller organism types*
+All organism groups showed the same decrease in mean distance to centroid at the end of the experiment -- there was no significant interaction between organism type and the effect of sampling time (Figure  2, Mixed effect model F~2,20~ = 0.39, p > 0.05). However, we did see a 24% decrease in the dispersion at the end of the experiment (F~1,20~ = 16.11, p < 0.05).
 
+*Question 2: less environmental signal among smaller organism types*
+Bromeliad species identity explains more variation in community composition of invertebrates, and less and less for zooplankon and bacteria (Figure  3:  ). We tested this by performing six PERMANOVAs, summarized in Table  1. For all organism types, the bromeliad species explained less of the variation at the end of the experiment than at the beginning. For macroinvertebrates, bromelaid species explained around 30% of the variation at the beginning and end of the experiment (R^2^ of 0.34 and 0.32, respectively), while explaining less in zooplankton (0.16 and 0.11) and very little in bacteria (0.05 and 0.04).
 
-
-Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (Figure  2:  )
-
-
-We found more signal in insects and zooplankton relative to bacteria. These differences can be seen in 
-
-Can we get an effect size out of the insects relative to the zooplankton and bacteria? we could, instead of using PERMANOVAs with block as a random factor, we could actually just test this effect size metric on animals from large to small with ordinal contrasts. 
-
-Another possibility: is there a convenient way to measure the differences between the initial and final community compositions. 
-
-
-
-
-### Tables
-
-
-Table  1: this is the table of disperions
-
-\begin{table}[!htbp] \centering 
-  \caption{} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-2} 
-\\[-1.8ex] & value \\ 
-\hline \\[-1.8ex] 
- taxa.L & 0.024 \\ 
-  & (0.031) \\ 
-  & \\ 
- taxa.Q & $-$0.064$^{**}$ \\ 
-  & (0.031) \\ 
-  & \\ 
- timingfinal & $-$0.101$^{***}$ \\ 
-  & (0.025) \\ 
-  & \\ 
- taxa.L:timingfinal & 0.024 \\ 
-  & (0.044) \\ 
-  & \\ 
- taxa.Q:timingfinal & 0.030 \\ 
-  & (0.044) \\ 
-  & \\ 
- Constant & 0.385$^{***}$ \\ 
-  & (0.018) \\ 
-  & \\ 
-\hline \\[-1.8ex] 
-Observations & 30 \\ 
-R$^{2}$ & 0.506 \\ 
-Adjusted R$^{2}$ & 0.403 \\ 
-Residual Std. Error & 0.069 (df = 24) \\ 
-F Statistic & 4.919$^{***}$ (df = 5; 24) \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
-
-### another table
-
-\begin{table}[!htbp] \centering 
-  \caption{} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lc} 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-2} 
-\\[-1.8ex] & value \\ 
-\hline \\[-1.8ex] 
- taxa.L & 0.024 \\ 
-  & (0.031) \\ 
-  & \\ 
- taxa.Q & $-$0.064$^{**}$ \\ 
-  & (0.031) \\ 
-  & \\ 
- timingfinal & $-$0.101$^{***}$ \\ 
-  & (0.025) \\ 
-  & \\ 
- taxa.L:timingfinal & 0.024 \\ 
-  & (0.044) \\ 
-  & \\ 
- taxa.Q:timingfinal & 0.030 \\ 
-  & (0.044) \\ 
-  & \\ 
- Constant & 0.385$^{***}$ \\ 
-  & (0.018) \\ 
-  & \\ 
-\hline \\[-1.8ex] 
-Observations & 30 \\ 
-Log Likelihood & 24.169 \\ 
-Akaike Inf. Crit. & $-$32.338 \\ 
-Bayesian Inf. Crit. & $-$21.128 \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
-\end{tabular} 
-\end{table} 
+### Tables	
 
 
 
-Table  2: Results from PERMAOVAs run on each of the three groups of organisms, both before and after the experiment. Both F-ratios and R^2^ values are higher for inverts than they are for zooplankton or bacteria
+Table  1: Results from PERMAOVAs run on each of the three groups of organisms, both before and after the experiment. Both F-ratios and R^2^ values are higher for inverts than they are for zooplankton or bacteria
 
 |                    |        | F                            | p                            | R^2^                         |
 | -------- | ------------------| ---------|--------- | ---------- |
@@ -285,10 +241,10 @@ Table  2: Results from PERMAOVAs run on each of the three groups of organisms, b
 ### Figures
 
 ![disp](../figures/plot_disp_taxa.pdf)
-Figure  3: behold the figure of dispersion
+Figure  2: behold the figure of dispersion
 
-![between](../figures/Fig1.pdf)
-Figure  2: The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker
+![between](../figures/r2_plot.pdf)
+Figure  3: The x-axis has the group studied. the Y axis the r2 of the data from a PERMANOVA. It turns out that a organisms get smaller, the effect of time on the species composition of the data gets weaker
 
 
 
@@ -296,7 +252,7 @@ Figure  2: The x-axis has the group studied. the Y axis the r2 of the data from 
 
 We did discover different amounts of environmental signal ithe different groups -- more in invertebrates and zooplankton than in bacteria. In the direction that we expected, based on the size-sensitivity hypothesis. We found support for these same patterns when we examined individual species responses -- more species of insects showed a change in response to environmental variation than did zooplankton. No bacteria OTU ever showed a predictable difference between before and after. Just as Farjalla et al predicted, the strength of environmental fitlering is in negative proportion to body size. Over the same time interval, insects and zooplankton developed more of a response to the environment than did bacteria. 
 
-We found that dispersion, in all cases, was lower at the end of the experiment than at the beginning. This indicates that our treatments were effectingve in removing beta diverstiy among patches. that is, that all habitats really did end up being very similar at the beginning, as we would expect. However, the amount of this decline was the same across all organism groups (Table  1), as indicated by the 
+We found that dispersion, in all cases, was lower at the end of the experiment than at the beginning. This indicates that our treatments were effectingve in removing beta diverstiy among patches. that is, that all habitats really did end up being very similar at the beginning, as we would expect. However, the amount of this decline was the same across all organism groups (Table  2), as indicated by the 
 
 The difference between insects and zooplankton was not as great as we expected it would be. that was probably because we were missing the active vs passive differences. Insect females choose where to place their eggs, evalutating resources and predation risk (citecitecite). On the other hand, the macroinvertebrate taxa that did respond are also the more abundant taxa; it may be that we only had the ability to detect patterns for these taxa. Both of these issues at once (should we do permanova on mortality?). Both size does predict some of the variation in response to the environment. Since active dispersers are also larger, there is then a relationship between that life history and body size -- larger animals are more likely to disperse actively. It may be that those groups show a response in that direction as well. 
 
@@ -305,13 +261,3 @@ In conclusion, here we have shown that a hypothesis made by variance partitionin
 In other words our experiment has not only confirmed some aspects of the body size habitat senstivity experiment, but also investigated the rate at which beta diversity is recovered for these different groups. p 
 
 ## References
-
-Farjalla, V. F., Srivastava, D. S., Marino, N. a C., Azevedo, F. D., Dib, V.,
-Lopes, P. M., Esteves, F. A. (2012). Ecological determinism increases with
-organism size. Ecology, 93(7), 1752–9.
-
-Muyzer G., de Waal E.C., Uitterlinden A.G. (1993). Profiling of complex
-microbial populations by denaturing gradient gel electrophoresis analysis of
-polymerase chain reaction-amplified genes coding for 16S rRNA. Applied
-Environmental Microbiology, 59(3), 695-700.
-
