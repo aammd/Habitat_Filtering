@@ -165,11 +165,17 @@ long that bromeliads were empty.
 
 ### Analyses
 
-*Question 1: less beta diversity among smaller organism types*
-If smaller taxa are more plastic, we should see less variation in community composition among bromeliads for smaller organism types. That is, we should see less beta diversity among bromeliads at the end of the experiment than we saw at the beginning. We tested this by comparing homogeniety of multivariate
-dispersions [@Anderson2006] between all six bromeliads (i.e. within one block) before and after the experiment. We repeated this comparison for all five blocks, and for all three organism types. We used the `betadisper` function in the R package
-vegan [@vegan], which provides a permutation test to test for differences in dispersion before and
-after the experiment within each block (999 null simulations block^-1^). 
+*Question 1: less beta diversity among smaller organism types* If smaller taxa
+are more plastic, we should see less variation in community composition among
+bromeliads for smaller organism types. That is, we should see less beta
+diversity among bromeliads at the end of the experiment than we saw at the
+beginning. We tested this by calculating multivariate dispersions
+[@Anderson2006] between all six bromeliads (i.e. distances to centroid of all bromeliads within one block) before and
+after the experiment. We repeated this comparison for all five blocks, and for
+all three organism types. We used the `betadisper` function in the R package
+vegan [@vegan], which provides a permutation test to test for differences in
+dispersion before and after the experiment within each block (999 null
+simulations block^-1^). For the purposes of this analysis, we used the Raup-Crick measure of dissimilarity. We extracted the mean distance to centroid `r fig("disp")` for each block before and after the experiment. We did this because our hypothesis concerns an interaction: specifically, that the difference in mean distance to centroid (i.e. the slopes of lines in `r fig("disp")`) decline with decreasing organism size. This allowed us to test these differences with a mixed effect linear model including the main effect of sampling time (before and after) organism type (macroinvertebrate, zooplankton and bacteria) and their interaction, with a random effect for block.
 
 *Question 2: less environmental signal among smaller organism types*
 The size-plastisicy hypothesis predicts that variation in communiy composition among bromeliads should be more correlated with environment for larger organism types. This correlation should be weaker for smaller groups. We tested this hypothesis with a permutational ANOVA (PERMANOVA), which measures the amount of difference
@@ -187,36 +193,54 @@ alternative to distance-based methods [@Warton2012]. This technique is implement
 
 $log(\mu_{jkl}) =  intercept_{j} + block_{jk} + bromeliad_{jl} + block \times bromeliad_{jkl}$
 
+Where $\mu_{jkl}$ is the response of species $j$ in block $k$ to the environment of bromeliad $l$. This model is used to predict the mean of a negative binomial distribution: 
+
 $Y_{ij} \sim NegBin(\mu_{jkl}, \phi_{j})$
 
+Here, $Y_{ij}$ is the abundance of species $j$ in plant $i$. The dispersion parameter, $\phi_{j}$, measures the variablity of species $j$ (constant across sites). 
 
-This approach
-has three advantages that make it suitable for our application. First, because
-it is based on GLMs, we are able to model the mean-variance relationship
-common in count data. Distance-based metrics, on the other hand, can conflate
-differences in dispersion with differences in location [@Warton2012]. We are
-already testing for dispersion and location effects in the separate analysis
-described above with distance based methods. Therefore this multivariate GLM
-approach helps confirm our findings by accounting for both within a different
-framework. Second, it allows us to test for an interaction between our
-treatments (different bromeliad species) and blocks. Third, mvabund also
-allows for estimating individual species-level responses. These are tested
-using bootrap tests that correct for multiple comparisons. This technique lets
-us identify which species responded most to the environmental differences, and
-to relate these to traits of these species.
+This approach has three advantages that make it suitable for our application.
+First, because it is based on GLMs, we are able to model the mean-variance
+relationship common in count data. This characteristic of count data is often
+problematic for distance-based metrics, which can conflate differences in
+dispersion with differences in location [@Warton2012]. We are already testing
+for dispersion and location effects in the separate analysis described above
+with distance based methods. Therefore this multivariate GLM approach helps
+confirm our findings by accounting for both within a different framework.
+Second, because it is model-based, it allows us to test for an interaction
+between our treatments (different bromeliad species) and blocks. Significance
+in these tests is generated by permutation tests based on 1000 replications.
+Third, mvabund also allows for estimating individual species-level responses.
+This lets us identify which species responded most to the environmental
+differences, and to relate these to traits of these species.
 
 All statistical analyses were conducted in R [@rcore]. Code to reproduce the analysis published here is available at ***link to data***
 
 
-## Results  
+## Results   
+```{r echo = FALSE}
+per_decline <- mean((disp_diffs$initial - disp_diffs$final)/disp_diffs$initial)
+pdiff <- sprintf("%.0f", per_decline * 100)
+gettime <- function(tax, .r2_plot_df){
+  ans <- .r2_plot_df %>% 
+    filter(taxa == tax)
+  
+  ret <- ans$number
+  names(ret) <- ans$time
+  ret
+}
 
-Goal 1: dispersion differences among the different organism groups.  
+med_inv <- sprintf("%.0f", median(gettime("inverts", r2_plot_df)))
+inv_r2 <- gettime("inverts", r2_plot_df) %>% sprintf("%.2f", .) 
+zoops_r2 <- gettime("zoops", r2_plot_df) %>% sprintf("%.2f", .)
+bact_r2 <- gettime("bact", r2_plot_df) %>% sprintf("%.2f", .)
+```
 
-We hypothesized that smaller organism types should recover less dispersion than larger ones. This can be tested with the interaction between timing of sampling (intial vs final) and organism type. We measured dispersion (distance to centroid) for all five blocks before and after the experiment (Mixed effect model, F~2,20~ = `r getFP_aov(tidy_mixed, "Fvalue", "taxa:timing")`, `r check_aov_p(tidy_mixed, "taxa:timing")`). However, we did see an overall decrease in the dispersion at the end of the experiment (F~1,20~ = `r getFP_aov(tidy_mixed, "Fvalue", "timing")`, `r check_aov_p(tidy_mixed, "timing")`).
+*Question 1: less beta diversity among smaller organism types*
+All organism groups showed the same decrease in mean distance to centroid at the end of the experiment -- there was no significant interaction between organism type and the effect of sampling time (`r fig("disp")`, Mixed effect model F~2,20~ = `r getFP_aov(tidy_mixed, "Fvalue", "taxa:timing")`, `r check_aov_p(tidy_mixed, "taxa:timing")`). However, we did see a `r pdiff`% decrease in the dispersion at the end of the experiment (F~1,20~ = `r getFP_aov(tidy_mixed, "Fvalue", "timing")`, `r check_aov_p(tidy_mixed, "timing")`).
 
-Question 2: 
-
-Our interspecific experiment found a large effect of bromeliad species on the community composition of invertebrates, then less and less for zooplankon and bacteria (`r fig_nums("bw_spp")` ). We tested this by performing six PERMANOVAs, summarized in `r tab("perm_3sp")`.
+*Question 2: less environmental signal among smaller organism types*
+Bromeliad species identity explains more variation in community composition of invertebrates, and less and less for zooplankon and bacteria (`r fig_nums("bw_spp")` ). We tested this by performing six PERMANOVAs, summarized in `r tab("perm_3sp")`. For all organism types, the bromeliad species explained less of the variation at the end of the experiment than at the beginning. For macroinvertebrates, bromelaid species explained around `r med_inv` of the variation at the beginning and end of the experiment (R^2^ of `r inv_r2["ini"]` and `r inv_r2["fin"]`, respectively), while explaining less in zooplankton (`r zoops_r2["ini"]` and `r zoops_r2["fin"]`) and very little in bacteria (`r bact_r2["ini"]` and `r bact_r2["fin"]`).
 
 ### Tables	
 
