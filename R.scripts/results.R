@@ -1,6 +1,5 @@
 ## these functions extract analysis results from adonis and
 ## manyglm objects
-library("magrittr")
 
 ## given a data.frame `dat`, return the value of RESP for
 ## the variable "species"
