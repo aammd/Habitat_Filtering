@@ -676,5 +676,6 @@ targets:
     depends:
       - figures/plot_disp_taxa.pdf
       - figures/r2_plot.pdf
+      - MS/orgsize.bib
     command: render("MS/OrgSize.md")
 
