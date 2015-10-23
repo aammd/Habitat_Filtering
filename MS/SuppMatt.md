@@ -53,7 +53,7 @@ plot(disp_mixed)
 ![](../figures/one_one_plot.pdf)
 Figure  1: This is the different mean differences to centroid on the same plot. shown is the 1:1 line.
 
-## PERMANOVAS
+# PERMANOVAS
 
 
 
@@ -146,7 +146,10 @@ get_adonis_table(bact_adonis_fin)
 |Total     | 29| 519.83333|       NA|        NA| 1.0000000|     NA|
 
 
-### results of multivariate GLMS
+
+# multivariate GLM
+
+results of multivariate GLMS
 
 
 ```r
