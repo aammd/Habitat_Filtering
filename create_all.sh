@@ -5,7 +5,7 @@
 cp ../01_PredPhylo/R.scripts/FIGURE_themes.R ./R.scripts/
 
 ## obtain the bibliography from Mendeley
-cp /home/andrew/Documents/reference/Mendeley_reference_lists/@MS_habitat_size_org.bib ./MS/orgsize.bib
+cp /home/andrew/Documents/reference/Mendeley_reference_lists/04_OrgSizeHabitat.bib ./MS/orgsize.bib
 
 ## append to the end the R package citations
 cat ./MS/Rcitations.bibtex >> ./MS/orgsize.bib
