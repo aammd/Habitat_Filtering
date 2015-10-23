@@ -165,29 +165,32 @@ long that bromeliads were empty.
 
 ### Analyses
 
-*Question 1: less beta diversity among smaller taxa*
-The duration of our experiment is probably not enough time for our invertebrate communities to recover the 
+*Question 1: less beta diversity among smaller organism types*
+If smaller taxa are more plastic, we should see less variation in community composition among bromeliads for smaller organism types. That is, we should see less beta diversity among bromeliads at the end of the experiment than we saw at the beginning. We tested this by comparing homogeniety of multivariate
+dispersions [@Anderson2006] between all six bromeliads (i.e. within one block) before and after the experiment. We repeated this comparison for all five blocks, and for all three organism types. We used the `betadisper` function in the R package
+vegan [@vegan], which provides a permutation test to test for differences in dispersion before and
+after the experiment within each block (999 null simulations block^-1^). 
 
-If smaller taxa are more plastic, they are unlikely to develop strong inter-
-patch differences during our experiment, or will do so more slowly than larger
-organisms. We tested this by comparing homogeniety of multivariate
-dispersions [@Anderson2006] between all six bromeliads (i.e. within one block) before and after the experiment. We repeated this comparison for all five blocks, and for all thee organism types. We used the `betadisper` function in the R package
-vegan [@vegan], which includes a permutation test to test for differences before and
-after the experiment within each block (999 null simulations block^-1^). All
-statistical analyses were conducted in R [@rcore]. We tested question 2 with a
-permutational ANOVA (PERMANOVA) to detect differences in the degree of
-environmental signal among groups. PERMANOVA measures the amount of difference
+*Question 2: less environmental signal among smaller organism types*
+The size-plastisicy hypothesis predicts that variation in communiy composition among bromeliads should be more correlated with environment for larger organism types. This correlation should be weaker for smaller groups. We tested this hypothesis with a permutational ANOVA (PERMANOVA), which measures the amount of difference
 in community composition between treatment groups and compares this to the
-expected distribution under a null hypothesis of no treatment effects. If
-larger-bodied groups of organisms are more filtered, then we expect to find a
-greater difference in community composition emerge among the
-macroinvertebrates, less among the zooplankton, and little to none among
-bacteria. We complemented this approach in question 3 with a multivariate
-regression of abundance [@mvabund] to identify those taxa which contributed
-most to the differences.
+expected distribution under a null hypothesis of no treatment effects. In each PERMANOVA we used block as an error strata, meaning that permutations were performed within blocks. We repeated this analysis for all three organism groups, and at both "initial" and "final" sampling dates (i.e. at the beginning and end of the experiment).
 
-We used a technique called multivariate generalized linear models
-[@Warton2012] from the R package mvabund [@Wang2012;@mvabund]. This approach
+*Question 3: Particular traits are correlated with environmental signal*
+
+The distance-based approaches described above test the response of the whole
+community, but community-level responses are often driven by the response of a
+smaller number of species. These species often posses particular traits which
+correlate with their responses. We tested this hypothesis with multivariate
+generalized linear models [@mvabund], which is a  model-based multivariate
+alternative to distance-based methods [@Warton2012]. This technique is implemented in the R package `mvabund`  [@Wang2012;@mvabund]. We used this approach to fit the model:
+
+$log(\mu_{jkl}) =  intercept_{j} + block_{jk} + bromeliad_{jl} + block \times bromeliad_{jkl}$
+
+$Y_{ij} \sim NegBin(\mu_{jkl}, \phi_{j})$
+
+
+This approach
 has three advantages that make it suitable for our application. First, because
 it is based on GLMs, we are able to model the mean-variance relationship
 common in count data. Distance-based metrics, on the other hand, can conflate
@@ -201,6 +204,8 @@ allows for estimating individual species-level responses. These are tested
 using bootrap tests that correct for multiple comparisons. This technique lets
 us identify which species responded most to the environmental differences, and
 to relate these to traits of these species.
+
+All statistical analyses were conducted in R [@rcore]. Code to reproduce the analysis published here is available at ***link to data***
 
 
 ## Results  
