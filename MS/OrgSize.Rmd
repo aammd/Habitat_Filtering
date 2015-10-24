@@ -356,16 +356,69 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 
 ## Discussion
 
-We tested three predictions of the size-plasticity hypothesis. First, we tested whether smaller organism types would develop less variation than larger organisms. We did not find support for this pattern. Second, we asked whether smaller organisms showed a weaker relationship to environmental variation than larger organisms. We found this pattern in two different multivariate tests of our final sample. Third, we asked which taxa were driving the response, and found that chironomids, oligochaetes and one zooplankton species in particular explained more of the deviance in multivariate response. 
+We tested three predictions of the size-plasticity hypothesis. First, we
+tested whether smaller organism types would develop less variation than larger
+organisms (Question 1). We did not find support for this pattern. Second, we
+asked whether smaller organisms showed a weaker relationship to environmental
+variation than larger organisms (Question 2). We found this pattern in two
+different multivariate tests (Question 3). Third, we asked which taxa were
+driving the response, and found that chironomids, oligochaetes and one
+zooplankton species in particular explained more of the deviance in
+multivariate response.
 
-We did discover different amounts of environmental signal ithe different groups -- more in invertebrates and zooplankton than in bacteria. In the direction that we expected, based on the size-sensitivity hypothesis. We found support for these same patterns when we examined individual species responses -- more species of insects showed a change in response to environmental variation than did zooplankton. No bacteria OTU ever showed a predictable difference between before and after. Just as Farjalla et al predicted, the strength of environmental fitlering is in negative proportion to body size. Over the same time interval, insects and zooplankton developed more of a response to the environment than did bacteria. 
+We found that dispersion, in all cases, was lower at the end of the experiment
+than at the beginning. This indicates that our treatments were effective in
+homogeneous (or nearly-homogeneous) starting communities. This is important,
+because it demonstrates that our inability to detect a species effect in
+PERMANOVAs of bacteria does not reflect an inability to detect differences
+among bacterial communities. However, the amount of this decline was the same
+across all organism groups as indicated by the absence of a significant
+interaction (`r tab("disp_tab")`). However, this methods assumes that
+homogenization occurred for all communities to the same degree. This is
+unlikely to be the case: though we were able to count and precisely calculate
+the starting insect community composition, we were obliged to use random
+subsamples of the zooplankton and bacteria communities. This means that while
+all communities began with the same invertebrate composition, they probably
+began with slight variation in zooplankton and bacteria composition.
 
-We found that dispersion, in all cases, was lower at the end of the experiment than at the beginning. This indicates that our treatments were effectingve in removing beta diverstiy among patches. that is, that all habitats really did end up being very similar at the beginning, as we would expect. However, the amount of this decline was the same across all organism groups (`r tab("disp_tab")`), as indicated by the 
+We did discover different amounts of environmental signal in the pattern
+expected: macroinvertebrates > zooplankton > bacteria. This provides support
+for the size-plasticity experiment in the absence of dispersal. The results
+from the PERMANOVA test closely matched the order of magnitude and rank order
+after the experiment as before. We found slightly different results from the
+multivariate GLM approach: while macroinvertebrates still showed a large
+response to environment and bacteria a small response, zooplankton showed a
+response nearly as strong as for insects. One explanation for this is that in
+removing dispersal, we have removed active dispersal for insects (which tends
+to increase response to the environment) and removed passive dispersal for
+zooplankton (which tends to decrease response to the environment). Just as
+Farjalla et al. predicted, the strength of environmental filtering is in
+negative proportion to body size. Over the same time interval, insects and
+zooplankton developed more of a response to the environment than did bacteria.
 
-The difference between insects and zooplankton was not as great as we expected it would be. that was probably because we were missing the active vs passive differences. Insect females choose where to place their eggs, evalutating resources and predation risk (citecitecite). On the other hand, the macroinvertebrate taxa that did respond are also the more abundant taxa; it may be that we only had the ability to detect patterns for these taxa. Both of these issues at once (should we do permanova on mortality?). Both size does predict some of the variation in response to the environment. Since active dispersers are also larger, there is then a relationship between that life history and body size -- larger animals are more likely to disperse actively. It may be that those groups show a response in that direction as well. 
+The difference between insects and zooplankton was not as great as we expected
+it would be. that was probably because we were missing the active vs passive
+differences. Insect females choose where to place their eggs, evalutating
+resources and predation risk (citecitecite). On the other hand, the
+macroinvertebrate taxa that did respond are also the more abundant taxa; it
+may be that we only had the ability to detect patterns for these taxa. Both of
+these issues at once (should we do permanova on mortality?). Both size does
+predict some of the variation in response to the environment. Since active
+dispersers are also larger, there is then a relationship between that life
+history and body size -- larger animals are more likely to disperse actively.
+It may be that those groups show a response in that direction as well.
 
-In conclusion, here we have shown that a hypothesis made by variance partitioning and by observations, can be supported by a manipulative experiment and a different statistical approach. that, I guess, is probably good news for variance partitioning methods, which have come under a lot of criticism lately. iN our experiment we removed the variation in community composition between habitats, and were essentially able to watch the recovery of beta diversity in our system. Measured as both turnover and dispersion, in that test I haven't even done yet. 
+In conclusion, here we have shown that a hypothesis made by variance
+partitioning and by observations, can be supported by a manipulative
+experiment and a different statistical approach. that, I guess, is probably
+good news for variance partitioning methods, which have come under a lot of
+criticism lately. iN our experiment we removed the variation in community
+composition between habitats, and were essentially able to watch the recovery
+of beta diversity in our system. Measured as both turnover and dispersion, in
+that test I haven't even done yet.
 
-In other words our experiment has not only confirmed some aspects of the body size habitat senstivity experiment, but also investigated the rate at which beta diversity is recovered for these different groups. p 
+In other words our experiment has not only confirmed some aspects of the body
+size habitat senstivity experiment, but also investigated the rate at which
+beta diversity is recovered for these different groups. p
 
 ## References
