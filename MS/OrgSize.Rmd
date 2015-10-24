@@ -1,5 +1,5 @@
 ---
-title: "The effect of habitat variation on organisms of different body size"
+title: "Smaller organisms are less strongly structured by environmental variation"
 author: "A. Andrew M. MacDonald, Vinicius F. Farjalla , Diane S. Srivastava"
 fontsize: 12pt
 output:
@@ -45,20 +45,58 @@ across different scales and systems.
 
 ## Introduction
 
-models of community assembly explain how local species composition are assembled from the regional species pool. They can be divided into neutral and niche-based processes. Neutral processes are based on the demographic equivalence of all species. the relative abundance of species in any local patch is dependent on their frequency in the regional species pool, paired with stochastic demographic processes such as immigration and emigration. In contrast, niche-based models of community assembly emphasize the trait differences among species. In these models, species are able to coexiest if they posses sufficeniently different traits (stabilizing processes) and their relative abundance is due to differences in their fitness (e.g. survival and reproduction). Niche-based models emphasize how the presence of species in a site is correlated with the abiotic and biotic conditions of that site. These determine whether a species is able to colonize or persist in a given patch. In niche-based, as in neutral models, variance in community composition is also derived from stochasticity in demographic processes. Both categorite of model also make predictions about how patches differ from each other in species composition (beta diversity). In a neutral model, differences between patches are caused by stochasticity in demographic processes, particularly dispersa.  In a niche-based model this variation is increased by variation among habitat patches, which selects for different species compositions in each. Separating the different patterns produced by these two methods usually involves variance partitioning. This approach has its detractors. But the question remains for ecologists: when and under what circumstances will local communities be assembled by neutral or niche-based processes? 
+When can we use environmental variation to predict community structure?
+Models of community assembly describe how local communities are assembled from
+the regional species pool; they can be divided into neutral and niche-based
+processes. These two frameworks make very different predictions about how the
+environment influences community structure. In neutral models, individuals of
+all species are assumed to be demographically equivalent, with patterns of
+relative abundance being driven by stochastic processes: birth, death and
+dispersal. Because dispersal is a spatial process, neutral models predict that
+sites close in space should be most similar in community composition. In
+contrast, niche-based models of community assembly emphasize differences among sites (i.e. in habitat qualities) and differences among species (in traits). In these models, species are able to coexist if they
+possess traits which permit them to colonize, and if they are sufficiently
+different from other species to allow coexistence. Niche-based models,
+therefore, predict that sites similar in biotic and abiotic conditions should be
+most similar in community composition.  Likewise, neutral and niche models make
+different predictions about how patches differ from each other in species
+composition (beta diversity). In a neutral model, differences between sites are
+caused by stochasticity in demographic processes, particularly dispersal. In a
+niche-based model differences between sites are caused by different
+environmental conditions. There have been many studies evaluating the relative
+importance of niche versus neutral processes. But the question remains for
+ecologists: when and under what circumstances will local communities be
+assembled by neutral or niche-based processes?
 
- In one of the first studies across different groups of
-organisms in the same community, Farjalla et al. [-@Farjalla2012] demonstrated that body
-size is a key trait determining environmental signal in community composition. They conducted an observational study across many different organism types, spanning orders of magnitude in body size, along a single environmental gradient. They considered two different hypotheses regarding how increasing body size should change the balance of niche-based vs neutral community assembly processes. The size-dispersal and size-plasticity hypotheses. The former hypothesis suggests that larger animals have weaker dispersal -- therefore more stochasticity in community composition -- while smaller organisms have such high dispersal rates that variation in composition must be driven by the suitability of the local environment. In contrast the size-plasticity hypothesis suggests that more important than the ability to disperse is the differences in the local environment. That is, smaller organisms should be less sensitive to environmental variation (ie more plastic) and larger organisms more so. They found that groups of organisms which are physically larger show a greater degree of
-habitat filtering: there is weaker environmental structure as body size
-decreases from insects (strong signal), zooplankton (moderate signal) and bacteria
-(weak signal). Their analysis of observational data found support for the size-plasticity hypothesis.
+One promising mechanism for answering this question is the "Size-Plasticity
+Hypothesis". In one of the first studies across different groups of organisms in
+the same community, Farjalla et al. [-@Farjalla2012] demonstrated that body size
+is a key trait determining environmental signal in community composition. They
+conducted an observational study across three different organism types:
+macroinvertebrates, zooplankton and bacteria. These organism types span orders
+of magnitude in body size and multiple species of each are found along the same
+environmental gradient -- in this case, three different species of tank
+bromeliads. They considered two different hypotheses regarding how increasing
+body size should change the balance of niche-based vs neutral community assembly
+processes: the size-dispersal and size-plasticity hypotheses. The former
+hypothesis suggests that larger animals have weaker dispersal -- therefore more
+spatial signal in community composition -- while smaller organisms have such high
+dispersal rates that variation in composition must be driven by the suitability
+of the local environment. In contrast the size-plasticity hypothesis suggests
+that more important than the ability to disperse is the differences in the local
+environment. That is, smaller organisms should be less sensitive to
+environmental variation (i.e. more plastic) and larger organisms more so. They
+found that groups of organisms which are physically larger show a greater degree
+of habitat filtering: there is weaker environmental structure as body size
+decreases from insects (strong signal), zooplankton (moderate signal) and
+bacteria (weak signal). Their analysis of observational data found support for
+the size-plasticity hypothesis.
 
-Why should the strenght of environmental filtering decrease with organism size? there are two possible mechanisms that may make communities of smaller organisms more strongly filtered. At the individual level, organisms which are very small maybe able to find microhabitats in a way that mitigates varation abmong patches. smaller organisms also have simpler metabolisms. Bacteria are often able to consume a wide variety of carbon sources. Bacteria can even use environmental DNA, or transfer plasmids among unrelated cells, acquiring new functions. 
+Why should the strength of environmental filtering decrease with organism size? there are two possible mechanisms that may make communities of smaller organisms more strongly filtered. At the individual level, organisms which are very small maybe able to find microhabitats in a way that mitigates variation among patches. smaller organisms also have simpler metabolisms. Bacteria are often able to consume a wide variety of carbon sources. Bacteria can even use environmental DNA, or transfer plasmids among unrelated cells, acquiring new functions. 
 
 Dispersion -- this hypothesis also tells us something about how we should expect to see communities change over time.
 
-The individual-level effects suggested by the size-plasticity hypothesis are difficult to test because of population level processes: especially dispersal. At the population level, smaller organisms may also show less of a relationship with environmental variation. if smaller organisms disperse more rapidly, then we would expect to see populations of smaller species maintained, even in patches where they have negative population growth rates (i.e. mass effects). smaller organisms have higher growth rates, higher rates of turnover, and shorter generation times. This suggests that they could persiste in highly variable or fluctuation habitats, purely by demographic processes. Also, they could stick aroun by evolution, as they have larger effects population sizes (does mutation rate show an effect with regard to population size?). rapid evolution to antiobotics is well know.
+The individual-level effects suggested by the size-plasticity hypothesis are difficult to test because of population level processes: especially dispersal. At the population level, smaller organisms may also show less of a relationship with environmental variation. if smaller organisms disperse more rapidly, then we would expect to see populations of smaller species maintained, even in patches where they have negative population growth rates (i.e. mass effects). smaller organisms have higher growth rates, higher rates of turnover, and shorter generation times. This suggests that they could persist in highly variable or fluctuation habitats, purely by demographic processes. Also, they could stick aroun by evolution, as they have larger effects population sizes (does mutation rate show an effect with regard to population size?). rapid evolution to antibiotics is well know.
 In both cases, therefore, space is an issue -- the processes of dispersal can either exaggerate or diminish the effects seen by Farjalla et al. 
 
 However, the work of Farjalla et al suggests a manipulative experiment: to
@@ -73,7 +111,7 @@ environmental conditions.
 
 We test three different predictions of the size-plasticity hypothesis: 
 
-Question 1: communities which begin at a simiar species composition will diverge, but this divergence
+Question 1: communities which begin at a similar species composition will diverge, but this divergence
 will be greatest between larger species and increasingly weak in smaller
 organisms
 
@@ -96,7 +134,7 @@ $41^{\circ}$); the environmental gradient is three different species of
 bromeliad. Each species of bromeliad is found in a different habitat of the
 park: _Aechmea nudicaulis_ (full sun habitats), _Vriesea neoglutinosa_
 (partial shade), and _Neoregelia cruenta_ (full shade). _Neoregelia_ has a
-uniquely large habitat range at this site, occuring in both full shade and
+uniquely large habitat range at this site, occurring in both full shade and
 full sun; only shade plants were used in this study. As is common for
 bromeliads, plants used in this study collect standing water (phytotelmata) in
 deep leaf axils, and are known to contain diverse communities  of
@@ -296,6 +334,8 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 
 
 ## Discussion
+
+We tested three predictions of the size-plasticity hypothesis. First, we tested whether smaller organism types would develop less variation than larger organisms. We did not find support for this pattern. Second, we asked whether smaller organisms showed a weaker relationship to environmental variation than larger organisms. We found this pattern in two different multivariate tests of our final sample. Third, we asked which taxa were driving the response, and found that it was two chironomids and one zooplankton species in particular which explained more of the deviance in multivariate response. 
 
 We did discover different amounts of environmental signal ithe different groups -- more in invertebrates and zooplankton than in bacteria. In the direction that we expected, based on the size-sensitivity hypothesis. We found support for these same patterns when we examined individual species responses -- more species of insects showed a change in response to environmental variation than did zooplankton. No bacteria OTU ever showed a predictable difference between before and after. Just as Farjalla et al predicted, the strength of environmental fitlering is in negative proportion to body size. Over the same time interval, insects and zooplankton developed more of a response to the environment than did bacteria. 
 
