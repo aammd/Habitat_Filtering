@@ -35,12 +35,7 @@ targets:
       - MS/OrgSize.pdf
       - figures/Fig2.pdf
       - MS/SuppMatt.pdf
-      - inverts_manyglm_fin_sum
-      - inverts_manyglm_fin_aov_tidy
-      - zoops_manyglm_fin_sum
-      - zoops_manyglm_fin_aov_tidy
-      - bact_manyglm_fin_sum
-      - bact_manyglm_fin_aov_tidy
+      - MS/OrgSize.docx
 
 ### read in data, including each bacterial file
 
@@ -595,6 +590,10 @@ targets:
     command: r2_plot(r2_plot_df, mytheme)
     plot: true
 
+  figures/r2_plot.png:
+    command: r2_plot(r2_plot_df, mytheme)
+    plot: true
+
 
   figures/one_one_plot.pdf:
     plot: true
@@ -605,7 +604,16 @@ targets:
     plot: true
     command: plot_disp_taxa(disp_difs_long, mytheme)
 
+  figures/plot_disp_taxa.png:
+    plot: true
+    command: plot_disp_taxa(disp_difs_long, mytheme)
+
+
   figures/individual_responses.pdf: 
+    plot: true
+    command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
+
+  figures/individual_responses.png: 
     plot: true
     command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
 
@@ -672,7 +680,7 @@ targets:
     command: render("MS/SuppMatt.md", output_format = I("pdf_document"))
 
   MS/OrgSize.md:
-    knitr:
+    knitr: 
       options:
         echo: false
     depends:
@@ -698,11 +706,19 @@ targets:
       - zoops_manyglm_table
       - bact_manyglm_table
 
-  MS/OrgSize.pdf:
-    depends:
-      - figures/plot_disp_taxa.pdf
-      - figures/r2_plot.pdf
-      - MS/orgsize.bib
-      - figures/individual_responses.pdf
-    command: render("MS/OrgSize.md")
+ # MS/OrgSize.pdf:
+ #   depends:
+ #     - figures/plot_disp_taxa.pdf
+ #     - figures/r2_plot.pdf
+ #     - MS/orgsize.bib
+ #     - figures/individual_responses.pdf
+ #   command: render("MS/OrgSize.md")
 
+
+  MS/OrgSize.docx:
+    depends:
+      - figures/plot_disp_taxa.png
+      - figures/r2_plot.png
+      - MS/orgsize.bib
+      - figures/individual_responses.png
+    command: render("MS/OrgSize.md", output_format = I("word_document"))
