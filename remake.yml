@@ -16,7 +16,8 @@ packages:
   - viridis
   - stargazer
   - nlme
-
+  - knitr
+  
 sources:
   - R.scripts/results.R
   - R.scripts/data_cleaning.R
@@ -492,6 +493,9 @@ targets:
   inverts_manyglm_fin_add:
     command: run_manyglm_add(inverts_tts_fin, glm_family = I("negative.binomial"))
 
+  inverts_manyglm_table:
+    command: manyglm_get_table(inverts_manyglm_fin_all_aov)
+
 ## perform manyglm analysis -- ZOOP
   ## run manyglm
   zoops_manyglm_fin:
@@ -511,6 +515,9 @@ targets:
   zoops_manyglm_fin_add:
     command: run_manyglm_add(zoops_tts_fin, glm_family = I("negative.binomial"))
 
+  zoops_manyglm_table:
+    command: manyglm_get_table(zoops_manyglm_fin_all_aov)
+
     ## peform manyglm analsysis -- BACTERIA
   ## run manyglm
   bact_manyglm_fin:
@@ -529,6 +536,9 @@ targets:
 ## ADDITIVE
   bact_manyglm_fin_add:
     command: run_manyglm_add(bact_tts_fin, glm_family = I("binomial"))
+
+  bact_manyglm_table:
+    command: manyglm_get_table(bact_manyglm_fin_all_aov)
 
 
 
@@ -643,6 +653,9 @@ targets:
       - inverts_manyglm_fin_add
       - zoops_manyglm_fin_add
       - bact_manyglm_fin_add
+      - inverts_manyglm_table
+      - zoops_manyglm_table
+      - bact_manyglm_table
 
   MS/SuppMatt.pdf:
     depends:
