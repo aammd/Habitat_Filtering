@@ -638,6 +638,8 @@ targets:
     knitr: 
       auto_figure_prefix: true
       chdir: true
+      options:
+        echo: false
     depends:
       - inverts_adonis_ini
       - zoops_adonis_ini
@@ -670,7 +672,9 @@ targets:
     command: render("MS/SuppMatt.md", output_format = I("pdf_document"))
 
   MS/OrgSize.md:
-    knitr: true
+    knitr:
+      options:
+        echo: false
     depends:
       - blocks
       - inverts_adonis_ini
