@@ -24,7 +24,11 @@ plot_indiv_species <- function(.inverts_manyglm_fin_aov_tidy,
     geom_point(shape = 21,
                size = 3,
                position = position_jitter(width = .1)) +
-    scale_fill_manual(values = c(NA, "black")) +
+    scale_fill_manual(values = c(NA, "black"), 
+                      labels = c("p > 0.05", "p < 0.05"),
+                      name = NULL) +
+    xlab("Organism type") +
+    ylab("Percent deviance explained") +
     .mytheme
 }
 
