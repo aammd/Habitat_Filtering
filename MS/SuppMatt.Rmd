@@ -93,6 +93,7 @@ get_adonis_table(bact_adonis_fin)
 
 results of multivariate GLMS
 
+## diagnositic plots for full models
 ```{r}
 plot(inverts_manyglm_fin)
 ```
@@ -105,6 +106,21 @@ plot(zoops_manyglm_fin)
 ```{r}
 
 plot(bact_manyglm_fin)
+```
+
+## ANOVA tables for full models
+Analyis of deviance 
+
+```{r}
+kable(inverts_manyglm_table)
+```
+
+```{r}
+kable(zoops_manyglm_table)
+```
+
+```{r}
+kable(bact_manyglm_table)
 ```
 
 ## manyglm
