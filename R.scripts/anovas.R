@@ -1,21 +1,9 @@
 ## look for block interaction
-anova(inverts_manyglm_fin, inverts_manyglm_fin_add)
+# anova(inverts_manyglm_fin, inverts_manyglm_fin_add)
 
 ## type III sums of squares:
 
-## function to run block and species:block
-run_manyglm_no_main_sp <- function(data_list, glm_family = "negative.binomial"){  
-  #' call mvabund on responses
-  responses <- data_list %>% 
-    extract2("taxa") %>% 
-    as.matrix
-  # browser()
-  ## run glm
-  data_list %>% 
-    extract2("factors") %>% 
-    data.frame %>% 
-    manyglm(responses ~ Block, data = ., family = glm_family)
-}
+
 
 inverts_manyglm_nomain <- run_manyglm_no_main_sp(inverts_tts_fin, glm_family = I("negative.binomial"))
 
@@ -27,4 +15,34 @@ zoops_manyglm_nomain <- run_manyglm_no_main_sp(zoops_tts_fin, glm_family = I("ne
 
 full_zoops <- anova(zoops_manyglm_fin, zoops_manyglm_nomain, nBoot = 100)
 
+## can get univariate stuff from these models too
 anova(zoops_manyglm_fin, zoops_manyglm_nomain, nBoot = 100, p.uni = 'adjusted')
+
+# bacteria
+
+
+bact_manyglm_nomain <- run_manyglm_no_main_sp(bact_tts_fin, glm_family = I("binomial"))
+
+anova(bact_manyglm_fin, bact_manyglm_nomain, nBoot = 100, p.uni = 'none', resamp = "montecarlo")
+
+
+
+invert_null <- run_manyglm_null(inverts_tts_fin, glm_family = I("negative.binomial"))
+
+
+
+inverts_manyglm_fin_aov %>% 
+  manyglm_get_table %>% 
+  percent_dev_sp
+
+inverts_manyglm_fin_aov %>% manyglm_get_table()
+
+zoops_manyglm_fin_aov %>% 
+  manyglm_get_table %>% 
+  percent_dev_sp
+
+
+bact_manyglm_fin_aov %>% 
+  manyglm_get_table %>% 
+  percent_dev_sp
+
