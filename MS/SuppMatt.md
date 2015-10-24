@@ -28,26 +28,14 @@ fontsize: 12pt
 
 mixed effect ANOVA table
 
-```r
-anova(disp_mixed) %>% 
-    knitr::kable()
-```
-
-
-
 |            | numDF| denDF|     F-value|   p-value|
 |:-----------|-----:|-----:|-----------:|---------:|
-|(Intercept) |     1|    20| 703.4117822| 0.0000000|
-|taxa        |     2|    20|   3.8561996| 0.0383318|
-|timing      |     1|    20|  16.1076135| 0.0006818|
-|taxa:timing |     2|    20|   0.3875174| 0.6837264|
+|(Intercept) |     1|    20| 837.1699446| 0.0000000|
+|taxa        |     2|    20|   9.9229148| 0.0010150|
+|timing      |     1|    20|  15.4715289| 0.0008221|
+|taxa:timing |     2|    20|   0.4375683| 0.6516385|
 
 residual plot for the dispersion model
-
-```r
-plot(disp_mixed)
-```
-
 ![plot of chunk unnamed-chunk-3](figure/SuppMatt__unnamed-chunk-3-1.png) 
 
 ![](../figures/one_one_plot.pdf)
@@ -62,12 +50,6 @@ Figure  1: This is the different mean differences to centroid on the same plot. 
 
 ### inverts
 
-```r
-get_adonis_table(inverts_adonis_ini)
-```
-
-
-
 |          | Df| SumsOfSqs|  MeanSqs|  F.Model|       R2| Pr(>F)|
 |:---------|--:|---------:|--------:|--------:|--------:|------:|
 |species   |  2|  27029.33| 13514.67| 7.032039| 0.342491|  0.001|
@@ -76,25 +58,13 @@ get_adonis_table(inverts_adonis_ini)
 
 ### zooplankton
 
-```r
-get_adonis_table(zoops_adonis_ini)
-```
-
-
-
-|          | Df| SumsOfSqs|  MeanSqs|  F.Model|        R2| Pr(>F)|
-|:---------|--:|---------:|--------:|--------:|---------:|------:|
-|species   |  2|  15601.27| 7800.633| 2.578766| 0.1603833|  0.004|
-|Residuals | 27|  81673.60| 3024.948|       NA| 0.8396167|     NA|
-|Total     | 29|  97274.87|       NA|       NA| 1.0000000|     NA|
+|          | Df| SumsOfSqs|  MeanSqs| F.Model|        R2| Pr(>F)|
+|:---------|--:|---------:|--------:|-------:|---------:|------:|
+|species   |  2|   15666.0| 7833.000|  2.5853| 0.1607244|  0.005|
+|Residuals | 27|   81805.2| 3029.822|      NA| 0.8392756|     NA|
+|Total     | 29|   97471.2|       NA|      NA| 1.0000000|     NA|
 
 ### bacteria
-
-```r
-get_adonis_table(bact_adonis_ini)
-```
-
-
 
 |          | Df| SumsOfSqs|  MeanSqs|   F.Model|        R2| Pr(>F)|
 |:---------|--:|---------:|--------:|---------:|---------:|------:|
@@ -105,12 +75,6 @@ get_adonis_table(bact_adonis_ini)
 ## final
 ### insects
 
-```r
-get_adonis_table(inverts_adonis_fin)
-```
-
-
-
 |          | Df| SumsOfSqs|   MeanSqs|  F.Model|        R2| Pr(>F)|
 |:---------|--:|---------:|---------:|--------:|---------:|------:|
 |species   |  2|  59463.67| 29731.833| 6.418015| 0.3222216|  0.002|
@@ -119,25 +83,13 @@ get_adonis_table(inverts_adonis_fin)
 
 ### zooplankton
 
-```r
-get_adonis_table(zoops_adonis_fin)
-```
-
-
-
 |          | Df| SumsOfSqs|   MeanSqs|  F.Model|        R2| Pr(>F)|
 |:---------|--:|---------:|---------:|--------:|---------:|------:|
-|species   |  2|  3065.733| 1532.8667| 1.732589| 0.1137423|  0.131|
-|Residuals | 27| 23887.600|  884.7259|       NA| 0.8862577|     NA|
-|Total     | 29| 26953.333|        NA|       NA| 1.0000000|     NA|
+|species   |  2|  3104.733| 1552.3667| 1.749576| 0.1147295|  0.159|
+|Residuals | 27| 23956.600|  887.2815|       NA| 0.8852705|     NA|
+|Total     | 29| 27061.333|        NA|       NA| 1.0000000|     NA|
 
 ### bacteria
-
-```r
-get_adonis_table(bact_adonis_fin)
-```
-
-
 
 |          | Df| SumsOfSqs|  MeanSqs|   F.Model|        R2| Pr(>F)|
 |:---------|--:|---------:|--------:|---------:|---------:|------:|
@@ -151,34 +103,44 @@ get_adonis_table(bact_adonis_fin)
 
 results of multivariate GLMS
 
-
-```r
-plot(inverts_manyglm_fin)
-```
-
+## diagnositic plots for full models
 ![plot of chunk unnamed-chunk-11](figure/SuppMatt__unnamed-chunk-11-1.png) 
 
 
-
-```r
-plot(zoops_manyglm_fin)
-```
-
 ![plot of chunk unnamed-chunk-12](figure/SuppMatt__unnamed-chunk-12-1.png) 
 
-
-```r
-plot(bact_manyglm_fin)
-```
-
 ![plot of chunk unnamed-chunk-13](figure/SuppMatt__unnamed-chunk-13-1.png) 
+
+## ANOVA tables for full models
+Analyis of deviance 
+
+
+|term          | Res.Df| Df.diff|      Dev| Pr(>Dev)|
+|:-------------|------:|-------:|--------:|--------:|
+|(Intercept)   |     29|      NA|       NA|       NA|
+|Block         |     25|       4| 109.7867|    0.166|
+|species       |     23|       2| 123.4727|    0.002|
+|Block:species |     15|       8| 150.3358|    0.052|
+
+
+|term          | Res.Df| Df.diff|      Dev| Pr(>Dev)|
+|:-------------|------:|-------:|--------:|--------:|
+|(Intercept)   |     29|      NA|       NA|       NA|
+|Block         |     25|       4| 46.35160|    0.088|
+|species       |     23|       2| 55.03097|    0.002|
+|Block:species |     15|       8| 51.67825|    0.016|
+
+
+|term          | Res.Df| Df.diff|        Dev| Pr(>Dev)|
+|:-------------|------:|-------:|----------:|--------:|
+|(Intercept)   |     29|      NA|         NA|       NA|
+|Block         |     25|       4| 2210.04170|     0.02|
+|species       |     23|       2|  673.64723|     0.02|
+|Block:species |     15|       8|   30.72662|     0.04|
 
 ## manyglm
 
 
 test for interactions
 
-```r
-#anova(inverts_manyglm_fin, inverts_manyglm_fin_add)
-```
 
