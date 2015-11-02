@@ -32,16 +32,19 @@ response to differences in environmental variables. These differences act as
 local environmental conditions prevents their establishment or persistence.
 However, not all groups of organisms are equally sensitive to the same
 environmental variables. Observational studies have already suggested that
-larger-bodied species are more strongly filtered by habitat than smaller-bodied
-species. However, this mechanism has never been tested experimentally. In our
-study we placed highly similar aquatic communities (composed of insects,
-zooplankton and bacteria) into different environments and observed subsequent
-divergence in composition. We predicted that insects would show a strong change
-in composition, zooplankton a moderate change and bacteria little to no change.
-Our results are consistent with these predictions, with the exception of a
-weaker signal in insects than expected. These results suggest that organism size
-could provide a framework for integrating studies of environmental filtering
-across different scales and systems.
+larger-bodied species are more strongly filtered by habitat than smaller-
+bodied species. This observation suggests that smaller organisms types, as a
+group, occupy broader fundamental niches, such that a the same population can
+exist in multiple habitats. However, this mechanism has never been tested
+experimentally. In our study we placed highly similar aquatic communities
+(composed of insects, zooplankton and bacteria) into different environments
+and observed subsequent divergence in composition. We predicted that insects
+would show a strong change in composition, zooplankton a moderate change and
+bacteria little to no change. Our results are consistent with these
+predictions, with the exception of a weaker signal in insects than expected.
+These results suggest that organism size could provide a framework for
+integrating studies of environmental filtering across different scales and
+systems.
 
 ## Introduction
 
