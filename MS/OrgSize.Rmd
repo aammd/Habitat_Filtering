@@ -113,7 +113,7 @@ patches where they have negative population growth rates (i.e. mass effects, [@M
 
 Dispersal creates a problem for measuring the distinction between the size-
 plasticity and size-dispersal hypotheses. Dispersal can be active, where
-adults choose where to lay eggs, or passive, when that organisms are moved by
+adults choose where to lay eggs, or passive, when organisms are moved by
 some vector. On the one hand, active choice by larger organism types could
 account for much of the pattern seen by Farjalla et al - particularly if the
 scale and precision of active dispersal increases with organism size. This
@@ -126,15 +126,20 @@ but a constant influx of new immigrants maintains its presence. Unfortunately,
 dispersal rates are notoriously difficult to measure, especially for the many
 species and scales necessary to address this question.
 
-Fortunately, the size-dispersal and size-plasticity also make different
-predictions regarding the rate of change in communities which begin at
-identical (or nearly-identical). We use this prediction to design and
-experiment: by starting with identical community compositions, we will observe
-the return of variation in community composition. We studied the same groups
-of organisms (insects, zooplankton and bacteria) in the same patchy, highly
-variable habitat (three species of tank bromeliads). We created communities
-that were as similar as possible in composition, then exposed these
-communities to their original environmental conditions.
+The confounding effect of dispersal can be removed with a manipulative
+experiment. The size-dispersal and size-plasticity hypotheses also make
+different predictions regarding the rate of change in communities which begin
+at identical compositions, but different environments. In such communities,
+the size-dispersal hypothesis predicts a similar rate of change in the
+structure of all groups; the size-plasticity hypothesis predicts that larger
+groups of organisms will change more (because of their narrower fundamental
+niches). We use this prediction to design and experiment: by starting with
+identical community compositions, we will observe the return of variation in
+community composition. We studied the same groups of organisms (insects,
+zooplankton and bacteria) in the same patchy, highly variable habitat (three
+species of tank bromeliads). We created communities that were as similar as
+possible in composition, then exposed these communities to their original
+environmental conditions.
 
 We test three different predictions of the size-plasticity hypothesis: 
 
