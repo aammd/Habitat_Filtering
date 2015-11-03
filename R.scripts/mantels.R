@@ -45,3 +45,35 @@ zoo_blks_fin <- split(zoops_tts_fin[[2]], zoops_tts_fin[[1]][,1])
 
 
 Map(mantel_ini_fin, zoo_blks_fin, zoo_blks_ini)
+
+
+
+### plotting
+
+tidy_mantel %>% 
+  mutate(taxa = factor(taxa, levels = c("Macroinvertebrates",
+                                        "Zooplankton", 
+                                        "Bacteria"))) %>% 
+  ggplot(aes(x = taxa, y = stat, fill = sigf < 0.05)) +
+  geom_point(size = 3, alpha = 0.7, pch = 21) +
+  ylab("Mantel statistic") +
+  geom_hline(yintercept = 0) +
+  # geom_smooth(aes(group = 1), method = "lm") +
+  geom_line(aes(group = blk)) +
+  facet_wrap(~blk, scales = "free") +
+  theme_bw()
+ggsave("mantel_change_by_block.png")
+
+tidy_mantel %>% 
+  mutate(taxa = factor(taxa, levels = c("Macroinvertebrates",
+                                        "Zooplankton", 
+                                        "Bacteria"))) %>% 
+  ggplot(aes(x = taxa, y = stat, fill = sigf < 0.05)) +
+  geom_point(size = 3, alpha = 0.7, pch = 21) +
+  ylab("Mantel statistic") +
+  geom_hline(yintercept = 0, colour = "grey") +
+  geom_smooth(aes(group = 1), method = "lm", se = FALSE, colour = "black") +
+  # geom_line(aes(group = blk)) +
+  # facet_wrap(~blk, scales = "free") +
+  theme_bw()
+ggsave("mantel_test_overall.png")
