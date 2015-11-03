@@ -19,12 +19,30 @@ clean_insect_names <- function(community_data, name_data) {
 ## Andrew MacDonald, Dec 2014
 
 ## read data
-clean_zooplankton <-  . %>% 
-  read.table(header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% 
-  tbl_df %>%
-  group_by(sampling, bromeliad, Spp) %>%
-  summarise(abundance = sum(abundance)) %>%
-  as.data.frame
+clean_zooplankton <-  function(filename){
+  filename %>% 
+    read.table(header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% 
+    tbl_df %>%
+    group_by(sampling, bromeliad, Spp) %>%
+    summarise(abundance = sum(abundance)) %>%
+    as.data.frame %>% 
+    summarize_zoops()
+}
+
+summarize_zoops <- function(.zoops){
+  .zoops %>% 
+    separate(Spp, c("group", "stage")) %>%
+    mutate(stage = ifelse(stage %in% c("adult", "nauplius"),
+                          "sp",
+                          stage),
+           stage = ifelse(is.na(stage),
+                          "sp",
+                          stage)) %>% 
+    unite("Spp", group, stage) %>% 
+    group_by(sampling, bromeliad, Spp) %>% 
+    summarize(abundance = sum(abundance)) %>% 
+    as.data.frame
+}
 
 
 ## alias for reading bacteria

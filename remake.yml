@@ -27,6 +27,7 @@ sources:
   - R.scripts/run_manyglm.R
   - R.scripts/FIGURE_themes.R
   - R.scripts/waldplot.R
+  - R.scripts/mantel_functions.R
 
 targets:
   all:
@@ -35,12 +36,8 @@ targets:
       - MS/OrgSize.pdf
       - figures/Fig2.pdf
       - MS/SuppMatt.pdf
-      - inverts_manyglm_fin_sum
-      - inverts_manyglm_fin_aov_tidy
-      - zoops_manyglm_fin_sum
-      - zoops_manyglm_fin_aov_tidy
-      - bact_manyglm_fin_sum
-      - bact_manyglm_fin_aov_tidy
+      - MS/OrgSize.docx
+      - tidy_mantel
 
 ### read in data, including each bacterial file
 
@@ -581,6 +578,32 @@ targets:
   bact_adonis_win_fin:
     command: AdonisData(bact_tts_win_fin, method = I("euclid"))
 
+######################################################
+############ MANTEL TESTS
+
+  inverts_split:
+    command: split_tts(inverts_tts_ini, inverts_tts_fin)
+
+  zoops_split:
+    command: split_tts(zoops_tts_ini, zoops_tts_fin)
+
+  bact_split:
+    command: split_tts(bact_tts_ini, bact_tts_fin)
+
+  ## run the tests
+
+  inverts_mantels:
+    command: make_mantels(inverts_split)
+  zoops_mantels:
+    command: make_mantels(zoops_split)
+  bact_mantels:
+    command: make_mantels(bact_split)
+
+## make the dataframe
+
+  tidy_mantel:
+    command: make_tidy_mantel(inverts_mantels, zoops_mantels, bact_mantels)
+
 ###  FIGURES
 
     ## Figure themes
@@ -595,6 +618,10 @@ targets:
     command: r2_plot(r2_plot_df, mytheme)
     plot: true
 
+  figures/r2_plot.png:
+    command: r2_plot(r2_plot_df, mytheme)
+    plot: true
+
 
   figures/one_one_plot.pdf:
     plot: true
@@ -605,7 +632,16 @@ targets:
     plot: true
     command: plot_disp_taxa(disp_difs_long, mytheme)
 
+  figures/plot_disp_taxa.png:
+    plot: true
+    command: plot_disp_taxa(disp_difs_long, mytheme)
+
+
   figures/individual_responses.pdf: 
+    plot: true
+    command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
+
+  figures/individual_responses.png: 
     plot: true
     command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
 
@@ -638,6 +674,8 @@ targets:
     knitr: 
       auto_figure_prefix: true
       chdir: true
+      options:
+        echo: false
     depends:
       - inverts_adonis_ini
       - zoops_adonis_ini
@@ -670,7 +708,9 @@ targets:
     command: render("MS/SuppMatt.md", output_format = I("pdf_document"))
 
   MS/OrgSize.md:
-    knitr: true
+    knitr: 
+      options:
+        echo: false
     depends:
       - blocks
       - inverts_adonis_ini
@@ -694,11 +734,19 @@ targets:
       - zoops_manyglm_table
       - bact_manyglm_table
 
-  MS/OrgSize.pdf:
-    depends:
-      - figures/plot_disp_taxa.pdf
-      - figures/r2_plot.pdf
-      - MS/orgsize.bib
-      - figures/individual_responses.pdf
-    command: render("MS/OrgSize.md")
+ # MS/OrgSize.pdf:
+ #   depends:
+ #     - figures/plot_disp_taxa.pdf
+ #     - figures/r2_plot.pdf
+ #     - MS/orgsize.bib
+ #     - figures/individual_responses.pdf
+ #   command: render("MS/OrgSize.md")
 
+
+  MS/OrgSize.docx:
+    depends:
+      - figures/plot_disp_taxa.png
+      - figures/r2_plot.png
+      - MS/orgsize.bib
+      - figures/individual_responses.png
+    command: render("MS/OrgSize.md", output_format = I("word_document"))
