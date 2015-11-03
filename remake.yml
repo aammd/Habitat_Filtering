@@ -37,6 +37,7 @@ targets:
       - figures/Fig2.pdf
       - MS/SuppMatt.pdf
       - MS/OrgSize.docx
+      - tidy_mantel
 
 ### read in data, including each bacterial file
 
@@ -576,6 +577,32 @@ targets:
 
   bact_adonis_win_fin:
     command: AdonisData(bact_tts_win_fin, method = I("euclid"))
+
+######################################################
+############ MANTEL TESTS
+
+  inverts_split:
+    command: split_tts(inverts_tts_ini, inverts_tts_fin)
+
+  zoops_split:
+    command: split_tts(zoops_tts_ini, zoops_tts_fin)
+
+  bact_split:
+    command: split_tts(bact_tts_ini, bact_tts_fin)
+
+  ## run the tests
+
+  inverts_mantels:
+    command: make_mantels(inverts_split)
+  zoops_mantels:
+    command: make_mantels(zoops_split)
+  bact_mantels:
+    command: make_mantels(bact_split)
+
+## make the dataframe
+
+  tidy_mantel:
+    command: make_tidy_mantel(inverts_mantels, zoops_mantels, bact_mantels)
 
 ###  FIGURES
 
