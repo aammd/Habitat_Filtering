@@ -27,6 +27,7 @@ sources:
   - R.scripts/run_manyglm.R
   - R.scripts/FIGURE_themes.R
   - R.scripts/waldplot.R
+  - R.scripts/mantel_functions.R
 
 targets:
   all:
