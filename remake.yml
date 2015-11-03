@@ -11,30 +11,48 @@ packages:
   - vegan
   - pryr
   - rmarkdown
-
+  - captioner
+  - ibuttonr
+  - viridis
+  - stargazer
+  - nlme
+  - knitr
 sources:
   - R.scripts/results.R
   - R.scripts/data_cleaning.R
   - R.scripts/data_organizing.R
   - R.scripts/run_analyses.R
-  
+  - R.scripts/plots.R
+  - R.scripts/test_disperson.R
+  - R.scripts/run_manyglm.R
+  - R.scripts/FIGURE_themes.R
+  - R.scripts/waldplot.R
+
 targets:
   all:
     depends: 
       - figures/Fig1.png
       - MS/OrgSize.pdf
+      - figures/Fig2.pdf
+      - MS/SuppMatt.pdf
+      - inverts_manyglm_fin_sum
+      - inverts_manyglm_fin_aov_tidy
+      - zoops_manyglm_fin_sum
+      - zoops_manyglm_fin_aov_tidy
+      - bact_manyglm_fin_sum
+      - bact_manyglm_fin_aov_tidy
 
 ### read in data, including each bacterial file
 
   insects:
     command: read_data("raw-data/insect.communities.table.txt")
-  
+
   insectnames:
     command: read.csv("raw-data/insectnames.csv", stringsAsFactors=FALSE)
-    
+
   blocks:
     command: read_data("raw-data/blocks.txt")
-    
+
   bromeliad:
     command: read_data("raw-data/bromeliad.volumes.txt")
 
@@ -44,34 +62,55 @@ targets:
 
   zoops:
     command: clean_zooplankton("raw-data/zoop.txt")
-    
-  bact_1:
-    command: read_clean_bact("raw-data/bacteria/block1.csv")
-        
-  bact_2:
-    command: read_clean_bact("raw-data/bacteria/block2.csv")
-        
-  bact_3:
-    command: read_clean_bact("raw-data/bacteria/block3.csv")
-        
-  bact_4:
-    command: read_clean_bact("raw-data/bacteria/block4.csv")
-        
-  bact_5:
-    command: read_clean_bact("raw-data/bacteria/block5.csv")
-   
-## store data as a list
 
+# bacteria
+## three species experiment
+  bact_1:
+    command: read_clean_bact("raw-data/bacteria/between_species/block1.csv")
+
+  bact_2:
+    command: read_clean_bact("raw-data/bacteria/between_species/block2.csv")
+
+  bact_3:
+    command: read_clean_bact("raw-data/bacteria/between_species/block3.csv")
+
+  bact_4:
+    command: read_clean_bact("raw-data/bacteria/between_species/block4.csv")
+
+  bact_5:
+    command: read_clean_bact("raw-data/bacteria/between_species/block5.csv")
+
+## within sp experiment
+  bact_2_within:
+    command: read_clean_bact_within("raw-data/bacteria/within_species/bloco2.csv")
+
+  bact_4_within:
+    command: read_clean_bact_within("raw-data/bacteria/within_species/bloco4.csv")
+
+  bact_5_within:
+    command: read_clean_bact_within("raw-data/bacteria/within_species/bloco5.csv")
+
+## Process bacteria data into a list
   bact_list:
     command: >
       list(bact_1 = bact_1, bact_2 = bact_2, bact_3 = bact_3,
            bact_4 = bact_4, bact_5 = bact_5)
+           
+  bact_list_within:
+    command: >
+      list(bact_2 = bact_2_within, 
+           bact_4 = bact_4_within, 
+           bact_5 = bact_5_within)
 
+### three species
   bact_df:
-    command: bact_list_to_df(bact_list) # combined bact across all blocks
-       
-## WITH BLOCK setup
+    command: bact_list_to_df(bact_list) 
 
+### within species
+  bact_df_within:
+    command: bact_list_to_df(bact_list_within) 
+
+## THREE SPECIES
   inverts_tts_ini:
     command: TaxaTimeSelector(inverts, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("initial"))
 
@@ -88,10 +127,422 @@ targets:
     command: TaxaTimeSelector(zoops, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))
 
   bact_tts_fin:
-    command: TaxaTimeSelector(bact_df, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))  
-    
-  ### perform permanovas
+    command: TaxaTimeSelector(bact_df, .blocks = blocks, .bromeliad = bromeliad, sampletime = I("final"))
 
+## WITHIN SPECIES 
+
+### first adjust the bromeliad data to rename Habitat to species
+#### in both experiments the "species" column is the taxa of interest
+  bromeliad_win:
+    command: brom_within(bromeliad)
+
+### inverts
+  inverts_tts_win_ini:
+    command: > 
+      TaxaTimeSelector(inverts, .blocks = blocks, 
+      .bromeliad = bromeliad_win, sampletime = I("initial"),
+      .experiment = I("withinsp"))
+
+  inverts_tts_win_fin:
+    command: > 
+      TaxaTimeSelector(inverts, .blocks = blocks, 
+      .bromeliad = bromeliad_win, sampletime = I("final"),
+      .experiment = I("withinsp"))
+
+### zoops    
+  zoops_tts_win_ini:
+    command: > 
+      TaxaTimeSelector(zoops, .blocks = blocks, 
+      .bromeliad = bromeliad_win, sampletime = I("initial"),
+      .experiment = I("withinsp"))
+
+  zoops_tts_win_fin:
+    command: > 
+      TaxaTimeSelector(zoops, .blocks = blocks, 
+      .bromeliad = bromeliad_win, sampletime = I("final"),
+      .experiment = I("withinsp"))
+      
+  ### bacteria
+  bact_tts_win_ini:
+    command: > 
+      TaxaTimeSelector(bact_df_within, .blocks = blocks, 
+      .bromeliad = bromeliad_win, sampletime = I("initial"),
+      .experiment = I("withinsp"))
+
+  bact_tts_win_fin:
+    command: > 
+      TaxaTimeSelector(bact_df_within, .blocks = blocks, 
+      .bromeliad = bromeliad_win, sampletime = I("final"),
+      .experiment = I("withinsp"))
+
+
+
+## create a list of permanovas for use in plotting
+  r2_plot_df:
+    command: > 
+      r2_plot_df_maker(inverts_adonis_ini, inverts_adonis_fin,
+              zoops_adonis_ini, zoops_adonis_fin,
+              bact_adonis_ini, bact_adonis_fin)
+    
+
+## supp matt figs
+
+  ### get blocks
+  blocks_Bacer:
+    command: filter_block(blocks, I("Baker"))
+
+    ### get blocks
+  blocks_Davidson:
+    command: filter_block(blocks, I("Davidson"))
+    ### get blocks
+
+  blocks_Eccleson:
+    command: filter_block(blocks, I("Eccleson"))
+    ### get blocks
+
+  blocks_Tennant:
+    command: filter_block(blocks, I("Tennant"))
+    ### get blocks
+
+  blocks_Smith:
+    command: filter_block(blocks, I("Smith"))
+
+
+  ## Create the before/after NMDS plots
+## each section has three parts: selecting the correct time
+## running the MDS
+## placing answers in a list
+
+  inverts_ini_fin_Baker:
+    command: >
+      TaxaTimeSelector(inverts,
+       .blocks = blocks_Bacer,
+       .bromeliad = bromeliad,
+       sampletime = I(c(I("initial"),
+                          I("final"))))
+
+  inverts_ini_fin_Davidson:
+    command: >
+      TaxaTimeSelector(inverts,
+                                  .blocks = blocks_Davidson,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  inverts_ini_fin_Eccleson:
+    command: >
+      TaxaTimeSelector(inverts,
+                                  .blocks = blocks_Eccleson,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  inverts_ini_fin_Tennant:
+    command: >
+      TaxaTimeSelector(inverts,
+                                  .blocks = blocks_Tennant,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  inverts_ini_fin_Smith:
+    command: >
+      TaxaTimeSelector(inverts,
+                                  .blocks = blocks_Smith,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  inverts_ini_fin_Baker_mds:
+    command: invert_mds_augment(inverts_ini_fin_Baker)
+  inverts_ini_fin_Davidson_mds:
+    command: invert_mds_augment(inverts_ini_fin_Davidson)
+  inverts_ini_fin_Eccleson_mds:
+    command: invert_mds_augment(inverts_ini_fin_Eccleson)
+  inverts_ini_fin_Tennant_mds:
+    command: invert_mds_augment(inverts_ini_fin_Tennant)
+  inverts_ini_fin_Smith_mds:
+    command: invert_mds_augment(inverts_ini_fin_Smith)
+
+## combine these into a list
+  invert_mds_list:
+    command: >
+      list(Baker = inverts_ini_fin_Baker_mds,
+           Davidson = inverts_ini_fin_Davidson_mds,
+           Eccleson = inverts_ini_fin_Eccleson_mds,
+           Tennant = inverts_ini_fin_Tennant_mds,
+           Smith = inverts_ini_fin_Smith_mds)
+
+
+##  NMDS for zoops
+
+  zoops_ini_fin_Baker:
+    command: >
+      TaxaTimeSelector(zoops,
+       .blocks = blocks_Bacer,
+       .bromeliad = bromeliad,
+       sampletime = I(c(I("initial"),
+                          I("final"))))
+
+  zoops_ini_fin_Davidson:
+    command: >
+      TaxaTimeSelector(zoops,
+                                  .blocks = blocks_Davidson,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  zoops_ini_fin_Eccleson:
+    command: >
+      TaxaTimeSelector(zoops,
+                                  .blocks = blocks_Eccleson,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  zoops_ini_fin_Tennant:
+    command: >
+      TaxaTimeSelector(zoops,
+                                  .blocks = blocks_Tennant,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  zoops_ini_fin_Smith:
+    command: >
+      TaxaTimeSelector(zoops,
+                                  .blocks = blocks_Smith,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c(I("initial"),
+                                                   I("final"))))
+
+  zoops_ini_fin_Baker_mds:
+    command: zoop_mds_augment(zoops_ini_fin_Baker)
+  zoops_ini_fin_Davidson_mds:
+    command: zoop_mds_augment(zoops_ini_fin_Davidson)
+  zoops_ini_fin_Eccleson_mds:
+    command: zoop_mds_augment(zoops_ini_fin_Eccleson)
+  zoops_ini_fin_Tennant_mds:
+    command: zoop_mds_augment(zoops_ini_fin_Tennant)
+  zoops_ini_fin_Smith_mds:
+    command: zoop_mds_augment(zoops_ini_fin_Smith)
+
+## combine these into a list
+  zoop_mds_list:
+    command: >
+      list(Baker = zoops_ini_fin_Baker_mds,
+           Davidson = zoops_ini_fin_Davidson_mds,
+           Eccleson = zoops_ini_fin_Eccleson_mds,
+           Tennant = zoops_ini_fin_Tennant_mds,
+           Smith = zoops_ini_fin_Smith_mds)
+
+
+## finally, bacteria
+
+  bact_ini_fin_Baker:
+    command: >
+      TaxaTimeSelector(zoops,
+       .blocks = blocks_Bacer,
+       .bromeliad = bromeliad,
+       sampletime = I(c(I("initial"),
+                          I("final"))))
+
+  bact_ini_fin_Davidson:
+    command: >
+      TaxaTimeSelector(bact_df,
+                                  .blocks = blocks_Davidson,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c("initial",
+                                                      "final")))
+
+  bact_ini_fin_Eccleson:
+    command: >
+      TaxaTimeSelector(bact_df,
+                                  .blocks = blocks_Eccleson,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c("initial",
+                                                      "final")))
+
+  bact_ini_fin_Tennant:
+    command: >
+      TaxaTimeSelector(bact_df,
+                                  .blocks = blocks_Tennant,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c("initial",
+                                                      "final")))
+
+  bact_ini_fin_Smith:
+    command: >
+      TaxaTimeSelector(bact_df,
+                                  .blocks = blocks_Smith,
+                                  .bromeliad = bromeliad,
+                                  sampletime = I(c("initial",
+                                                      "final")))
+
+  bact_ini_fin_Baker_mds:
+    command: bact_mds_augment(bact_ini_fin_Baker)
+  bact_ini_fin_Davidson_mds:
+    command: bact_mds_augment(bact_ini_fin_Davidson)
+  bact_ini_fin_Eccleson_mds:
+    command: bact_mds_augment(bact_ini_fin_Eccleson)
+  bact_ini_fin_Tennant_mds:
+    command: bact_mds_augment(bact_ini_fin_Tennant)
+  bact_ini_fin_Smith_mds:
+    command: bact_mds_augment(bact_ini_fin_Smith)
+
+## combine these into a list -- list of NMDS solutions!!
+  bact_mds_list:
+    command: >
+      list(Baker = bact_ini_fin_Baker_mds,
+           Davidson = bact_ini_fin_Davidson_mds,
+           Eccleson = bact_ini_fin_Eccleson_mds,
+           Tennant = bact_ini_fin_Tennant_mds,
+           Smith = bact_ini_fin_Smith_mds)
+
+############################################################
+############################################################
+#                                        Disperson
+
+  inverts_ini_fin_Baker_disp:
+    command: make_betadisp(inverts_ini_fin_Baker, I("raup"))
+  inverts_ini_fin_Davidson_disp:
+    command: make_betadisp(inverts_ini_fin_Davidson, I("raup"))
+  inverts_ini_fin_Eccleson_disp:
+    command: make_betadisp(inverts_ini_fin_Eccleson, I("raup"))
+  inverts_ini_fin_Tennant_disp:
+    command: make_betadisp(inverts_ini_fin_Tennant, I("raup"))
+  inverts_ini_fin_Smith_disp:
+    command: make_betadisp(inverts_ini_fin_Smith, I("raup"))
+  zoops_ini_fin_Baker_disp:
+    command: make_betadisp(zoops_ini_fin_Baker, I("raup"))
+  zoops_ini_fin_Davidson_disp:
+    command: make_betadisp(zoops_ini_fin_Davidson, I("raup"))
+  zoops_ini_fin_Eccleson_disp:
+    command: make_betadisp(zoops_ini_fin_Eccleson, I("raup"))
+  zoops_ini_fin_Tennant_disp:
+    command: make_betadisp(zoops_ini_fin_Tennant, I("raup"))
+  zoops_ini_fin_Smith_disp:
+    command: make_betadisp(zoops_ini_fin_Smith, I("raup"))
+  bact_ini_fin_Baker_disp:
+    command: make_betadisp(bact_ini_fin_Baker, I("raup"))
+  bact_ini_fin_Davidson_disp:
+    command: make_betadisp(bact_ini_fin_Davidson, I("raup"))
+  bact_ini_fin_Eccleson_disp:
+    command: make_betadisp(bact_ini_fin_Eccleson, I("raup"))
+  bact_ini_fin_Tennant_disp:
+    command: make_betadisp(bact_ini_fin_Tennant, I("raup"))
+  bact_ini_fin_Smith_disp:
+    command: make_betadisp(bact_ini_fin_Smith, I("raup")  )
+
+  disper_list:
+    command: >
+      list(
+            inverts_Baker = inverts_ini_fin_Baker_disp,
+            inverts_Davidson = inverts_ini_fin_Davidson_disp,
+            inverts_Eccleson = inverts_ini_fin_Eccleson_disp,
+            inverts_Tennant = inverts_ini_fin_Tennant_disp,
+            inverts_Smith = inverts_ini_fin_Smith_disp,
+            zoops_Baker = zoops_ini_fin_Baker_disp,
+            zoops_Davidson = zoops_ini_fin_Davidson_disp,
+            zoops_Eccleson = zoops_ini_fin_Eccleson_disp,
+            zoops_Tennant = zoops_ini_fin_Tennant_disp,
+            zoops_Smith = zoops_ini_fin_Smith_disp,
+            bact_Baker = bact_ini_fin_Baker_disp,
+            bact_Davidson = bact_ini_fin_Davidson_disp,
+            bact_Eccleson = bact_ini_fin_Eccleson_disp,
+            bact_Tennant = bact_ini_fin_Tennant_disp,
+            bact_Smith = bact_ini_fin_Smith_disp
+        )
+
+  disp_diffs:
+    command: get_mean_disps(displist = disper_list)
+
+  disp_difs_long:
+    command: disp_to_long(disp_diffs)
+
+  disp_mixed:
+    command: make_disp_mixedmod(disp_difs_long)
+
+  aov_mixed:
+    command: anova(disp_mixed)
+
+  tidy_mixed:
+    command: aov_mixed_tidy(aov_mixed)
+
+
+## Run the ANOVA
+
+
+#####################
+## perform manyglm analysis -- INVERTS
+  ## run manyglm
+  inverts_manyglm_fin:
+    command: run_manyglm(inverts_tts_fin, glm_family = I("negative.binomial"))
+  ## obtain summaries and anovas
+  inverts_manyglm_fin_sum:
+    command: make_summary(inverts_manyglm_fin)
+  inverts_manyglm_fin_aov:
+    command: manyglm_anova(inverts_manyglm_fin)
+  ## tidy anova output
+  inverts_manyglm_fin_aov_tidy:
+    command: get_model_stats(inverts_manyglm_fin_aov)
+  ## full model anova
+  inverts_manyglm_fin_all_aov:
+    command: anova(inverts_manyglm_fin,  p.uni = I("none"), show.time = I("all"), nBoot = 500)
+## ADDITIVE
+  inverts_manyglm_fin_add:
+    command: run_manyglm_add(inverts_tts_fin, glm_family = I("negative.binomial"))
+
+  inverts_manyglm_table:
+    command: manyglm_get_table(inverts_manyglm_fin_all_aov)
+
+## perform manyglm analysis -- ZOOP
+  ## run manyglm
+  zoops_manyglm_fin:
+    command: run_manyglm(zoops_tts_fin, glm_family = I("negative.binomial"))
+  ## obtain summaries and anovas
+  zoops_manyglm_fin_sum:
+    command: make_summary(zoops_manyglm_fin)
+  zoops_manyglm_fin_aov:
+    command: manyglm_anova(zoops_manyglm_fin)
+  ## tidy anova output
+  zoops_manyglm_fin_aov_tidy:
+    command: get_model_stats(zoops_manyglm_fin_aov)
+  ## full model anova
+  zoops_manyglm_fin_all_aov:
+    command: anova(zoops_manyglm_fin,  p.uni = I("none"), show.time = I("all"), nBoot = 500)
+## ADDITIVE
+  zoops_manyglm_fin_add:
+    command: run_manyglm_add(zoops_tts_fin, glm_family = I("negative.binomial"))
+
+  zoops_manyglm_table:
+    command: manyglm_get_table(zoops_manyglm_fin_all_aov)
+
+    ## peform manyglm analsysis -- BACTERIA
+  ## run manyglm
+  bact_manyglm_fin:
+    command: run_manyglm(bact_tts_fin, glm_family = I("binomial"))
+  ## obtain summaries and anovas
+  bact_manyglm_fin_sum:
+    command: make_summary(bact_manyglm_fin, .resamp = I("montecarlo"), .nboot = 50)
+  bact_manyglm_fin_aov:
+    command: manyglm_anova(bact_manyglm_fin, .resamp = I("montecarlo"), .nboot = 50)
+  ## tidy anova output
+  bact_manyglm_fin_aov_tidy:
+    command: get_model_stats(bact_manyglm_fin_aov)
+  ## full model anova
+  bact_manyglm_fin_all_aov:
+    command: anova(bact_manyglm_fin,  p.uni = I("none"), resamp = I("montecarlo"), show.time = I("all"), nBoot = 50)
+## ADDITIVE
+  bact_manyglm_fin_add:
+    command: run_manyglm_add(bact_tts_fin, glm_family = I("binomial"))
+
+  bact_manyglm_table:
+    command: manyglm_get_table(bact_manyglm_fin_all_aov)
+
+
+
+## THREE SPECIES
   inverts_adonis_ini:
     command: AdonisData(inverts_tts_ini, method = I("euclid"))
 
@@ -109,22 +560,84 @@ targets:
 
   bact_adonis_fin:
     command: AdonisData(bact_tts_fin, method = I("euclid"))
-    
-  figures/Fig1.png:
-    command: > 
-      r2_plot(inverts_adonis_ini, inverts_adonis_fin,
-              zoops_adonis_ini, zoops_adonis_fin,
-              bact_adonis_ini, bact_adonis_fin)
-    plot: true
-    
-  figures/Fig1.pdf:
-    command: > 
-      r2_plot(inverts_adonis_ini, inverts_adonis_fin,
-              zoops_adonis_ini, zoops_adonis_fin,
-              bact_adonis_ini, bact_adonis_fin)
+
+  ## WITHIN SPECIES
+
+  inverts_adonis_win_ini:
+    command: AdonisData(inverts_tts_win_ini, method = I("euclid"))
+
+  zoops_adonis_win_ini:
+    command: AdonisData(zoops_tts_win_ini, method = I("euclid"))
+
+  bact_adonis_win_ini:
+    command: AdonisData(bact_tts_win_ini, method = I("euclid"))
+
+  inverts_adonis_win_fin:
+    command: AdonisData(inverts_tts_win_fin, method = I("euclid"))
+
+  zoops_adonis_win_fin:
+    command: AdonisData(zoops_tts_win_fin, method = I("euclid"))
+
+  bact_adonis_win_fin:
+    command: AdonisData(bact_tts_win_fin, method = I("euclid"))
+
+###  FIGURES
+
+    ## Figure themes
+  mytheme:
+    command: maketheme()
+
+  mypts:
+    command: makept()
+
+  ## Figures  
+  figures/r2_plot.pdf:
+    command: r2_plot(r2_plot_df, mytheme)
     plot: true
 
+
+  figures/one_one_plot.pdf:
+    plot: true
+    command: one_one_plot(disp_diffs)
+
+
+  figures/plot_disp_taxa.pdf:
+    plot: true
+    command: plot_disp_taxa(disp_difs_long, mytheme)
+
+  figures/individual_responses.pdf: 
+    plot: true
+    command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
+
+## figures of the dispersion in each block, for the supplementary material
+  figures/inverts.pdf:
+    plot: true
+    command: plot_taxa_mds(invert_mds_list)
+
+  figures/zoop.pdf:
+    plot: true
+    command: plot_taxa_mds(zoop_mds_list)
+
+  figures/bact.pdf:
+    plot: true
+    command: plot_taxa_mds(bact_mds_list)
+
+###### within
+
+  figures/Fig2.pdf:
+    command: > 
+      r2_plot_df_maker(inverts_adonis_win_ini, inverts_adonis_win_fin,
+              zoops_adonis_win_ini, zoops_adonis_win_fin,
+              bact_adonis_win_ini, bact_adonis_win_fin)
+    plot: true
+
+
+### DOCUMENTS
+
   MS/SuppMatt.md:
+    knitr: 
+      auto_figure_prefix: true
+      chdir: true
     depends:
       - inverts_adonis_ini
       - zoops_adonis_ini
@@ -132,9 +645,60 @@ targets:
       - inverts_adonis_fin
       - zoops_adonis_fin
       - bact_adonis_fin
+      - disper_list
+      - disp_difs_long 
+      - disp_mixed
+      - inverts_manyglm_fin
+      - zoops_manyglm_fin
+      - bact_manyglm_fin  
+      - inverts_manyglm_fin_all_aov  
+      - zoops_manyglm_fin_all_aov  
+      - bact_manyglm_fin_all_aov
+      - inverts_manyglm_fin_add
+      - zoops_manyglm_fin_add
+      - bact_manyglm_fin_add
+      - inverts_manyglm_table
+      - zoops_manyglm_table
+      - bact_manyglm_table
+
+  MS/SuppMatt.pdf:
+    depends:
+      - figures/inverts.pdf
+      - figures/zoop.pdf
+      - figures/bact.pdf
+      - figures/one_one_plot.pdf
+    command: render("MS/SuppMatt.md", output_format = I("pdf_document"))
+
+  MS/OrgSize.md:
     knitr: true
-    
+    depends:
+      - blocks
+      - inverts_adonis_ini
+      - zoops_adonis_ini
+      - bact_adonis_ini
+      - inverts_adonis_fin
+      - zoops_adonis_fin
+      - bact_adonis_fin
+      - disp_difs_long 
+      - disp_mixed
+      - tidy_mixed
+      - inverts_manyglm_fin
+      - zoops_manyglm_fin
+      - bact_manyglm_fin 
+      - inverts_manyglm_fin_add
+      - zoops_manyglm_fin_add
+      - bact_manyglm_fin_add
+      - disp_diffs
+      - r2_plot_df
+      - inverts_manyglm_table
+      - zoops_manyglm_table
+      - bact_manyglm_table
+
   MS/OrgSize.pdf:
     depends:
-      - figures/Fig1.pdf
+      - figures/plot_disp_taxa.pdf
+      - figures/r2_plot.pdf
+      - MS/orgsize.bib
+      - figures/individual_responses.pdf
     command: render("MS/OrgSize.md")
+

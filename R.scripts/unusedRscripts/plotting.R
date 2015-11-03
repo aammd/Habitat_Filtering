@@ -2,7 +2,7 @@
 
 ## graphing insects threespp ----------
 
-insect_final$plotting_data %>%
+inverts_manyglm_fin_aov_tidy %>% 
   ggplot(aes(x = "insect", y = species_wald, fill = species_p < 0.05)) +
   geom_point(shape = 21, size = 5, alpha = 0.7) +
   scale_fill_manual(values = c(NA, "black")) + 

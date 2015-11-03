@@ -1,6 +1,6 @@
 ## these functions extract analysis results from adonis and
 ## manyglm objects
-library("magrittr")
+library(magrittr)
 
 ## given a data.frame `dat`, return the value of RESP for
 ## the variable "species"
@@ -62,7 +62,7 @@ species_stats <- function(data){
     do(left_join(insect_statistic(.$aov_result), insect_sig(.$aov_result)))
 }
 
-r2_plot <- function(.inverts_adonis_ini, .inverts_adonis_fin,
+r2_plot_df_maker <- function(.inverts_adonis_ini, .inverts_adonis_fin,
                     .zoops_adonis_ini, .zoops_adonis_fin,
                     .bact_adonis_ini, .bact_adonis_fin){ ## does this need to be substitute?
   list(data_frame(name = as.character(quote(.inverts_adonis_ini)), 
@@ -81,9 +81,6 @@ r2_plot <- function(.inverts_adonis_ini, .inverts_adonis_fin,
     rbind_all %>% 
     mutate(name = gsub(x = name, pattern = "\\.", replacement = "")) %>%
     separate(name, into = c("taxa", "method", "time")) %>% 
-    mutate(taxa = factor(taxa, levels = c("inverts", "zoops", "bact"))) %>%
-    ggplot(aes(x = taxa, colour = time, y = number)) + 
-    geom_point(size = 6) +
-    ylab(expression(r^2*" value")) +
-    theme_bw()
+    mutate(taxa = factor(taxa, levels = c("inverts", "zoops", "bact")))
+
 }

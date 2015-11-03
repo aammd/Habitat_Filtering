@@ -25,3 +25,10 @@ reports/test.html
 
 reports/*.html
 MS/*.html
+MS/discussion
+photos/misc/*
+outline.md
+*.log
+xtable*
+
+srivastava_bell*

@@ -1,41 +1,134 @@
 ---
-title: "withblock_adonis"
-author: "Andrew MacDonald"
-date: "April 22, 2015"
-output: html_document
+title: "Supplementary Material"
+author: "A. Andrew M. MacDonald; Diane S. Srivastava; Vinicius"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    includes:
+      in_header: formatting/myheader_suppmatt.tex
+    toc: true
+  md_document: default
+  html_document: default
+  word_document:
+    reference_docx: reference.docx
+geometry: margin=1in
+fontsize: 12pt
 ---
 
-# Before
 
-## insects
-```{r results = 'asis'}
-inverts_adonis_ini
+```{r echo=FALSE}
+Sfig_nums <- captioner()
+Stab_nums <- captioner(prefix = "Table")
+Sfig <- pryr::partial(Sfig_nums, display = "cite")
+Stab <- pryr::partial(Stab_nums, display = "cite")
 ```
 
-## zooplankton
-```{r results = 'asis'}
-zoops_adonis_ini
+# Exploratory figures
+
+![](../figures/inverts.pdf)
+![](../figures/zoop.pdf)
+![](../figures/bact.pdf)
+
+# Dispersion
+
+mixed effect ANOVA table
+```{r results='asis'}
+anova(disp_mixed) %>% 
+    knitr::kable()
 ```
 
-## bacteria
-```{r results = 'asis'}
-bact_adonis_ini
+residual plot for the dispersion model
+```{r}
+plot(disp_mixed)
 ```
 
-# After
-## insects
-```{r results = 'asis'}
-inverts_adonis_fin
+![](../figures/one_one_plot.pdf)
+`r Sfig_nums("one2one", "This is the different mean differences to centroid on the same plot. shown is the 1:1 line.")`
+
+# PERMANOVAS
+
+```{r, echo = FALSE}
+get_adonis_table <- function(permanova_answer){
+  permanova_answer[["aov.tab"]] %>% as.data.frame() %>% knitr::kable()
+}
 ```
 
-## zooplankton
+
+## initial
+
+### inverts
 ```{r results = 'asis'}
-zoops_adonis_fin
+get_adonis_table(inverts_adonis_ini)
 ```
 
-## bacteria
+### zooplankton
 ```{r results = 'asis'}
-bact_adonis_fin
+get_adonis_table(zoops_adonis_ini)
 ```
 
+### bacteria
+```{r results = 'asis'}
+get_adonis_table(bact_adonis_ini)
+```
+
+## final
+### insects
+```{r results = 'asis'}
+get_adonis_table(inverts_adonis_fin)
+```
+
+### zooplankton
+```{r results = 'asis'}
+get_adonis_table(zoops_adonis_fin)
+```
+
+### bacteria
+```{r results = 'asis'}
+get_adonis_table(bact_adonis_fin)
+```
+
+
+
+# multivariate GLM
+
+results of multivariate GLMS
+
+## diagnositic plots for full models
+```{r}
+plot(inverts_manyglm_fin)
+```
+
+
+```{r}
+plot(zoops_manyglm_fin)
+```
+
+```{r}
+
+plot(bact_manyglm_fin)
+```
+
+## ANOVA tables for full models
+Analyis of deviance 
+
+```{r}
+kable(inverts_manyglm_table)
+```
+
+```{r}
+kable(zoops_manyglm_table)
+```
+
+```{r}
+kable(bact_manyglm_table)
+```
+
+## manyglm
+
+
+test for interactions
+```{r}
+#anova(inverts_manyglm_fin, inverts_manyglm_fin_add)
+
+```
 

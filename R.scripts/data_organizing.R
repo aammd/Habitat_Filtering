@@ -16,9 +16,10 @@
 TaxaTimeSelector <- function(.blocks, 
                              .bromeliad, 
                              .taxa,
-                             sampletime) {
+                             sampletime, 
+                             .experiment = "threespp") {
   which_blocks <- .blocks %>%
-    filter(experiment == "threespp") %>%
+    filter(experiment == .experiment) %>%
     select(Block = block)
   
   which_broms <- .bromeliad %>%
@@ -26,25 +27,32 @@ TaxaTimeSelector <- function(.blocks,
     select(Brom, Block, species)
   
   which_taxa <- .taxa %>%
-    filter(sampling == sampletime) %>%
+    filter(sampling %in% sampletime) %>%
     rename(Brom = bromeliad)
   
   brom_taxa <- which_taxa %>%
     filter(Spp != "none") %>%
     spread(Spp, abundance, fill = 0) %>% 
-    left_join(which_broms, .) %>% 
-    mutate(sampling = sampletime)# %>% ## cheating! NAs introduced in this factor are removed
-    ## now only need to remove the NA values! could just get a vector of their names and na to 0
-    
+    left_join(which_broms, .)
+  
+
+  
   brom_taxa[is.na(brom_taxa)] <- 0
     
   
   ###tests could go here
-  brom_taxa %>% 
+  outlist <- brom_taxa %>% 
   {
-    list(factors = select(., Block, species),
+    list(factors = select(., Block, species, sampling),
          taxa = select(., -Block, -Brom, -species, -sampling))
   }
+  
+  zerocols <- colSums(outlist$taxa) == 0
+  if (any(zerocols)) {
+    message("removing absent taxa")
+    outlist$taxa <- outlist$taxa[,!zerocols]
+  }
+  return(outlist)  
 }
 
 
@@ -90,6 +98,22 @@ FilterNABacteriaRows <- function(data) {
   list(factors = newfac, taxa = newtax)
 }
 
+#' Rename Habitat column to species
+#' 
+#' For the within-species experiment this is essential, since "species" differences are basically between habitat.
+#'
+#' @param .bromeliad full bromliad data.frame
+#'
+#' @return a dataframe with "species" as "open" or "closed"
+brom_within <- function(.bromeliad){
+ .bromeliad %>% 
+    select(-species) %>% 
+    rename(species = Habitat) %>% 
+    select(Brom, Block, species)
+}
+
+
+
 ## wrapper that lets us work over a list:
 lapply_maker <- function(f, ...){
   function(x, ...) lapply(x, f, ...)
@@ -108,7 +132,7 @@ bact_list_to_df <- function(bactlist){
     # gather all columns that start with X (ie the "species") into one
     lapply(function(x) gather(x, key = sp, 
                               value = pres, 
-                              starts_with("X"))) %>%
+                              starts_with("X"), convert = TRUE)) %>%
     rbind_all %>% 
     select(sampling, bromeliad = Brom, Spp = sp, abundance = pres)
 }
@@ -157,3 +181,7 @@ TaxaTimeSelector_split <- function(.blocks,
 }
 
 lapply_splitter <- lapply_maker(TaxaTimeSelector_split)
+
+filter_block <- function(.blocks, bk) {
+  dplyr::filter(.blocks, block == bk)
+}
