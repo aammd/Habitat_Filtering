@@ -33,8 +33,8 @@ make_tidy_mantel <- function(invert_mantel_list,
                              zoop_mantel_list,
                              bact_mantel_list){
   rbind_list(
-    data_frame(get_statistic(invert_mantel_list), "Macroinvertebrates"),
-    data_frame(get_statistic(zoop_mantel_list), "Zooplankton"),
-    data_frame(get_statistic(bact_mantel_list), "Bacteria")
+    cbind(get_statistic(invert_mantel_list), taxa = "Macroinvertebrates"),
+    cbind(get_statistic(zoop_mantel_list), taxa = "Zooplankton"),
+    cbind(get_statistic(bact_mantel_list), taxa = "Bacteria")
   )
 }
