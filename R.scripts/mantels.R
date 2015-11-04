@@ -76,4 +76,4 @@ tidy_mantel %>%
   # geom_line(aes(group = blk)) +
   # facet_wrap(~blk, scales = "free") +
   theme_bw()
-ggsave("mantel_test_overall.png")
+ggsave("byblock.png")
