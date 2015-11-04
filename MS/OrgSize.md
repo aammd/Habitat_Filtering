@@ -27,16 +27,19 @@ response to differences in environmental variables. These differences act as
 local environmental conditions prevents their establishment or persistence.
 However, not all groups of organisms are equally sensitive to the same
 environmental variables. Observational studies have already suggested that
-larger-bodied species are more strongly filtered by habitat than smaller-bodied
-species. However, this mechanism has never been tested experimentally. In our
-study we placed highly similar aquatic communities (composed of insects,
-zooplankton and bacteria) into different environments and observed subsequent
-divergence in composition. We predicted that insects would show a strong change
-in composition, zooplankton a moderate change and bacteria little to no change.
-Our results are consistent with these predictions, with the exception of a
-weaker signal in insects than expected. These results suggest that organism size
-could provide a framework for integrating studies of environmental filtering
-across different scales and systems.
+larger-bodied species are more strongly filtered by habitat than smaller-
+bodied species. This observation suggests that smaller organisms types, as a
+group, occupy broader fundamental niches, such that a the same population can
+exist in multiple habitats. However, this mechanism has never been tested
+experimentally. In our study we placed highly similar aquatic communities
+(composed of insects, zooplankton and bacteria) into different environments
+and observed subsequent divergence in composition. We predicted that insects
+would show a strong change in composition, zooplankton a moderate change and
+bacteria little to no change. Our results are consistent with these
+predictions, with the exception of a weaker signal in insects than expected.
+These results suggest that organism size could provide a framework for
+integrating studies of environmental filtering across different scales and
+systems.
 
 ## Introduction
 
@@ -105,7 +108,7 @@ patches where they have negative population growth rates (i.e. mass effects, [@M
 
 Dispersal creates a problem for measuring the distinction between the size-
 plasticity and size-dispersal hypotheses. Dispersal can be active, where
-adults choose where to lay eggs, or passive, when that organisms are moved by
+adults choose where to lay eggs, or passive, when organisms are moved by
 some vector. On the one hand, active choice by larger organism types could
 account for much of the pattern seen by Farjalla et al - particularly if the
 scale and precision of active dispersal increases with organism size. This
@@ -118,15 +121,20 @@ but a constant influx of new immigrants maintains its presence. Unfortunately,
 dispersal rates are notoriously difficult to measure, especially for the many
 species and scales necessary to address this question.
 
-Fortunately, the size-dispersal and size-plasticity also make different
-predictions regarding the rate of change in communities which begin at
-identical (or nearly-identical). We use this prediction to design and
-experiment: by starting with identical community compositions, we will observe
-the return of variation in community composition. We studied the same groups
-of organisms (insects, zooplankton and bacteria) in the same patchy, highly
-variable habitat (three species of tank bromeliads). We created communities
-that were as similar as possible in composition, then exposed these
-communities to their original environmental conditions.
+The confounding effect of dispersal can be removed with a manipulative
+experiment. The size-dispersal and size-plasticity hypotheses also make
+different predictions regarding the rate of change in communities which begin
+at identical compositions, but different environments. In such communities,
+the size-dispersal hypothesis predicts a similar rate of change in the
+structure of all groups; the size-plasticity hypothesis predicts that larger
+groups of organisms will change more (because of their narrower fundamental
+niches). We use this prediction to design and experiment: by starting with
+identical community compositions, we will observe the return of variation in
+community composition. We studied the same groups of organisms (insects,
+zooplankton and bacteria) in the same patchy, highly variable habitat (three
+species of tank bromeliads). We created communities that were as similar as
+possible in composition, then exposed these communities to their original
+environmental conditions.
 
 We test three different predictions of the size-plasticity hypothesis: 
 
