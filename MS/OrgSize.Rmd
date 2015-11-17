@@ -48,6 +48,38 @@ systems.
 
 ## Introduction
 
+1. When can we predict community structure from environmental conditions?  
+
+2. Macroscopic organisms and microscopic organisms show different patterns of distribution. 
+a. Microscopic organisms often are globally distributed
+b. Macroscopic organisms often have more geographically restricted distributions. 
+c. Explanation 1: reflects differences in the breadth of their environmental tolerances or differences in their dispersal abilities. 
+i. Microscopic organisms have been argued to withstand a wider range of environmental conditions than macroscopic organisms because….
+
+3. Explanation 2: microscopic organisms may be able to disperse further than macroscopic organisms 
+a. microorganisms disperse long distances passively on air and water currents 
+b. macroscopic organisms usually actively disperse but over shorter distances. 
+c. Even within passive dispersers species tend disperse further when they are smaller, as they are buoyant in water or aloft in air for longer times. 
+
+4. It has been difficult to determine whether environmental filtering or dispersal limitation explains differences between micro- and macro-scopic organisms. 
+a. Reason 1:  the distribution of micro-and macroscopic organisms has rarely been compared in the same systems. 
+b. Reason 2: observing change in community composition over environmental gradients is often not sufficient to infer environmental filtering. 
+i. Since environmental variables typically are spatially auto-correlated, sites that are different in abiotic variables are often also spatially distant. 
+ii. Although it is possible to partial out the effects of space, this is an imperfect way to remove the signal of dispersal limitation as dispersal can be irregular over space due to species behaviour or nonlinear currents. 
+iii. A much better way to remove dispersal limitation is through experimentally adding colonists. 
+c. We are aware of no study that experimentally removes dispersal limitation for both micro- and macro-organisms in the same system, simultaneously. 
+
+5. We conduct such an experiment in bromeliads. 
+a. Bromeliads are… 
+b. Previously, shown that macroinvertebrate composition is more closely related to the bromeliad environment than zooplankton, whereas bacteria communities show no signal of the environment (Farjalla et al.). 
+i. However, this study was based purely on observational data. 
+
+6. Here we provide a much stronger test of the strength of environmental filtering for these three organism groups by experimentally dispersing all species to all habitats. 
+a. If environmental filtering increases with organism size, we would predict that larger organisms would show stronger habitat effects on community composition than smaller organisms, regardless of our experimental dispersal treatment (Fig. 1a). 
+b. If instead dispersal limitation increased with organism size, we would expect that any apparent effect of habitat on community composition was an artefact of spatial autocorrelation and would be erased by our dispersal treatment (Fig. 1b). 
+c. If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (Fig. 1c).
+
+
 When can we use environmental variation to predict community structure?
 Models of community assembly describe how local communities are assembled from
 the regional species pool; they can be divided into neutral and niche-based
