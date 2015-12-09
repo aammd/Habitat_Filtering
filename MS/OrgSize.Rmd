@@ -48,9 +48,47 @@ systems.
 
 ## Introduction
 
-1. When can we predict community structure from environmental conditions?  
+#### When can we predict community structure from environmental conditions? 
+When can we use environmental variation to predict community structure?
+Models of community assembly describe how local communities are assembled from
+the regional species pool; they can be divided into neutral and niche-based
+processes. These two frameworks make very different predictions about how the
+environment influences community structure. In neutral models, individuals of
+all species are assumed to be demographically equivalent, with patterns of
+relative abundance being driven by stochastic processes: birth, death and
+dispersal. Because dispersal is a spatial process, neutral models predict that
+sites close in space should be most similar in community composition. In
+contrast, niche-based models of community assembly emphasize differences among sites (i.e. in habitat qualities) and differences among species (i.e. in traits). In these models, species are able to coexist if they
+possess traits which permit them to colonize, and if they are sufficiently
+different from other species to allow coexistence. Niche-based models,
+therefore, predict that sites similar in biotic and abiotic conditions should be
+most similar in community composition. There have been many studies evaluating the relative
+importance of niche versus neutral processes. But the question remains for
+ecologists: when and under what circumstances will local communities be
+assembled by neutral or niche-based processes?
 
-2. Macroscopic organisms and microscopic organisms show different patterns of distribution. 
+
+#### Macroscopic organisms and microscopic organisms show different patterns of distribution. 
+Why should the strength of environmental filtering decrease with organism
+size? There are two possible mechanisms that may make communities of smaller
+organisms more strongly filtered. First, at the individual level, organisms
+may have behavioral or physiological plasticity which permits them to persist
+in a patch, even if the environment changes. For example, small organisms may
+be able to find microhabitats that allow them to persist when the rest of a
+local habitat is unsuitable. Small organisms may also have a wide dietary
+plasticity -- for example, a single bacteria taxon can often consume a wide
+variety of carbon sources. Bacteria can even use environmental DNA, or
+transfer plasmids among unrelated cells, acquiring new functions. Second, at
+the level of the population, demographic processes can contribute to the
+amount of sensitivity a group will show. Smaller organisms have higher growth
+rates, higher rates of turnover, and shorter generation times. This suggests
+that they could persist in highly variable or fluctuation habitats, purely by
+demographic processes. However, most importantly the process of dispersal can
+counteract habitat filtering. If smaller organisms disperse more rapidly, then
+we would expect to see populations of smaller species maintained, even in
+patches where they have negative population growth rates (i.e. mass effects, [@Mouquet2002]).
+
+
 a. Microscopic organisms often are globally distributed
 b. Macroscopic organisms often have more geographically restricted distributions. 
 c. Explanation 1: reflects differences in the breadth of their environmental tolerances or differences in their dispersal abilities. 
@@ -80,23 +118,7 @@ b. If instead dispersal limitation increased with organism size, we would expect
 c. If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (Fig. 1c).
 
 
-When can we use environmental variation to predict community structure?
-Models of community assembly describe how local communities are assembled from
-the regional species pool; they can be divided into neutral and niche-based
-processes. These two frameworks make very different predictions about how the
-environment influences community structure. In neutral models, individuals of
-all species are assumed to be demographically equivalent, with patterns of
-relative abundance being driven by stochastic processes: birth, death and
-dispersal. Because dispersal is a spatial process, neutral models predict that
-sites close in space should be most similar in community composition. In
-contrast, niche-based models of community assembly emphasize differences among sites (i.e. in habitat qualities) and differences among species (i.e. in traits). In these models, species are able to coexist if they
-possess traits which permit them to colonize, and if they are sufficiently
-different from other species to allow coexistence. Niche-based models,
-therefore, predict that sites similar in biotic and abiotic conditions should be
-most similar in community composition. There have been many studies evaluating the relative
-importance of niche versus neutral processes. But the question remains for
-ecologists: when and under what circumstances will local communities be
-assembled by neutral or niche-based processes?
+
 
 One promising mechanism for answering this question is the Size-Plasticity
 Hypothesis [@Farjalla2012]. This hypothesis suggests that smaller organisms
@@ -124,24 +146,7 @@ degree of habitat filtering: there is weaker environmental structure as body
 size decreases from insects (strong signal), zooplankton (moderate signal) and
 bacteria (weak signal).
 
-Why should the strength of environmental filtering decrease with organism
-size? There are two possible mechanisms that may make communities of smaller
-organisms more strongly filtered. First, at the individual level, organisms
-may have behavioral or physiological plasticity which permits them to persist
-in a patch, even if the environment changes. For example, small organisms may
-be able to find microhabitats that allow them to persist when the rest of a
-local habitat is unsuitable. Small organisms may also have a wide dietary
-plasticity -- for example, a single bacteria taxon can often consume a wide
-variety of carbon sources. Bacteria can even use environmental DNA, or
-transfer plasmids among unrelated cells, acquiring new functions. Second, at
-the level of the population, demographic processes can contribute to the
-amount of sensitivity a group will show. Smaller organisms have higher growth
-rates, higher rates of turnover, and shorter generation times. This suggests
-that they could persist in highly variable or fluctuation habitats, purely by
-demographic processes. However, most importantly the process of dispersal can
-counteract habitat filtering. If smaller organisms disperse more rapidly, then
-we would expect to see populations of smaller species maintained, even in
-patches where they have negative population growth rates (i.e. mass effects, [@Mouquet2002]).
+
 
 Dispersal creates a problem for measuring the distinction between the size-
 plasticity and size-dispersal hypotheses. Dispersal can be active, where
