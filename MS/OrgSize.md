@@ -11,7 +11,7 @@ output:
   html_document: default
   word_document:
     reference_docx: formatting/reference.docx
-geometry: margin=1ni
+geometry: margin=1in
 bibliography: orgsize.bib
 csl: formatting/the-american-naturalist.csl
 ---
@@ -336,7 +336,7 @@ Figure  4: Responses of individual species (or OTUs) to environmental variation.
 ## Discussion
 
 We tested three predictions of the size-plasticity hypothesis. First, we
-tested whether smaller organism types would develop less variation than larger
+tested whether smaller organism types would show less variation than larger
 organisms (Question 1). We did not find support for this pattern. Second, we
 asked whether smaller organisms showed a weaker relationship to environmental
 variation than larger organisms (Question 2). We found this pattern in two
