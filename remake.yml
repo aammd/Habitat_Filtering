@@ -732,13 +732,13 @@ targets:
       - zoops_manyglm_table
       - bact_manyglm_table
 
-# MS/OrgSize.pdf:
-#    depends:
-#      - figures/plot_disp_taxa.pdf
-#      - figures/r2_plot.pdf
-#      - MS/orgsize.bib
-#      - figures/individual_responses.pdf
-#    command: render("MS/OrgSize.md")
+  MS/OrgSize.pdf:
+     depends:
+      - figures/plot_disp_taxa.pdf
+      - figures/r2_plot.pdf
+      - MS/orgsize.bib
+      - figures/individual_responses.pdf
+     command: render("MS/OrgSize.md")
 
 
   MS/OrgSize.docx:
