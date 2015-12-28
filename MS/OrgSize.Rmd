@@ -467,4 +467,52 @@ system.  Our results offer support for the size plasticity hypothesis, and
 offer insight into the development of beta diversity in three different groups
 of organisms.
 
+Species interactions are important in determining community compositon in many communities. However we are not investigating them here. We lose much of the signal that was originally present in many communities -- i mean the observed results that we found in the communities at the beginning. the beginning meaning the observed data. Here are some things that make it different:
+The distribution of adults -- of course, this has nothing to do with the differences in the community composition in response to bromeliad variation. Bromelaids are different from each other, but not all those differences would be correlated with differences in adult distriubution. For example, bromeliads in the shade probably have more detritus, but shaded plants may well have more spiders present to kill insects. Likewise exposed bromeliads may have a higher risk of bird predation. 
+
+However another source of variation in community composition is also removed here, and this one is potentially more important. That is the interactions among individuals in our experiment. Our experimental design allowed only some of the interactions to persist in the community. For example, predation is probably important in determining the distribution of different species. 
+
+predator-prey interactions 
+
+Higher heat in more exposed bromeliads makes the predators forage more aggressively and that leads to more insect community death. How specific is a predator's diet, and how much variance exists among prey in vulnerability? that makes both the exposed habitats both a stronger filter -- supposing predators simply have a higher feeding rate, but not different diet preferences. 
+If predators are killing more of their favourites, then the habitat is more strongly filtered. This would be the case even if they respond to a simple trait, something like body size.
+If they are killing at random, merely say the first ones they encounter, this would not create more environmental signal per se. 
+
+competition
+
+How would competition be different in the different habitats? Well, competition in this system is probably a priority effect. priority effects occur when one species establishes in a community before another, developing a large enough population. In natural plants, if there is a competitor, insects might either choose not to oviposit in a bromeliad, or oviposit there but have reduced survival. In our experiment this did not occur because there was no time. Instead individuals were combined together and may not have had sufficient time to influence each other's survival. However how much of this variation is actually relatd to the environment? well probably rather little. There is probably no reason to expect that species interactions are more extreme in different habitats
+
+Except that eg in Aechmaea they may well interact more directly, causing more predation or more competition, and more exposure to heat, where the higher structure of Vresia or Neoregelia might offer refuges from both of these. 
+
+Adult behaviour
+
+oviposition behaviour in this system often comes with female choice. Females respond to the presence of predators, and potentially of competitors, and sometimes even the amount of resources that are visible. Why is this interesting? well it means that environmental variables can have an effect on the dispersal to the community note mrely the survival of animals in this community once they arrive there. And so, when local variables work in that way, they can have a much larger effect on the local community composition. 
+IN a similar way, the matrix around the bromeliad can be importnat for dispersal into the communities. by that I mean that sometimes adults get killed and eaten by predators in the area around the bromeliads. For example, more exposed sites may experience more bird predation, while more forested sites have more of another kind of predation, in this case 
+
+Why is this important to the world of ecology?
+Well all systems that we know of contain this same wide range of organism sizes. And many systems are also characterized by an environmental gradient. It seems like future attempts to measure evnerionmental structure might indeed want to track body size as a critical feature of the organism group studied. also the scale of environmental variation is very important. Also it does indeed seem like smaller organisms may have larger fundamental niches, being less structured by the environment and responding less to a maniupalation of thier environment. A natural next step would be to quantify the actual niche size of these organisms, by measuring their ability to survive and reproduce at the extremes of the environmental gradient found in bromeliads. usually, measurements of the niche take place only over organisms of very similar size. 
+
+Our analysis of bacterial species individually found a large number of OTUs which responded to the environment. This is due to a very high number of taxa that are found only once, giving the appearance of extremely high environmental signal. If instead we consider only those OTUs found in multiple bromeliads, we find a much weaker effect. This result is partly difficult to interpret based on the nature of the DGGE technique. This provides only a measure of how different a bacterial community is, and as such each OTU may actually represent multiple groups of baterial species. It is also impossible to relate DGGE otus to any trait of the taxa, which might account for either the traits that allow them tobe present in a community or the different traits that might impact the community. However DGGE is indeed the same technique that was used before. And for our purposes it is sufficient to quantify variation in microbial communities. For the purposes of this study we needed to know how variable microbial communities are, and to what extent that was correlated with the environment. 
+There is a possibility that our inability to detect an environmental signal in bacteria was hampered by this poor taxonomic resolution. In other words, perhaps we cannot tell anything about the bacteria, and we are in fact picking up the signal, not of increasing plasticity, but of decreasing taxonomic resolution. the "taxonomic impediment" is of course greater the smaller a taxon is. As a check against this, we checked the multivariate dispersion of each community, confirming that it was smaller at the end of the experiment than at the beginning. This is what we'd expect. At the beginning, when we observed the composition of each plant, we found that each had a very large variation in their composition. We then homogenized them removing all variation. We allowed only two weeks for variation to emerge. thus we expect that the variation in the final communities should be much smaller than in the full community, because they have less time. If, on the other hand, our method simply did not work and could not detect any change at all in the bacterial community, we would not find any change in the multivariate dispersion at all. As it is, we find a decrease in the dispersion of the bacteria that is on par with what we observed in the zooplankton. which is a good sign that our treatments did indeed reduce variation, just that when they did increase them again the resulting variation did not correlate with the environment. 
+Alternative methods are now available to more completely quantify the bacterial communities. Future studies should take advantage of these more complete methods. they give a better census of the entire microbial community. Additionally, they provide a means of confirming what these organisms actually do in a community. 
+ 
+
+In our study, we use morphospecies at one taxonomic level for insects, and a much coarser one for zooplankton, and at a very crude level for bacteria. Our method is robust to this variation in resolution, because we compare only before and after homoegnization within each taxonomic group. However, another exciting future direction would be to compare how the number of species in a taxonomic group alters its sensitivity to the environment. suppose a very species-rich assemblage and a very species-poor one are compared along the same gradient. This is interesting in two directions. One , in fact the more speciose groiup might have on average smaller niches (due to competition) on the other hand, more speciose groups are also likely to be smaller in body size, and according to our result have larger fundamental groups. also, in more speciose groups there are possibly more species interactions, which might cause competition (ie the different niche breathds I just mentioned) but also they might facilitate each other, or might show a whole host of species interactions (eg sharing a predator). 
+
+Vellends' four processes:
+speciation
+* unlikely
+* might have occurred in the microbes?
+dispersal
+* removed in our study
+* that was the point
+drift
+* random death did indeed occur
+* while it might have been higher or lower in any given plant, this would not have enhanced the environmental signal.
+selection
+* this was essentially an expeiment to measure the strenght of seleciton on different organism groups. We found that larger organisms do indeed experience higher seleciton than smaller organisms. 
+
+What does this mean for the park at Jurubatiba? Well the landscape there is composed of different taxa of bromeliads. it is a landscape characterized by a large number of very different communities, of different shade and sun habitats, probably more than the average amount of heterogeneity. We show that this heterogeneity may well affect the distribution of different groups to a different extent. For example larger species are probably very patchily distributed, only in those bromeliads where they can persist, while bacterial and zooplankton species are probably distributed more evenly across the landscape. fhjk
+
+
 ## References
