@@ -503,10 +503,17 @@ Vellends' four processes:
 speciation
 * unlikely
 * might have occurred in the microbes?
+
+By manipulating the starting communities, we altered the process of community assembly to measure the strength of only a single effect: selection. a single process. 
+Speciation is unlikely to have occurred in our samples, but does maybe, among the smallest organisms. For example, in strong resource gradients different populations of microbes can certainly evolve. However its not likely that any divergence in microbes would create such a strong difference in DGGE, nor not at all certain that any such process would affect the behaviour of other species. thus its probably an invisible process to our experiment. 
+
 dispersal
 * removed in our study
 * that was the point
-drift
+
+The main goal of our study was to examine the effects of removing dispersal. 
+
+drif
 * random death did indeed occur
 * while it might have been higher or lower in any given plant, this would not have enhanced the environmental signal.
 selection
