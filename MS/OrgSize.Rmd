@@ -381,7 +381,17 @@ inverts_interact <- extract_tab(inverts_manyglm_table, "Block:species")
 zoops_interact <- extract_tab(zoops_manyglm_table, "Block:species")
 bact_interact <- extract_tab(bact_manyglm_table, "Block:species")
 ```
-We performed a third test of differences between organism types in their sensitivity to bromeliad species identity. We measured the percent of the total deviance explained by the combination of $bromeliad_{jl}$ and $block \times bromeliad_{jkl}$ terms in our multivariate GLM model. These terms explained high proportions of deviance for insects and zooplankton (`r percent_dev_sp(inverts_manyglm_table)` and `r percent_dev_sp(zoops_manyglm_table)`, respectively) and less for bacteria (`r percent_dev_sp(bact_manyglm_table)`). This agrees with our hypothesis, and with the PERMANOVA results reported above. We were obliged to combine terms for this analysis, because there was always a significant interaction between block and species in our models (ie, we could not examine main effects of species independently; See Supplementary Material). 
+
+We wanted to use the manyglm approach to measure test if smaller organism
+types respond less to the same environmental gradient than larger ones. To do
+this, we measured the percent of the total deviance explained by the
+combination of $bromeliad_{jl}$ and $block \times bromeliad_{jkl}$ terms in
+our model. These terms explained high proportions of deviance for insects and
+zooplankton (`r sprintf("%.2f", percent_dev_sp(inverts_manyglm_table))` and `r sprintf("%.2f", percent_dev_sp(zoops_manyglm_table))`, respectively) and less for bacteria (`r sprintf("%.2f", percent_dev_sp(bact_manyglm_table))`). This agrees with our hypothesis, and
+with the PERMANOVA results reported above. We were obliged to combine terms
+for this analysis, because there was always a significant interaction between
+block and species in our models (ie, we could not examine main effects of
+species independently; See Supplementary Material).
 
 ### Tables	
 
