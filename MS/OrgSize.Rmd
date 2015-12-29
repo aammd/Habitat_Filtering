@@ -206,7 +206,7 @@ str_end <- blocks %>%
 	select(setup.date) %>% 
 	mutate(sdate = ymd(setup.date)) %>% 
 	filter(sdate %in% range(sdate)) %>% 
-	.[["setup.date"]]
+	.[["sdate"]]
 ```
 
 We homogenized the community of macroinvertebrates, zooplankton and bacteria
