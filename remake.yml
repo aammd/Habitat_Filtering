@@ -738,6 +738,7 @@ targets:
       - figures/r2_plot.pdf
       - MS/orgsize.bib
       - figures/individual_responses.pdf
+      - photos/design.svg
      command: render("MS/OrgSize.md")
 
 

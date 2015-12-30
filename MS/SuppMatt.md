@@ -68,7 +68,7 @@ Figure  1: This is the different mean differences to centroid on the same plot. 
 
 |          | Df| SumsOfSqs|  MeanSqs|   F.Model|        R2| Pr(>F)|
 |:---------|--:|---------:|--------:|---------:|---------:|------:|
-|species   |  2|  22.46667| 11.23333| 0.6855787| 0.0483293|  0.101|
+|species   |  2|  22.46667| 11.23333| 0.6855787| 0.0483293|  0.085|
 |Residuals | 27| 442.40000| 16.38519|        NA| 0.9516707|     NA|
 |Total     | 29| 464.86667|       NA|        NA| 1.0000000|     NA|
 
@@ -85,7 +85,7 @@ Figure  1: This is the different mean differences to centroid on the same plot. 
 
 |          | Df| SumsOfSqs|   MeanSqs|  F.Model|        R2| Pr(>F)|
 |:---------|--:|---------:|---------:|--------:|---------:|------:|
-|species   |  2|  3104.733| 1552.3667| 1.749576| 0.1147295|  0.125|
+|species   |  2|  3104.733| 1552.3667| 1.749576| 0.1147295|  0.158|
 |Residuals | 27| 23956.600|  887.2815|       NA| 0.8852705|     NA|
 |Total     | 29| 27061.333|        NA|       NA| 1.0000000|     NA|
 
@@ -93,7 +93,7 @@ Figure  1: This is the different mean differences to centroid on the same plot. 
 
 |          | Df| SumsOfSqs|  MeanSqs|   F.Model|        R2| Pr(>F)|
 |:---------|--:|---------:|--------:|---------:|---------:|------:|
-|species   |  2|  23.33333| 11.66667| 0.6344411| 0.0448862|  0.016|
+|species   |  2|  23.33333| 11.66667| 0.6344411| 0.0448862|  0.027|
 |Residuals | 27| 496.50000| 18.38889|        NA| 0.9551138|     NA|
 |Total     | 29| 519.83333|       NA|        NA| 1.0000000|     NA|
 
@@ -118,17 +118,17 @@ Analyis of deviance
 |term          | Res.Df| Df.diff|      Dev| Pr(>Dev)|
 |:-------------|------:|-------:|--------:|--------:|
 |(Intercept)   |     29|      NA|       NA|       NA|
-|Block         |     25|       4| 109.7867|    0.176|
+|Block         |     25|       4| 109.7867|    0.150|
 |species       |     23|       2| 123.4727|    0.002|
-|Block:species |     15|       8| 150.3358|    0.058|
+|Block:species |     15|       8| 150.3358|    0.038|
 
 
 |term          | Res.Df| Df.diff|      Dev| Pr(>Dev)|
 |:-------------|------:|-------:|--------:|--------:|
 |(Intercept)   |     29|      NA|       NA|       NA|
-|Block         |     25|       4| 46.35160|    0.098|
+|Block         |     25|       4| 46.35160|    0.104|
 |species       |     23|       2| 55.03097|    0.002|
-|Block:species |     15|       8| 51.67825|    0.018|
+|Block:species |     15|       8| 51.67825|    0.012|
 
 
 |term          | Res.Df| Df.diff|        Dev| Pr(>Dev)|
@@ -136,7 +136,7 @@ Analyis of deviance
 |(Intercept)   |     29|      NA|         NA|       NA|
 |Block         |     25|       4| 2210.04170|     0.02|
 |species       |     23|       2|  673.64723|     0.02|
-|Block:species |     15|       8|   30.72662|     0.10|
+|Block:species |     15|       8|   30.72662|     0.06|
 
 ## manyglm
 
@@ -144,3 +144,46 @@ Analyis of deviance
 test for interactions
 
 
+
+# Dispersion
+
+*Question 1: less beta diversity among smaller organism types* 
+If smaller taxa have broader fundamental niches, we should see less variation in community composition among
+bromeliads for smaller organism types. That is, we should see less beta
+diversity among bromeliads at the end of the experiment (following community homogenization) than we saw at the
+beginning. We tested this by calculating multivariate dispersions
+[@Anderson2006] between all six bromeliads (i.e. distances to centroid of all
+bromeliads within one block) before and after the experiment. We repeated this
+comparison for all five blocks, and for all three organism types. We used the
+`betadisper` function in the R package vegan [@vegan], which provides a
+permutation test to test for differences in dispersion before and after the
+experiment within each block (999 null simulations block^-1^). For the
+purposes of this analysis, we used the Raup-Crick measure of dissimilarity. We
+extracted the mean distance to centroid (Figure  2) for each block
+before and after the experiment. We did this because our hypothesis concerns
+an interaction: specifically, that the effects of homogenization and recovery on mean distance to centroid
+(i.e. the slopes of lines in Figure  2) declines with decreasing organism
+size. This allowed us to test these differences with a mixed effect linear
+model including the main effect of sampling time (before and after) organism
+type (macroinvertebrate, zooplankton and bacteria) and their interaction, with
+a random effect for block.
+
+
+![disp](../figures/plot_disp_taxa.png)
+Figure  2: Mean distance to centroid, before and after the experiment, for each of the three organism types. Each dot represents the mean distance to centroid for all six bromeliads in a block, and lines connect initial and final measurements of the same block.
+
+
+We found that dispersion, in all cases, was lower at the end of the experiment
+than at the beginning. This indicates that our treatments were effective in
+homogeneous (or nearly-homogeneous) starting communities. This is important,
+because it demonstrates that our inability to detect a species effect in
+PERMANOVAs of bacteria does not reflect an inability to detect differences
+among bacterial communities. However, the amount of this decline was the same
+across all organism groups as indicated by the absence of a significant
+interaction (` Stab("disp_tab")`). However, this method assumes that
+homogenization occurred for all communities to the same degree. This is
+unlikely to be the case: though we were able to count and precisely calculate
+the starting insect community composition, we were obliged to use random
+subsamples of the zooplankton and bacteria communities. This means that while
+all communities began with the same invertebrate composition, they probably
+began with slight variation in zooplankton and bacteria composition.
