@@ -205,7 +205,7 @@ of all six bromeliads as described shortly (Figure  1).  Our goal was
 to create identical starting community composition for all bromeliads within a
 block. Variation between blocks in starting community composition is thus
 included in the random effect of blocks. We created five blocks in this
-experiment between 2013/03/27 and 2013/04/03.
+experiment between 27 March 2013 and 03 April 2013.
 
 ![img](../photos/design.png) 
 
