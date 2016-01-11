@@ -1,12 +1,12 @@
 
-make_betadisp <- function(data_list, distmeas){
+make_betadisp <- function(data_list, distmeas, test_factor = "sampling"){
   ## repeat this process for all blocks and taxa
   ## arguments for starting data and distance metric
   
   inv_dist <- vegdist(data_list[[2]], method = distmeas)
   # grps <- unite(inverts_ini_fin_Baker[[1]], "blck", Block, sampling)[["blck"]]
   
-  inv_grps <- data_list[[1]]$sampling
+  inv_grps <- data_list[[1]][[test_factor]]
   
   bkr <- betadisper(inv_dist, inv_grps, bias.adjust = TRUE, )
 #   anova(bkr)
