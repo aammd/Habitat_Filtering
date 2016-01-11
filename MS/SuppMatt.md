@@ -41,6 +41,31 @@ residual plot for the dispersion model
 ![](../figures/one_one_plot.pdf)
 Figure  1: This is the different mean differences to centroid on the same plot. shown is the 1:1 line.
 
+## Dispersion
+
+
+
+
+
+|term      | df|     sumsq|    meansq| statistic|   p.value|
+|:---------|--:|---------:|---------:|---------:|---------:|
+|Groups    |  2| 0.0027411| 0.0013706| 0.0710147| 0.9316216|
+|Residuals | 27| 0.5210939| 0.0192998|        NA|        NA|
+
+
+
+|term      | df|     sumsq|    meansq| statistic|   p.value|
+|:---------|--:|---------:|---------:|---------:|---------:|
+|Groups    |  2| 0.1576358| 0.0788179|  2.994272| 0.0669126|
+|Residuals | 27| 0.7107178| 0.0263229|        NA|        NA|
+
+
+
+|term      | df|     sumsq|    meansq| statistic|   p.value|
+|:---------|--:|---------:|---------:|---------:|---------:|
+|Groups    |  2| 0.0013260| 0.0006630| 0.4047036| 0.6711544|
+|Residuals | 27| 0.0442309| 0.0016382|        NA|        NA|
+
 # PERMANOVAS
 
 
@@ -104,12 +129,12 @@ Figure  1: This is the different mean differences to centroid on the same plot. 
 results of multivariate GLMS
 
 ## diagnositic plots for full models
-![plot of chunk unnamed-chunk-11](figure/SuppMatt__unnamed-chunk-11-1.png) 
-
-
-![plot of chunk unnamed-chunk-12](figure/SuppMatt__unnamed-chunk-12-1.png) 
-
 ![plot of chunk unnamed-chunk-13](figure/SuppMatt__unnamed-chunk-13-1.png) 
+
+
+![plot of chunk unnamed-chunk-14](figure/SuppMatt__unnamed-chunk-14-1.png) 
+
+![plot of chunk unnamed-chunk-15](figure/SuppMatt__unnamed-chunk-15-1.png) 
 
 ## ANOVA tables for full models
 Analyis of deviance 
