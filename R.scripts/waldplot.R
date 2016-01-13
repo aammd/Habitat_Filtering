@@ -14,22 +14,31 @@ plot_indiv_species <- function(.inverts_manyglm_fin_aov_tidy,
                              scale_dev)
   
   
-  tidy_total %>% 
+  multivar_data <- tidy_total %>% 
     mutate(taxa = ordered(taxa,
                           levels = c("macroinvertebrates", 
                                      "zooplankton",
                                      "bacteria")),
-           sig = species_p %>% is_less_than(0.05)) %>% 
-    ggplot(aes(x = taxa, y = species_wald, fill = factor(sig))) +
-    geom_point(shape = 21,
+           sig = species_p %>% is_less_than(0.05))
+  # browser()
+  multivar_data %>% 
+    ggplot(aes(x = taxa, y = species_wald, )) +
+    geom_boxplot(varwidth = TRUE) +
+    geom_point(data = multivar_data %>% 
+                 filter(sig),
+               shape = 21,
                size = 3,
-               position = position_jitter(width = .1)) +
-    scale_fill_manual(values = c(NA, "black"), 
-                      labels = c("p > 0.05", "p < 0.05"),
+               fill = "black") +
+    geom_label(data = multivar_data %>% 
+                 filter(sig), 
+               aes(label = rowname), 
+               nudge_x = 0.1, hjust = "left") +
+    scale_fill_manual(values = c("black"), 
+                      labels = c("p < 0.05"),
                       name = NULL) +
     xlab("Organism type") +
-    ylab("Percent deviance explained") +
-    .mytheme
+    ylab("Percent deviance explained") + 
+    theme_minimal()
 }
 
 scale_dev <- function(manyglm.tidy){
