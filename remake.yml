@@ -28,6 +28,7 @@ sources:
   - R.scripts/FIGURE_themes.R
   - R.scripts/waldplot.R
   - R.scripts/mantel_functions.R
+  - R.scripts/render_convenience.R
 
 targets:
   all:
@@ -781,7 +782,7 @@ targets:
       - MS/orgsize.bib
       - figures/individual_responses.pdf
       - photos/design.svg
-     command: render("MS/OrgSize.md")
+     command: render_pdf("MS/OrgSize.md")
 
 
   MS/OrgSize.docx:
