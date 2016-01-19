@@ -131,7 +131,7 @@ Here we provide a much stronger test of the strength of environmental filtering 
 3). If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (Figure  1c).
 
 
-![ho](../photos/hypotheses.png)
+![ho](../photos/hypotheses_illustration.png)
 
 Figure  1: And illustration of the possible patterns resulting from our experiment. Observations have already shown that community composition of larger animals is more strongly related to environmental differences (solid line, all figures). In our experiment we remove differences among community composition, and observe the subsequent return of these differences (dashed lines). There are three possible outcomes. If differences in composition are caused by an increase in sensitivity to the environment, then we should see a match between the amount of environmental signal before and after the experiment (1a). If differences in composition are caused by biased dispersal, we should see no difference after the experiment (1b). Finally, an intermediate scenario (1c) results when both environment and biased dispersal contributed to the original pattern.
 
@@ -164,7 +164,7 @@ block. Variation between blocks in starting community composition is thus
 included in the random effect of blocks. We created five blocks in this
 experiment between 27 March 2013 and 03 April 2013.
 
-![img](../photos/design.png) 
+![img](../photos/design_illustration.png) 
 
 Figure  2: Schematic of our experimental design. We first sampled six bromeliads (two plants of each of the three species named here). We formed (solid arrows) homogeneous initial communities (MIX) by counting equal numbers of animals (macroinvertebrates) or by mixing water samples of equal volume from all plants (zooplankton and bacteria). We then returned (dashed arrows) these initial communities to the six bromeliads, and replaced the bromeliads in their original habitats.
 
@@ -495,6 +495,53 @@ richness is low. Macroinvertebrates have few species and low
 densities; if only stochastic death was modifying their populations we
 should see a result resembling Figure 1b. Nevertheless, we observed
 environmental effects in macroinvertebrates and zooplankton, suggesting
-that these groups do experience selection caused by the environment.
+that these groups do experience selection caused by the environment[.
+
+Our experiment is limited by both temporal and spatial extent, yet
+extending beyond this scope is necessary to resolve controversies
+about how the environment creates differences in communities. We
+measured the composition of three organism groups and observed the
+return of differences in composition caused by the environment (ie a
+fixed time interval for all organism groups). This gives us a snapshot
+of what happens over a fixed period of time in three different groups
+or organisms: macroinvertebrates developed more environmental
+structure faster than did smaller zooplankton and bacteria. While this
+tells us about the immediate impact environment had on each group, we
+lack information on the temporal dynamics of these communities. Yet
+these dynamics are a ubiquitous part of community assembly, and
+transient dynamics can occur in organism groups of all sizes. Temporal
+change could be measured with a modification of our design, where
+blocks are sampled at regular intervals an community change monitored.
+Spatial differences, also, could be investigated with a modified
+design. In our experiment we used different bromeliad species from
+different habitat types to create our environmental gradient. All
+bromeliads were taken from approximately the same part of the National
+Park. However, many observational datasets [@Wang2012a;@DeBie2012]
+take place across scales from 10s to 1000s of kilometers. Such studies
+produce variable estimates of the strength of dispersal limitation and
+ecological determinism in different organism groups. A broader scale
+is needed to answer the question of the relative importance of
+dispersal and environmental variation for groups of organisms with
+different body sizes. Measuring the temporal dynamics for multiple
+groups at once across large spatial scales is too difficult; however,
+this could be possible in a small, naturally patchy system like ours.
+Our design could also be adapted to this question, using bromeliads
+from different points along a gradient, such as a mountainside or from
+more distant points on the Brazilian coast. Such cross-scale studes
+are a necessary step to unify the variable results obtained by studies
+of environmental determinism to date.
+
+
+We have demonstrated in a manipulative experiment a mechanism behind a
+pattern that has previously been observed in many systems and at many
+spatial scales. To our knowledge, this is the first experimental test
+of such a mechanism. The success of this approach suggests extensions
+of this design to other proposed mechanisms underlying community
+structure. This will help unify the contrasting results of
+environmental differences on organisms of different size, and lead to
+an understanding of how body size influences the process of community
+assembly.
+
+
 
 ## References
