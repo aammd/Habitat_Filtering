@@ -56,9 +56,6 @@ organisms could have larger environmental tolerances, allowing them to occupy
 broader fundamental niches. Second, smaller organisms could have greater
 dispersal abilities, allowing them to reach more habitats.
 
-<!--Bryant J et al 2008 pnas show bacteria and plants have different patterns over an elevational gradient – but both respond-->
-<!--Wang, J., Soininen, J., Zhang, Y., Wang, B., Yang, X. and Shen, J. (2012), Patterns of elevational beta diversity in micro- and macroorganisms. Global Ecology and Biogeography, 21: 743–750. doi: 10.1111/j.1466-8238.2011.00718.x-->
-
 The environment may not affect small-bodied organisms if they have large
 fundamental niches, meaning that they would not experience much selection (_sensu_ Vellend) after
 colonizing a new habitat. This larger fundamental niche could be caused by
@@ -203,7 +200,7 @@ ethanol. Any coarse detritus found in the bromeliads was similarly cleaned,
 frozen and thawed (to kill any macroinvertebrates eggs). We confirmed that
 this technique removed all invertebrates and most detritus by dissecting an
 empty bromeliad. Bromeliads were placed in a local habitat similar to their
-original location: _Neoregelica_ in shade, _Aechmea_ in full sun and _Vriesea_ in
+original location: _Neoregelia_ in shade, _Aechmea_ in full sun and _Vriesea_ in
 marginal habitat. We then added the starting communities of
 macroinvertebrates, zooplankton and bacteria.
 
@@ -321,112 +318,183 @@ Figure  5: Responses of individual species (morphospecies or Operational Taxonom
 
 ## Main findings
 
-Our study compared the response of macroinvertebrates, zooplankton and bacterial communities to similar environmental gradients. This is an experimental investigation of the observational
-pattern found by Farjalla et a [-@Farjalla2012]: the correlation between environment and
-community composition is weaker for bacteria, intermediate for zooplankton, and
-strong for insects. Our initial sampling prior to the experimental manipulation
-reproduced this observational pattern, assuring us that the pattern is robust to differences in field site and year. However, this observed pattern may have been
-caused by environmentally-correlated dispersal, by environmental differences, or
-both. To investigate the effects of selection by environment, we therefore removed dispersal limitation among communities by making our starting communities as similar as possible, and then measuring how much variation returned to
-communities caused by environment alone (ie by selection, _sensu_ Vellend
-[-@Vellend2010b]). We predicted three patterns that might result from this
-manipulation (Fig 1a-c). We found that the environment created large differences in
-macroinvertebrates, weaker differences in zooplankton, and none in bacteria (Figure  4). This agrees with the observations of Farjalla et al [-@Farjalla2012]. We measured the effect of the environment by using the pseudo-R^2^ value from a PERMANOVA [@Anderson2013a]; multivariate GLM [@Warton2012; @Wang2012] produced the same effect, except for finding that signal in insects and zooplankton were of similar strength. The PERMANOVA results suggest that smaller
-groups of organisms do indeed have broader fundamental niches, and are less
-affected by selection as a result of the environment. We examined the responses in the GLMs for each species, and found that oligochaetes, harpaticoid copepods,
-and chironomids showed significant responses to environmental differences. These groups were the most numerous in our experiment, thus these are the regressions with the most power. 
+Our study compared the response of macroinvertebrates, zooplankton and
+bacterial communities to similar environmental gradients. This is an
+experimental investigation of the observational pattern found by
+Farjalla et a [-@Farjalla2012]: the correlation between environment
+and community composition is weaker for bacteria, intermediate for
+zooplankton, and strong for insects. Our initial sampling prior to the
+experimental manipulation reproduced this observational pattern,
+assuring us that the pattern is robust to differences in field site
+and year. However, this observed pattern may have been caused by
+environmentally-correlated dispersal, by environmental differences, or
+both. To investigate the effects of selection by environment, we
+therefore removed dispersal limitation among communities by making our
+starting communities as similar as possible, and then measuring how
+much variation returned to communities caused by environment alone
+(i.e. by selection, _sensu_ Vellend [-@Vellend2010b]). Three
+patterns might result from this manipulation (illustrated in Fig 1a-c);
+our data is most consistent with environmental filtering increasing
+with organism size (Fig 1a). Specifically, we found that the
+environment created large differences in macroinvertebrates, weaker
+differences in zooplankton, and none in bacteria (Figure  4).
+The two methods we used to assess the effect of the
+environment(pseudo-R^2^ value from  PERMANOVA and multivariate GLM )
+produced the broadly similar results, indicating that our conclusions
+are robust. The PERMANOVA results suggest that smaller groups of
+organisms do indeed have broader fundamental niches, and are less
+affected by selection as a result of the environment. The multivariate
+GLM results suggest the same, except that the signal in insects and
+zooplankton were of similar strength. The GLMs for each species
+suggest that oligochaetes, harpaticoid copepods, and chironomids
+showed significant responses to environmental differences. However,
+numerical rather than trait differences may underlie these species-
+specific results. These groups were the most numerous in our
+experiment, thus these are the regressions with the most power.
 
-A complete theory of community assembly and change includes two other
-processes (besides dispersal and selection) which create differences in
-communities: speciation and ecological drift [@Vellend2010b;@Vellend2014]. We argue that these processes are
-not responsible for the pattern we observed. Speciation is the formation of new
-species, and is unlikely to occur on the time scales we studied -- indeed that
-is only possible for bacteria and then it would be impossible to detect [].
-Ecological drift is variation in species composition caused by the stochastic sequence of births and deaths in coexisting populations. Drift is therefore
-strongest when population sizes are small, and species richness is low. Macroinvertebrates have few species and low densities; if only stochastic death was modifying their populations we should see a result resembling Figure 1b. However, we still observed environmental effects in
-macroinvertebrates and zooplankton suggesting that these groups do
-experience selection caused by the environment.
+We found less environmental filtering on small organisms, and more in
+larger organisms. The simplest explanation for this pattern is that
+the fundamental niche breadth of organisms contracts as their body
+size increases. Farjalla et al. [-@Farjalla2012] termed this
+hypothesis the "size-plasticity hypothesis". They proposed that
+smaller organisms have wider fundamental niches, and are therefore
+less sensitive to variation in environment than larger organisms. They
+found this pattern in observations of macroinvertebrate, zooplankton
+and bacteria communities in bromeliads. Other studies of differently-
+sized groups of organisms across environmental gradients also show the
+same pattern. For example, along mountainsides both microbial and
+plant diversity declines with altitude, though elevation explains less
+variation in bacteria than in plants [@Bryant2008]. Similarly, Wang et
+al. [-@Wang2012a] found that environmental variation along a
+mountainside stream correlated weakly with bacterial community
+diversity, and more strongly with stream invertebrates. These patterns
+are also found in lakes, where Soininen et al. [-@Soininen2013] used a
+very different approach, modeling the distribution of individual taxa
+of bacteria, phytoplankton and zooplankton in response to the
+environment. They found that model performance was highest for the
+largest taxa.
+
+Interestingly, while this pattern is found frequently when multiple
+groups are compared in the same small gradient this effect can be
+absent (or even reversed) between studies or along large spatial
+gradients. In a meta-analysis of 326 studies, body size and dispersal
+ability did not predict the proportion of variance related to the
+environment [@Soininen2014]. When comparing organism groups of such
+different sizes, the choice of scale of environmental variation is of
+critical importance. For example, a study comparing various freshwater
+groups across all of Belgium found that organism with larger
+propagules showed _less_ environmental signal, probably as a result of
+increased dispersal limitation [@DeBie2012]. However, this inverse
+relationship between the response to environment and body size seems
+to only be found when studies consider multiple groups in the same
+place. This lack of an effect between studies may be due to
+differences in how far apart, and how variable, are the habitats
+chosen for study. For example, microbial communities may be more
+sensitive to environmental variation if measured on finer scales
+[@Bryant2008]. Our choice of system simplifies this issue somewhat, as
+bromeliads are naturally discrete, forming units of habitat that can
+be sampled in their entirety.
+
+## Selection via species interactions
+
+Although the direct effect of the environment on organisms is the
+simplest explanation for our results, we cannot discount indirect
+effects of the environment that are mediated by species interactions.
+This could happen in two ways: (1) the environment determines the
+strength or direction of species interactions (2) the environment
+determines the presence of a strongly-interacting species, which in
+turn determines the survival or colonization of other species. An
+example of the environment influencing species interactions is the
+reduction of predation that occurs when bromeliads have more detritus
+[@Klecka2014;@Srivastava2006a]. Detritus creates habitat complexity
+that makes it harder for damselflies to find prey. Detritus density
+varied between our bromeliad species, meaning that there would have
+been a larger effect of predation in  _Aechmea_ (open habitats, less detritus)
+than in _Neoregelia_ (closed habitats, more detritus). As predators can show
+preference for different prey (Chapter 2) predation can be an
+important form of selection (i.e. by selecting against preferred prey
+species). Facilitation is also possible: interactions within a trophic level can move
+between strongly competitive and facilitative as environments become
+more stressful [@He2014a]. Such positive interactions might be most
+prevalent among microbes [@Nemergut2013a] and may weaken filtering for
+those groups. The strength of species interactions may also change in different
+organism groups [@Soininen2013]. This could be due in part to the
+change in the number of interacting species; in diverse communities (such as bacteria)
+the strength of interactions may become diluted, meaning that species
+interactions are less strong for smaller, more diverse taxa [@Wang]
 
 ## Dispersal mode and life cycle complexity
 
-We found less environmental filtering on small organisms, and more in larger organisms. Our results are consistent with the hypothesis of Farjalla et al. [-@Farjalla2012], who suggested that larger  organisms (e.g. macroinvertebrates) have broader fundamental niches compared to smaller organisms (e.g. bacteria). They termed this hypothesis the "size-plasticity hypothesis". However there are many ecological processes (besides niche breadth) that may be different for smaller organisms. Below we consider the patterns that might have been caused by differences in dispersal mode and life cycle complexity, and discuss why we think our data are more consistent with the "size-plasticity" mechanism instead.
+There are many ecological processes (besides niche
+breadth) that may be different for smaller organisms. Below, we
+consider the patterns that might have been caused by differences in
+dispersal mode and life cycle complexity, and discuss why we think our
+data are more consistent with the "size-plasticity" mechanism instead.
 
 ### Dispersal mode 
 
-Dispersal is often divided into two "modes": active dispersal, where the
-dispersing stage selects a habitat in which to settle (e.g. many
-macroinvertebrates); and passive dispersal (i.e. all zooplankton and bacteria),
-where the dispersing stage is moved by a vector. Both types of dispersal may be
-correlated with the environment, creating a confounding source of variation in
-observations of community composition [@Smith2010]. Active dispersers may
-disperse non-randomly, for example to avoid certain avoid predators or to find
-mates. Passive dispersers may be dispersed by animals with this same behaviour
-[], may vector one another [@Lopez1999;@Sabagh2011;@Lopez2002;@Grossart2010a], or may be dispersed non-randomly by an
-abiotic process [@Vanschoenwinkel2008]. Bias in either active or passive
-dispersal causes non-dispersing stages to be absent from some habitats, even if
-they could survive there. If such biased dispersal were the cause of differences
-in community composition, we would again have found a pattern similar to Fig 1b.
-Therefore, dispersal limitation does not create the effect of environment
-between the different groups; rather it appears to be driven by environmental
-sensitivity of the non-dispersing stages. Differences in dispersal mode may
-instead cause differences in distribution between species within a group (for
-example, between active and passive dispersing invertebrates).
+Dispersal is often divided into two "modes": active dispersal, where
+the dispersing stage selects a habitat in which to settle (e.g. many
+macroinvertebrates); and passive dispersal (i.e. all zooplankton and
+bacteria), where the dispersing stage is moved by a vector. Both types
+of dispersal may be correlated with the environment, creating a
+confounding source of variation in observations of community
+composition [@Smith2010]. Active dispersers may disperse non-randomly,
+for example to avoid certain avoid predators or to find mates. Passive
+dispersers may be dispersed by animals with this same behaviour, may
+vector one another [@Lopez1999;@Sabagh2011;@Lopez2002;@Grossart2010a],
+or may be dispersed non-randomly by an abiotic process
+[@Vanschoenwinkel2008]. Bias in either active or passive dispersal
+causes non-dispersing stages to be absent from some habitats, even if
+they could survive there. If such biased dispersal were the cause of
+differences in community composition, we would again have found a
+pattern similar to Fig 1b. Therefore, dispersal limitation does not
+create the appearance of environment between the different groups;
+rather it is driven by environmental sensitivity of the non-dispersing
+stages. Differences in dispersal mode may instead cause differences in
+distribution between species within a group (for example, between
+active and passive dispersing invertebrates).
 
 ### Life cycle complexity
 
-Our gradient of organism body size also creates variation in life cycle complexity:
-our experiment captures part of the complex life cycle of many invertebrates
-(i.e. the larval stage) and the full simple life cycle for other taxa (including
-zooplankton and bacteria and some invertebrates, such as oligochaetes). Thus we
-have two ways for ecological selection to act: via mortality on complex life
-cycles, and via both mortality and fecundity on simple life cycles. Therefore,
-less variation in relative abundance can occur for (most) macroinvertebrates
-than for zooplankton or bacteria. We should expect that if the environment
-affects all groups equally, then there would be more change in those
-groups with simple life cycles. That is, the reverse of the prediction of 1a. Instead, we see that the effect of the environment was strongest on macroinvertebrates, and weakest on bacteria. Whatever change occurred in bacteria communities, happened irrespective of differences in the environment.
+Our gradient of organism body size also creates variation in life
+cycle complexity: our experiment captures part of the complex life
+cycle of many invertebrates (i.e. the larval stage) and the full
+simple life cycle for other taxa (including zooplankton and bacteria
+and some invertebrates, such as oligochaetes). Thus we have two ways
+for ecological selection to act: via mortality on complex life cycles,
+and via both mortality and fecundity on simple life cycles. Therefore,
+less variation in relative abundance can occur for (most)
+macroinvertebrates than for zooplankton or bacteria. We should expect
+that if the environment affects all groups equally, then there would
+be more change in those groups with simple life cycles. That is, the
+reverse of the prediction of 1a. Instead, we see that the effect of
+the environment was strongest on macroinvertebrates, and weakest on
+bacteria. Whatever change occurred in bacteria communities, happened
+irrespective of differences in the environment.
 
-## Species interactions
+## The other components of community structure: drift and speciation
 
-The composition of macroinvertebrates, zooplankton and bacteria may
-also be influenced by their interactions with other species. These
-interactions can affect both dispersal to and selection within a
-habitat patch (in our case, a bromeliad). For example, when an
-ovipositing female senses the presence of another animal - for example
-a predator - and avoids the patch (a trait-mediated indirect effect
-[@Werner2003]). Previous work in bromeliads has shown that the mere
-presence of predators can alter the community composition
-[@Atwood2014;@Marino2015]. Predators may also have different diet
-preferences (see Chapter 1) and so even once prey are present,
-predators will modify the community composition by eating prey [@Morlon2014].
-Interactions among the surviving prey themselves may also affect their
-distribution: the presence of competitors may also prevent successful
-colonization, especially if the competitor is strongly similar
-[@Connell1961], and if it has arrived in the patch well before the
-colonizing species [@Fukami2015]. Species interactions can also be
-positive: facilitation can allow species to persist in a habitat where
-they would not be found alone [@He2014a]. Such positive interactions
-might be most prevalent among microbes [@Nemergut2013a].
-
-In our experiment we manipulated only environmental differences
-between habitat patches, and not species interactions directly. Yet,
-species interactions might have contributed to the response to
-environment, because the environment can change the outcome of both
-predation and competition. For example, predators are less efficient
-at killing prey when they are in a bromeliad with a large amount of
-detritus [@Klecka2014;@Srivastava2006a]. Likewise, interactions within
-a trophic level can move between strongly competitive and facilitative
-as environments become more stressful [@He2014a]. 
-
-We removed this variation along with variation that comes only from
-the differences in the environment when we homogenized our initial
-communities. Therefore all species had the opportunity to interact,
-even those species which might not have co-occurred in the initial
-community. This implies one of two things about the importance of
-species interactions: first, either they are not as strong as
-environmental filtering itself, or second, they are partly correlated
-with the environment.
-
-similarly, the facilitation among the many different species of microbes might have been part of the mechanism that prevented environmental differences from having an effect.
-
+Our experimental manipulation therefore suggests that differences
+between organism groups in their environmental correlation, at least
+at this spatial scale, is the result of ecological selection rather
+than limited dispersal. A complete theory of community assembly and
+change includes two other  processes which can create differences in
+communities: speciation and ecological drift
+[@Vellend2010b;@Vellend2014]. We argue that these processes are not
+responsible for the pattern we observed. Speciation is the formation
+of new species, and is unlikely to occur on the time scales we
+studied. While rapid evolution is possible in bacteria, DGGE is not
+able to detect the subtle differences between closely related taxa.
+This method is also unlikely to detect horizontal gene transfer, as
+only small sections of DNA are involved [@Wiedenbeck2011]. Ecological
+drift is variation in species composition caused by the stochastic
+sequence of births and deaths in coexisting populations. Drift is
+therefore strongest when population sizes are small, and species
+richness is low. Macroinvertebrates have few species and low
+densities; if only stochastic death was modifying their populations we
+should see a result resembling Figure 1b. Nevertheless, we observed
+environmental effects in macroinvertebrates and zooplankton, suggesting
+that these groups do experience selection caused by the environment.
 
 ## References
