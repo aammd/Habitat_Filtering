@@ -4,21 +4,22 @@ plot_indiv_species <- function(.inverts_manyglm_fin_aov_tidy,
                                .mytheme){
   
   tidy_total <- rbind_list(.inverts_manyglm_fin_aov_tidy %>%
-                             mutate(taxa = "macroinvertebrates") %>% 
+                             mutate(taxa = "Macroinvertebrates") %>% 
                              scale_dev,
                            .zoops_manyglm_fin_aov_tidy %>% 
-                             mutate(taxa = "zooplankton") %>% 
+                             mutate(taxa = "Zooplankton") %>% 
                              scale_dev,
                            .bact_manyglm_fin_aov_tidy %>% 
-                             mutate(taxa = "bacteria") %>% 
+                             mutate(taxa = "Bacteria") %>% 
                              scale_dev)
   
   
   multivar_data <- tidy_total %>% 
     mutate(taxa = ordered(taxa,
-                          levels = c("macroinvertebrates", 
-                                     "zooplankton",
-                                     "bacteria")),
+                          levels = c("Bacteria", 
+                                     "Zooplankton",
+                                     "Macroinvertebrates"
+                          )),
            sig = species_p %>% is_less_than(0.05))
   # browser()
   multivar_data %>% 
@@ -29,7 +30,7 @@ plot_indiv_species <- function(.inverts_manyglm_fin_aov_tidy,
                shape = 21,
                size = 3,
                fill = "black") +
-    geom_label(data = multivar_data %>% 
+    geom_text(data = multivar_data %>% 
                  filter(sig), 
                aes(label = rowname), 
                nudge_x = 0.1, hjust = "left") +
