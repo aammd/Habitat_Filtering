@@ -6,7 +6,8 @@ HabitatOrganismSize.log
 data/second_experiment_blocks.csv
 data/.gsf*
 *~
-/figures
+/figures/*.svg
+/figures/*.pdf
 MS/figure/
 MS/figure/
 MS/flatworm.md

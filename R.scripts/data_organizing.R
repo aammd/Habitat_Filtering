@@ -185,3 +185,16 @@ lapply_splitter <- lapply_maker(TaxaTimeSelector_split)
 filter_block <- function(.blocks, bk) {
   dplyr::filter(.blocks, block == bk)
 }
+
+
+find_bact_singletons <- function(.bact_tts_fin){
+  .bact_tts_fin %>% .[[2]] %>% colSums() %>% {. > 1} %>% which()
+}
+
+bact_nosingletons <- function(.bact_tts_fin){
+  new_bacteria <- .bact_tts_fin
+  singles <- find_bact_singletons(.bact_tts_fin)
+  new_bacteria[[2]] <- .bact_tts_fin[[2]][,singles]
+  new_bacteria
+}
+

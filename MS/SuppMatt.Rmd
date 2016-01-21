@@ -45,6 +45,24 @@ plot(disp_mixed)
 ![](../figures/one_one_plot.pdf)
 `r Sfig_nums("one2one", "This is the different mean differences to centroid on the same plot. shown is the 1:1 line.")`
 
+## Dispersion
+
+```{r}
+make_disp_anova <- function(make_betadisp_output){
+  make_betadisp_output %>% anova %>% broom::tidy(.)  %>% knitr::kable()
+}
+```
+
+
+```{r}
+### macroinvertebrates
+make_disp_anova(inverts_disper_species)
+### zooplankton
+make_disp_anova(zoops_disper_species)
+### bacteria
+make_disp_anova(bact_disper_species )
+```
+
 # PERMANOVAS
 
 ```{r, echo = FALSE}

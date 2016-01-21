@@ -28,6 +28,7 @@ sources:
   - R.scripts/FIGURE_themes.R
   - R.scripts/waldplot.R
   - R.scripts/mantel_functions.R
+  - R.scripts/render_convenience.R
 
 targets:
   all:
@@ -36,6 +37,8 @@ targets:
       - figures/Fig2.pdf
       - MS/SuppMatt.pdf
       - MS/OrgSize.docx
+      - figures/individual_responses_nosingle.pdf
+      - figures/individual_responses_nosingle.png
 
 ### read in data, including each bacterial file
 
@@ -464,6 +467,15 @@ targets:
   tidy_mixed:
     command: aov_mixed_tidy(aov_mixed)
 
+### does the environment affect dispersion?
+
+
+  inverts_disper_species:
+    command: make_betadisp(inverts_tts_fin, I("raup"), test_factor = I("species"))
+  zoops_disper_species:
+    command: make_betadisp(zoops_tts_fin, I("raup"), test_factor = I("species"))
+  bact_disper_species:
+    command: make_betadisp(bact_tts_fin, I("raup"), test_factor = I("species"))
 
 ## Run the ANOVA
 
@@ -535,6 +547,25 @@ targets:
   bact_manyglm_table:
     command: manyglm_get_table(bact_manyglm_fin_all_aov)
 
+
+########## rerunning bacteria without singletons
+
+  bact_tts_fin_nosingle:
+    command: bact_nosingletons(bact_tts_fin)
+  ## run manyglm
+  bact_manyglm_fin_nosingle:
+    command: run_manyglm(bact_tts_fin_nosingle, glm_family = I("binomial"))
+  ## obtain summaries and anovas
+  bact_manyglm_fin_nosingle_sum:
+    command: make_summary(bact_manyglm_fin_nosingle, .resamp = I("montecarlo"), .nboot = 50)
+  bact_manyglm_fin_nosingle_aov:
+    command: manyglm_anova(bact_manyglm_fin_nosingle, .resamp = I("montecarlo"), .nboot = 50)
+  ## tidy anova output
+  bact_manyglm_fin_nosingle_aov_tidy:
+    command: get_model_stats(bact_manyglm_fin_nosingle_aov)
+  ## full model anova
+  bact_manyglm_fin_nosingle_all_aov:
+    command: anova(bact_manyglm_fin_nosingle,  p.uni = I("none"), resamp = I("montecarlo"), show.time = I("all"), nBoot = 50)
 
 
 ## THREE SPECIES
@@ -643,6 +674,15 @@ targets:
     plot: true
     command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
 
+## and again, this time without singletons
+  figures/individual_responses_nosingle.pdf: 
+    plot: true
+    command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_nosingle_aov_tidy, mytheme)
+
+  figures/individual_responses_nosingle.png: 
+    plot: true
+    command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_nosingle_aov_tidy, mytheme)
+
 ## figures of the dispersion in each block, for the supplementary material
   figures/inverts.pdf:
     plot: true
@@ -696,6 +736,9 @@ targets:
       - inverts_manyglm_table
       - zoops_manyglm_table
       - bact_manyglm_table
+      - inverts_disper_species
+      - zoops_disper_species
+      - bact_disper_species
 
   MS/SuppMatt.pdf:
     depends:
@@ -739,7 +782,7 @@ targets:
       - MS/orgsize.bib
       - figures/individual_responses.pdf
       - photos/design.svg
-     command: render("MS/OrgSize.md")
+     command: render_pdf("MS/OrgSize.md")
 
 
   MS/OrgSize.docx:
