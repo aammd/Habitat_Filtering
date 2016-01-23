@@ -2,7 +2,7 @@
 
 This project tests the hypothesis that the fundamental niche of different organisms is negatively correlated with body size; a pattern reported by [Farjalla et al. 2003](http://www.ncbi.nlm.nih.gov/pubmed/22919920)
 
-![img](photos/design.png)
+![img](photos/design_illustration.png)
 
 ![img](photos/oneblock.jpg)
 
