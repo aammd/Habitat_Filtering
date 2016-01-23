@@ -71,7 +71,7 @@ level, small organisms may persist in a habitat if they are able to adapt to
 local conditions by virtue of their short generation times and high population
 sizes. This adaptation can also involve the use of environmental
 DNA, which bacteria can absorb and which may confer an advantage in new
-habitats. Zooplankton may also evolve rapidly (cite), for example [CITE EXAMPLE involving environment].
+habitats.
 
 Alternatively, microscopic organisms may be widely distributed because they
 are able to get to more places faster. There is substantial evidence that
