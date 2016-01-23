@@ -36,9 +36,8 @@ genome size, mechanisms of gene transfer, and modes of dispersal. These
 biological properties of organisms are in turn expected to affect rates of
 speciation, dispersal, selection and drift -- the four processes underlying
 community assembly. In this framework, speciation populates the regional pool,
-dispersal refers to the arrival of species into a local community, “selection”
-to differences among species in their response to environment or other species,
-and “drift” to changes in species abundances resulting from stochastic
+dispersal refers to the arrival of species into a local community, (selection) to differences among species in their response to environment or other species,
+and (drift) to changes in species abundances resulting from stochastic
 demographic processes. These four processes together can describe all of the
 contemporary models of community ecology; providing a framework for assessing
 whether differences in dispersal or differences in selection drive community
@@ -76,7 +75,7 @@ level, small organisms may persist in a habitat if they are able to adapt to
 local conditions by virtue of their short generation times and high population
 sizes. This adaptation can also involve the use of environmental
 DNA, which bacteria can absorb and which may confer an advantage in new
-habitats. Zooplankton may also evolve rapidly (cite), for example [CITE EXAMPLE involving environment].
+habitats.
 
 Alternatively, microscopic organisms may be widely distributed because they
 are able to get to more places faster. There is substantial evidence that
@@ -421,7 +420,7 @@ ability did not predict the proportion of variance related to the
 environment [@Soininen2014]. Studies at very large spatial scales may also not show support for this pattern, especially if these scales are so large that dispersal limitation for large organisms becomes important. For example, a study comparing various freshwater
 groups across all of Belgium found that organism with larger
 propagules showed _less_ environmental signal, probably as a result of
-increased dispersal limitation [@DeBie2012]. This variation in results highlights the difficulty in choosing the right scale to test the proposed mechanism of the size-plasticity hypothesis (that is, wider fundamental niches for smaller organisms). An experimental manipulation such as ours is therefore useful for measuring the effect of the environment on whole communities, separate from variation caused by dispersal.
+increased dispersal limitation [@DeBie2012a]. This variation in results highlights the difficulty in choosing the right scale to test the proposed mechanism of the size-plasticity hypothesis (that is, wider fundamental niches for smaller organisms). An experimental manipulation such as ours is therefore useful for measuring the effect of the environment on whole communities, separate from variation caused by dispersal.
 
 ## Selection via species interactions
 
@@ -548,7 +547,7 @@ Spatial differences, also, could be investigated with a modified
 design. In our experiment we used different bromeliad species from
 different habitat types to create our environmental gradient. All
 bromeliads were taken from approximately the same part of the National
-Park. However, many observational datasets [@Wang2012a;@DeBie2012]
+Park. However, many observational datasets [@Wang2012a;@DeBie2012a]
 take place across scales from 10s to 1000s of kilometers. Such studies
 produce variable estimates of the strength of dispersal limitation and
 ecological determinism in different organism groups. Explicitly incorporating spatial scale in such studies may help resolve some of this variation. Measuring the temporal dynamics for multiple

@@ -31,8 +31,7 @@ genome size, mechanisms of gene transfer, and modes of dispersal. These
 biological properties of organisms are in turn expected to affect rates of
 speciation, dispersal, selection and drift -- the four processes underlying
 community assembly. In this framework, speciation populates the regional pool,
-dispersal refers to the arrival of species into a local community, (selection)
-to differences among species in their response to environment or other species,
+dispersal refers to the arrival of species into a local community, (selection) to differences among species in their response to environment or other species,
 and (drift) to changes in species abundances resulting from stochastic
 demographic processes. These four processes together can describe all of the
 contemporary models of community ecology; providing a framework for assessing
@@ -173,13 +172,13 @@ collection of original communities from bromeliads, homogenization of
 communities, and assembly of this homogenized community in each of the
 original (now empty) bromeliads.  **Original communities**: Prior to sampling
 the macroinvertebrates, we sampled macroinvertebrates by thoroughly rinsing
-each bromeliad and filtering the water through 1mm and 180N<m mesh. These mesh
+each bromeliad and filtering the water through 1mm and 180μm mesh. These mesh
 sizes have been shown to separate macro invertebrates from both coarse
 detritus and fine particulate organic matter, facilitating their collection [@Romero2010].
 We identified macroinvertebrates to morphospecies. We sampled the zooplankton
 and bacteria communities by collecting water samples from each bromeliad:
 100ml for zooplankton, 50ml for bacteria. Zooplankton were collected by
-filtering on 50 N<m Nytex mesh and fixed in 5% buffered formalin. This fixed
+filtering on 50 μm Nytex mesh and fixed in 5% buffered formalin. This fixed
 solution was then diluted to 20 ml, and a 1 ml subsample taken for analysis.
 Zooplankton were  identified to the lowest taxonomic unit possible (species in
 most cases, except for bdelloid rotifers and harpaticoid copepods, left at the
@@ -377,7 +376,7 @@ ability did not predict the proportion of variance related to the
 environment [@Soininen2014]. Studies at very large spatial scales may also not show support for this pattern, especially if these scales are so large that dispersal limitation for large organisms becomes important. For example, a study comparing various freshwater
 groups across all of Belgium found that organism with larger
 propagules showed _less_ environmental signal, probably as a result of
-increased dispersal limitation [@DeBie2012]. This variation in results highlights the difficulty in choosing the right scale to test the proposed mechanism of the size-plasticity hypothesis (that is, wider fundamental niches for smaller organisms). An experimental manipulation such as ours is therefore useful for measuring the effect of the environment on whole communities, separate from variation caused by dispersal.
+increased dispersal limitation [@DeBie2012a]. This variation in results highlights the difficulty in choosing the right scale to test the proposed mechanism of the size-plasticity hypothesis (that is, wider fundamental niches for smaller organisms). An experimental manipulation such as ours is therefore useful for measuring the effect of the environment on whole communities, separate from variation caused by dispersal.
 
 ## Selection via species interactions
 
@@ -504,7 +503,7 @@ Spatial differences, also, could be investigated with a modified
 design. In our experiment we used different bromeliad species from
 different habitat types to create our environmental gradient. All
 bromeliads were taken from approximately the same part of the National
-Park. However, many observational datasets [@Wang2012a;@DeBie2012]
+Park. However, many observational datasets [@Wang2012a;@DeBie2012a]
 take place across scales from 10s to 1000s of kilometers. Such studies
 produce variable estimates of the strength of dispersal limitation and
 ecological determinism in different organism groups. Explicitly incorporating spatial scale in such studies may help resolve some of this variation. Measuring the temporal dynamics for multiple
