@@ -31,9 +31,9 @@ genome size, mechanisms of gene transfer, and modes of dispersal. These
 biological properties of organisms are in turn expected to affect rates of
 speciation, dispersal, selection and drift -- the four processes underlying
 community assembly. In this framework, speciation populates the regional pool,
-dispersal refers to the arrival of species into a local community, “selection”
+dispersal refers to the arrival of species into a local community, (selection)
 to differences among species in their response to environment or other species,
-and “drift” to changes in species abundances resulting from stochastic
+and (drift) to changes in species abundances resulting from stochastic
 demographic processes. These four processes together can describe all of the
 contemporary models of community ecology; providing a framework for assessing
 whether differences in dispersal or differences in selection drive community
@@ -173,13 +173,13 @@ collection of original communities from bromeliads, homogenization of
 communities, and assembly of this homogenized community in each of the
 original (now empty) bromeliads.  **Original communities**: Prior to sampling
 the macroinvertebrates, we sampled macroinvertebrates by thoroughly rinsing
-each bromeliad and filtering the water through 1mm and 180μm mesh. These mesh
+each bromeliad and filtering the water through 1mm and 180N<m mesh. These mesh
 sizes have been shown to separate macro invertebrates from both coarse
 detritus and fine particulate organic matter, facilitating their collection [@Romero2010].
 We identified macroinvertebrates to morphospecies. We sampled the zooplankton
 and bacteria communities by collecting water samples from each bromeliad:
 100ml for zooplankton, 50ml for bacteria. Zooplankton were collected by
-filtering on 50 μm Nytex mesh and fixed in 5% buffered formalin. This fixed
+filtering on 50 N<m Nytex mesh and fixed in 5% buffered formalin. This fixed
 solution was then diluted to 20 ml, and a 1 ml subsample taken for analysis.
 Zooplankton were  identified to the lowest taxonomic unit possible (species in
 most cases, except for bdelloid rotifers and harpaticoid copepods, left at the
