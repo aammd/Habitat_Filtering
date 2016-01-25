@@ -63,6 +63,9 @@ make_disp_anova(zoops_disper_species)
 make_disp_anova(bact_disper_species )
 ```
 
+*Question 1: less beta diversity among smaller organism types*
+All organism types showed the same decrease in mean distance to centroid at the end of the experiment -- there was no significant interaction between organism type and the effect of sampling time (` fig("disp")`, Mixed effect model F~2,20~ = ` getFP_aov(tidy_mixed, "Fvalue", "taxa:timing")`, ` check_aov_p(tidy_mixed, "taxa:timing")`). However, we did see an overall ` pdiff`% decrease in the dispersion at the end of the experiment (F~1,20~ = ` getFP_aov(tidy_mixed, "Fvalue", "timing")`, ` check_aov_p(tidy_mixed, "timing")`).
+
 # PERMANOVAS
 
 ```{r, echo = FALSE}
