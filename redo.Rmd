@@ -29,44 +29,47 @@ zoops_tts_fin$taxa <- zoops_tts_fin$taxa[is_in,]
 
 and combine them:
 
+
+Actually, what needs to happen here is a difference kind of _split_ in the list structure: specifcally, I want a list as long as the number of blocks (2 in this case, 5 in real life). I want each element to contain a `$factors` and a `$taxa` element. `purrr` probably has the perfect tool if only I can find it.
+
+```{r}
+
+library(purrr)
+
+inverts_tts_fin %>% 
+  lapply(split, f = .[["factors"]][["Block"]]) %>% 
+  transpose()
+
+
+```
+
+That looks like the correct operation! This `transpose()` performs exactly the operation we want.
+
 ```{r}
 
 f <- . %>% 
-  bind_cols %>% 
-  group_by(Block, species) %>% 
-  mutate(brom_rep = seq_along(species))
+  lapply(split, f = .[["factors"]][["Block"]]) %>% 
+  transpose()
 
-invert_zoops <- inverts_tts_fin %>% 
-  f %>% 
-  left_join(zoops_tts_fin %>% f) %>% 
-  split(., .$Block)
-  
-library(purrr)  
+invert_zoops <-  
+  list(inverts = inverts_tts_fin %>% f,
+       zoops   = zoops_tts_fin %>% f)
 
-map(invert_zoops, ~ kable(.x))
 ```
 
 So far so good. Now let's build the PERMANOVA response:
 
 ```{r}
-## Adonis requires a spread once again:
-new_adonis_data <- invert_zoops %>% 
-  spread(taxa, abd, fill = 0) %>% 
-  {list(factors = select(., Block, species, brom_rep, size),
-       taxa = select(., -Block, -species, -sampling, -brom_rep, -size))}
-
-lapply(new_adonis_data, head)
-```
-
-All those NAs! is that going to be a problem?!
-
-```{r}
 AdonisData <- function(Data, .strata = Data[["factors"]]$Block, ...){  
-  adonis(Data[["taxa"]] ~ species * size, data = Data[["factors"]], strata = .strata, ...)
+  adonis(Data[["taxa"]] ~ species , data = Data[["factors"]], strata = .strata, ...)
 }
 
+adonis_list <- invert_zoops %>% 
+  at_depth(2, AdonisData)
 
-AdonisData(new_adonis_data, na.rm = TRUE) ## na.rm goes into vegdist
-  
+adonis_list %>% 
+  map(. %>% map_dbl(~.x[["aov.tab"]][["R2"]][[1]])) %>% 
+  map_df(~data_frame(Block = names(.x), rsq = .x), .id = "grp")
+
 ```
 
