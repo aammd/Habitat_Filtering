@@ -1,0 +1,72 @@
+---
+title: "redo analysis"
+author: "Andrew MacDonald"
+date: "April 8, 2016"
+output: pdf_document
+---
+
+```{r}
+remake::dump_environment()
+inverts_tts_fin
+zoops_tts_fin
+```
+
+Let's choose only a few blocks to get started:
+
+```{r}
+blks <- c("Baker", "Eccleson")
+
+is_in <- which(inverts_tts_fin$factors$Block %in% blks)
+
+inverts_tts_fin$factors <- inverts_tts_fin$factors[is_in,]
+inverts_tts_fin$taxa <- inverts_tts_fin$taxa[is_in,]
+
+is_in <- which(zoops_tts_fin$factors$Block %in% blks)
+
+zoops_tts_fin$factors <- zoops_tts_fin$factors[is_in,]
+zoops_tts_fin$taxa <- zoops_tts_fin$taxa[is_in,]
+```
+
+and combine them:
+
+```{r}
+
+f <- . %>% 
+  bind_cols %>% 
+  group_by(Block, species) %>% 
+  mutate(brom_rep = seq_along(species))
+
+invert_zoops <- inverts_tts_fin %>% 
+  f %>% 
+  left_join(zoops_tts_fin %>% f) %>% 
+  split(., .$Block)
+  
+library(purrr)  
+
+map(invert_zoops, ~ kable(.x))
+```
+
+So far so good. Now let's build the PERMANOVA response:
+
+```{r}
+## Adonis requires a spread once again:
+new_adonis_data <- invert_zoops %>% 
+  spread(taxa, abd, fill = 0) %>% 
+  {list(factors = select(., Block, species, brom_rep, size),
+       taxa = select(., -Block, -species, -sampling, -brom_rep, -size))}
+
+lapply(new_adonis_data, head)
+```
+
+All those NAs! is that going to be a problem?!
+
+```{r}
+AdonisData <- function(Data, .strata = Data[["factors"]]$Block, ...){  
+  adonis(Data[["taxa"]] ~ species * size, data = Data[["factors"]], strata = .strata, ...)
+}
+
+
+AdonisData(new_adonis_data, na.rm = TRUE) ## na.rm goes into vegdist
+  
+```
+
