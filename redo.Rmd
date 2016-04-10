@@ -11,22 +11,6 @@ inverts_tts_fin
 zoops_tts_fin
 ```
 
-Let's choose only a few blocks to get started:
-
-```{r}
-blks <- c("Baker", "Eccleson")
-
-is_in <- which(inverts_tts_fin$factors$Block %in% blks)
-
-inverts_tts_fin$factors <- inverts_tts_fin$factors[is_in,]
-inverts_tts_fin$taxa <- inverts_tts_fin$taxa[is_in,]
-
-is_in <- which(zoops_tts_fin$factors$Block %in% blks)
-
-zoops_tts_fin$factors <- zoops_tts_fin$factors[is_in,]
-zoops_tts_fin$taxa <- zoops_tts_fin$taxa[is_in,]
-```
-
 and combine them:
 
 
@@ -60,8 +44,8 @@ invert_zoops <-
 So far so good. Now let's build the PERMANOVA response:
 
 ```{r}
-AdonisData <- function(Data, .strata = Data[["factors"]]$Block, ...){  
-  adonis(Data[["taxa"]] ~ species , data = Data[["factors"]], strata = .strata, ...)
+AdonisData <- function(Data, ...){  
+  adonis(Data[["taxa"]] ~ species , data = Data[["factors"]], ...)
 }
 
 adonis_list <- invert_zoops %>% 
