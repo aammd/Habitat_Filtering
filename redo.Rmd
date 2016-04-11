@@ -11,10 +11,8 @@ inverts_tts_fin
 zoops_tts_fin
 ```
 
-and combine them:
 
-
-Actually, what needs to happen here is a difference kind of _split_ in the list structure: specifcally, I want a list as long as the number of blocks (2 in this case, 5 in real life). I want each element to contain a `$factors` and a `$taxa` element. `purrr` probably has the perfect tool if only I can find it.
+Actually, what needs to happen here is a difference kind of _split_ in the list structure: specifcally, I want a list as long as the number of blocks (2 in this case, 5 in real life). I want each element to contain a `$factors` and a `$taxa` element.
 
 ```{r}
 
@@ -37,7 +35,8 @@ f <- . %>%
 
 invert_zoops <-  
   list(inverts = inverts_tts_fin %>% f,
-       zoops   = zoops_tts_fin %>% f)
+       zoops   = zoops_tts_fin %>% f,
+       bact    = bact_tts_fin %>% f)
 
 ```
 
@@ -51,9 +50,33 @@ AdonisData <- function(Data, ...){
 adonis_list <- invert_zoops %>% 
   at_depth(2, AdonisData)
 
-adonis_list %>% 
+block_level_rsqs <- adonis_list %>% 
   map(. %>% map_dbl(~.x[["aov.tab"]][["R2"]][[1]])) %>% 
   map_df(~data_frame(Block = names(.x), rsq = .x), .id = "grp")
 
+kable(block_level_rsqs)
 ```
 
+### plot the results
+
+```{r}
+block_lvl_rs_ordered <- block_level_rsqs %>%
+  mutate(grp = ordered(grp, levels = c("bact", "zoops", "inverts")))
+
+block_lvl_rs_ordered %>% 
+  ggplot(aes(x = grp, y = rsq, group = Block)) +
+  geom_point() + 
+  geom_line()
+```
+
+Zooplankton appear to have *more*, not less, structure than macroinvertebrates.
+
+```{r}
+grp_anova <- block_lvl_rs_ordered %>% 
+  lmerTest::lmer(rsq ~ grp + (1|Block), data = .) 
+
+anova(grp_anova)
+summary(grp_anova)
+```
+
+And the linear contrast is no longer significant, nor is it even positive! perhaps this was the wrong approach after all.
