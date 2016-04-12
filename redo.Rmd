@@ -5,10 +5,8 @@ date: "April 8, 2016"
 output: pdf_document
 ---
 
-```{r}
+```{r echo=FALSE, message=FALSE}
 remake::dump_environment()
-inverts_tts_fin
-zoops_tts_fin
 ```
 
 
