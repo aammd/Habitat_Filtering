@@ -17,6 +17,7 @@ packages:
   - stargazer
   - nlme
   - knitr
+  - purrr
 sources:
   - R.scripts/results.R
   - R.scripts/data_cleaning.R

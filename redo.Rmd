@@ -14,12 +14,10 @@ Actually, what needs to happen here is a difference kind of _split_ in the list 
 
 ```{r}
 
-library(purrr)
-
 inverts_tts_fin %>% 
   lapply(split, f = .[["factors"]][["Block"]]) %>% 
-  transpose()
-
+  transpose() %>% 
+  at_depth(2, ~ head(.x)[1:3])
 
 ```
 
