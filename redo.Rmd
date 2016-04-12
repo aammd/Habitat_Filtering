@@ -34,24 +34,55 @@ invert_zoops <-
        zoops   = zoops_tts_fin %>% f,
        bact    = bact_tts_fin %>% f)
 
+
+presabs <- function(df) {
+  for (i in names(df)) {
+    df[[i]] <- as.numeric(df[[i]] > 0)
+  }
+  df
+}
+
+invert_zoops_pa <- invert_zoops %>% 
+  ## remove all zero species within each block:
+  at_depth(2, . %>% map_at("taxa", ~.x[,(colSums(.x > 0) > 0)])) %>% 
+  ## converte inverts and zoops to presence absence
+  map_at(c("inverts", "zoops"), . %>% 
+           map(. %>% 
+                 map_at("taxa", presabs)))
+
 ```
 
 So far so good. Now let's build the PERMANOVA response:
 
-```{r}
+```{r message=FALSE}
 AdonisData <- function(Data, ...){  
   adonis(Data[["taxa"]] ~ species , data = Data[["factors"]], ...)
 }
 
-adonis_list <- invert_zoops %>% 
-  at_depth(2, AdonisData)
+rdaData <- function(Data, ...){  
+  rda(Data[["taxa"]] ~ species , data = Data[["factors"]], ...)
+}
+
+adonis_list <- invert_zoops_pa %>% 
+  at_depth(2, AdonisData, method = "euclid")
+
+rda_list <- invert_zoops_pa %>% 
+  at_depth(2, rdaData)
+
 
 block_level_rsqs <- adonis_list %>% 
   map(. %>% map_dbl(~.x[["aov.tab"]][["R2"]][[1]])) %>% 
   map_df(~data_frame(Block = names(.x), rsq = .x), .id = "grp")
 
 kable(block_level_rsqs)
+
+# ## and f-vals
+# block_level_fs <- adonis_list %>% 
+#   map(. %>% map_dbl(~.x[["aov.tab"]][["F.Model"]][[1]])) %>% 
+#   map_df(~data_frame(Block = names(.x), fval = .x), .id = "grp")
 ```
+
+
 
 ### plot the results
 
