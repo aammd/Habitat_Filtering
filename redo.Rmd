@@ -107,3 +107,107 @@ summary(grp_anova)
 ```
 
 And the linear contrast is no longer significant, nor is it even positive! perhaps this was the wrong approach after all.
+
+## number of species in common
+
+first let's see what species are present everywhere
+
+```{r}
+ubiquity <- invert_zoops %>% 
+  at_depth(2, . %>% map_at("taxa", ~.x[,(colSums(.x > 0) > 0)])) %>% 
+  at_depth(2, . %>% map_at("taxa", ~ data_frame(ubiq = sum(colSums(.x > 0) == 6),
+                                                nspp = ncol(.x)))) %>% 
+  map_df(. %>% map_df("taxa", .id = "Block"), .id = "taxa")
+```
+
+OK let's try to plot that
+
+```{r}
+ubiquity %>% 
+  ggplot(aes(x = nspp, y = ubiq, colour = taxa)) +
+  geom_point() + 
+  stat_smooth(method = "lm") +
+  facet_wrap(~taxa, scales = "free")
+```
+
+
+## correlation analysis
+
+could we analyze figure 3 directly, with a rank correlation test? 
+
+```{r eval = FALSE}
+
+sizes <- data_frame(taxa = c("bact", "zoops", "inverts"),
+                    size = 1:3)
+
+
+
+observed <- list(data_frame(name = as.character(quote(inverts_adonis_fin)), 
+                number = species_r2(inverts_adonis_fin)),
+     data_frame(name = as.character(quote(zoops_adonis_fin)), 
+                number = species_r2(zoops_adonis_fin)),
+     data_frame(name = as.character(quote(bact_adonis_fin)), 
+                number = species_r2(bact_adonis_fin))) %>% 
+  bind_rows() %>% 
+  separate(name, into = c("taxa", "method", "time")) %>% 
+  filter(time == "fin") %>% 
+  left_join(sizes)  %>% 
+  lm(number ~ size, data = .) %>% 
+  broom::tidy()
+
+### randomization tests
+
+null_sims_spear <- replicate(n = 99, {
+  ss <- 1:30 %>% 
+    split(f = gl(5, 6)) %>% 
+    lapply(sample) %>% 
+    unlist
+  
+  inverts_tts_fin$factors$species <- inverts_tts_fin$factors$species[ss]
+  zoops_tts_fin$factors$species <- zoops_tts_fin$factors$species[ss]
+  bact_tts_fin$factors$species <- bact_tts_fin$factors$species[ss] 
+  
+  inverts_adonis_fin <- AdonisData(inverts_tts_fin, method = I("euclid"))
+  
+  zoops_adonis_fin <- AdonisData(zoops_tts_fin, method = I("euclid"))
+  
+  bact_adonis_fin <- AdonisData(bact_tts_fin, method = I("euclid"))
+  
+  
+  list(data_frame(name = as.character(quote(inverts_adonis_fin)), 
+                  number = species_r2(inverts_adonis_fin)),
+       data_frame(name = as.character(quote(zoops_adonis_fin)), 
+                  number = species_r2(zoops_adonis_fin)),
+       data_frame(name = as.character(quote(bact_adonis_fin)), 
+                  number = species_r2(bact_adonis_fin))) %>% 
+    bind_rows() %>% 
+    separate(name, into = c("taxa", "method", "time")) %>% 
+    filter(time == "fin") %>% 
+    left_join(sizes) %>% 
+    lm(number ~ size, data = .) %>% 
+    broom::tidy()
+  
+}, simplify = FALSE)
+
+obs_slope <- observed %>% filter(term == "size") %>% .[["estimate"]]
+
+null_sims_spear %>% 
+  bind_rows(.id = "sim") %>% 
+  filter(term == "size") %>% 
+  .[["estimate"]] %>% 
+  {c(., obs_slope) >= obs_slope} %>% 
+  {sum(.)/length(.)} 
+
+
+null_sims_spear %>% 
+  bind_rows(.id = "sim") %>% 
+  filter(term == "size") %>% 
+  .[["estimate"]] %>% 
+  hist(xlim = c(-0.05, 0.15), col = "lightgrey", main = "null distribution of slopes") %>% 
+  abline(v = obs_slope, col = "darkgreen",  lwd = 2)
+```
+
+## reduce the number of species
+
+let us reduce the number of species, that will be good. 
+
