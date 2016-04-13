@@ -84,3 +84,72 @@ r2_plot_df_maker <- function(.inverts_adonis_ini, .inverts_adonis_fin,
     mutate(taxa = factor(taxa, levels = c("inverts", "zoops", "bact")))
 
 }
+
+
+## compare the increase in R2 between different organism groups to a null model of that same increase:
+test_slope_robustness <- function(inverts_adonis_ini, inverts_adonis_fin,
+                                  zoops_adonis_ini, zoops_adonis_fin,
+                                  bact_adonis_ini, bact_adonis_fin, REPS){
+  
+  sizes <- data_frame(taxa = c("bact", "zoops", "inverts"),
+                      size = 1:3)
+  # could replace these values with actual size later
+  
+  observed <- r2_plot_df_maker(inverts_adonis_ini, inverts_adonis_fin,
+                               zoops_adonis_ini, zoops_adonis_fin,
+                               bact_adonis_ini, bact_adonis_fin) %>% 
+    left_join(sizes) %>% 
+    group_by(time) %>% 
+    do(broom::tidy(lm(number ~ size, data = .)))
+  
+  ### randomization tests
+  
+  null_sims <- replicate(n = REPS, {
+    ss <- 1:30 %>% 
+      split(f = gl(5, 6)) %>% 
+      lapply(sample) %>% 
+      unlist
+    
+    inverts_tts_ini$factors$species <- inverts_tts_ini$factors$species[ss]
+    zoops_tts_ini$factors$species <- zoops_tts_ini$factors$species[ss]
+    bact_tts_ini$factors$species <- bact_tts_ini$factors$species[ss] 
+    
+    inverts_tts_fin$factors$species <- inverts_tts_fin$factors$species[ss]
+    zoops_tts_fin$factors$species <- zoops_tts_fin$factors$species[ss]
+    bact_tts_fin$factors$species <- bact_tts_fin$factors$species[ss] 
+    
+    inverts_adonis_ini <- AdonisData(inverts_tts_ini, method = I("euclid"))
+    zoops_adonis_ini <- AdonisData(zoops_tts_ini, method = I("euclid"))
+    bact_adonis_ini <- AdonisData(bact_tts_ini, method = I("euclid"))
+    inverts_adonis_fin <- AdonisData(inverts_tts_fin, method = I("euclid"))
+    zoops_adonis_fin <- AdonisData(zoops_tts_fin, method = I("euclid"))
+    bact_adonis_fin <- AdonisData(bact_tts_fin, method = I("euclid"))
+    
+    r2_plot_df_maker(inverts_adonis_ini, inverts_adonis_fin,
+                     zoops_adonis_ini, zoops_adonis_fin,
+                     bact_adonis_ini, bact_adonis_fin) %>% 
+      left_join(sizes) %>%
+      group_by(time) %>% 
+      do(broom::tidy(lm(number ~ size, data = .)))
+    
+    
+  }, simplify = FALSE)
+  
+  obs_slope <- observed %>% filter(term == "size") %>% select(time, estimate)
+  
+  null_sims_summary <- null_sims %>% 
+    bind_rows(.id = "sim") %>% 
+    filter(term == "size") %>% 
+    select(time, estimate) %>%
+    bind_rows(obs_slope) %>% 
+    left_join(obs_slope %>% 
+                rename(obs = estimate)) %>% 
+    group_by(time, obs) %>% 
+    summarize(null_mean = mean(estimate),
+              null_sd   = sd(estimate),
+              null_p    = sum(estimate >= obs) / length(estimate)) %>% 
+    mutate(ses = (obs - null_mean) / null_sd)
+  
+  return(list(null_sims, null_sims_summary))
+}
+
