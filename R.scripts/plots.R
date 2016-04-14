@@ -135,26 +135,50 @@ plot_disp_taxa <- function(.disp_difs_long, the_theme){
     the_theme
 }
 
-r2_plot <- function(r2_df, the_theme){
+r2_plot <- function(r2_df, the_theme, .r2_null_test){
   newlevels <- c(inverts = "Macroinvertebrates",
                  zoops = "Zooplankton",
                  bact = "Bacteria")
 
+  ## insect figure
+  nullplot <- .r2_null_test[[1]] %>% 
+    bind_rows(.id = "sim") %>% 
+    filter(term == "size") %>% 
+    select(time, estimate) %>% 
+    filter(time == "fin") %>% 
+    ggplot(aes(x = estimate)) + 
+    geom_histogram() +
+    theme_minimal() + 
+    ylab("") +
+    xlab("Slope") +
+    geom_vline(xintercept = .r2_null_test[[2]] %>% 
+                 filter(time == "fin")  %>% 
+                 .[["obs"]], size = 2,
+               colour = "darkgreen")
+  
   r2_df %>% 
     mutate(taxa = newlevels[taxa],
            taxa = ordered(taxa,
                           levels = c("Bacteria", 
                                      "Zooplankton",
                                      "Macroinvertebrates"
-                                     )),
+                          )),
            time = ifelse(time == "fin", "Final", "Initial"),
            time = ordered(time, levels = c("Initial", "Final"))) %>% 
     ggplot(aes(x = taxa, y = number)) + 
     # geom_line() + 
-    geom_point(aes(fill = time, group = time), size = 6, shape = 21, colour = "black") +
+    geom_point(aes(fill = time, group = time), size = 6,
+               shape = 21, colour = "black") +
     ylab(expression("Environmental signal ("*r^2*" value)")) +
-    theme_minimal() + 
-    scale_fill_viridis(discrete = TRUE, guide = guide_legend(title = NULL)) +
-    #scale_fill_manual(values = c("darkgreen", "lightblue")) +
-    xlab("Organism type")
+    xlab("Organism type") +
+    theme_bw() +
+    theme(legend.position = "top") +
+    scale_fill_manual(values = c("lightgreen", "darkgreen"), 
+                      guide = guide_legend(title = NULL)) +
+    annotation_custom(ggplotGrob(nullplot), xmin = 0.3, xmax = 1.5, ymin = 0.25, ymax = 0.34)
+  
+  
+  
+  
 }
+

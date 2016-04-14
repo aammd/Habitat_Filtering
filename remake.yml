@@ -653,11 +653,11 @@ targets:
 
   ## Figures  
   figures/r2_plot.pdf:
-    command: r2_plot(r2_plot_df, mytheme)
+    command: r2_plot(r2_plot_df, mytheme, r2_null_test)
     plot: true
 
   figures/r2_plot.png:
-    command: r2_plot(r2_plot_df, mytheme)
+    command: r2_plot(r2_plot_df, mytheme, r2_null_test)
     plot: true
 
 
