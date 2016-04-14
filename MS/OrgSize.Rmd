@@ -23,72 +23,66 @@ fig <- pryr::partial(fig_nums, display = "cite")
 tab <- pryr::partial(tab_nums, display = "cite")
 ```
 
+<!-- Abstract -->
 
 ## Introduction
 
-One of the most profound differences between organisms is their body
-size. Macroscopic (> 1mm) and microscopic (< 1 mm) animals differ in
-population size, growth rates, morphological complexity, genome size,
-and modes of dispersal. These biological properties are
-in turn expected to affect rates of speciation, dispersal, selection
-and drift -- the four processes underlying community assembly. In this
-framework, speciation populates the regional pool, dispersal refers to
-the arrival of species into a local community, “selection” to
-differences among species in their response to environment or other
-species, and “drift” to changes in species abundances resulting from
-stochastic demographic processes. These four processes together can
-describe all of the contemporary models of community ecology
-[@Vellend2010b;@Hanson2012;@Chase2011]. Understanding how macroscopic
-and microscopic organisms differ in these four processes is a
-necessary first step to understanding differences in assembly between
-these groups.
-
-If microscopic and macroscopic communities are assembled by different processes,
-we would expect to see difference in their distribution. Indeed, this is often
-the case. Microscopic organisms are often globally distributed, while
-macroscopic organisms have more geographically restricted distributions [@Fenchel2004]. Even
-within landscapes, there is some evidence that the occurrence of microscopic organisms respond
-less to environmental gradients than macroscopic organisms
+One of the most profound differences between organisms is their body size. Large
+and small organisms can differ in population size, growth rates, morphological
+complexity, genome size, and modes of dispersal. This scaling of biological
+processes with organism size has often been used to explain differences in the
+spatial distribution of small and large organisms. Microscopic organisms such as
+bacteria and plankton are often globally distributed, while larger
+organisms have more geographically restricted distributions [@Fenchel2004]. Even
+within landscapes, there is some evidence that the occurrence of such microscopic
+organisms responds less to environmental gradients than larger organisms
 [@Farjalla2012;@Fierer2011].  However, while such differences in distribution
 suggest that the suite of processes underlying community assembly differ between
 micro- and macroscopic organisms, it is difficult to determine which process is
-driving this difference. There are at least two possible mechanisms that may make
-communities of smaller organisms more widely distributed. First, smaller
+driving this difference. There are at least two possible mechanisms that may
+make communities of smaller organisms more widely distributed. First, smaller
 organisms could have larger environmental tolerances, allowing them to occupy
 broader fundamental niches. Second, smaller organisms could have greater
 dispersal abilities, allowing them to reach more habitats.
 
-The environment may not affect small-bodied organisms if they have large
-fundamental niches, causing weaker selection (_sensu_ Vellend) in response to different environments. Larger fundamental niches in smaller organisms could be caused by
-several factors. First, their small body size allows habitat heterogeneity to
-affect them at very small scales:  smaller organisms are able to find tolerable
-microhabitats, while organisms that experience the environment at a coarser grain may not detect a46 similar variation in the environment. Secondly, single-celled organisms may be able to use
-multiple carbon sources [@Langenheder2007] and able to survive in a greater range of
-habitats.  Microscopic life is also more likely to possess resting stages when a
-habitat is unfavorable (e.g. encysting protists, tun state for tardigrades) or
-to propagate by a resistant life history stage such as spores. At the population
-level, small organisms may persist in a habitat if they are able to adapt to
-local conditions by virtue of their short generation times and high population
-sizes. This adaptation can also involve the use of environmental
-DNA, which bacteria can absorb and which may confer an advantage in new habitats.
+Smaller organisms may have broader environmental tolerances for several reasons.
+First, their small body size allows habitat heterogeneity to affect them at very
+small scales:  smaller organisms are able to find tolerable microhabitats, while
+organisms that experience the environment at a coarser grain may not detect a
+similar variation in the environment. This biological difference between small
+and large organisms can be compounded by the macroscopic grain at which
+organisms are typically observed by researchers, which averages over any
+microscopic-scale variation in distribution. Secondly, single- celled organisms
+may be able to use multiple carbon sources [@Langenheder2007] and able to
+survive in a greater range of habitats. Very small organisms are also more
+likely to possess resting stages when a habitat is unfavorable (e.g. encysting
+protists, tun state for tardigrades) or to propagate by a resistant life history
+stage such as spores. At the population level, small organisms may persist in a
+habitat if they are able to adapt to local conditions by virtue of their short
+generation times and high population sizes. In the case of bacteria, genetic
+adaptation can also involve the uptake and use of environmental DNA.
 
-Alternatively, microscopic organisms may be widely distributed because they
-are able to get to more places faster. There is substantial evidence that
-microscopic organisms may be able to disperse further than macroscopic
-organisms. The classic "everything is everywhere and the environment selects"
-hypothesis of Baas Becking [-@BaasBecking1934] suggests that smaller organisms are not limited by
-biogeographic barriers but instead are found globally, emerging from
-resistant stages in favorable environments [@Huszar2015]. Many bacteria and zooplankton have
-passive dispersal, traveling long distances by wind or water
-currents, or by phoresy. In contrast, macroscopic organisms usually have
-active dispersal, for example oviposition by flying adults. At finer grains, active dispersal could result in a close association between
-distribution and environmental variables, assuming that active dispersal is
-adapted to maximize fitness. However, at larger scales, the limited distances
-covered by active dispersers might prevent macroscopic animals from reaching
-suitable places. This would weaken the association between environment and distribution for larger animals.
+Alternatively, small organisms may be widely distributed because they are able
+to get to more places faster. There is substantial evidence that microscopic
+organisms such as bacteria, viruses, protists and plankton may be able to
+disperse further than larger organisms; amongst these microscopic organisms, the
+smallest disperse the furthest. The classic "everything is everywhere and the
+environment selects" hypothesis of Baas Becking [-@BaasBecking1934] suggests
+that smaller organisms are not limited by biogeographic barriers but instead are
+found globally, emerging from resistant stages in favorable environments
+[@Huszar2015]. Many bacteria and zooplankton have passive dispersal, traveling
+long distances by wind or water currents, or by phoresy. In contrast, larger
+animals (but not larger plants) usually have active dispersal; for example,
+adult insects actively choose sites to oviposit. At the scale of landscapes, active
+dispersal could result in a close association between distribution and
+environmental variables, assuming that active dispersal is adapted to maximize
+fitness. However, at continental and global scales, the limited distances covered by active
+dispersers might prevent larger animals from reaching suitable places. This
+would weaken the association between environment and distribution for larger
+animals.
 
 It has been difficult to determine whether differences in distribution between
-small and large organisms is caused by variation in the strength of
+small and large organisms is caused by differences in the strength of
 environmental filtering or dispersal limitation. There are three reasons for
 this. First, the distribution of micro-and macroscopic organisms has rarely been
 compared within the same system. This creates a problem of scale, with studies
@@ -100,44 +94,32 @@ researchers have used variance partitioning to separate the effects of
 environment from space, but this approach has limitations [@Gilbert2010]. For
 example, Smith and Lundholm [-@Smith2010] found that spatially-correlated
 dispersal contributed to both spatial and environmental partitions of variance
-in community composition. Patterns of dispersal may also be irregular and
-nonlinear over space, caused by individual behaviour (active dispersers) or by
-vectors (passive dispersers). Third, when an actively-dispersing species is not
-found in a site it is impossible to determine if this is because the environment
-makes dispersal or establishment unlikely. <!--not clear: these confounding factors make observation of these patterns difficult; let's try experiment--> For example, a female insect may be
-deterred from ovipositing in a location by the presence of a predator. An
+in community composition. Third, dispersal limitation and environmental filtering can mask each other. A species can only be filtered by a site’s environment when it can reach the site, so a community experiencing equally strong dispersal and environmental limitation can may show mainly the former in variance partitioning [@Smith2010; @DeBie2012a]. A special case of this problem occurs when an actively-dispersing species is not
+found in a site. It is impossible to determine if this is because the environment
+makes dispersal unlikely or establishment unlikely. <!--not clear: these confounding factors make observation of these patterns difficult; let's try experiment--> For example, an insect larva may be missing from a location because its parent was deterred from ovipositing in the environment or because the larvae could not withstand the environment. An
 experiment that removes dispersal limitation for all organisms is therefore a
 stronger test of the relative effects of environment on species composition. We
 are aware of no study that experimentally removes dispersal limitation for both
-micro- and macro- organisms in the same system, simultaneously. We conducted an
-experiment that removes dispersal limitation for micro- and macro-organisms,
-using bromeliad phytotelmata as a model community.
+micro- and macroscopic organisms in the same system, simultaneously, to reveal environmental filtering. We conducted such an experiment, here using bromeliad phytotelmata as a model community.
 
-#Bromeliads 
-We conducted an experiment that removes dispersal limitation for
-micro- and macro-organisms, using bromeliad phytotelmata as a model community.
-Bromeliads are common in the Neotropics and contain many species of macroinvertebrates [@Marino2012], zooplankton [@Petermann2015], and bacteria [@Haubrich2009a]. Importantly, different species of
-bromeliad grow in different habitats, and this habitat variation is correlated with differences among their communities. Previous observations in this system
-show that this environmental variation is closely associated with variation in
-macroinvertebrate composition, weakly associated with variation in zooplankton communities and not at all associated with variation in bacterial communities [@Farjalla2012].
+Here we provide a much stronger test<!-- than what?-- > of the strength of environmental filtering for these three organism types by experimentally dispersing all species to all habitats, and examining whether the original habitat-based patterns in composition re-emerged.  We predicted: 
 
-Here we provide a much stronger test <!-- than what?-- > of the strength of environmental filtering for these three organism types by experimentally dispersing all species to all habitats, and examining whether the original habitat-based patterns in composition re-emerged.  We predicted: 
-1). If environmental filtering increases with organism size, we would predict that the effects of habitat would be stronger on the composition of communities of large-bodied organisms than of small-bodied organisms, both before and after our experimental dispersal treatment (`r fig("hypo")`a). <!--confusing: "before and after"-->
-2). If instead dispersal limitation increased with organism size, we would expect that any apparent effect of habitat on community composition was an artefact of spatial autocorrelation and would be erased by our dispersal treatment (`r fig("hypo")`b). 
-3). If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (`r fig("hypo")`c).
+1. If environmental filtering, but not dispersal limitation, increases with organism size, we would predict that habitat would affect the composition of communities of large-bodied organisms more than those of small-bodied organisms(`r fig("hypo")`a). <!--confusing: "before and after": deleted-->
+2. If instead only dispersal limitation increased with organism size, we would expect that any apparent effect of habitat on community composition was an artifact of spatial autocorrelation and would be erased by our dispersal treatment (`r fig("hypo")`b). 
+3. If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (`r fig("hypo")`c).
 
-## study system 
+## Study system 
 <!--or maybe better: observational pattern?-->
 
-Bromeliads are common in the Neotropics and contain many species of insects [@Marino2012], zooplankton [@Petermann2015], and bacteria [@Haubrich2009a]. Importantly, different species of
-bromeliad grow in different habitats, and this habitat variation is correlated with differences among their communities. Previous observations in this system
+Bromeliads are common in the Neotropics and contain many species of macroinvertebrates (especially insects [@Frank2009]),  zooplankton [@Petermann2015], and bacteria [@Haubrich2009a]. Importantly, different species of
+bromeliad grow in different habitats, and this habitat variation is correlated with differences among their communities [@Marino2012]. Previous observations in this system
 show that this environmental variation is closely associated with variation in
 macroinvertebrate composition, weakly associated with variation in zooplankton communities and almost uncorrelated with variation in bacterial communities [@Farjalla2012].
 
 ![ho](../photos/hypotheses_illustration.png)
 <!--Can you add numbers to indicate their relative sizes, or their relationship to the threshold of interest (1mm)? -->
 
-`r fig_nums("hypo", "Illustration of the possible patterns resulting from our experiment. Observations have already shown that community composition of larger animals is more strongly related to environmental differences than is composition of smaller organisms (solid line, all figures). In our experiment we remove differences among community composition, and observe the subsequent return of these differences as caused by environment (dashed lines). There are three possible outcomes. If differences in composition are caused by an increase in sensitivity to the environment (with increasing organism size), then we should see a match between the amount of environmental signal before and after the experiment (1a). If differences in composition are caused by biased dispersal, we should see no difference after the experiment (1b). Finally, an intermediate scenario (1c) results when both environment and biased dispersal contributed to the original pattern.")`
+`r fig_nums("hypo", "Illustration of the possible patterns resulting from our experiment. Previous observations have already shown that community composition of larger animals is more strongly related to environmental differences than is composition of smaller organisms (solid line, all figures). In our experiment we remove differences among community composition, and observe the subsequent return of these differences as caused by environment (dashed lines). There are three possible outcomes. If differences in composition are caused by an increase in sensitivity to the environment (with increasing organism size), then we should see a match between the amount of environmental signal before and after the experiment (1a). If differences in composition are caused by biased dispersal, we should see no difference after the experiment (1b). Finally, an intermediate scenario (1c) results when both environment and biased dispersal contributed to the original pattern.")`
 
 ## Methods
 
@@ -177,7 +159,7 @@ experiment between `r format(str_end[[1]], format = "%d %B %Y")` and `r format(s
 
 ![img](../photos/design_illustration.png) 
 
-`r fig_nums("design", "Schematic of our experimental design. We first sampled six bromeliads (two plants of each of three species). We formed (solid arrows) homogeneous initial communities (MIX) by counting equal numbers of animals (macroinvertebrates) or by mixing water samples of equal volume from all plants (zooplankton and bacteria). We then returned (dashed arrows) these initial communities to the six bromeliads, and returned the bromeliads to their original habitats.")`
+`r fig_nums("design", "Schematic of our experimental design. We first sampled six bromeliads (two plants of each of three species). We formed (solid arrows) homogeneous initial communities (MIX) by counting equal numbers of animal taxa (macroinvertebrates) or by mixing water samples of equal volume from all plants (zooplankton and bacteria). We then returned (dashed arrows) these initial communities to the six bromeliads, and returned the bromeliads to their original habitats.")`
 
 Our experimental setup consisted of three steps (`r fig("design")`):
 collection of original communities from bromeliads, homogenization of
@@ -232,10 +214,7 @@ long that bromeliads were empty.
 
 ### Analyses
 
-The size-plasticity hypothesis predicts that the relationship between
-community composition and environment should increase in strength from
-small to large types of organism.  This relationship should be weaker
-for smaller organism types. We tested this hypothesis with a
+We distinguished between our three predictions `r fig("hypo")` with a
 permutation ANOVA (PERMANOVA), which measures the amount of difference
 in community composition between treatment groups and compares this to
 the expected distribution under a null hypothesis of no treatment
@@ -243,7 +222,7 @@ effects. In each PERMANOVA we used block as an error stratum, meaning
 that permutations were performed within blocks. We repeated this
 analysis for all three organism types, and at both "initial" and
 "final" sampling dates (i.e. at the beginning and end of the
-experiment). We hypothesized that the R^2^ value associated with environment should increase with organism size (`r fig("hypo")`) 
+experiment). We interpreted the R^2^ value of this PERMANOVA as a metric of the strength of habitat filtering (`r fig("hypo")`) 
 <!--similar criterion and decision rules for the other hypotheses?-->
 
 The distance-based approaches described above test the response of the whole
