@@ -304,6 +304,31 @@ species and also high similarity among communities (bromeliads),
 creating a null distribution with low mean and small variance (and
 hence lower thresholds for significance).
 
+```{r nullmodelslope}
+inises <- r2_null_test[[2]] %>% 
+  filter(time == "ini") %>% 
+  .[["ses"]] %>% 
+  sprintf("%.2f", .)
+
+inip <- r2_null_test[[2]] %>% 
+  filter(time == "ini") %>% 
+  .[["null_p"]]
+
+
+finses <- r2_null_test[[2]] %>% 
+  filter(time == "fin") %>% 
+  .[["ses"]] %>% 
+  sprintf("%.2f", .)
+
+finp <- r2_null_test[[2]] %>% 
+  filter(time == "fin") %>% 
+  .[["null_p"]]
+
+```
+
+
+The pattern in `r fig("bw_spp")` may have also been caused by differences in the kind of data we used for each group. We therefore compared this pattern of increasing environmental effects with a null model. First, we calulated the slope of the relationship between R^2^ value and organism size (size was represented as ranks). We then generated null distributions by reshuffling bromeliad species within blocks. In these null simulations the same permutation was used for all organism types. We found that the observed slope was much higher than the null simulations for both initial (SES = `r inises`, p = `r inip`) and final (SES = `r finses`, p = `r finp`) sampling (`r r2_null_test[[1]] %>% length` simulations). 
+
 ```{r echo=FALSE}
 
 extract_tab <- function(mglmtab, .term){
