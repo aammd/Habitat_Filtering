@@ -104,8 +104,8 @@ micro- and macroscopic organisms in the same system, simultaneously, to reveal e
 
 Here we provide a much stronger test<!-- than what?-- > of the strength of environmental filtering for these three organism types by experimentally dispersing all species to all habitats, and examining whether the original habitat-based patterns in composition re-emerged.  We predicted: 
 
-1. If environmental filtering, but not dispersal limitation, increases with organism size, we would predict that habitat would affect the composition of communities of large-bodied organisms more than those of small-bodied organisms(`r fig("hypo")`a). <!--confusing: "before and after": deleted-->
-2. If instead only dispersal limitation increased with organism size, we would expect that any apparent effect of habitat on community composition was an artifact of spatial autocorrelation and would be erased by our dispersal treatment (`r fig("hypo")`b). 
+1. If environmental filtering, but not dispersal limitation, increases with organism size, we would predict that habitat would affect the composition of communities of large-bodied organisms more than those of small-bodied organisms(`r fig("hypo")`a). <!--confusing: "before and after": deleted--> 
+2. If instead only dispersal limitation increased with organism size, we would expect that any apparent effect of habitat on community composition was an artifact of spatial autocorrelation and would be erased by our dispersal treatment (`r fig("hypo")`b).
 3. If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (`r fig("hypo")`c).
 
 ## Study system 
@@ -154,8 +154,7 @@ of all six bromeliads as described shortly (`r fig("design")`).  Our goal was
 to create identical starting community composition for all bromeliads within a
 block. Variation between blocks in starting community composition is thus
 included in the random effect of blocks. We created five blocks in this
-experiment between `r format(str_end[[1]], format = "%d %B %Y")` and `r format(str_end[[2]], format = "%d %B %Y")`.
-<!--more and stronger statements of what animals we are studying and how big they are-->
+experiment between `r format(str_end[[1]], format = "%d %B %Y")` and `r format(str_end[[2]], format = "%d %B %Y")`. <!--more and stronger statements of what animals we are studying and how big they are-->
 
 ![img](../photos/design_illustration.png) 
 
@@ -222,8 +221,7 @@ effects. In each PERMANOVA we used block as an error stratum, meaning
 that permutations were performed within blocks. We repeated this
 analysis for all three organism types, and at both "initial" and
 "final" sampling dates (i.e. at the beginning and end of the
-experiment). We interpreted the R^2^ value of this PERMANOVA as a metric of the strength of habitat filtering (`r fig("hypo")`) 
-<!--similar criterion and decision rules for the other hypotheses?-->
+experiment). We interpreted the R^2^ value of this PERMANOVA as a metric of the strength of habitat filtering (`r fig("hypo")`) <!--similar criterion and decision rules for the other hypotheses?-->
 
 All statistical analyses were conducted in R 3.2.3 [@rcore] using vegan 2.3 [@vegan] and mvabund [@mvabund]. Code to reproduce the analysis published here is available at ***link to data***
 
@@ -310,19 +308,20 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 
 `r tab_nums("perm_3sp", "Bromeliad species effects on the composition of three types of organisms, as determined by PERMANOVAs both before and 12 days after homogenization. Both F-ratios and R^2^ values are higher for macroinvertebrates than for zooplankton than for bacteria (before and after). Following homogenization, macroinvertebrate and bacterial communities both significantly diverged among bromeliad species.")`
 
-|                    |        | F~2,27~                            | p                            | R^2^                         |
+
+|            |                               | F~2,27~    | p           | R^2^           |
 | -------- | ------------------| ---------|--------- | ---------- |
 | macroinvertebrates | before | `r getF(inverts_adonis_ini)` | `r getP(inverts_adonis_ini)` | `r getR(inverts_adonis_ini)` |
-|                    | after  | `r getF(inverts_adonis_fin)` | `r getP(inverts_adonis_fin)` | `r getR(inverts_adonis_fin)` |
+|                 | after  | `r getF(inverts_adonis_fin)` | `r getP(inverts_adonis_fin)` | `r getR(inverts_adonis_fin)`|
 | zooplankton        | before | `r getF(zoops_adonis_ini)` | `r getP(zoops_adonis_ini)` | `r getR(zoops_adonis_ini)` |
 |                    | after  | `r getF(zoops_adonis_fin)` | `r getP(zoops_adonis_fin)` | `r getR(zoops_adonis_fin)` |
 | bacteria           | before | `r getF(bact_adonis_ini)` | `r getP(bact_adonis_ini)` | `r getR(bact_adonis_ini)` |
-|                    | after  | `r getF(bact_adonis_fin)` | `r getP(bact_adonis_fin)` | `r getR(bact_adonis_fin)`                             |
-
+|                    | after  | `r getF(bact_adonis_fin)` | `r getP(bact_adonis_fin)` | `r getR(bact_adonis_fin)` |
 
 ### Figures
 
 ![between](../figures/r2_plot.png)
+
 `r fig_nums("bw_spp", "The amount of variation (r2 from PERMANOVA) in faunal community composition explained by bromeliad species (i.e. the strength of the environmental signal) decreases from larger to smaller organisms.  The environmental signal in initial, undisturbed communities was removed by homogenization, but after 12 days of recovery, was again of similar strength in final macroinvertebrate and bacterial communities. ")`
 
 <!-- add the sizes of the groups -->
@@ -334,7 +333,7 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 Our study compared the response of macroinvertebrates, zooplankton and
 bacterial communities to identical environmental gradients. Our initial sampling prior to the experimental manipulation found that the correlation between environment
 and community composition is weaker for bacteria, intermediate for
-zooplankton, and strong for macroinvertebrates (`r fig("bw_spp"`). This observational pattern mirrors that previously reported by Farjalla et al. [-@Farjalla2012],  confirming that the observational pattern is robust to differences in field site and year.<!--show this?!--> However, this observed pattern may have been caused by differences among the three organism types in the strength of environmental filtering or environmentally-correlated dispersal, or
+zooplankton, and strong for macroinvertebrates (`r fig("bw_spp")`). This observational pattern mirrors that previously reported by Farjalla et al. [-@Farjalla2012],  confirming that the observational pattern is robust to differences in field site and year.<!--show this?!--> However, this observed pattern may have been caused by differences among the three organism types in the strength of environmental filtering or environmentally-correlated dispersal, or
 both (`r fig("hypo")`). We
 therefore removed dispersal limitation among communities by homogenizing our
 starting communities, but returned communities to the same environmental gradient to test whether pure environmental filtering was sufficient to restore the initial pattern in distributions. Our results are most consistent with environmental filtering increasing
@@ -460,8 +459,7 @@ low as a single individual per species in the case of rare macroinvertebrates to
 many millions of individuals for abundant bacteria taxa. Ecological drift – the
 variation in species composition caused by the stochastic sequence of births and
 deaths - should be strongest therefore for macroinvertebrates and zooplankton,
-countering the deterministic signal of environmental filtering (`r
-fig("hypo")`b). Nevertheless, we still observed the strongest environmental
+countering the deterministic signal of environmental filtering (`r fig("hypo")`b). Nevertheless, we still observed the strongest environmental
 effects on macroinvertebrates and zooplankton, suggesting that our results are
 robust to any effects of drift.
 
