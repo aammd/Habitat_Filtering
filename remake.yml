@@ -763,6 +763,7 @@ targets:
         echo: false
     depends:
       - blocks
+      - inverts_tts_ini
       - inverts_adonis_ini
       - zoops_adonis_ini
       - bact_adonis_ini
