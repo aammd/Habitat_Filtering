@@ -354,7 +354,7 @@ show the same pattern of increasing environmental determinism with body size.
 For example, along mountainsides, elevation explains more variation in plant
 diversity than in bacteria [@Bryant2008]. In streams, environmental variation
 also correlates more strongly with stream invertebrate than bacterial
-composition [@Wang2012a]. Similar patterns are also found in a group of Finnish
+composition [@Wang2012b]. Similar patterns are also found in a group of Finnish
 lakes, where Soininen et al. [-@Soininen2013] analyzed the distribution of
 individual taxa rather than organism groups. They found that models describing
 the distribution of taxa in terms of the environment had greater predictive
