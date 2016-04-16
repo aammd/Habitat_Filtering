@@ -189,7 +189,14 @@ targets:
     command: >
       test_slope_robustness(inverts_adonis_ini, inverts_adonis_fin,
               zoops_adonis_ini, zoops_adonis_fin,
-              bact_adonis_ini, bact_adonis_fin, 499)
+              bact_adonis_ini, bact_adonis_fin, 
+              .inverts_tts_ini = inverts_tts_ini,
+              .zoops_tts_ini = zoops_tts_ini,
+              .bact_tts_ini = bact_tts_ini,
+              .inverts_tts_fin = inverts_tts_fin,
+              .zoops_tts_fin = zoops_tts_fin,
+              .bact_tts_fin = bact_tts_fin,
+               REPS = 499)
     
 
 ## supp matt figs
