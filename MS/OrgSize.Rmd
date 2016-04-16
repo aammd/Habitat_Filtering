@@ -232,11 +232,14 @@ regression of R^2^ as a function of approximate organism size (bacteria =
 distribution, we generated a random permutation of the environmental variable
 (i.e. bromeliad species). We used the same permutation series for each organism type.
 We calculated the standardized effect size of the observed slope with the
-equation (observed - mean_null) / standard deviation_null and calculated the
-null p-value as the proportion of null simulations equal or greater to the
-observed slope. All statistical analyses were conducted in R 3.2.3 [@rcore].<!--
-Code to reproduce the analysis published here is available at ***link to data***
--->
+equation 
+
+$SES = \frac{Slope_{observed} - mean(Slope_{null})}{SD(Slope_{null})}$ 
+
+We calculated the null p-value as the proportion of null simulations equal or
+greater to the observed slope. All statistical analyses were conducted in R
+3.2.3 [@rcore].<!-- Code to reproduce the analysis published here is available
+at ***link to data*** -->
 
 
 ## Results   
@@ -329,7 +332,7 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 
 ![between](../figures/r2_plot.png)
 
-`r fig_nums("bw_spp", "The amount of variation (r^2^ from PERMANOVA) in community composition explained by bromeliad species (i.e. the strength of the environmental signal) decreases from larger to smaller organisms.  The environmental signal in initial, undisturbed communities was removed by homogenization, but after 12 days of recovery, was again of similar strength in final macroinvertebrate and bacterial communities. Inset shows the results of a null simulation to test the significance of this increase in R^2^ value: histogram is the distribution of slopes (R^2^ as a function of approximate organism size) and the dark green line indicates the observed value of the slope for the _Final_ sampling")`
+`r fig_nums("bw_spp", "The amount of variation (R^2^ from PERMANOVA) in community composition explained by bromeliad species (i.e. the strength of the environmental signal) decreases from larger to smaller organisms.  The environmental signal in initial, undisturbed communities was removed by homogenization, but after 12 days of recovery, was again of similar strength in final macroinvertebrate and bacterial communities. Inset shows the results of a null simulation to test the significance of this increase in R^2^ value: histogram is the distribution of slopes (R^2^ as a function of approximate organism size) and the dark green line indicates the observed value of the slope for the _Final_ sampling.")`
 
 ## Discussion
 
