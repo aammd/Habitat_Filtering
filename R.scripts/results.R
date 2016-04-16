@@ -89,10 +89,14 @@ r2_plot_df_maker <- function(.inverts_adonis_ini, .inverts_adonis_fin,
 ## compare the increase in R2 between different organism groups to a null model of that same increase:
 test_slope_robustness <- function(inverts_adonis_ini, inverts_adonis_fin,
                                   zoops_adonis_ini, zoops_adonis_fin,
-                                  bact_adonis_ini, bact_adonis_fin, REPS){
+                                  bact_adonis_ini, bact_adonis_fin, 
+                                  .inverts_tts_ini, .zoops_tts_ini, .bact_tts_ini,
+                                  .inverts_tts_fin, .zoops_tts_fin, .bact_tts_fin,
+                                  REPS){
   
   sizes <- data_frame(taxa = c("bact", "zoops", "inverts"),
-                      size = 1:3)
+                      size = log(c(0.04, 0.5, 5)))
+  # bacteria = 0.04mm,  zooplankton = 0.5mm,  macroinvertebrates = 5mm
   # could replace these values with actual size later
   
   observed <- r2_plot_df_maker(inverts_adonis_ini, inverts_adonis_fin,
@@ -110,20 +114,20 @@ test_slope_robustness <- function(inverts_adonis_ini, inverts_adonis_fin,
       lapply(sample) %>% 
       unlist
     
-    inverts_tts_ini$factors$species <- inverts_tts_ini$factors$species[ss]
-    zoops_tts_ini$factors$species <- zoops_tts_ini$factors$species[ss]
-    bact_tts_ini$factors$species <- bact_tts_ini$factors$species[ss] 
+    .inverts_tts_ini$factors$species <- .inverts_tts_ini$factors$species[ss]
+    .zoops_tts_ini$factors$species <- .zoops_tts_ini$factors$species[ss]
+    .bact_tts_ini$factors$species <- .bact_tts_ini$factors$species[ss] 
     
-    inverts_tts_fin$factors$species <- inverts_tts_fin$factors$species[ss]
-    zoops_tts_fin$factors$species <- zoops_tts_fin$factors$species[ss]
-    bact_tts_fin$factors$species <- bact_tts_fin$factors$species[ss] 
+    .inverts_tts_fin$factors$species <- .inverts_tts_fin$factors$species[ss]
+    .zoops_tts_fin$factors$species <- .zoops_tts_fin$factors$species[ss]
+    .bact_tts_fin$factors$species <- .bact_tts_fin$factors$species[ss] 
     
-    inverts_adonis_ini <- AdonisData(inverts_tts_ini, method = I("euclid"))
-    zoops_adonis_ini <- AdonisData(zoops_tts_ini, method = I("euclid"))
-    bact_adonis_ini <- AdonisData(bact_tts_ini, method = I("euclid"))
-    inverts_adonis_fin <- AdonisData(inverts_tts_fin, method = I("euclid"))
-    zoops_adonis_fin <- AdonisData(zoops_tts_fin, method = I("euclid"))
-    bact_adonis_fin <- AdonisData(bact_tts_fin, method = I("euclid"))
+    inverts_adonis_ini <- AdonisData(.inverts_tts_ini, method = I("euclid"))
+    zoops_adonis_ini <- AdonisData(.zoops_tts_ini, method = I("euclid"))
+    bact_adonis_ini <- AdonisData(.bact_tts_ini, method = I("euclid"))
+    inverts_adonis_fin <- AdonisData(.inverts_tts_fin, method = I("euclid"))
+    zoops_adonis_fin <- AdonisData(.zoops_tts_fin, method = I("euclid"))
+    bact_adonis_fin <- AdonisData(.bact_tts_fin, method = I("euclid"))
     
     r2_plot_df_maker(inverts_adonis_ini, inverts_adonis_fin,
                      zoops_adonis_ini, zoops_adonis_fin,
