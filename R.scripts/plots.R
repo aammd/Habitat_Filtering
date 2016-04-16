@@ -169,7 +169,7 @@ r2_plot <- function(r2_df, the_theme, .r2_null_test){
     # geom_line() + 
     geom_point(aes(fill = time, group = time), size = 6,
                shape = 21, colour = "black") +
-    ylab(expression("Environmental signal ("*r^2*" value)")) +
+    ylab(expression("Environmental signal ("*R^2*" value)")) +
     xlab("Organism type") +
     theme_bw() +
     theme(legend.position = "top") +
