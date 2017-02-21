@@ -8,7 +8,7 @@
 mds_plotmaker <- function(taxa_mds, env_vars, maintitle){
   # define colours and shapes
   ## plot with colours for species
-  mastercols <- viridis(5)
+  mastercols <- viridis(3)
   colors.vec <- mastercols[1:3]
   names(colors.vec) <- c("Neoregelia", "Vrisea","Aechmea.nudicaulis")
   
@@ -32,13 +32,13 @@ mds_plotmaker <- function(taxa_mds, env_vars, maintitle){
   ordihull(taxa_mds,
            groups = env_vars$sp_samp,
            label = FALSE, lwd = 1.3, draw = "polygon",
-           col = mastercols[4], 
+           # col = mastercols[4], 
            show.groups = fins)
   
   ordihull(taxa_mds,
            groups = env_vars$sp_samp,
            label = FALSE, lwd = 1.3, draw = "polygon",
-           col = mastercols[5], 
+           # col = mastercols[5], 
            show.groups = inis)
   
   # ordihull(taxa_mds,
