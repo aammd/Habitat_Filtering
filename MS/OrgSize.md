@@ -1,6 +1,6 @@
 ---
 title: "Smaller organisms are less strongly structured by environmental variation"
-author: "A. Andrew M. MacDonald, Vinicius F. Farjalla , Diane S. Srivastava"
+author: "A. Andrew M. MacDonald, Vinicius F. Farjalla, Flavia Lima, Diane S. Srivastava"
 fontsize: 12pt
 output:
   pdf_document:
@@ -243,7 +243,7 @@ hence lower thresholds for significance). This increases the power to detect hab
 
 
 
-So far, we have assessed the absolute effect of habitat filtering on each organism group separately, but our goal was also to determine if the strength of habitat filtering increases between the organism groups.  We therefore compared this pattern of increasing environmental effects with a null model. First, we calculated the slope of the relationship between the R^2^ value and approximate organism size. We then generated null distributions by reshuffling bromeliad species within blocks, using the same permutation across all organism types. We found that the observed slope was much higher than the null simulations for both initial (SES = 6.18, p = 0.002) and final (SES = 4.82, p = 0.002) sampling (499 simulations). 
+So far, we have assessed the absolute effect of habitat filtering on each organism group separately, but our goal was also to determine if the strength of habitat filtering increases between the organism groups.  We therefore compared this pattern of increasing environmental effects with a null model. First, we calculated the slope of the relationship between the R^2^ value and approximate organism size. We then generated null distributions by reshuffling bromeliad species within blocks, using the same permutation across all organism types. We found that the observed slope was much higher than the null simulations for both initial (SES = 6.46, p = 0.002) and final (SES = 4.87, p = 0.002) sampling (499 simulations). 
 
 
 

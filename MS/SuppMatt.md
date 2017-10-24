@@ -28,15 +28,9 @@ fontsize: 12pt
 
 mixed effect ANOVA table
 
-|            | numDF| denDF|     F-value|   p-value|
-|:-----------|-----:|-----:|-----------:|---------:|
-|(Intercept) |     1|    20| 837.1699446| 0.0000000|
-|taxa        |     2|    20|   9.9229148| 0.0010150|
-|timing      |     1|    20|  15.4715289| 0.0008221|
-|taxa:timing |     2|    20|   0.4375683| 0.6516385|
 
 residual plot for the dispersion model
-![plot of chunk unnamed-chunk-3](figure/SuppMatt__unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-3](figure/SuppMatt__unnamed-chunk-3-1.png)
 
 ![](../figures/one_one_plot.pdf)
 Figure  1: This is the different mean differences to centroid on the same plot. shown is the 1:1 line.
@@ -65,6 +59,9 @@ Figure  1: This is the different mean differences to centroid on the same plot. 
 |:---------|--:|---------:|---------:|---------:|---------:|
 |Groups    |  2| 0.0013260| 0.0006630| 0.4047036| 0.6711544|
 |Residuals | 27| 0.0442309| 0.0016382|        NA|        NA|
+
+*Question 1: less beta diversity among smaller organism types*
+All organism types showed the same decrease in mean distance to centroid at the end of the experiment -- there was no significant interaction between organism type and the effect of sampling time (` fig("disp")`, Mixed effect model F~2,20~ = ` getFP_aov(tidy_mixed, "Fvalue", "taxa:timing")`, ` check_aov_p(tidy_mixed, "taxa:timing")`). However, we did see an overall ` pdiff`% decrease in the dispersion at the end of the experiment (F~1,20~ = ` getFP_aov(tidy_mixed, "Fvalue", "timing")`, ` check_aov_p(tidy_mixed, "timing")`).
 
 # PERMANOVAS
 
@@ -129,12 +126,12 @@ Figure  1: This is the different mean differences to centroid on the same plot. 
 results of multivariate GLMS
 
 ## diagnositic plots for full models
-![plot of chunk unnamed-chunk-13](figure/SuppMatt__unnamed-chunk-13-1.png) 
+![plot of chunk unnamed-chunk-13](figure/SuppMatt__unnamed-chunk-13-1.png)
 
 
-![plot of chunk unnamed-chunk-14](figure/SuppMatt__unnamed-chunk-14-1.png) 
+![plot of chunk unnamed-chunk-14](figure/SuppMatt__unnamed-chunk-14-1.png)
 
-![plot of chunk unnamed-chunk-15](figure/SuppMatt__unnamed-chunk-15-1.png) 
+![plot of chunk unnamed-chunk-15](figure/SuppMatt__unnamed-chunk-15-1.png)
 
 ## ANOVA tables for full models
 Analyis of deviance 

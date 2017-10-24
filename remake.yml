@@ -233,7 +233,7 @@ targets:
        .blocks = blocks_Bacer,
        .bromeliad = bromeliad,
        sampletime = I(c(I("initial"),
-                          I("final"))))
+                        I("final"))))
 
   inverts_ini_fin_Davidson:
     command: >
@@ -661,55 +661,79 @@ targets:
   ## Figures  
   figures/r2_plot.pdf:
     command: r2_plot(r2_plot_df, mytheme, r2_null_test)
-    plot: true
+    plot:
+      width: 500
+      height: 500
 
   figures/r2_plot.png:
     command: r2_plot(r2_plot_df, mytheme, r2_null_test)
-    plot: true
+    plot:
+      width: 500
+      height: 500
 
 
   figures/one_one_plot.pdf:
-    plot: true
+    plot:
+      width: 500
+      height: 500
     command: one_one_plot(disp_diffs)
 
 
   figures/plot_disp_taxa.pdf:
-    plot: true
+    plot:
+      width: 500
+      height: 500
     command: plot_disp_taxa(disp_difs_long, mytheme)
 
   figures/plot_disp_taxa.png:
-    plot: true
+    plot:
+      width: 500
+      height: 500
     command: plot_disp_taxa(disp_difs_long, mytheme)
 
 
   figures/individual_responses.pdf: 
-    plot: true
+    plot:
+      width: 500
+      height: 500
     command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
 
   figures/individual_responses.png: 
-    plot: true
+    plot:
+      width: 500
+      height: 500
     command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
 
 ## and again, this time without singletons
   figures/individual_responses_nosingle.pdf: 
-    plot: true
+    plot:
+      width: 500
+      height: 500
     command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_nosingle_aov_tidy, mytheme)
 
   figures/individual_responses_nosingle.png: 
-    plot: true
+    plot:
+      width: 500
+      height: 500
     command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_nosingle_aov_tidy, mytheme)
 
 ## figures of the dispersion in each block, for the supplementary material
   figures/inverts.pdf:
-    plot: true
+    plot:
+      width: 500
+      height: 500
     command: plot_taxa_mds(invert_mds_list)
 
   figures/zoop.pdf:
-    plot: true
+    plot:
+      width: 500
+      height: 500
     command: plot_taxa_mds(zoop_mds_list)
 
   figures/bact.pdf:
-    plot: true
+    plot:
+      width: 500
+      height: 500
     command: plot_taxa_mds(bact_mds_list)
 
 ###### within
@@ -719,8 +743,9 @@ targets:
       r2_plot_df_maker(inverts_adonis_win_ini, inverts_adonis_win_fin,
               zoops_adonis_win_ini, zoops_adonis_win_fin,
               bact_adonis_win_ini, bact_adonis_win_fin)
-    plot: true
-
+    plot:
+      width: 500
+      height: 500
 
 ### DOCUMENTS
 
@@ -739,7 +764,6 @@ targets:
       - bact_adonis_fin
       - disper_list
       - disp_difs_long 
-      - disp_mixed
       - inverts_manyglm_fin
       - zoops_manyglm_fin
       - bact_manyglm_fin  
@@ -777,9 +801,7 @@ targets:
       - inverts_adonis_fin
       - zoops_adonis_fin
       - bact_adonis_fin
-      - disp_difs_long 
-      - disp_mixed
-      - tidy_mixed
+      - disp_difs_long
       - inverts_manyglm_fin
       - zoops_manyglm_fin
       - bact_manyglm_fin 
@@ -795,7 +817,6 @@ targets:
 
   MS/OrgSize.pdf:
      depends:
-      - figures/plot_disp_taxa.pdf
       - figures/r2_plot.pdf
       - MS/orgsize.bib
       - figures/individual_responses.pdf
@@ -805,7 +826,6 @@ targets:
 
   MS/OrgSize.docx:
     depends:
-      - figures/plot_disp_taxa.png
       - figures/r2_plot.png
       - MS/orgsize.bib
       - figures/individual_responses.png

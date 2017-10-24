@@ -1,6 +1,6 @@
 ---
 title: "Smaller organisms are less strongly structured by environmental variation"
-author: "A. Andrew M. MacDonald, Vinicius F. Farjalla , Diane S. Srivastava"
+author: "A. Andrew M. MacDonald, Vinicius F. Farjalla, Flavia Lima, Diane S. Srivastava"
 fontsize: 12pt
 output:
   pdf_document:

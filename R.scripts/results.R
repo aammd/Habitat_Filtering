@@ -78,7 +78,7 @@ r2_plot_df_maker <- function(.inverts_adonis_ini, .inverts_adonis_fin,
        data_frame(name = as.character(quote(.bact_adonis_fin)), 
                   number = species_r2(.bact_adonis_fin))
   ) %>%
-    rbind_all %>% 
+    bind_rows %>% 
     mutate(name = gsub(x = name, pattern = "\\.", replacement = "")) %>%
     separate(name, into = c("taxa", "method", "time")) %>% 
     mutate(taxa = factor(taxa, levels = c("inverts", "zoops", "bact")))
