@@ -67,8 +67,8 @@ Alternatively, small organisms may be widely distributed because they are able
 to get to more places faster. There is substantial evidence that microscopic
 organisms such as bacteria, viruses, protists and plankton may be able to
 disperse further than larger organisms; amongst these microscopic organisms, the
-smallest disperse the furthest. The classic "everything is everywhere and the
-environment selects" hypothesis of Baas Becking [-@BaasBecking1934] suggests
+smallest disperse the furthest [@DeBie2012a]. This is the reasoning behing the classic "everything is everywhere and the
+environment selects" hypothesis of Baas Becking [-@BaasBecking1934], which suggests
 that smaller organisms are not limited by dispersal barriers or distance but instead are
 found globally, emerging from resistant stages in favorable environments
 [@Huszar2015]. Many bacteria and zooplankton have passive dispersal, traveling
