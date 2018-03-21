@@ -104,19 +104,18 @@ stronger test of the relative effects of environment on species composition. We
 are aware of no study that experimentally removes dispersal limitation for both
 micro- and macroscopic organisms in the same system, simultaneously, to reveal environmental filtering. We conducted such an experiment, using patchy natural mesocosms (bromeliad phytotelmata) as model communities.
 
-Here we provide a robust test of the strength of environmental filtering for these three organism groups, which differ widely in size: macroinvertebrates (large), zooplankton (intermediate) and bacteria (small). In this test we dispersed all species to all habitats, and examined whether the original habitat-based patterns in composition re-emerged.  We predicted: 
-
-1. If environmental filtering, but not dispersal limitation, increases with organism size, we would predict that habitat would affect the composition of communities of large-bodied organisms more than those of small-bodied organisms(`r fig("hypo")`a). <!--confusing: "before and after": deleted--> 
-2. If instead only dispersal limitation increased with organism size, we would expect that any apparent effect of habitat on community composition was an artifact of spatial autocorrelation and would be erased by our removal of dispersal limitation (`r fig("hypo")`b).
-3. If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (`r fig("hypo")`c).
-
-### Study system 
-<!--or maybe better: observational pattern?-->
+### Study system
 
 Tank bromeliads (Bromeliaceae) retain rainwater in their bowl-like leaves, creating patches of aquatic habitat throughtout Neotropic forests. These small patches of habitat are inhabited by many species of macroinvertebrates, especially insects [@Frank2009],  zooplankton [@Petermann2015], and bacteria [@Louca2017-lw; @Haubrich2009a]. Importantly, different species of
 bromeliad grow in different habitats, and this habitat variation is correlated with differences among their communities [@Marino2012]. Previous observations in this system
 show that this environmental variation is closely associated with variation in
 macroinvertebrate composition, weakly associated with variation in zooplankton communities and almost uncorrelated with variation in bacterial communities [@Farjalla2012].
+
+Here we provide a robust test of the strength of environmental filtering for these three organism groups, which differ widely in size: macroinvertebrates (large), zooplankton (intermediate) and bacteria (small). In this test we dispersed all species to all habitats, and examined whether the original habitat-based patterns in composition re-emerged.  We predicted: 
+
+1. If environmental filtering, but not dispersal limitation, increases with organism size, we would predict that habitat would affect the composition of communities of large-bodied organisms more than those of small-bodied organisms(`r fig("hypo")`a). <!--confusing: "before and after": deleted--> 
+2. If instead only dispersal limitation increased with organism size, we would expect that any apparent effect of habitat on community composition was an artifact of spatial autocorrelation and would be erased by our removal of dispersal limitation (`r fig("hypo")`b).
+3. If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (`r fig("hypo")`c).
 
 ![ho](../photos/hypotheses_illustration.png)
 
