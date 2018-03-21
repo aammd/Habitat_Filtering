@@ -501,24 +501,24 @@ The authors are grateful for helpful comments by Leticia Aviles, Mary O'Connor, 
 <div id = 'refs'></div>
 
 \newpage
-## Figure captions
+## Figure legends
 
-*Figure 1*: Illustration of the possible patterns resulting from our experiment. Previous observations have already shown that community composition of larger animals is more strongly related to environmental differences than is composition of smaller organisms (solid line, all figures). In our experiment we remove differences among community composition, and observe the subsequent return of these differences as caused by environment (dashed lines). There are three possible outcomes. If differences in composition are caused by an increase in sensitivity to the environment (with increasing organism size), then we should see a match between the amount of environmental signal before and after the experiment (1a). If differences in composition are caused by biased dispersal, we should see no difference between organism types after the experimental homogenization (1b). Finally, an intermediate scenario (1c) results when both environment and biased dispersal contributed to the original pattern.
+**Figure 1**: Illustration of the possible patterns resulting from our experiment. Previous observations have already shown that community composition of larger animals is more strongly related to environmental differences than is composition of smaller organisms (solid line, all figures). In our experiment we remove differences among community composition, and observe the subsequent return of these differences as caused by environment (dashed lines). There are three possible outcomes. If differences in composition are caused by an increase in sensitivity to the environment (with increasing organism size), then we should see a match between the amount of environmental signal before and after the experiment (1a). If differences in composition are caused by biased dispersal, we should see no difference between organism types after the experimental homogenization (1b). Finally, an intermediate scenario (1c) results when both environment and biased dispersal contributed to the original pattern.    
 
+**Figure 2**: Schematic of our experimental design. We first sampled six bromeliads (two plants of each of three species). We formed (solid arrows) homogeneous initial communities (MIX) by counting equal numbers of animal taxa (macroinvertebrates) or by mixing water samples of equal volume from all plants (zooplankton and bacteria). We then returned (dashed arrows) initial communities to the six bromeliads in their associated habitats.   
 
-*Figure 2*: Schematic of our experimental design. We first sampled six bromeliads (two plants of each of three species). We formed (solid arrows) homogeneous initial communities (MIX) by counting equal numbers of animal taxa (macroinvertebrates) or by mixing water samples of equal volume from all plants (zooplankton and bacteria). We then returned (dashed arrows) initial communities to the six bromeliads in their associated habitats.
-
-
-*Figure 3*: The amount of variation (R^2^ from PERMANOVA) in community composition explained by bromeliad species (i.e. the strength of the environmental signal) decreases from larger to smaller organisms.  The environmental signal in initial, undisturbed communities was removed by homogenization, but after 12 days of recovery, was again of similar strength in final macroinvertebrate and bacterial communities. Inset shows the results of a null simulation to test the significance of this increase in R^2^ value: histogram is the distribution of slopes (i.e. change in R^2^ as a function of relative organism size) and the dark green line indicates the observed value of the slope for the _Final_ sampling.
+**Figure 3**: The amount of variation (R^2^ from PERMANOVA) in community composition explained by bromeliad species (i.e. the strength of the environmental signal) decreases from larger to smaller organisms.  The environmental signal in initial, undisturbed communities was removed by homogenization, but after 12 days of recovery, was again of similar strength in final macroinvertebrate and bacterial communities. Inset shows the results of a null simulation to test the significance of this increase in R^2^ value: histogram is the distribution of slopes (i.e. change in R^2^ as a function of relative organism size) and the dark green line indicates the observed value of the slope for the _Final_ sampling.
 
 \newpage
 ## Figures
-
 #### Figure 1
 ![](../photos/hypotheses_illustration.png)
+\newpage
 
 #### Figure 2
 ![](../photos/design_illustration.png) 
+\newpage
 
 #### Figure 3
 ![](../figures/r2_plot.png)
+\newpage
