@@ -117,10 +117,6 @@ Here we provide a robust test of the strength of environmental filtering for the
 2. If instead only dispersal limitation increased with organism size, we would expect that any apparent effect of habitat on community composition was an artifact of spatial autocorrelation and would be erased by our removal of dispersal limitation (`r fig("hypo")`b).
 3. If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (`r fig("hypo")`c).
 
-![ho](../photos/hypotheses_illustration.png)
-
-`r fig_nums("hypo", "Illustration of the possible patterns resulting from our experiment. Previous observations have already shown that community composition of larger animals is more strongly related to environmental differences than is composition of smaller organisms (solid line, all figures). In our experiment we remove differences among community composition, and observe the subsequent return of these differences as caused by environment (dashed lines). There are three possible outcomes. If differences in composition are caused by an increase in sensitivity to the environment (with increasing organism size), then we should see a match between the amount of environmental signal before and after the experiment (1a). If differences in composition are caused by biased dispersal, we should see no difference between organism types after the experimental homogenization (1b). Finally, an intermediate scenario (1c) results when both environment and biased dispersal contributed to the original pattern.")`
-
 ## Methods
 
 ### Experimental design
@@ -153,10 +149,6 @@ to create identical starting community composition for all bromeliads within a
 block. Variation between blocks in starting community composition is thus
 included in the random effect of blocks. We created five blocks in this
 experiment between `r format(str_end[[1]], format = "%d %B %Y")` and `r format(str_end[[2]], format = "%d %B %Y")`. <!--more and stronger statements of what animals we are studying and how big they are-->
-
-![img](../photos/design_illustration.png) 
-
-`r fig_nums("design", "Schematic of our experimental design. We first sampled six bromeliads (two plants of each of three species). We formed (solid arrows) homogeneous initial communities (MIX) by counting equal numbers of animal taxa (macroinvertebrates) or by mixing water samples of equal volume from all plants (zooplankton and bacteria). We then returned (dashed arrows) initial communities to the six bromeliads in their associated habitats.")`
 
 Our experimental setup consisted of three steps (`r fig("design")`):
 collection of original communities from bromeliads, homogenization of
@@ -329,11 +321,7 @@ getR <- function(x) sprintf("%.2f", x[["aov.tab"]][["R2"]][[1]])
 | bacteria           | before | `r getF(bact_adonis_ini)` | `r getP(bact_adonis_ini)` | `r getR(bact_adonis_ini)` |
 |                    | after  | `r getF(bact_adonis_fin)` | `r getP(bact_adonis_fin)` | `r getR(bact_adonis_fin)` |
 
-### Figures
 
-![between](../figures/r2_plot.png)
-
-`r fig_nums("bw_spp", "The amount of variation (R^2^ from PERMANOVA) in community composition explained by bromeliad species (i.e. the strength of the environmental signal) decreases from larger to smaller organisms.  The environmental signal in initial, undisturbed communities was removed by homogenization, but after 12 days of recovery, was again of similar strength in final macroinvertebrate and bacterial communities. Inset shows the results of a null simulation to test the significance of this increase in R^2^ value: histogram is the distribution of slopes (i.e. change in R^2^ as a function of relative organism size) and the dark green line indicates the observed value of the slope for the _Final_ sampling.")`
 
 ## Discussion
 
@@ -509,3 +497,28 @@ The authors are grateful for helpful comments by Leticia Aviles, Mary O'Connor, 
 
 
 ## References
+
+<div id = 'refs'></div>
+
+\newpage
+## Figure captions
+
+*Figure 1*: Illustration of the possible patterns resulting from our experiment. Previous observations have already shown that community composition of larger animals is more strongly related to environmental differences than is composition of smaller organisms (solid line, all figures). In our experiment we remove differences among community composition, and observe the subsequent return of these differences as caused by environment (dashed lines). There are three possible outcomes. If differences in composition are caused by an increase in sensitivity to the environment (with increasing organism size), then we should see a match between the amount of environmental signal before and after the experiment (1a). If differences in composition are caused by biased dispersal, we should see no difference between organism types after the experimental homogenization (1b). Finally, an intermediate scenario (1c) results when both environment and biased dispersal contributed to the original pattern.
+
+
+*Figure 2*: Schematic of our experimental design. We first sampled six bromeliads (two plants of each of three species). We formed (solid arrows) homogeneous initial communities (MIX) by counting equal numbers of animal taxa (macroinvertebrates) or by mixing water samples of equal volume from all plants (zooplankton and bacteria). We then returned (dashed arrows) initial communities to the six bromeliads in their associated habitats.
+
+
+*Figure 3*: The amount of variation (R^2^ from PERMANOVA) in community composition explained by bromeliad species (i.e. the strength of the environmental signal) decreases from larger to smaller organisms.  The environmental signal in initial, undisturbed communities was removed by homogenization, but after 12 days of recovery, was again of similar strength in final macroinvertebrate and bacterial communities. Inset shows the results of a null simulation to test the significance of this increase in R^2^ value: histogram is the distribution of slopes (i.e. change in R^2^ as a function of relative organism size) and the dark green line indicates the observed value of the slope for the _Final_ sampling.
+
+\newpage
+## Figures
+
+#### Figure 1
+![](../photos/hypotheses_illustration.png)
+
+#### Figure 2
+![](../photos/design_illustration.png) 
+
+#### Figure 3
+![](../figures/r2_plot.png)
