@@ -670,8 +670,8 @@ targets:
   figures/r2_plot.pdf:
     command: r2_plot(r2_plot_df, nullplot)
     plot:
-      width: 6
-      height: 6
+      width: 4
+      height: 4
       onefile: FALSE
 
   figures/r2_plot.png:

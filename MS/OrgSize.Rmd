@@ -337,8 +337,8 @@ small environmental gradient, this effect can be absent (or even reversed)
 between studies or along regional spatial scales. In a meta-analysis of 326
 studies<!-- from around the world? --> covering a broad range of ecosystems and
 taxa, neither body size nor dispersal ability predicted the  strength of
-environment filtering for individual species [@Soininen2014]. A study comparing various freshwater groups across all of Belgium found that passively-dispersed organisms with larger propagules showed _less_ environmental signal than those with small propagules, probably because increased dispersal limitation masked the signal of environmental filtering [@DeBie2012a]. The contrast between the results of this
-regional study and smaller-scale studies suggests that the choice of spatial
+environment filtering for individual species [@Soininen2014]. A study comparing various freshwater groups across all of Belgium found that passively-dispersed organisms with larger propagules showed _less_ environmental signal than those with small propagules, probably because the positive association between organism size with dispersal limitation masked the signal of organism size on environmental filtering [@DeBie2012a]. The contrast between the results of such
+regional studies and smaller-scale studies suggests that the choice of spatial
 scale is of critical importance, a point we return to later.
 
 ### Caveat 1: species interactions
@@ -359,8 +359,8 @@ in this study. For example, in bromeliads, consumption rates of damselflies may
 be reduced by high detrital density [@Klecka2014;@Srivastava2006a], that is, in
 _Neoregelia_ (closed habitats, more detritus) bromeliads as compared to
 _Aechmea_ (open habitats, less detritus) bromeliads. Predators can also show
-preference for different prey (Chapter 2), and prey differ in their resistance
-of predators [@Hammill2015]. These top-down effectd could create
+preference for different prey [@MacDonald089144], and prey differ in their resistance
+of predators [@Hammill2015]. These top-down effects could create
 differences in macroinvertebrate composition between these two bromeliad
 species, beyond the effect of environment _per se_.
 
@@ -371,7 +371,7 @@ stressful [@He2014a]. The strength of species interactions may also change
 between different organism groups [@Soininen2013]. For example, it has been
 suggested that bacterial communities have weak, diffuse interactions because of
 their high diversity [@Wang]. If so, bacterial communities would show diminished
-potential for species interactions to mediate the  effects of the environment.
+potential for species interactions to mediate the  effects of the environment. In fact, although bromeliad microbes do demonstrate non-neutral and non-random species associations, these patterns appear to occur independent of the environment [@Farjalla2012; @Louca2016-ki].
 
 Many multivariate studies have the same problem of confounding the direct effects of
 the environment on communities with the indirect effects mediated by species
@@ -415,12 +415,7 @@ genetically distinct groups using DGGE, which cannot distinguish between
 closely-related taxa [@Wiedenbeck2011]. If environmental filtering in bacteria occurred largely at
 these low taxonomic levels, we might have underestimated the strength of
 environmental filtering for bacteria. However, another study of bromeliad
-bacteria in a nearby _restinga_, which used the higher-resolution method of
-metagenomics sequencing to identify bacteria, also found no evidence of sorting
-according to taxonomy – but strong sorting in terms of 
-phylogenetically-labile metabolic traits [@Louca2016-ki].
-Together, these results suggest that within coarse functional groups, bacterial
-taxa are largely substitutable.
+bacteria in a nearby _restinga_, which used the higher-resolution method of marker gene sequencing to identify microbial taxa, also found that environmental differences between bromeliads explained little variation in taxonomic composition of their microbial communities (Louca et al. 2016). Importantly, the percent of variation explained by the environment in this metagenomics analysis was similar across a range of taxonomic resolutions, from sub-genera to class, suggesting that we did not overlook environmental filtering by using the coarser taxonomic resolution of DGGE methods. In fact, both the metagenomic analysis of Louca et al. (2016) and the DGGE analysis of Farjalla et al. (2012) showed the same pattern of non-random species associations in bromeliad microbes despite little environmental filtering.
 
 The three groups of organisms also differed in abundance per species, from as
 low as a single individual per species in the case of rare macroinvertebrates to
@@ -458,7 +453,7 @@ design, it could easily be extended to cover different temporal and spatial
 scales to address these points. For most systems, measuring the temporal
 dynamics for multiple groups at once across large spatial scales is too
 difficult; however, this could be possible in a small, naturally patchy system
-like ours. Such cross-scale experimental studies are a necessary step to unify
+like bromeliads. Such cross-scale experimental studies are a necessary step to unify
 the variable results obtained by observational studies of environmental
 determinism.
 
@@ -513,19 +508,25 @@ Bromeliad species effects on the composition of three types of organisms, as det
 
 \newpage
 ## Figures
-#### Figure 1
-![](../photos/hypotheses_illustration.png)
 
-\newpage
-#### Figure 2
-
-![](../photos/design_illustration.png) 
-
-\newpage
-
-#### Figure 3
- 
+**Figure 1**    
+   
   
+```{r fig.cap=""}
+knitr::include_graphics("../photos/hypotheses_illustration.pdf")
+```
+\newpage
+
+**Figure 2**    
+   
+    
+```{r fig.cap=""}
+knitr::include_graphics("../photos/design_illustration.pdf")
+```
+\newpage
+
+**Figure 3**   
+
 ```{r fig.cap=""}
 knitr::include_graphics("../figures/r2_plot.pdf")
 ```
