@@ -119,7 +119,7 @@ Here we provide a robust test of the strength of environmental filtering for the
 
 ## Methods
 
-### Experimental design
+### Study site
 
 We performed this
 experiment in the same location and along the same gradient of environmental
@@ -141,6 +141,8 @@ str_end <- blocks %>%
 	.[["sdate"]]
 ```
 
+### Experimental design 
+
 For each of five temporal blocks, we
 collected and sampled the macroinvertebrates, zooplankton and bacteria of two
 bromeliads of each of the three species. We then homogenized the communities
@@ -155,17 +157,18 @@ collection of original communities from bromeliads, homogenization of
 communities, and assembly of this homogenized community in each of the
 original (now empty) bromeliads.  **Original communities**: We
 sampled the zooplankton and bacteria communities by collecting water
-samples from each bromeliad: 100ml for zooplankton, 50ml for bacteria.
-Zooplankton were collected by filtering on 50 μm Nytex mesh and fixed
+samples from each bromeliad: 100ml for zooplankton, 50ml for bacteria; this sample volume was based on previous studies [@Farjalla2012].
+Zooplankton were collected by filtering on $50\mu$m Nytex mesh and fixed
 in 5% buffered formalin. This fixed solution was then diluted to 20
 ml, and a 1 ml subsample taken for analysis. Zooplankton were
 identified to the lowest taxonomic unit possible (species in most
 cases, except for bdelloid rotifers and harpaticoid copepods, identified to class and order, respectively). Bacteria were collected
 by taking 100ml of filtrate from the zooplankton sample and filtering
-it a second time on a Whatman filter paper. We measured bacterial
+it a second time on $0.2\mu$m nitrocellulose
+filters (Whatman filter paper) which were then stored at -20C. We measured bacterial
 community composition using denaturing gradient gel electrophoresis
 (DGGE, Muyzer et al. [-@Muyzer1993]). This technique measures an approximation of
-bacterial diversity in the form of Operational Taxonomic Units (OTUs). We sampled
+bacterial diversity in the form of Operational Taxonomic Units (OTUs). Although this yieds fairly coarse-level separation of taxonomic groups, we used this method to be able to replicate the original results of Farjalla et al. [-@Farjalla2012]. We demonstrate later that our results are qualitatively similar to that obtained by marker gene sequencing [@Louca2016-ki]. We sampled
 macroinvertebrates by thoroughly rinsing each bromeliad and filtering
 the water through 1mm and 180μm mesh. These mesh sizes have been shown
 to separate macroinvertebrates from both coarse detritus and fine
@@ -181,7 +184,7 @@ for at least 24 hours and then rinsing each plant with 70% ethanol. We confirmed
 that this technique removed all invertebrates and most detritus by
 dissecting an empty bromeliad. 
 Any coarse detritus found in the bromeliads was similarly cleaned,
-frozen and thawed (to kill any eggs or resting stages of macroinvertebrates).Bromeliads were placed in a local
+frozen and thawed (to kill any eggs or resting stages of macroinvertebrates). Bromeliads were placed in a local
 habitat similar to their original location: _Neoregelia_ in shade,
 _Aechmea_ in full sun and _Vriesea_ in marginal habitat. We then added
 the starting communities of macroinvertebrates, zooplankton and
