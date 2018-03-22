@@ -657,15 +657,25 @@ targets:
   mypts:
     command: makept()
 
+  test3.pdf:
+    command: testplot()
+    plot:
+      width: 5
+      height: 5
+
+  nullplot:
+    command: plot_inset(r2_null_test)
+
   ## Figures  
   figures/r2_plot.pdf:
-    command: r2_plot(r2_plot_df, mytheme, r2_null_test)
+    command: r2_plot(r2_plot_df, nullplot)
     plot:
-      width: 500
-      height: 500
+      width: 6
+      height: 6
+      onefile: FALSE
 
   figures/r2_plot.png:
-    command: r2_plot(r2_plot_df, mytheme, r2_null_test)
+    command: r2_plot(r2_plot_df, r2_null_test)
     plot:
       width: 500
       height: 500
