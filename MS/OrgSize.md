@@ -54,9 +54,9 @@ survive in a greater range of habitats. Very small organisms are also more
 likely to possess resting stages when a habitat is unfavorable (e.g. cysts for 
 protists, tun state for tardigrades) or to propagate by means of a resistant life history
 stage such as spores. At the population level, small organisms may persist in a
-habitat if they are able to adapt to local conditions by virtue of their short
+habitat if they are able to adapt to rapidly adapt to local conditions by virtue of their short
 generation times and high population sizes. In the case of bacteria, genetic
-adaptation can also involve the uptake and use of environmental DNA.
+adaptation can also involve lateral gene transfer between lineages [@Ochman2000-is].
 
 Alternatively, small organisms may be widely distributed because they are able
 to get to more places faster. There is substantial evidence that microscopic
@@ -106,11 +106,11 @@ bromeliad grow in different habitats, and this habitat variation is correlated w
 show that this environmental variation is closely associated with variation in
 macroinvertebrate composition, weakly associated with variation in zooplankton communities and almost uncorrelated with variation in bacterial communities [@Farjalla2012].
 
-Here we provide a robust test of the strength of environmental filtering for these three organism groups, which differ widely in size: macroinvertebrates (large), zooplankton (intermediate) and bacteria (small). In this test we dispersed all species to all habitats, and examined whether the original habitat-based patterns in composition re-emerged.  We predicted: 
+Here we provide a robust test of the strength of environmental filtering for these three organism groups, which differ widely in size: macroinvertebrates (large, 5 to 50 mm), zooplankton (intermediate, 2 x 10^-1^ to 2 mm) and bacteria (small, 5 x 10^-3^ to 5 x 10^-4^ mm). In this test we dispersed all species to all habitats, and examined whether the original habitat-based patterns in composition re-emerged.  We predicted: 
 
-1. If environmental filtering, but not dispersal limitation, increases with organism size, we would predict that habitat would affect the composition of communities of large-bodied organisms more than those of small-bodied organisms(Figure  1a). <!--confusing: "before and after": deleted--> 
-2. If instead only dispersal limitation increased with organism size, we would expect that any apparent effect of habitat on community composition was an artifact of spatial autocorrelation and would be erased by our removal of dispersal limitation (Figure  1b).
-3. If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (Figure  1c).
+1. If environmental filtering, but not dispersal limitation, increases with organism size, we would predict that habitat would affect the composition of communities of large-bodied organisms more than those of small-bodied organisms (Figure 1a). <!--confusing: "before and after": deleted--> 
+2. If instead only dispersal limitation increased with organism size, we would expect that any apparent effect of habitat on community composition was an artifact of spatial autocorrelation and would be erased by our removal of dispersal limitation (Figure 1b).
+3. If both environmental filtering and dispersal limitation increased with organism size, we would predict an intermediate scenario (Figure 1c).
 
 ## Methods
 
@@ -134,13 +134,13 @@ habitats), _Vriesea neoglutinosa_ (partial shade), and _Neoregelia cruenta_
 For each of five temporal blocks, we
 collected and sampled the macroinvertebrates, zooplankton and bacteria of two
 bromeliads of each of the three species. We then homogenized the communities
-of all six bromeliads as described shortly (Figure  2).  Our goal was
+of all six bromeliads as described shortly (Figure 2).  Our goal was
 to create identical starting community composition for all bromeliads within a
 block. Variation between blocks in starting community composition is thus
 included in the random effect of blocks. We created five blocks in this
 experiment between 27 March 2013 and 03 April 2013. <!--more and stronger statements of what animals we are studying and how big they are-->
 
-Our experimental setup consisted of three steps (Figure  2):
+Our experimental setup consisted of three steps (Figure 2):
 collection of original communities from bromeliads, homogenization of
 communities, and assembly of this homogenized community in each of the
 original (now empty) bromeliads.  **Original communities**: We
@@ -193,7 +193,7 @@ confirmed that this was sufficient time for communities to change, but not so lo
 
 ### Analyses
 
-We distinguished between our three predictions (Figure  1) with a
+We distinguished between our three predictions (Figure 1) with a
 permutational ANOVA (PERMANOVA), which measures the amount of difference in
 community composition between treatment groups and compares this to the expected
 distribution under a null hypothesis of no treatment effects. In each PERMANOVA
@@ -201,7 +201,7 @@ we used block as an error stratum, meaning that permutations were performed
 within blocks. We repeated this analysis for all three organism types, and at
 both the beginning and end of the
 experiment. We interpreted the R^2^ value of this PERMANOVA as a metric of the
-strength of habitat filtering (Figure  1). Our hypothesis predicted that
+strength of habitat filtering (Figure 1). Our hypothesis predicted that
 R^2^ values should increase from smaller to larger organism types. However,
 because we sampled each of these groups with different techniques, and collected
 different types of data (e.g. abundance data for macroinvertebrates,
@@ -229,7 +229,7 @@ at ***link to data*** -->
 ## Results   
 
 
-Both before and at the end of our experiment, bromeliad species identity explains more variation in community composition of macroinvertebrates than any other organism type, less for zooplankton and less still for bacteria (Figure  3, Table  1). For all organism types, bromeliad species explained less of the variation in
+Both before and at the end of our experiment, bromeliad species identity explains more variation in community composition of macroinvertebrates than any other organism type, less for zooplankton and less still for bacteria (Figure  1, Table  1). For all organism types, bromeliad species explained less of the variation in
 composition at the end of the experiment than before the homogenization. Note that,  although the sampling design (and therefore degrees of freedom) are identical for all groups, the critical (alpha = 0.05) F-value for each organism group differs because PERMANOVA p-values are calculated on a null distribution generated by permuting samples among groups (species in our case). Bacterial communities have many
 species and also high similarity among communities (bromeliads),
 creating a null distribution with low mean and small variance (and
@@ -248,11 +248,11 @@ So far, we have assessed the absolute effect of habitat filtering on each organi
 
 ### Main findings
 
-Our study compared the response of macroinvertebrates, zooplankton and bacterial communities to an identical environmental gradient. Our initial sampling prior to the experimental manipulation found that the correlation between environment and community composition is weakest for bacteria, intermediate for zooplankton, and strongest for macroinvertebrates (Figure  3). This observational pattern mirrors that previously reported by Farjalla et al. [-@Farjalla2012],  confirming that the observational pattern is robust to differences in field site and year.<!--show this?!--> However, this observed pattern may have been caused by differences among the three organism types in the strength of environmental filtering or environmentally-correlated dispersal, or
-both (Figure  1). We
+Our study compared the response of macroinvertebrates, zooplankton and bacterial communities to an identical environmental gradient. Our initial sampling prior to the experimental manipulation found that the correlation between environment and community composition is weakest for bacteria, intermediate for zooplankton, and strongest for macroinvertebrates (Figure  1). This observational pattern mirrors that previously reported by Farjalla et al. [-@Farjalla2012],  confirming that the observational pattern is robust to differences in field site and year.<!--show this?!--> However, this observed pattern may have been caused by differences among the three organism types in the strength of environmental filtering or environmentally-correlated dispersal, or
+both (Figure 1). We
 therefore removed dispersal limitation among communities by homogenizing our
 starting communities, and then returned communities to the same environmental gradient to test whether pure environmental filtering was sufficient to restore the initial pattern in distributions. Our results are most consistent with environmental filtering increasing
-with organism size (Fig 1a). Specifically, we found that the environment created minimal differences in bacteria, weak differences in zooplankton, and large differences in macroinvertebrates (Figure  3).
+with organism size (Fig 1a). Specifically, we found that the environment created minimal differences in bacteria, weak differences in zooplankton, and large differences in macroinvertebrates (Figure  1).
 
 Our experimental manipulation suggests that environmental filtering is stronger
 for larger than smaller organisms, and that this explains the differences
@@ -362,7 +362,7 @@ low as a single individual per species in the case of rare macroinvertebrates to
 many millions of individuals for abundant bacteria taxa. Ecological drift – the
 variation in species composition caused by the stochastic sequence of births and
 deaths - should be strongest therefore for macroinvertebrates and zooplankton,
-countering the deterministic signal of environmental filtering (Figure  1b). Nevertheless, we still observed the strongest environmental
+countering the deterministic signal of environmental filtering (Figure 1b). Nevertheless, we still observed the strongest environmental
 effects on macroinvertebrates and zooplankton, suggesting that our results are
 robust to any effects of drift.
 
