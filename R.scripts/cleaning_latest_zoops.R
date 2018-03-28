@@ -123,12 +123,40 @@ zoops_pond_aster_gone <- zoops_david_twoaster_gone %>%
 zoops_pond_aster_gone %>% 
   group_by(sampling, bromeliad, Spp) %>% 
   filter(n() == 2) %>% 
-  arrange(bromeliad)
-# ohhh shit. there are some observations that should be impossible! 
+  arrange(bromeliad) %>% 
+  verify(nrow(.) == 2)
+# there should only be two rows, corresponding to the two duplicate samples.
 
-
-  
+zoops_with_duplicates <- zoops_pond_aster_gone %>% 
+  group_by(sampling, bromeliad, Spp) %>%
   mutate(duplicate_sample = seq_along(bromeliad)) %>% 
-  filter(duplicate_sample > 1)
-zoops_pond_aster_gone %>% 
+  ungroup %>% 
+  # can remove stars now
+  mutate(bromeliad = if_else(bromeliad %in% c("*N20"), str_replace(bromeliad, "\\*", ""), bromeliad))
+  
+# Sarah jane -- an unconventional dilution
+
+zoops_note <- zoops_with_duplicates %>% 
+  mutate(bromeliad = if_else(bromeliad == "N28*", str_replace(bromeliad, "\\*", ""), bromeliad)) %>% 
+  mutate(notes = if_else(bromeliad == "N28", "diluted in 40mL and counted 2mL", NA_character_))
+
+# asterisk should now be empty!!
+zoops_note %>% 
   filter(grepl("\\*", bromeliad))
+
+
+anti_join(oldzoops, zoops_note) %>% 
+  select(bromeliad) %>% 
+  semi_join(zoops_note, .)
+
+# This now shows some discrepency:
+
+# Some of this is the erroneous "initial" values taht I am certain are errors in data entry -- specfically the N8 V9 and V6
+
+# rather than include a "none" species, I just left it off entirely
+
+# V12 was not used in the experiment and was corrected back to V11.
+
+
+
+write_csv(x = zoops_note, path = "raw-data/zooplankton_observations_final.csv")
