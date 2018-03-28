@@ -1,0 +1,299 @@
+block,sampling,bromeliad,Spp,abundance
+Baker,initial,A5,Bdelloidea,3
+Baker,initial,N5,Bdelloidea,51
+Baker,initial,N5,Harpacticoida_nauplius,1
+Baker,initial,V3,Bdelloidea,9
+Baker,initial,V3,Harpacticoida_nauplius,7
+Baker,initial,V3,Harpacticoida_adult,7
+Baker,initial,V3,Cyclopoida_adult,1
+Baker,initial,A6,Bdelloidea,6
+Baker,initial,A6,Cyclopoida_adult,2
+Baker,initial,V10,Bdelloidea,2
+Baker,initial,V10,Harpacticoida_nauplius,1
+Baker,initial,V10,Harpacticoida_adult,1
+Baker,initial,V10,Cyclopoida_nauplius,2
+Baker,initial,V10,Cyclopoida_adult,3
+Baker,initial,N1,Bdelloidea,3
+Baker,initial,N1,Centropyxis_aculeata,111
+Baker,initial,N1,Centropyxis_discoides,45
+Baker,initial,N1,Cyclopoida_adult,3
+Baker,final,A5,Bdelloidea,4
+Baker,final,N5,Bdelloidea,12
+Baker,final,V3,Bdelloidea,9
+Baker,final,V3,Harpacticoida_nauplius,7
+Baker,final,V3,Harpacticoida_adult,1
+Baker,final,A6,Bdelloidea,3
+Baker,final,V10,Bdelloidea,23
+Baker,final,V10,Harpacticoida_nauplius,6
+Baker,final,V10,Harpacticoida_adult,1
+Baker,final,N1,Bdelloidea,18
+Baker,final,N1,Centropyxis_aculeata,30
+Baker,final,N1,Centropyxis_discoides,8
+Baker,final,N1,Harpacticoida_adult,1
+Baker,final,N1,Cyclopoida_nauplius,1
+Eccleson,initial,N8,Bdelloidea,54
+Eccleson,initial,V9,Bdelloidea,1
+Eccleson,initial,V9,Harpacticoida_nauplius,2
+Eccleson,initial,V9,Harpacticoida_adult,4
+Eccleson,initial,V9,Cyclopoida_adult,1
+Eccleson,initial,V6,Bdelloidea,3
+Eccleson,initial,V6,Harpacticoida_adult,2
+Eccleson,initial,V6,Cyclopoida_adult,2
+Eccleson,initial,N7,Bdelloidea,5
+Eccleson,initial,A9,Bdelloidea,10
+Eccleson,initial,A11,Bdelloidea,1
+Eccleson,final,N8,Bdelloidea,158
+Eccleson,initial,N8,Lecane_decipiens,2
+Eccleson,final,V9,Harpacticoida_nauplius,1
+Eccleson,initial,V9,Harpacticoida_adult,1
+Eccleson,final,V6,Bdelloidea,3
+Eccleson,initial,V6,Harpacticoida_adult,1
+Eccleson,final,N7,Bdelloidea,8
+Eccleson,final,A9,Bdelloidea,11
+Eccleson,final,A11,Bdelloidea,6
+Davidson,initial,A8,0,NA
+Davidson,initial,V4,Cyclopoida_nauplius,1
+Davidson,initial,V4,Harpacticoida_nauplius,2
+Davidson,initial,V4,Harpacticoida_adult,1
+Davidson,initial,N6,Lecane_bulla,1
+Davidson,initial,N2,Bdelloidea,4
+Davidson,initial,N2,Centropyxis_aculeata,278
+Davidson,initial,N2,Centropyxis_discoides,54
+Davidson,initial,N2,Harpacticoida_adult,2
+Davidson,initial,V8,Cyclopoida_adult,1
+Davidson,initial,V8,Harpacticoida_nauplius,2
+Davidson,initial,V8,Harpacticoida_adult,3
+Davidson,initial,A7,Bdelloidea,14
+Davidson,final,A8,Bdelloidea,23
+Davidson,final,V4,Bdelloidea,3
+Davidson,final,V4,Lecane_decipiens,1
+Davidson,final,V4,Harpacticoida_nauplius,2
+Davidson,final,N6,Bdelloidea,43
+Davidson,final,N6,Lecane_decipiens,1
+Davidson,final,N6,Centropyxis_aculeata,1
+Davidson,final,N6,Tardigrada,1
+Davidson,final,N2,Bdelloidea,5
+Davidson,final,N2,Centropyxis_aculeata,12
+Davidson,final,N2,Centropyxis_discoides,1
+Davidson,final,N2,Harpacticoida_nauplius,2
+Davidson,final,N2,Harpacticoida_adult,3
+Davidson,final,V8,Bdelloidea,6
+Davidson,final,V8,Centropyxis_aculeata,2
+Davidson,final,V8,Centropyxis_discoides,1
+Davidson,final,V8,Harpacticoida_nauplius,2
+Davidson,final,A7,Bdelloidea,10
+Davidson,final,A7,Centropyxis_aculeata,1
+Smith,initial,A16,Bdelloidea,2
+Smith,initial,N12,Bdelloidea,17
+Smith,initial,V7,Cyclopoida_nauplius,1
+Smith,initial,V7,Cyclopoida_adult,2
+Smith,initial,V7,Harpacticoida_nauplius,3
+Smith,initial,V7,Harpacticoida_adult,1
+Smith,initial,N13,Bdelloidea,5
+Smith,initial,A14,Bdelloidea,2
+Smith,initial,V1,Bdelloidea,1
+Smith,initial,V1,Cyclopoida_nauplius,1
+Smith,initial,V1,Cyclopoida_adult,1
+Smith,initial,V1,Harpacticoida_adult,1
+Smith,final,A16,Bdelloidea,5
+Smith,final,N12,Bdelloidea,11
+Smith,final,V7,Bdelloidea,1
+Smith,final,N13,Bdelloidea,23
+Smith,final,A14,Bdelloidea,13
+Smith,final,V1,Bdelloidea,2
+Smith,final,V1,Harpacticoida_nauplius,3
+Smith,final,V1,Harpacticoida_adult,1
+Tennant,initial,N11,Bdelloidea,3
+Tennant,initial,V2,Harpacticoida_nauplius,1
+Tennant,initial,V2,Harpacticoida_adult,4
+Tennant,initial,V2,Cyclopoida_adult,1
+Tennant,initial,A12,Bdelloidea,16
+Tennant,initial,A13,Bdelloidea,5
+Tennant,initial,N9,Bdelloidea,5
+Tennant,initial,N9,Lecane_decipiens,1
+Tennant,initial,N9,Centropyxis_aculeata,69
+Tennant,initial,N9,Cyclopoida_nauplius,4
+Tennant,initial,N9,Cyclopoida_adult,10
+Tennant,initial,V12*,Bdelloidea,2
+Tennant,initial,V12,Harpacticoida_nauplius,2
+Tennant,initial,V12,Harpacticoida_adult,1
+Tennant,final,N11,Bdelloidea,17
+Tennant,final,N11,Cyclopoida_nauplius,2
+Tennant,final,V2,Bdelloidea,4
+Tennant,final,V2,Lecane_decipiens,1
+Tennant,final,V2,Harpacticoida_nauplius,5
+Tennant,final,V2,Harpacticoida_adult,5
+Tennant,final,A12,Bdelloidea,46
+Tennant,final,A12,Centropyxis_aculeata,5
+Tennant,final,A13,Bdelloidea,53
+Tennant,final,A13,Cyclopoida_adult,2
+Tennant,final,N9,Bdelloidea,5
+Tennant,final,N9,Centropyxis_aculeata,17
+Tennant,final,N9,Cyclopoida_nauplius,1
+Tennant,final,N9,Harpacticoida_adult,1
+Tennant,final,V11*,Bdelloidea,14
+Tennant,final,V11,Harpacticoida_nauplius,9
+Tennant,final,V11,Harpacticoida_adult,3
+Donna,initial,N29,Bdelloidea,6
+Donna,initial,N29,Ostracoda,1
+Donna,initial,N33,Bdelloidea,2
+Donna,initial,N33,Lecane_stichaea,1
+Donna,initial,*N50,NA,NA
+Donna,initial,*N49,NA,NA
+Donna,initial,N47,Bdelloidea,4
+Donna,initial,N47,Lecane_closterocerca,5
+Donna,initial,N44,Cyclopoida_adult,2
+Donna,final,N29,Bdelloidea,35
+Donna,final,N33,Bdelloidea,126
+Donna,final,N33,Centropyxis_aculeata,1
+Donna,final,N33,Lecane_decipiens,1
+Donna,final,N50,Bdelloidea,99
+Donna,final,N49,Bdelloidea,48
+Donna,final,N49,Ostracoda,1
+Donna,final,N49,Lepadella_patella,1
+Donna,final,N47,Bdelloidea,49
+Donna,final,N44,Bdelloidea,66
+Pond,initial,N48,Bdelloidea,4
+Pond,initial,N35,Bdelloidea,1
+Pond,initial,N35,Cyclopoida_adult,1
+Pond,initial,N35,Ostracoda,1
+Pond,initial,N20,Harpacticoida_adult,1
+Pond,initial,*N22,NA,NA
+Pond,initial,N52,Bdelloidea,26
+Pond,initial,N51,Bdelloidea,8
+Pond,final,N48,Bdelloidea,178
+Pond,final,N35,Bdelloidea,132
+Pond,final,N35,Lecane_bulla,1
+Pond,final,*N20,Bdelloidea,103
+Pond,final,N22,Bdelloidea,113
+Pond,final,N52,Bdelloidea,93
+Pond,final,N52,Lepadella_patella,1
+Pond,final,*N20,Bdelloidea,62
+Rose,initial,N40,Bdelloidea,6
+Rose,initial,N40,Lecane_bulla,3
+Rose,initial,N40,Lecane_decipiens,1
+Rose,initial,N40,Tardigrada,1
+Rose,initial,N38,Lecane_decipiens,1
+Rose,initial,N38,Cyclopoida_adult,1
+Rose,initial,N36,Bdelloidea,7
+Rose,initial,N36,Lecane_bulla,3
+Rose,initial,N36,Lecane_decipiens,1
+Rose,initial,N36,Lecane_lunaris,1
+Rose,initial,N36,Centropyxis_aculeata,297
+Rose,initial,N39,Bdelloidea,5
+Rose,initial,N39,Lecane_bulla,4
+Rose,initial,N39,Lecane_decipiens,3
+Rose,initial,N39,Lecane_lunaris,1
+Rose,initial,N39,Cyclopoida_adult,3
+Rose,initial,N34,Bdelloidea,32
+Rose,initial,N34,Lecane_bulla,8
+Rose,initial,N34,Lecane_lunaris,16
+Rose,initial,N34,Lecane_cornuta,8
+Rose,initial,N34,Lecane_stichaea,10
+Rose,initial,N34,Lecane_decipiens,6
+Rose,initial,N34,Lecane_closterocerca,5
+Rose,initial,N37,Bdelloidea,26
+Rose,initial,N37,Lecane_bulla,1
+Rose,initial,N37,Cyclopoida_nauplius,1
+Rose,final,N40,Bdelloidea,97
+Rose,final,N40,Lecane_decipiens,4
+Rose,final,N40,Lecane_cornuta,2
+Rose,final,N40,Lecane_bulla,4
+Rose,final,N40,Lecane_stichaea,3
+Rose,final,N40,Centropyxis_aculeata,16
+Rose,final,N40,Tardigrada,1
+Rose,final,N38,Bdelloidea,86
+Rose,final,N38,Lecane_cornuta,5
+Rose,final,N38,Lecane_bulla,2
+Rose,final,N38,Lecane_stichaea,4
+Rose,final,N38,Centropyxis_aculeata,37
+Rose,final,N36,Bdelloidea,70
+Rose,final,N36,Lecane_cornuta,4
+Rose,final,N36,Lecane_stichaea,1
+Rose,final,N36,Centropyxis_aculeata,30
+Rose,final,N39,Bdelloidea,126
+Rose,final,N39,Lecane_bulla,3
+Rose,final,N39,Lecane_cornuta,1
+Rose,final,N39,Centropyxis_aculeata,34
+Rose,final,N39,Cyclopoida_nauplius,1
+Rose,final,N34,Bdelloidea,45
+Rose,final,N34,Lecane_cornuta,3
+Rose,final,N34,Lepadella_patella,1
+Rose,final,N34,Tardigrada,1
+Rose,final,N37,Bdelloidea,185
+Rose,final,N37,Lecane_decipiens,2
+Rose,final,N37,Lecane_cornuta,2
+Rose,final,N37,Lecane_stichaea,1
+Rose,final,N37,Centropyxis_aculeata,19
+Martha,initial,N45,Bdelloidea,17
+Martha,initial,N45,Lecane_decipiens,2
+Martha,initial,N45,Lecane_bulla,1
+Martha,initial,N45,Lecane_stichaea,1
+Martha,initial,N45,Lecane_opias,8
+Martha,initial,N45,Cyclopoida_adult,3
+Martha,initial,N45,Tardigrada,1
+Martha,initial,N21,Lecane_closterocerca,1
+Martha,initial,N43,Bdelloidea,8
+Martha,initial,N43,Lecane_decipiens,1
+Martha,initial,N43,Lecane_bulla,2
+Martha,initial,N43,Lecane_opias,1
+Martha,initial,N43,Tardigrada,1
+Martha,initial,N41,Bdelloidea,13
+Martha,initial,N41,Centropyxis_aculeata,61
+Martha,initial,N46,Bdelloidea,13
+Martha,initial,N46,Lecane_decipiens,10
+Martha,initial,N46,Lecane_bulla,28
+Martha,initial,N46,Lecane_stichaea,11
+Martha,initial,N46,Lecane_opias,22
+Martha,initial,N46,Cyclopoida_adult,1
+Martha,initial,N27,Bdelloidea,6
+Martha,final,N45,Bdelloidea,60
+Martha,final,N45,Lecane_bulla,1
+Martha,final,N45,Cyclopoida_adult,1
+Martha,final,N21,Bdelloidea,25
+Martha,final,N21,Lecane_bulla,1
+Martha,final,N43,Bdelloidea,96
+Martha,final,N43,Lecane_bulla,1
+Martha,final,N43,Lecane_stichaea,1
+Martha,final,N43,Cyclopoida_adult,1
+Martha,final,N41,Bdelloidea,63
+Martha,final,N41,Lecane_decipiens,1
+Martha,final,N41,Lecane_bulla,1
+Martha,final,N41,Asplanchna_sp.,1
+Martha,final,N41,Cyclopoida_nauplius,1
+Martha,final,N41,Tardigrada,1
+Martha,final,N46,Bdelloidea,98
+Martha,final,N46,Lecane_bulla,4
+Martha,final,N27,Bdelloidea,24
+Martha,final,N27,Lecane_bulla,4
+Martha,final,N27,Lepadella_patella,1
+Martha,final,N27,Centropyxis_aculeata,1
+Sarah Jane,initial,N23,Lecane_stichaea,4
+Sarah Jane,initial,N42,Cyclopoida_adult,2
+Sarah Jane,initial,N24,Bdelloidea,1
+Sarah Jane,initial,N24,Centropyxis_aculeata,123
+Sarah Jane,initial,N30,Bdelloidea,4
+Sarah Jane,initial,N28,Lecane_bulla,3
+Sarah Jane,initial,N28,Cyclopoida_adut,2
+Sarah Jane,initial,N28,Tardigrada,1
+Sarah Jane,initial,N25,Lecane_bulla,1
+Sarah Jane,initial,N25,Lecane_stichaea,1
+Sarah Jane,initial,N25,Lecane_opias,1
+Sarah Jane,initial,N25,Centropyxis_aculeata,26
+Sarah Jane,final,N23,Bdelloidea,32
+Sarah Jane,final,N23,Lecane_stichaea,1
+Sarah Jane,final,N42,Bdelloidea,6
+Sarah Jane,final,N42,Centropyxis_aculeata,1
+Sarah Jane,final,N24,Bdelloidea,7
+Sarah Jane,final,N24,Centropyxis_aculeata,12
+Sarah Jane,final,N30,Bdelloidea,56
+Sarah Jane,final,N30,Lecane_decipiens,2
+Sarah Jane,final,N30,Lepadella_patella,1
+Sarah Jane,final,N30,Cyclopoida_adult,1
+Sarah Jane,final,N28*,Bdelloidea,6
+Sarah Jane,final,N28,Centropyxis_aculeata,1
+Sarah Jane,final,N28,Centropyxis_discoides,2
+Sarah Jane,final,N25,Bdelloidea,23
+Sarah Jane,final,N25,Lecane_decipiens,1
+Sarah Jane,final,N25,Lepadella_patella,2
+Sarah Jane,final,N25,Centropyxis_aculeata,1
