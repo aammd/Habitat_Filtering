@@ -19,12 +19,14 @@ clean_insect_names <- function(community_data, name_data) {
 ## Andrew MacDonald, Dec 2014
 
 ## read data
+
 clean_zooplankton <-  function(filename){
   filename %>% 
-    read.table(header=TRUE,comment.char="#",stringsAsFactors=FALSE) %>% 
+    read_csv(comment = "#") %>% 
     tbl_df %>%
     group_by(sampling, bromeliad, Spp) %>%
-    summarise(abundance = sum(abundance)) %>%
+    # ignores duplicates
+    summarise(abundance = mean(abundance)) %>%
     as.data.frame %>% 
     summarize_zoops()
 }

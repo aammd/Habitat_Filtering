@@ -18,6 +18,7 @@ packages:
   - nlme
   - knitr
   - purrr
+  - readr
 sources:
   - R.scripts/results.R
   - R.scripts/data_cleaning.R
@@ -59,7 +60,7 @@ targets:
     quiet: true
 
   zoops:
-    command: clean_zooplankton("raw-data/zoop.txt")
+    command: clean_zooplankton("raw-data/zooplankton_observations_final.csv")
 
 # bacteria
 ## three species experiment
@@ -670,8 +671,8 @@ targets:
   figures/r2_plot.pdf:
     command: r2_plot(r2_plot_df, nullplot)
     plot:
-      width: 4
-      height: 4
+      width: 9
+      height: 9
       onefile: FALSE
 
   figures/r2_plot.png:
