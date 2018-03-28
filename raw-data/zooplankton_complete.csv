@@ -43,11 +43,11 @@ Eccleson,initial,N7,Bdelloidea,5
 Eccleson,initial,A9,Bdelloidea,10
 Eccleson,initial,A11,Bdelloidea,1
 Eccleson,final,N8,Bdelloidea,158
-Eccleson,initial,N8,Lecane_decipiens,2
+Eccleson,final,N8,Lecane_decipiens,2
 Eccleson,final,V9,Harpacticoida_nauplius,1
-Eccleson,initial,V9,Harpacticoida_adult,1
+Eccleson,final,V9,Harpacticoida_adult,1
 Eccleson,final,V6,Bdelloidea,3
-Eccleson,initial,V6,Harpacticoida_adult,1
+Eccleson,final,V6,Harpacticoida_adult,1
 Eccleson,final,N7,Bdelloidea,8
 Eccleson,final,A9,Bdelloidea,11
 Eccleson,final,A11,Bdelloidea,6
