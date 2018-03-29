@@ -7,6 +7,7 @@ output:
     includes:
       in_header: formatting/myheader.tex
     latex_engine: xelatex
+    keep_tex: true
   md_document: default
   html_document: default
   word_document:
