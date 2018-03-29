@@ -20,42 +20,6 @@ fontsize: 12pt
 ![](../figures/zoop.pdf)
 ![](../figures/bact.pdf)
 
-# Dispersion
-
-mixed effect ANOVA table
-```{r results='asis'}
-# anova(disp_mixed) %>% 
-#     knitr::kable()
-```
-
-residual plot for the dispersion model
-```{r}
-plot(disp_mixed)
-```
-
-![](../figures/one_one_plot.pdf)
-`r Sfig_nums("one2one", "This is the different mean differences to centroid on the same plot. shown is the 1:1 line.")`
-
-## Dispersion
-
-```{r}
-make_disp_anova <- function(make_betadisp_output){
-  make_betadisp_output %>% anova %>% broom::tidy(.)  %>% knitr::kable()
-}
-```
-
-
-```{r}
-### macroinvertebrates
-make_disp_anova(inverts_disper_species)
-### zooplankton
-make_disp_anova(zoops_disper_species)
-### bacteria
-make_disp_anova(bact_disper_species )
-```
-
-*Question 1: less beta diversity among smaller organism types*
-All organism types showed the same decrease in mean distance to centroid at the end of the experiment -- there was no significant interaction between organism type and the effect of sampling time (` fig("disp")`, Mixed effect model F~2,20~ = ` getFP_aov(tidy_mixed, "Fvalue", "taxa:timing")`, ` check_aov_p(tidy_mixed, "taxa:timing")`). However, we did see an overall ` pdiff`% decrease in the dispersion at the end of the experiment (F~1,20~ = ` getFP_aov(tidy_mixed, "Fvalue", "timing")`, ` check_aov_p(tidy_mixed, "timing")`).
 
 # PERMANOVAS
 
@@ -143,47 +107,3 @@ test for interactions
 #anova(inverts_manyglm_fin, inverts_manyglm_fin_add)
 
 ```
-
-
-# Dispersion
-
-*Question 1: less beta diversity among smaller organism types* 
-If smaller taxa have broader fundamental niches, we should see less variation in community composition among
-bromeliads for smaller organism types. That is, we should see less beta
-diversity among bromeliads at the end of the experiment (following community homogenization) than we saw at the
-beginning. We tested this by calculating multivariate dispersions
-[@Anderson2006] between all six bromeliads (i.e. distances to centroid of all
-bromeliads within one block) before and after the experiment. We repeated this
-comparison for all five blocks, and for all three organism types. We used the
-`betadisper` function in the R package vegan [@vegan], which provides a
-permutation test to test for differences in dispersion before and after the
-experiment within each block (999 null simulations block^-1^). For the
-purposes of this analysis, we used the Raup-Crick measure of dissimilarity. We
-extracted the mean distance to centroid (`r Sfig("disp")`) for each block
-before and after the experiment. We did this because our hypothesis concerns
-an interaction: specifically, that the effects of homogenization and recovery on mean distance to centroid
-(i.e. the slopes of lines in `r Sfig("disp")`) declines with decreasing organism
-size. This allowed us to test these differences with a mixed effect linear
-model including the main effect of sampling time (before and after) organism
-type (macroinvertebrate, zooplankton and bacteria) and their interaction, with
-a random effect for block.
-
-
-![disp](../figures/plot_disp_taxa.png)
-`r Sfig_nums("disp", "Mean distance to centroid, before and after the experiment, for each of the three organism types. Each dot represents the mean distance to centroid for all six bromeliads in a block, and lines connect initial and final measurements of the same block.")`
-
-
-We found that dispersion, in all cases, was lower at the end of the experiment
-than at the beginning. This indicates that our treatments were effective in
-homogeneous (or nearly-homogeneous) starting communities. This is important,
-because it demonstrates that our inability to detect a species effect in
-PERMANOVAs of bacteria does not reflect an inability to detect differences
-among bacterial communities. However, the amount of this decline was the same
-across all organism groups as indicated by the absence of a significant
-interaction (` Stab("disp_tab")`). However, this method assumes that
-homogenization occurred for all communities to the same degree. This is
-unlikely to be the case: though we were able to count and precisely calculate
-the starting insect community composition, we were obliged to use random
-subsamples of the zooplankton and bacteria communities. This means that while
-all communities began with the same invertebrate composition, they probably
-began with slight variation in zooplankton and bacteria composition.
