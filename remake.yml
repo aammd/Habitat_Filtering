@@ -19,6 +19,7 @@ packages:
   - knitr
   - purrr
   - readr
+  - assertr
 sources:
   - R.scripts/results.R
   - R.scripts/data_cleaning.R
@@ -36,10 +37,9 @@ targets:
   all:
     depends: 
       - MS/OrgSize.pdf
-      - figures/Fig2.pdf
       - MS/SuppMatt.pdf
-      - figures/individual_responses_nosingle.pdf
-      - figures/individual_responses_nosingle.png
+     # - figures/individual_responses_nosingle.pdf
+     # - figures/individual_responses_nosingle.png
 
 ### read in data, including each bacterial file
 
@@ -183,6 +183,12 @@ targets:
               zoops_adonis_ini, zoops_adonis_fin,
               bact_adonis_ini, bact_adonis_fin)
               
+  r2_plot_df_win:
+    command: >  
+      r2_plot_df_maker(inverts_adonis_win_ini, inverts_adonis_win_fin,
+            zoops_adonis_win_ini, zoops_adonis_win_fin,
+            bact_adonis_win_ini, bact_adonis_win_fin)
+              
 ## test these against a null model
 
   r2_null_test:
@@ -198,6 +204,22 @@ targets:
               .bact_tts_fin = bact_tts_fin,
                REPS = 499)
     
+  r2_null_test_win:
+    command: >
+      test_slope_robustness(
+              inverts_adonis_win_ini,
+              inverts_adonis_fin,
+              zoops_adonis_win_ini,
+              zoops_adonis_win_fin,
+              bact_adonis_win_ini, 
+              bact_adonis_win_fin, 
+              .inverts_tts_ini = inverts_tts_win_ini,
+              .zoops_tts_ini =     zoops_tts_win_ini,
+              .bact_tts_ini =       bact_tts_win_ini,
+              .inverts_tts_fin = inverts_tts_win_fin,
+              .zoops_tts_fin =     zoops_tts_win_fin,
+              .bact_tts_fin =       bact_tts_win_fin,
+               REPS = 499)
 
 ## supp matt figs
 
@@ -666,13 +688,23 @@ targets:
 
   nullplot:
     command: plot_inset(r2_null_test)
+    
+  nullplot_win:
+    command: plot_inset(r2_null_test_win)
 
   ## Figures  
   figures/r2_plot.pdf:
     command: r2_plot(r2_plot_df, nullplot)
     plot:
-      width: 9
-      height: 9
+      width: 5
+      height: 5
+      onefile: FALSE
+      
+  figures/r2_plot_win.pdf:
+    command: r2_plot(r2_plot_df_win, nullplot_win)
+    plot:
+      width: 5
+      height: 5
       onefile: FALSE
 
   figures/r2_plot.png:
@@ -702,11 +734,11 @@ targets:
     command: plot_disp_taxa(disp_difs_long, mytheme)
 
 
-  figures/individual_responses.pdf: 
-    plot:
-      width: 500
-      height: 500
-    command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
+ # figures/individual_responses.pdf: 
+ #   plot:
+ #     width: 500
+ #     height: 500
+ #   command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
 
   figures/individual_responses.png: 
     plot:
@@ -715,11 +747,11 @@ targets:
     command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_aov_tidy, mytheme)
 
 ## and again, this time without singletons
-  figures/individual_responses_nosingle.pdf: 
-    plot:
-      width: 500
-      height: 500
-    command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_nosingle_aov_tidy, mytheme)
+#  figures/individual_responses_nosingle.pdf: 
+#    plot:
+#      width: 500
+#      height: 500
+#    command: plot_indiv_species(inverts_manyglm_fin_aov_tidy, zoops_manyglm_fin_aov_tidy,  bact_manyglm_fin_nosingle_aov_tidy, mytheme)
 
   figures/individual_responses_nosingle.png: 
     plot:
@@ -746,16 +778,8 @@ targets:
       height: 10
     command: plot_taxa_mds(bact_mds_list)
 
-###### within
+###### within species
 
-  figures/Fig2.pdf:
-    command: > 
-      r2_plot_df_maker(inverts_adonis_win_ini, inverts_adonis_win_fin,
-              zoops_adonis_win_ini, zoops_adonis_win_fin,
-              bact_adonis_win_ini, bact_adonis_win_fin)
-    plot:
-      width: 500
-      height: 500
 
 ### DOCUMENTS
 
@@ -831,6 +855,7 @@ targets:
       - MS/orgsize.bib
       - figures/individual_responses.pdf
       - photos/design.svg
+      - figures/r2_plot_win.pdf
      command: render_pdf("MS/OrgSize.md")
 
 
