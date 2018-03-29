@@ -145,7 +145,8 @@ plot_inset <- function(arg_r2_null_test){
     ggplot(aes(x = estimate)) +
     geom_histogram(fill = "lightgrey", bins = 30) +
     theme_classic() +
-    theme(axis.text = element_text(size = 7)) +
+    theme(axis.text = element_text(size = 6),
+          axis.title = element_text(size = 8)) +
     ylab("") +
     xlab("Slope") +
     geom_vline(xintercept = arg_r2_null_test[[2]] %>%
@@ -158,13 +159,13 @@ plot_inset <- function(arg_r2_null_test){
 
 
 
-r2_plot <- function(arg_r2_df, nullplot){
+r2_plot <- function(arg_r2_df, .nullplot){
   newlevels <- c(inverts = "Macroinvertebrates",
                  zoops = "Zooplankton",
                  bact = "Bacteria")
 
-
-  arg_r2_df %>% 
+# browser()
+  plotdata <- arg_r2_df %>% 
     mutate(taxa = newlevels[taxa],
            taxa = ordered(taxa,
                           levels = c("Bacteria", 
@@ -172,7 +173,11 @@ r2_plot <- function(arg_r2_df, nullplot){
                                      "Macroinvertebrates"
                           )),
            time = ifelse(time == "fin", "12 days after homogenization", "before homogenization"),
-           time = ordered(time, levels = c("before homogenization", "12 days after homogenization"))) %>% 
+           time = ordered(time, levels = c("before homogenization", "12 days after homogenization")))
+  
+  ytop <- max(plotdata$number)
+  
+  plotdata %>% 
     ggplot(aes(x = taxa, y = number)) + 
     # geom_line() + 
     geom_point(aes(fill = time, group = time), size = 6,
@@ -183,7 +188,8 @@ r2_plot <- function(arg_r2_df, nullplot){
     theme(legend.position = "top") +
     scale_fill_manual(values = c("white", "black"), 
                       guide = guide_legend(title = NULL)) +
-    annotation_custom(ggplotGrob(nullplot), xmin = 0.5, xmax = 1.5, ymin = 0.25, ymax = 0.34)
+    annotation_custom(ggplotGrob(.nullplot), xmin = 0.3, xmax = 1.5, ymin = 0.22, ymax = 0.35) + 
+    ylim(c(0, 0.35))
   
 }
 
