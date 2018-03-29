@@ -1,6 +1,6 @@
 ---
 title: "Supplementary Material"
-author: "A. Andrew M. MacDonald; Diane S. Srivastava; Vinicius"
+author: "A. Andrew M. MacDonald"
 output:
   pdf_document:
     latex_engine: xelatex
@@ -9,19 +9,10 @@ output:
     toc: true
   md_document: default
   html_document: default
-  word_document:
-    reference_docx: reference.docx
 geometry: margin=1in
 fontsize: 12pt
 ---
 
-
-```{r echo=FALSE}
-Sfig_nums <- captioner()
-Stab_nums <- captioner(prefix = "Table")
-Sfig <- pryr::partial(Sfig_nums, display = "cite")
-Stab <- pryr::partial(Stab_nums, display = "cite")
-```
 
 # Exploratory figures
 
