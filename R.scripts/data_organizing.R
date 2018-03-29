@@ -18,38 +18,76 @@ TaxaTimeSelector <- function(.blocks,
                              .taxa,
                              sampletime, 
                              .experiment = "threespp") {
+  # get only one of the two experiments (all data is in the same csvs)
   which_blocks <- .blocks %>%
     filter(experiment == .experiment) %>%
     select(Block = block)
   
+  # the bromeliads in these blocks are:
   which_broms <- .bromeliad %>%
-    semi_join(which_blocks) %>%
+    semi_join(which_blocks, by = "Block") %>%
     select(Brom, Block, species)
   
+  # browser()
+  
+  # create a table with all the bromeliads from this block. Add "final" or
+  # "initial" for each plant (depending on which is being selected). This is
+  # necessary because sometimes no organisms were observed, but we still need to
+  # know that a sample was collected
+  which_broms_sampling <- which_broms %>% 
+    modelr::data_grid(nesting(Brom, Block, species), sampling = sampletime) %>% 
+    # this dataset should have exactly the following nrows: the number of blocks x 6 reps x (1 or 2 sample times)
+    verify(nrow(.) == (nrow(which_blocks) * 6 * length(sampletime)))
+  
+  # get taxonomic observations for either initial or final (or.. both!)
   which_taxa <- .taxa %>%
     filter(sampling %in% sampletime) %>%
     rename(Brom = bromeliad)
+  # note that this collects more taxa than needed! It gets all taxa, not just
+  # the ones seen only in the plants being "selected".
   
+  # converting data to wide format and adding bromeliads to it
   brom_taxa <- which_taxa %>%
-    filter(Spp != "none") %>%
     spread(Spp, abundance, fill = 0) %>% 
-    left_join(which_broms, .)
+    left_join(which_broms_sampling, ., by = c("Brom", "sampling"))
   
-
+  # this leaves a row of NA where there were no animals observed. first fill
+  # that down, then edit all the cells
   
-  brom_taxa[is.na(brom_taxa)] <- 0
-    
+  brom_taxa_nafill <- brom_taxa %>% 
+    # then check (later) to make sure this has not caused problems
+    verify(sum(is.na(sampling)) == 0) %>% 
+    # fill numeric columns with 0
+    mutate_if(is.numeric, replace_na, replace = 0)
   
-  ###tests could go here
-  outlist <- brom_taxa %>% 
+  # how many w/in block reps? depends on experiment:
+  subreps <- c(threespp = 2, withinsp = 3)[.experiment]
+  
+  # browser()
+  # there are 2 or 3 replicates per block:
+  brom_taxa_nafill %>% group_by(sampling, Block, species) %>% tally %>% 
+    verify(all(n == subreps))
+  # there are 6 total in each block
+  blocktotal <- brom_taxa_nafill %>% group_by(sampling, Block) %>% tally %>% 
+    verify(all(n == 6))
+  # so you can calculate the total number of observations (rows)
+  rplants <- nrow(blocktotal) * 6
+  
+  # and confirm that the sampling matches (i.e. no 0s or NAs or other weird thing)
+  if (length(sampletime) == 1) { brom_taxa_nafill %>% group_by(sampling) %>% tally %>% 
+    verify(n == rplants)}
+  
+  outlist <- brom_taxa_nafill %>% 
   {
     list(factors = select(., Block, species, sampling),
          taxa = select(., -Block, -Brom, -species, -sampling))
   }
   
   zerocols <- colSums(outlist$taxa) == 0
+  dropped_cols <- names(outlist$taxa)[zerocols]
+  
   if (any(zerocols)) {
-    message("removing absent taxa")
+    message(sprintf("removing absent taxa %s", paste(dropped_cols, collapse = ", ")))
     outlist$taxa <- outlist$taxa[,!zerocols]
   }
   return(outlist)  
