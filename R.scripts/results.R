@@ -93,27 +93,28 @@ test_slope_robustness <- function(inverts_adonis_ini, inverts_adonis_fin,
                                   .inverts_tts_ini, .zoops_tts_ini, .bact_tts_ini,
                                   .inverts_tts_fin, .zoops_tts_fin, .bact_tts_fin,
                                   REPS){
-  
+  # browser()
   sizes <- data_frame(taxa = c("bact", "zoops", "inverts"),
                       size = log(c(0.04, 0.5, 5)))
   # bacteria = 0.04mm,  zooplankton = 0.5mm,  macroinvertebrates = 5mm
-  # could replace these values with actual size later
+  # could replace these values with more detailed size later
   
   observed <- r2_plot_df_maker(inverts_adonis_ini, inverts_adonis_fin,
                                zoops_adonis_ini, zoops_adonis_fin,
                                bact_adonis_ini, bact_adonis_fin) %>% 
-    left_join(sizes) %>% 
+    left_join(sizes, by = "taxa") %>% 
     group_by(time) %>% 
     do(broom::tidy(lm(number ~ size, data = .)))
   
   ### randomization tests
   
   null_sims <- replicate(n = REPS, {
+    # generate a stratified randomization of the subscripts
     ss <- 1:30 %>% 
       split(f = gl(5, 6)) %>% 
       lapply(sample) %>% 
       unlist
-    
+    # randomizing the envrionmental variable -- bromeliad "species" (which is sometimes V, A, N and sometimes open, closed) -- across all observations 
     .inverts_tts_ini$factors$species <- .inverts_tts_ini$factors$species[ss]
     .zoops_tts_ini$factors$species <- .zoops_tts_ini$factors$species[ss]
     .bact_tts_ini$factors$species <- .bact_tts_ini$factors$species[ss] 
@@ -132,7 +133,7 @@ test_slope_robustness <- function(inverts_adonis_ini, inverts_adonis_fin,
     r2_plot_df_maker(inverts_adonis_ini, inverts_adonis_fin,
                      zoops_adonis_ini, zoops_adonis_fin,
                      bact_adonis_ini, bact_adonis_fin) %>% 
-      left_join(sizes) %>%
+      left_join(sizes, by = "taxa") %>%
       group_by(time) %>% 
       do(broom::tidy(lm(number ~ size, data = .)))
     
