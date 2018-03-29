@@ -1,11 +1,12 @@
 ---
-title: "Supplementary material 2"
+title: "Exploratory figures"
 author: "Andrew MacDonald"
 date: "April 8, 2016"
 output: pdf_document
 ---
 
 ```{r echo=FALSE, message=FALSE}
+## note that this works only interactively -- ie it won't work if you just click "Knit"
 ## load all data from main project
 remake::dump_environment()
 ```
@@ -89,6 +90,7 @@ block_lvl_rs_ordered %>%
   geom_line()
 ```
 
+Perhaps not surprisingly, when we break down the data to very small samples, we find very noisy results with no clear pattern. 
 
 ## number of species in common
 
@@ -192,8 +194,3 @@ null_sims_spear %>%
   hist(xlim = c(-0.05, 0.15), col = "lightgrey", main = "null distribution of slopes") %>% 
   abline(v = obs_slope, col = "darkgreen",  lwd = 2)
 ```
-
-## reduce the number of species
-
-let us reduce the number of species, that will be good. 
-
