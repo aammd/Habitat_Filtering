@@ -62,7 +62,7 @@ mds_plotmaker <- function(taxa_mds, env_vars, maintitle){
   #                          "Aechmea.nudicaulis_initial"))
   
   ## draw points for each bromeliad, drawing the shapes and colours from data
-  points(taxa_mds, display = "sites", cex = 1,
+  points(taxa_mds, display = "sites", cex = 1.6,
          pch = shapes.vec[env_vars$sampling], 
          col = "black", 
          bg = colors.vec[env_vars$species])
@@ -71,7 +71,7 @@ mds_plotmaker <- function(taxa_mds, env_vars, maintitle){
   bromnames <- unique(env_vars$species)
   sampnames <- unique(env_vars$sampling)
   
-  legend("topright", legend = substr(bromnames, 1, 1),
+  legend("topright", legend = bromnames,
          bty = "n",
          col = "black",cex = 1.3, pch = 21, pt.bg = colors.vec[bromnames])
   
@@ -182,7 +182,7 @@ r2_plot <- function(arg_r2_df, .nullplot){
     # geom_line() + 
     geom_point(aes(fill = time, group = time), size = 6,
                shape = 21, colour = "black") +
-    ylab(expression("Environmental signal ("*R^2*" value)")) +
+    ylab(expression("Environmental signal (PERMANOVA "*R^2*" value)")) +
     xlab("Organism type") +
     theme_bw() +
     theme(legend.position = "top") +
