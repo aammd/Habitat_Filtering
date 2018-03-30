@@ -20,6 +20,7 @@ packages:
   - purrr
   - readr
   - assertr
+  - stringr
 sources:
   - R.scripts/results.R
   - R.scripts/data_cleaning.R
@@ -58,6 +59,9 @@ targets:
   inverts:
     command: clean_insect_names(insects, insectnames)
     quiet: true
+    
+  raw-data/macroinvertebrate_observations_final.csv:
+    command: write_csv(inverts, target_name)
 
   zoops:
     command: clean_zooplankton("raw-data/zooplankton_observations_final.csv")
