@@ -212,7 +212,7 @@ targets:
     command: >
       test_slope_robustness(
               inverts_adonis_win_ini,
-              inverts_adonis_fin,
+              inverts_adonis_win_fin,
               zoops_adonis_win_ini,
               zoops_adonis_win_fin,
               bact_adonis_win_ini, 
@@ -668,6 +668,23 @@ targets:
 
 ###### within species
 
+  figures/inverts_win.pdf:
+    plot:
+      width: 10
+      height: 10
+    command: plot_taxa_mds(invert_mds_list)
+
+  figures/zoop_win.pdf:
+    plot:
+      width: 10
+      height: 10
+    command: plot_taxa_mds(zoop_mds_list)
+
+  figures/bact_win.pdf:
+    plot:
+      width: 10
+      height: 10
+    command: plot_taxa_mds(bact_mds_list)
 
 ### DOCUMENTS
 
