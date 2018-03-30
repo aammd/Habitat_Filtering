@@ -13,15 +13,11 @@ geometry: margin=1in
 fontsize: 12pt
 ---
 
+This Supplementary document contains three sections. First is a section showing the results from the PERMANOVAs reported in the main manuscript. Second is some NMDS plots which show the communities which represent our experimental results.
 
-# Exploratory figures
+## PERMANOVAS
 
-![](../figures/inverts.pdf)
-![](../figures/zoop.pdf)
-![](../figures/bact.pdf)
-
-
-# PERMANOVAS
+In the main text we report differences among three organismal groups (insects, zooplankton and bacteria) in their sensitivity to environmental gradients. In this system, the environmental gradient is represented by differences between three bromeliad species which grow in different habitats. Figure 3 in the text reports the differences in these environmental effects as the R^2^ value from PERMANOVAs. This Supplement reports these PERMANOVA tables in full. 
 
 ```{r, echo = FALSE}
 get_adonis_table <- function(permanova_answer){
@@ -29,81 +25,89 @@ get_adonis_table <- function(permanova_answer){
 }
 ```
 
+## Before homogenization
 
-## initial
-
-### inverts
+### Macroinvertebrates
 ```{r results = 'asis'}
 get_adonis_table(inverts_adonis_ini)
 ```
 
-### zooplankton
+### Zooplankton
 ```{r results = 'asis'}
 get_adonis_table(zoops_adonis_ini)
 ```
 
-### bacteria
+### Bacteria
 ```{r results = 'asis'}
 get_adonis_table(bact_adonis_ini)
 ```
 
-## final
-### insects
+## 12 Days after homogenization
+### Macroinvertebrates
 ```{r results = 'asis'}
 get_adonis_table(inverts_adonis_fin)
 ```
 
-### zooplankton
+### Zooplankton
 ```{r results = 'asis'}
 get_adonis_table(zoops_adonis_fin)
 ```
 
-### bacteria
+### Bacteria
 ```{r results = 'asis'}
 get_adonis_table(bact_adonis_fin)
 ```
 
 
+## Ordination figures
 
-# multivariate GLM
+In the PERMANOVA results above, we analysed community data using block as a random factor and bromeliad species as the environmental variable. In the following NMDS plots, we split the data up differently for display purposes: here, we show each block separately, with points grouped by the time of observation (before or after the experiment) and by the environment in which they are found. In the plots that follow, two clouds of points represent differences before the experiment ("initial", round points) and 12 days after ("final", square points). Three colours represent the three species: _Aechmea nudicaulis_ (yellow points; full sun habitats), _Vriesea neoglutinosa_ (green points; partial shade), and _Neoregelia cruenta_ (purple points; full shade).
 
-results of multivariate GLMS
-
-## diagnositic plots for full models
-```{r}
-plot(inverts_manyglm_fin)
-```
+![](../figures/inverts.pdf)
+![](../figures/zoop.pdf)
+![](../figures/bact.pdf)
 
 
-```{r}
-plot(zoops_manyglm_fin)
-```
+<!-- # multivariate GLM -->
 
-```{r}
+<!-- results of multivariate GLMS -->
 
-plot(bact_manyglm_fin)
-```
-
-## ANOVA tables for full models
-Analyis of deviance 
-
-```{r}
-kable(inverts_manyglm_table)
-```
-
-```{r}
-kable(zoops_manyglm_table)
-```
-
-```{r}
-kable(bact_manyglm_table)
-```
-
-## manyglm
+<!-- ## diagnositic plots for full models -->
+<!-- ```{r} -->
+<!-- plot(inverts_manyglm_fin) -->
+<!-- ``` -->
 
 
-test for interactions
-```{r}
-#anova(inverts_manyglm_fin, inverts_manyglm_fin_add)
+<!-- ```{r} -->
+<!-- plot(zoops_manyglm_fin) -->
+<!-- ``` -->
 
-```
+<!-- ```{r} -->
+
+<!-- plot(bact_manyglm_fin) -->
+<!-- ``` -->
+
+<!-- ## ANOVA tables for full models -->
+<!-- Analyis of deviance  -->
+
+<!-- ```{r} -->
+<!-- kable(inverts_manyglm_table) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- kable(zoops_manyglm_table) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- kable(bact_manyglm_table) -->
+<!-- ``` -->
+
+
+<!-- ## manyglm -->
+
+
+<!-- test for interactions -->
+<!-- ```{r} -->
+<!-- #anova(inverts_manyglm_fin, inverts_manyglm_fin_add) -->
+
+<!-- ``` -->
