@@ -193,3 +193,19 @@ r2_plot <- function(arg_r2_df, .nullplot){
   
 }
 
+# draft for patchworking the two together:
+
+
+plot_two_panel <- function(r2_plot_df, nullplot, r2_plot_df_win, nullplot_win){
+  p1 <- r2_plot(r2_plot_df, nullplot)
+  p1_mod <- p1 + labs(title = "A") +
+    theme(legend.position = "bottom", legend.direction = "vertical")
+  
+  p2 <- r2_plot(r2_plot_df_win, nullplot_win)
+  p2_mod <- p2 + 
+    theme(axis.title.y = element_blank()) + 
+    guides(fill=FALSE) + 
+    labs(title = "B")
+  p1_mod + p2_mod
+}
+
