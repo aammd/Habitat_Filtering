@@ -21,7 +21,7 @@ csl: formatting/the-american-naturalist.csl
 ## Introduction
 
 One of the most profound differences between organisms is their body size. Small
-and large organisms can differ in population size, growth rates, morphological
+and large organisms differ in population size, growth rates, morphological
 complexity, genome size, and modes of dispersal. This scaling of biological
 processes with organism size has often been used to explain differences in the
 spatial distribution of small and large organisms. Microscopic organisms such as
@@ -60,12 +60,12 @@ Alternatively, small organisms may be widely distributed because they are able
 to get to more places faster. There is substantial evidence that microscopic
 organisms such as bacteria, viruses, protists and plankton may be able to
 disperse further than larger organisms; amongst these microscopic organisms, the
-smallest disperse the furthest [@DeBie2012a]. This is the reasoning behing the classic "everything is everywhere and the
+smallest disperse the furthest [@DeBie2012a]. This is the reasoning behind the classic "everything is everywhere and the
 environment selects" hypothesis of Baas Becking [-@BaasBecking1934], which suggests
 that smaller organisms are not limited by dispersal barriers or distance but instead are
 found globally, emerging from resistant stages in favorable environments
 [@Huszar2015]. Many bacteria and zooplankton have passive dispersal, traveling
-long distances by wind or water currents, or by phoresy. In contrast, larger
+long distances by wind, water, or phoresy. In contrast, larger
 animals (but not larger plants) usually have active dispersal; for example,
 adult insects actively choose sites to oviposit. At the scale of landscapes, active
 dispersal could result in a close association between distribution and
@@ -88,8 +88,8 @@ researchers have used variance partitioning to separate the effects of
 environment from space, but this approach has limitations [@Gilbert2010]. For
 example, Smith and Lundholm [-@Smith2010] found that spatially-correlated
 dispersal contributed to both spatial and environmental partitions of variance
-in community composition. Third, dispersal limitation and environmental filtering can mask each other. A species can only be filtered by a site’s environment when it can reach the site, so a community experiencing equally strong dispersal and environmental limitation can may show mainly the former in variance partitioning [@Smith2010; @DeBie2012a]. A special case of this problem occurs when an actively-dispersing species is not
-found in a site. It is impossible to determine if this is because the environment
+in community composition. Third, dispersal limitation and environmental filtering can mask each other. A species can only be filtered by a site’s environment when it can reach the site, so a community experiencing equally strong dispersal and environmental limitation may show mainly the former in variance partitioning [@Smith2010; @DeBie2012a]. A special case of this problem occurs when an actively-dispersing species is not
+found in a site: it is impossible to determine if this is because the environment
 makes dispersal unlikely or establishment unlikely.
 For example, an insect larva may be missing from a location because its parent was deterred from ovipositing in the environment or because the larvae could not withstand the environment. An
 experiment that removes dispersal limitation for all organisms is therefore a
@@ -112,7 +112,7 @@ Here we provide a robust test of the strength of environmental filtering for the
 
 ## Methods
 
-### Study site
+### Experimental design 
 
 We performed this
 experiment in the same location and along the same gradient of environmental
@@ -120,30 +120,33 @@ variation (bromeliad species in different habitats) as Farjalla et al. [-@Farjal
 Northeast Rio de Janeiro state, Brazil ($22^{\circ}$ S $41^{\circ}$ W). The 
 environmental gradient in this ecosystem is twofold -- three different species of bromeliad, which differ also in their preferred level of exposure to sunlight: _Aechmea nudicaulis_ (full sun
 habitats), _Vriesea neoglutinosa_ (partial shade), and _Neoregelia cruenta_
-(full shade).
-<!-- _Neoregelia_ has a uniquely large habitat range at this site, -->
-<!-- occurring in both full shade and full sun; only shade plants were used in this -->
-<!-- study. -->
+(full shade). We also performed a second experiment using only _N. cruenta_. This is possible because this bromeliad (unlike the other two species) is found in many habitats. While the first experiment used only _N. cruenta_ growing in full shade, in the second experiment we used _N. cruenta_ from full sun, partial shade and full shade. Thus we are able to separate the effects of bromeliad species from the effects of the habitats where they are found.
 
 ```{r start_end_dates}
-str_end <- blocks %>% 
-	filter(experiment == "threespp") %>% 
-	select(setup.date) %>% 
-	mutate(sdate = ymd(setup.date)) %>% 
-	filter(sdate %in% range(sdate)) %>% 
-	.[["sdate"]]
+start_end <- function(exp){
+  blocks %>% 
+    filter(experiment == exp) %>% 
+    select(setup.date) %>% 
+    mutate(sdate = ymd(setup.date)) %>% 
+    filter(sdate %in% range(sdate)) %>% 
+    .[["sdate"]]}
+
+str_end <- start_end("threespp")
+
+str_end_win <- start_end("withinsp")
 ```
 
-### Experimental design 
-
-For each of five temporal blocks, we
-collected and sampled the macroinvertebrates, zooplankton and bacteria of two
-bromeliads of each of the three species. We then homogenized the communities
-of all six bromeliads as described shortly (Figure 2).  Our goal was
+In both the three-bromeliad and _N. cruenta_ experiments, our goal was
 to create identical starting community composition for all bromeliads within a
-block. Variation between blocks in starting community composition is thus
-included in the random effect of blocks. We created five blocks in this
-experiment between `r format(str_end[[1]], format = "%d %B %Y")` and `r format(str_end[[2]], format = "%d %B %Y")`. <!--more and stronger statements of what animals we are studying and how big they are-->
+block. 
+To set up one experimental block we used six bromeliads. 
+In the three-bromeliad experiment we collected and sampled the macroinvertebrates, zooplankton and bacteria of two
+bromeliads of each of the three species; in the _N. cruenta_ experiment we sampled three individuals from each of open and closed habitats. We then homogenized the communities
+of all six bromeliads as described shortly (Figure 2).  
+Blocks varied in the timing of their setup, their spatial location, and slightly in starting community composition; this variation is
+included in the random effect of blocks. We created five blocks in the three-bromeliad experiment
+experiment between `r format(str_end[[1]], format = "%d %B %Y")` and `r format(str_end[[2]], format = "%d %B %Y")`; and 
+another five in the _N. cruenta_ experiment between `r format(str_end_win[[1]], format = "%d %B %Y")` and `r format(str_end_win[[2]], format = "%d %B %Y")`
 
 Our experimental setup consisted of three steps (Figure 2):
 collection of original communities from bromeliads, homogenization of
@@ -171,7 +174,7 @@ particulate organic matter, facilitating their collection
 zooplankton and microbes by mixing an equal volume of filtered tank
 water from each of the six bromeliads in a block (approximately 100ml plant^-1^), then adding 
 this mixture to all bromeliads. To create
-homogenized communities of macroinvertebrates, we divided individuals  of all species equally among the six bromeliads in each block. **Community assembly in bromeliads**: We emptied
+homogenized communities of macroinvertebrates, we divided individuals of all species equally among the six bromeliads in each block. **Community assembly in bromeliads**: We emptied
 bromeliads by washing them thoroughly, hanging them upside down to dry
 for at least 24 hours and then rinsing each plant with 70% ethanol. We confirmed
 that this technique removed all invertebrates and most detritus by
@@ -193,7 +196,7 @@ make sure that our treatment effects were not affected by colonization or
 excessive emergence. To prevent colonization we surrounded bromeliads with
 mosquito netting (mesh size approx. 1.5 mm). To prevent emergence we ended our
 experiment after 12 days, based on the results of a pilot study that
-confirmed that this was sufficient time for communities to change, but not so long that bromeliads became empty of organisms
+confirmed that this was sufficient time for communities to change, but not so long that bromeliads became empty of macroscopic organisms.
 
 
 ### Analyses
@@ -227,7 +230,9 @@ $$
 
 We calculated the null p-value as the proportion of null simulations equal or
 greater to the observed slope. All statistical analyses were conducted in R
-3.2.3 [@rcore].<!-- Code to reproduce the analysis published here is available
+3.2.3 [@rcore].
+
+<!-- Code to reproduce the analysis published here is available
 at ***link to data*** -->
 
 
@@ -250,8 +255,7 @@ zoops_r2 <- gettime("zoops", r2_plot_df)
 bact_r2 <- gettime("bact", r2_plot_df) 
 ```
 
-Both before and at the end of our experiment, bromeliad species identity explains more variation in community composition of macroinvertebrates than any other organism type, less for zooplankton and less still for bacteria (Figure 3, Table 1). For all organism types, bromeliad species explained less of the variation in
-composition at the end of the experiment than before the homogenization. Note that,  although the sampling design (and therefore degrees of freedom) are identical for all groups, the critical (alpha = 0.05) F-value for each organism group differs because PERMANOVA p-values are calculated on a null distribution generated by permuting samples among groups (species in our case). Bacterial communities have many
+Both before and at the end of our experiment, bromeliad species identity explains more variation in community composition of macroinvertebrates than any other organism type, less for zooplankton and less still for bacteria (Figure 3, Table 1). This pattern was repeated for the _N. cruenta_ experiment. In both experiments and for all organism types, communities were more different before the experiment (i.e., in nature) than an the end. Note that, although the sampling design (and therefore degrees of freedom) are identical for all groups, the critical (alpha = 0.05) F-value for each organism group differs because PERMANOVA p-values are calculated on a null distribution generated by permuting samples among groups (species in our case). Bacterial communities have many
 species and also high similarity among communities (bromeliads),
 creating a null distribution with low mean and small variance (and
 hence lower thresholds for significance). This increases the power to detect habitat effects for bacteria, explaining why this group has marginally significant effects of habitat despite habitat explaining a tiny amount of total variation in composition.
@@ -496,7 +500,7 @@ Bromeliad species effects on the composition of three types of organisms, as det
 
 **Figure 2**: Schematic of our experimental design. We first sampled six bromeliads (two plants of each of three species). We formed (solid arrows) homogeneous initial communities (MIX) by counting equal numbers of animal taxa (macroinvertebrates) or by mixing water samples of equal volume from all plants (zooplankton and bacteria). We then returned (dashed arrows) initial communities to the six bromeliads in their associated habitats.   
 
-**Figure 3**: The amount of variation (R^2^ from PERMANOVA) in community composition explained by bromeliad species (i.e. the strength of the environmental signal) decreases from larger to smaller organisms.  The environmental signal in initial, undisturbed communities was removed by homogenization, but after 12 days of recovery, was again of similar strength in final macroinvertebrate and bacterial communities. Inset shows the results of a null simulation to test the significance of this increase in R^2^ value: histogram is the distribution of slopes (i.e. change in R^2^ as a function of relative organism size) and the dark green line indicates the observed value of the slope for the _Final_ sampling.
+**Figure 3**: The amount of variation (R^2^ from PERMANOVA) in community composition explained by bromeliad species (i.e. the strength of the environmental signal) increases with the approximate body size of organisms.  The environmental signal in initial, undisturbed communities was removed by homogenization, but after 12 days of recovery, was again of similar strength in final macroinvertebrate and bacterial communities. Inset shows the results of a null simulation to test the significance of this increase in R^2^ value: histogram is the distribution of slopes (i.e. change in R^2^ as a function of relative organism size) and the dark line indicates the observed value of the slope for observations at the end of the experiment (i.e. black dots).
 
 
 \newpage
